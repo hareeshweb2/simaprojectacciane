@@ -1,0 +1,49 @@
+//written to have image size proper in general information page
+.phone-error{
+	font-family: "AvenirLTStdRoman";
+    font-size: 0.938em;
+}
+a{
+	cursor:pointer;
+}
+.modified-message{
+	margin:50px 0;
+}
+
+/* Mobile Resolution */
+@media (max-width: 767px) {
+.change-photo .img{
+    width: 90px;
+    height: 90px;
+  }
+}
+.mob-profile-edit .file-upload input[type='file'] {
+	top: 0;
+}
+
+.adrs-card .text-ellipsis {
+    display:block;
+}
+.removeButtonClass{
+    text-align: center;
+    background-color: #fff !important;
+    box-sizing: border-box;
+    padding: 0 !important;
+    border-width: 0 !important;
+    border-style: none !important;
+    border-color: none !important;
+    border-image: initial;
+    outline:none;
+}
+
+.upload-icon {
+    position: relative;
+}
+
+.upload-icon > input {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 125px;
+    opacity: 0;
+}

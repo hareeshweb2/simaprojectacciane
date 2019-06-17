@@ -1,0 +1,69 @@
+/*** -----------------------------------------
+
+            CALENDAR CUSTOMIZATION
+
+----------------------------------------- ***/
+
+.cal-icon-custom .mat-icon-button.mat-icon-button {
+    font-family: 'icomoon' !important;
+    margin-left: -42px;
+}
+
+
+.mobile .cal-icon-custom .mat-icon-button.mat-icon-button {
+    margin-left: 0;
+    position: absolute;
+    right: 0;
+    top: -2px;
+}
+    
+.cal-icon-custom .mat-icon-button:before {
+    content: "\e934"
+}
+
+.cal-icon-custom .mat-icon-button .mat-button-wrapper {
+    display: none;
+}
+
+.mat-calendar-body-selected.mat-calendar-body-selected {
+    background-color: #47BFA6;
+}
+
+.mat-calendar-body-today:not(.mat-calendar-body-selected).mat-calendar-body-today:not(.mat-calendar-body-selected) {
+    border-color: #47BFA6;
+}
+
+.mat-datepicker-content.mat-datepicker-content {
+    font-family: 'AvenirLTStdRoman';
+    background-color: #fcfcfc;
+    box-shadow: none;
+    border: 1px solid #e5e5e5;
+}
+
+.mat-calendar.mat-calendar {
+    font-family: 'AvenirLTStdRoman';
+}
+
+.mat-button-wrapper.mat-button-wrapper {
+    font-family: 'AvenirLTStdRoman';
+    color: #47BFA6;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.mat-calendar.mat-calendar {
+    width: 280px;
+    height: 320px;
+}
+
+.mat-calendar-header.mat-calendar-header {
+    padding: 0px 8px 0 8px;
+}
+
+.mat-calendar-table-header.mat-calendar-table-header {
+    color: rgba(0,0,0,.87);
+}
+
+.mat-calendar-body-label.mat-calendar-body-label {
+    color: #47BFA6;
+}

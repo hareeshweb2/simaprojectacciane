@@ -1,0 +1,15 @@
+/*** -----------------------------------------
+
+				MANAGE PROGRAMS
+
+----------------------------------------- ***/
+
+.manage-prgm-edit .myorders-sec .list {
+	align-items: flex-start;
+	padding-top: 12px;
+}
+
+.manage-prgm-edit .myorders-sec .total-items,
+.manage-prgm-edit .myorders-sec .switch {
+	margin-top: 8px;
+}

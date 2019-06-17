@@ -1,0 +1,49 @@
+/** Border Radius **/
+
+.bor-radius-profile {
+    border-radius: 100px;
+}
+
+.cptr{
+    cursor: pointer;
+}
+
+.bor-radius-profile{
+    border-radius: 100px;
+    height: 74px;
+    width: 74px;
+}
+.selectwrapper{
+    position: relative;
+}
+
+.elle{
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 30ch;
+    position: relative;
+    top: 4px;
+}
+.btn:focus {
+    box-shadow: 1px 1px 7px #929292;
+  }
+
+.mid-block-cls {
+    display: inline-block;
+    width: 49%;
+    vertical-align:top;
+}
+
+.right-align {
+    text-align: right;
+}
+
+.mar-bot8px {
+    margin-bottom: 8px;
+}
+
+.breakword {
+    white-space: nowrap;
+}

@@ -1,0 +1,82 @@
+
+.dashboard-card-list {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.dashboard-list {
+	margin: 0;
+	padding: 0 5px 5px;
+}
+
+.dashboard-card-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%; 
+}
+
+.dashboard-square {
+    height: 5.417em;
+    width: 5.417em;
+    border: 1px solid #47bfa6;
+	text-align: center;
+	background: #47bfa6;
+	margin: .75em  0 .75em .75em;
+}
+
+.dashboard-square .icon {
+    font-size: 35px;
+	line-height: 70px;
+	color: #fff;
+}
+
+
+.card-head {
+	font-weight: bold;
+	font-family: 'AvenirLTStdRoman';
+	font-size: 35px;
+	margin: 0;
+	color: #3C3D43;
+}
+
+.card-text {
+	font-size: 16px;
+	font-family: 'AvenirLTStdRoman';
+	margin: 0;
+	color: #3C3D43;
+	white-space: nowrap;
+}
+
+.dashboard-square-mobile {
+    height: 2.667em;
+    width: 2.667em;
+    border: 1px solid #47bfa6;
+	text-align: center;
+	background: #47bfa6;
+	margin: .75em  0 .75em .75em;
+}
+
+.dashboard-square-mobile .icon {
+    font-size: 20px;
+	line-height: 35px;
+	color: #fff;
+}
+
+.card-text-mobile {
+		font-size: 0.75em;
+		margin:0 0 0 5px;
+	}
+
+.card-head-mobile {
+	font-size: 1.125em;
+	font-weight: bold;
+	font-family: 'AvenirLTStdRoman';
+	margin: 10px 0 0 5px;
+	color: #3C3D43;
+}

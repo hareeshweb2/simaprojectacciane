@@ -1,0 +1,60 @@
+<section class="page-content" *layout="'mobile'">
+    <div class="myorders-sec" *ngIf="!loading">
+        <div class="order-row mob-update-leader">
+            <span *ngIf="!showProfilePic" class="icon-icon_user_new icon"></span>
+            <img class="bor-radius-profile pro-img mar-bot8px" src="{{profilePic}}" *ngIf="showProfilePic"/>
+            <label class="order-id" *ngIf="name">{{name}}</label>
+            <div class="text-muted row-padding-5" *ngIf="email">{{email}}</div>
+            <div class="text-muted row-padding-5" *ngIf="mailingStreet">
+                {{mailingStreet}}
+            </div>
+            <div class="text-muted row-padding-5" *ngIf="mailingStreet2">
+                {{mailingStreet2}}
+            </div>
+            <div class="text-muted row-padding-5" *ngIf="mailingCityCountryAndPostalCode">
+                {{mailingCityCountryAndPostalCode}}
+            </div>
+            <div class="text-muted row-padding-5" *ngIf="phone">{{phone}}</div>
+        </div>
+    </div>
+
+    <div class="form-fields mob-profile-edit order-row" *ngIf="!loading">
+        <div class="form-group">
+            <label class="mid-block-cls right-align breakword">{{messages.awanaRole}} : </label>
+            <label class="mid-block-cls ellipsis" *ngIf="Awana_Role__c">{{Awana_Role__c.split(';').join(', ')}}</label>
+        </div>
+        <div class="form-group">
+            <label class="mid-block-cls right-align breakword">{{messages.churchRole}} : </label>
+            <label class="mid-block-cls ellipsis" *ngIf="Church_Role__c">{{Church_Role__c.split(';').join(', ')}}</label>
+        </div>
+        <div class="form-group">
+            <label class="mid-block-cls right-align breakword">{{messages.mozoLevel}} : </label>
+            <label class="mid-block-cls ellipsis" *ngIf="Mozo_User_Level__c">{{Mozo_User_Level__c}}</label>
+        </div>
+        <div class="form-group">
+            <label class="mid-block-cls right-align breakword">{{messages.accountOwner}} : </label>
+            <label class="mid-block-cls ellipsis">{{Organization_Owner__c === true ? 'YES' : 'NO'}}</label>
+        </div>
+        <div class="form-group">
+            <label class="mid-block-cls right-align breakword">{{messages.authorizedPurchaser}} : </label>
+            <label class="mid-block-cls ellipsis">{{Authorized_Purchaser__c == true ? 'YES' : 'NO'}}</label>
+        </div>
+    </div>
+    <div class="footer-btn" *ngIf="userAuthorization && userAuthorization.editManageLeaders && !loading">
+        <button href="javascript:vid(0);" class="btn btn-green btn-width-110 margin-r10" *ngIf="userAuthorization && userAuthorization.editManageLeaders"
+            (click)="updateLeader()">
+            {{messages.edit}}
+        </button>
+        <button href="javascript:vid(0);" class="btn btn-width-110" (click)="cancel()">
+            {{messages.cancel}}
+        </button>
+    </div>
+    <div *ngIf="loading" class="text-center loadinggif">
+        <img id="mySpinner" src="assets/img/Awana_Spinner.gif" />
+    </div>
+    <div *ngIf="serviceError" class="text-center">
+        <p class="para-txt">
+          {{serviceMessage}}
+        </p>
+    </div>
+</section>

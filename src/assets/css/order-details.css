@@ -1,0 +1,65 @@
+/*** -----------------------------------------
+
+            ORDER DETAILS
+
+----------------------------------------- ***/
+
+.order-details {
+	border: 1px solid #f4f0ed;
+}
+
+.order-details .list {
+	border-bottom: 1px solid #f4f0ed;
+	align-items: center;
+}
+
+.product-details {
+	padding: 2em 2em 1.4em 2em;
+	border-bottom: 1px solid #f4f0ed;
+	color: #a7a4a2;
+	line-height: 20px;
+}
+
+.product-details:last-child {
+	border-bottom: 0px;
+}
+
+.product-details .product-head {
+	font-family: 'AvenirLTStdRoman';
+	font-size: 16px;
+	color: #47bfa6;
+	font-weight: normal;
+	max-width: 40ch;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin: 0 0 15px 0;
+}
+
+.product-details .item-summary {
+	align-items: start;
+}
+
+.product-details .item-summary .item-head {
+	font-family: 'AvenirLTStdRoman';
+	font-size: 16px;
+	color: #4f4a46;
+	margin: 0 0 15px 0;
+}
+
+.product-details .item-summary {
+	margin-top: 25px;
+}
+
+.product-details .item-summary li {
+	padding: 0px;
+}
+
+.product-details .item-summary li p > span {
+	display: block;
+	margin-bottom: 4px;
+}
+
+.product-details .item-summary .btn-track-order {
+	margin-top: 10px;
+}

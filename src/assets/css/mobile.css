@@ -1,0 +1,2330 @@
+/*** -----------------------------------------
+
+			MOBILE CUSTOM CSS
+
+----------------------------------------- ***/
+
+.mobile {
+	position: relative;
+	background: #ebebeb;
+	max-width: 767px;
+	min-height: 100%;
+}
+
+.mobile .container {
+	margin: 0 auto;
+}
+
+.mobile .page-content {
+	padding:60px 0 280px 0;
+	margin: 0px;
+}
+
+.mobile .page-content.padding-muted.padding-muted {
+	padding-bottom: 280px;
+}
+
+.mobile.body-bg {
+	background: #fff;
+}
+
+.mobile section:before,
+.mobile section:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.mobile section:after {
+    clear: both;
+}
+
+.mobile .cancel-btn {
+	/*min-width: 100px;*/
+}
+
+.mobile .text-field-big {
+    height: 43px;
+    font-size: 14px;
+}
+
+/*** -----------------------------------------
+
+			MOBILE HEADER
+
+----------------------------------------- ***/
+
+.mobile-header {
+	background: #47BFA6;
+	height: 60px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	color: #fff;
+	padding: 0 18px;
+	position: fixed;
+	width: 100%;
+	box-sizing: border-box;
+	z-index: 1001;
+}
+
+
+.mob-header-static {
+	position: static;
+}
+
+.mob-header-static .icon-nav {
+	position: absolute;
+	left: 18px;
+	top: 16px;
+}
+
+.mobile-header .icons {
+	font-size: 24px;
+}
+
+.mobile-header .notify {
+	font-size: 26px;
+    color: #fff;
+    position: relative;
+    line-height: 50px;
+}
+
+.mobile-header .notify .bubble {
+	background: #F69D0B;
+    font-family: 'AvenirLTStdRoman';
+    color: #fff;
+    height: 16px;
+    width: 16px;
+    font-size: 9px;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    line-height: 17px;
+    position: absolute;
+    top: -5px;
+    right: 0;
+}
+
+.mobile-header a.arrow-left {
+	font-size: 24px;
+	color: #fff;
+	margin-right: 8px;
+    vertical-align: middle;
+}
+
+.mobile-header .logo-sec {
+	line-height: 20px;
+}
+
+.mobile-header .logo-sec .arrow-left {
+    float: left;
+    margin-right: 12px;
+    position: inherit;
+}
+
+.mobile-header .logo-sec a {
+	vertical-align: middle;
+}
+
+.mobile-header .edit-icon {
+	position: absolute;
+	right: 22px;
+	font-size: 25px;
+	color: #fff;
+	top: 15px;
+}
+
+.mobile-header a.icon-nav {
+	color: #fff;
+	float: left;
+	margin-right: 12px;
+}
+
+.mobile-header .icon-right {
+	position: absolute;
+	right: 18px;
+	top: 16px;
+}
+
+.mobile-header .header-txt {
+	font-size: 1.4em;
+	font-family: 'AvenirLTStdRoman';
+}
+
+
+/*** -----------------------------------------
+
+			HEADER NOTIFIV+CATION
+
+----------------------------------------- ***/
+
+.mobile-header .notify-popup {
+	border-radius: 0px;
+	left: 0;
+    right: 0;
+    margin-right: 0;
+    margin-left: 0;
+    min-width: 100%;
+    max-width: 100%;
+    border: 0px;
+    box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.12);
+}
+
+.mobile-header .notify-popup .list li.icon-column {
+	width: 30px;
+}
+
+.mobile-header .notify-popup:after, 
+.mobile-header .notify-popup:before {
+    right: 20px;
+    margin-right: 0px;
+}
+
+.mobile-header .notify-popup .btn-row a {
+	border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.mobile-header .notify-popup .list .icons {
+    font-size: 30px;
+}
+
+
+
+
+/*** -----------------------------------------
+
+				LOGIN
+
+----------------------------------------- ***/
+
+
+.mobile .login-header {
+	justify-content: center;
+}
+
+.mobile .login-header a.arrow-left {
+	position: absolute;
+	left: 18px;
+}
+
+.mobile .login {
+	width: 100%;
+	background: #fff;
+}
+
+.mobile .login-div.login-div.login-div,
+.mobile .register-div.register-div.register-div  {
+	padding: 45px 40px;
+	border: 0px;
+	max-width: 400px;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+.mobile .login-maindiv {
+	border: 0px;
+}
+
+.mobile .login-div .checkbox a {
+	float: none;
+}
+
+.mobile .login-div .thankyou-div {
+	padding: 0px;
+}
+
+.mobile .thankyou-div .thanks-msg {
+	margin: 30px 0;
+	display: block;
+	text-align: center;
+	padding: 2em;
+	line-height: 28px;
+}
+
+.mobile .thankyou-div .thanks-msg .icon {
+	width: auto;
+	margin: 15px 0 25px 0;
+}
+
+.mobile  .thanks-msg .icon .icon-icon_mail {
+	font-size: 40px;
+}
+
+.mobile .register-div .btn.btn-block {
+    padding: 12px 18px;
+    text-align: center;
+}
+
+
+/*** ------------------------------------
+
+		DASHBOARD -- MY ORDERS
+
+------------------------------------ ***/
+
+.mobile .myorders-sec {
+	padding: 0px;
+}
+
+.mobile .myorders-sec .total-text {
+	margin-top: 10px;
+	font-size: 12px;
+}
+
+.mobile .myorders-sec .list {
+	position: relative;
+	border-bottom: 1px solid #f2f2f2;
+	align-items: center;
+	min-height: 65px;
+	position: relative;
+	align-items: flex-start;
+}
+
+.mobile .myorders-sec .list > li,
+.mobile .order-expand .list > li {
+	padding: .9em .5em;
+}
+
+.mobile .myorders-sec .heading {
+	color: #3C3D43;
+	font-size: 18px;
+	padding: .8em 1em;
+	font-family: 'AvenirLTStdRoman';
+	font-weight: bold;
+	border-bottom: 1px solid #f4f0ed;
+	margin: 0px;
+}
+
+.mobile .myorders-sec > .heading > .icon {
+	font-size: 30px;
+	margin-right: 6px;
+}
+
+.mobile .myorders-sec .order-id {
+	font-family: 'AvenirLTStdRoman';
+	color: #4F4A46;
+	display: block;
+	margin-bottom: 2px;
+	font-size: 16px;
+}
+
+.mobile .myorders-sec .list li.amount-txt {
+	/*width: 120px;*/
+}
+
+.mobile .myorders-sec .total-items {
+	font-family: 'AvenirLTStdRoman';
+	color: #47bfa6;
+	display: block;
+	font-size: 16px;
+	/*text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;*/
+}
+
+.mobile .myorders-sec .list li.icon-column {
+	padding-right: 0px;
+}
+
+.mobile .myorders-sec .text-pad {
+	font-size: 14px;
+	margin-top: 20px;
+}
+
+.mobile .myorders-sec .status-txt label {
+	font-size: 14px;
+}
+
+.mobile .myorders-sec .list .notify-para-txt {
+	font-size: 13px;
+	padding-right: 10px;
+	line-height: 20px;
+}
+
+.mobile .myorders-sec .icons {
+	display: block;
+	font-size: 30px;
+	color: #666563;
+	margin: 3px 0;
+}
+
+.mobile .myorders-sec .icon-icon_my_orders {
+	font-size: 30px;
+}
+
+.mobile .myorders-sec .icon-icon_my_donations {
+	font-size: 40px;
+}
+
+.mobile .myorders-sec .icon-icon_my_donations {
+	font-size: 40px;
+}
+
+.mobile .myorders-sec .icon-icon_calendar_heart {
+	font-size: 30px;
+}
+
+.mobile .myorders-sec .icon-icon_shipped {
+	font-size: 20px;
+}
+
+.myorders-sec .icon-icon_recurring {
+	font-size: 32px;
+	color: #47BFA6;
+}
+
+.mobile .myorders-sec .icon-icon_delivered {
+	color: #8fa479;
+}
+
+.mobile .myorders-sec .icon-icon_onetime {
+	color: #d7d7d7;
+	font-size: 30px;
+}
+
+.mobile .myorders-sec .plus,
+.mobile .myorders-sec .minus {
+	color: #ebebeb;
+    font-size: 50px;
+}
+
+.mobile .myorders-sec .list.active {
+	background: #fbfaf8;
+}
+
+.mobile .myorders-sec .list.active::before {
+	content: "";
+	height: 100%;
+	width: 4px;
+	background: #3CB495;
+	position: absolute;
+    top: 0;
+    left: 0;
+    display: table-cell;
+}
+
+.mobile .myorders-sec .total-text > span {
+    display: inline-block;
+}
+
+.mobile .myorders-sec .icon-more_vert {
+    font-size: 30px;
+    color: #b5b4b2;
+    margin-top: 20px;
+    display: inline-block;
+    position: relative;
+    right: 5px;
+}
+
+
+/*** -----------------------------------------
+
+		DASHBOARD OVERVIEW NOTIFICATION
+
+----------------------------------------- ***/
+
+.mobile .mob-db-overview-notify {
+	margin: 4px 2px;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    overflow: hidden;
+    text-align: center;
+}
+
+.mobile .mob-db-overview-notify li {
+	float: left;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.mobile .db-notify-box {
+	background-color: #fff;
+	border: 1px solid #d3d3d3;
+	width: 100%;
+	padding: .7em;
+	margin: 6px;
+}
+
+.mobile .db-notify-box .icon, 
+.mobile .db-notify-box .para-txt {
+	display: block;
+	text-align: center;
+}
+
+.mobile .db-notify-box .icon {
+	display: block;
+	width: 100%;
+}
+
+.mobile .db-notify-box .para-txt {
+    margin-bottom: 0;
+    padding: 0;
+}
+
+
+/*** -----------------------------------------
+
+				ORDER ROW
+
+----------------------------------------- ***/
+
+.mobile .order-row {
+	background: #fff;
+	border-bottom: 4px solid #d6d6d6;
+	margin-top: 6px;
+}
+
+.mobile .green-border {
+	border-bottom: 4px solid #99d5c8;
+}
+
+.mobile .order-row.active {
+	border-bottom: 4px solid #99d5c8;
+}
+
+.mobile .order-row .list.list {
+	border-bottom: 0px;
+	align-items: center;
+	border-bottom: 2px solid #f2f2f2;
+}
+
+.mobile .order-row .total-text {
+	margin: 0px;
+	padding: 10px 1em;
+}
+
+.mobile .footer-btn {
+    background: #fff;
+    padding: 15px;
+    text-align: center;
+    margin: 10px 0 20px 0;
+}
+
+.mobile .footer-btn a.btn-link {
+    font-size: 16px;
+    font-family: 'AvenirLTStdRoman';
+    color: #000000;
+    font-weight: bold;
+}
+
+.mobile .church-name-sec {
+	margin-top: 2px;
+}
+
+.mobile .church-name-sec .church-img {
+	height: 40px;
+	width: 40px;
+	display: inline-block;
+}
+
+.mobile .church-name-sec .church-img img {
+	height: 40px;
+	width: 40px;
+}
+
+.mobile .church-name-sec .head {
+	font-size: 14px;
+	margin: 0 0 4px 0;
+}
+
+.mobile .church-name-sec .adrs-txt {
+	font-size: 12px;
+	color: #A7A4A2;
+}
+
+
+/*** -----------------------------------------
+
+					CARD
+
+----------------------------------------- ***/
+
+.mobile .card.card {
+    position: relative;
+    padding: .6em;
+    width: 180px;
+    margin: 2em;
+    border: 1px solid #e9e9e9;
+    -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.08);
+    -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.08);
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.08);
+}
+
+.mobile .card-head {
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.mobile .card-para-text {
+    font-size: 12px;
+    margin-top: 0px;
+}
+
+.mobile .card-text {
+    font-size: 10px;
+}
+
+
+/*** -----------------------------------------
+
+				FOOTER
+
+----------------------------------------- ***/
+
+.mobile .footer {
+	padding: 28px 0 20px 0;
+	top: auto;
+    bottom: 0;
+}
+
+.mobile .footer-signup {
+	margin: 0 20px;
+}
+
+.mobile .footer-signup .text-field {
+	font-size: 15px;
+	height: 36px;
+	padding: 8px 12px;
+}
+
+.mobile .footer-signup .btn-green {
+	width: 100px;
+    height: 24px;
+    font-size: 11px;
+    padding: 4px 12px;
+}
+
+.mobile .footer-links {
+	border-bottom: 1px solid #48494f;
+	margin: 0px;
+}
+
+.mobile .foot-list-links, 
+.mobile .foot-botlinks {
+	display: inline-block;
+	float: none;
+	width: auto;
+}
+
+.mobile .footer-links .foot-list-links {
+	padding-left: 20px;
+}
+
+.mobile .footer-links [class*="col-"] {
+	padding: 0px;
+}
+
+.mobile .foot-list-links li {
+    margin-bottom: 12px;
+}
+
+.mobile .foot-list-links li:last-child {
+	margin-bottom: 0px;
+}
+
+.mobile .foot-list-links a {
+	font-size: 14px;
+}
+
+.mobile .foot-find-awana {
+	padding: 16px;
+	border-bottom: 1px solid #48494f;
+}
+
+.mobile .foot-find-awana li {
+	position: relative;
+}
+
+.mobile .foot-find-awana .label-txt {
+	font-size: 16px;
+}
+
+.mobile .foot-find-awana .text-field {
+	font-size: 15px;
+}
+
+.mobile .foot-find-awana .cus-care {
+	text-align: center;
+}
+
+.mobile .foot-find-awana .cus-care .label-txt,
+.mobile .foot-find-awana .phone-no {
+	display: inline-block;
+	margin: 0px;
+
+}
+
+.mobile .foot-find-awana .phone-no {
+	font-size: 16px;
+	margin-left: 5px;
+}
+.mobile .foot-botlinks {
+	padding: 15px 20px 0 20px;
+	margin: 0px;
+	text-align: center;
+}
+
+.mobile .foot-botlinks a {
+    color: #818184;
+    font-size: 12px;
+    margin: 6px 0;
+    display: inline-block;
+}
+
+.mobile .copyright {
+	padding: 20px 50px 0 50px;
+    font-size: 12px;
+}
+
+
+/*** -----------------------------------------
+
+			DASHBOARD MENU
+
+----------------------------------------- ***/
+
+.mobile-db-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 30000;
+    visibility: hidden;
+    height: 100%;
+    width: 100%;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    visibility: visible;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+}
+
+
+.mob-db-menu-open {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	z-index: 3000;
+}
+
+.mob-db-menu-open .mobile-db-menu  {
+    visibility: visible;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.mob-db-menu-open .db-menu-overlay {
+    position: absolute;
+    right: 0;
+}
+
+.db-menu-overlay::after {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    background: rgba(0,0,0,0.6);
+    content: '';
+    opacity: 0;
+    -webkit-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+    transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+    z-index: 105;
+}
+
+.mob-db-menu-open .db-menu-overlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 20000;
+    height: 100%;
+    perspective: 1000px;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+}
+
+.mob-db-menu-open .db-menu-overlay::after {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    -webkit-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+    z-index: 190;
+    top: 0;
+}
+
+.mob-db-menu-open .footer {
+	position: relative;
+}
+.mob-db-menu-open .page-content {
+    padding: 60px 0 34px 0;
+}
+
+/*.mobile-db-menu .sidebar {
+	position: relative;
+}
+
+.mobile-db-menu .sidebar::after {
+	position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    background: rgba(0,0,0,0.2);
+    content: '';
+    opacity: 0;
+    -webkit-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+    transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+}*/
+
+.mobile-db-menu .sidebar {
+    height: 100%;
+}
+
+.mobile-db-menu .sidebar > .row {
+	height: 100%;
+}
+
+.mobile-db-menu .sidebar .sidebarmenu {
+	padding: 0px;
+	background: #fff;
+	overflow-y: auto;
+	-webkit-box-shadow: 0 0 15px 2px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0 0 15px 2px rgba(0,0,0,0.4);
+	box-shadow: 0 0 15px 2px rgba(0,0,0,0.4);
+	max-width: 320px;
+}
+
+.mobile-db-menu .sidebar .close-icon {
+	padding: 0px;
+	position: relative;
+}
+
+.mobile-db-menu .close {
+    color: #fff;
+    font-size: 22px;
+    top: 20px;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+
+.mobile-db-menu .close:before,
+.mobile-db-menu .close:after {
+	border-color: #fff;
+}
+
+.mobile-db-menu .sidebar .list a {
+	padding: 15px 20px;
+	font-size: 16px;
+}
+
+.mobile-db-menu .sidebar .list .inner-list a {
+	padding: 12px 14px 12px 34px;
+}
+
+.mobile-db-menu .sidebar .list .inner-list li a:hover {
+    padding-left: 38px;
+}
+
+.mobile-db-menu .sidebar .list .inner-list li a.active:hover {
+    padding-left: 34px;
+}
+
+.mobile-db-menu .sidebar .dropdown {
+	min-width: auto;
+}
+
+.mobile-db-menu .sidebar .list a .plus,
+.mobile-db-menu .sidebar .list a .minus {
+	color: #d8d8d8;
+    top: 14px;
+}
+
+.mobile-db-menu .sidebar .list a .icon {
+	font-size: 22px;
+	width: 35px;
+}
+
+.mobile-db-menu .sidebar .list a .icon.icon-icon_donations2,
+.mobile-db-menu .sidebar .list a .icon-icon_subscription {
+	font-size: 17px;
+}
+
+.mobile-db-menu .sidebar .list a .icon.icon-icon_dashboard2 {
+	font-size: 20px;
+}
+
+.mobile-db-menu .sidebar .list a .icon-icon_logout {
+	font-size: 18px;
+}
+
+.mobile-db-menu .sidebar .list a .icon-icon_my_donations {
+	font-size: 26px;
+}
+
+.mobile-db-menu .sidebar .myawana-heading {
+	font-size: 32px;
+	margin: 20px 22px;
+}
+
+.mobile-db-menu .sidebar .profile {
+	height: auto;
+	background: #47BFA6;
+	color: #fff;
+	border-top: 0px;
+}
+
+.mobile-db-menu .sidebar .profile .profile-sec {
+	display: flex;
+	text-align: left;
+}
+
+.mobile-db-menu .profile .profile-img {
+	border: 2px solid #fff;
+}
+
+.mobile-db-menu .profile .heading,
+.mobile-db-menu .profile .sub-head {
+	color: #fff;
+}
+
+.mobile-db-menu .profile .heading {
+	text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 180px;
+    font-size: 18px;
+}
+
+.mobile-db-menu .profile-sec .sub-head {
+	font-family: 'AvenirLTStdLight';
+	line-height: 20px;
+}
+
+.mobile-db-menu .switch-profile {
+	border-top: 1px solid #7dd1c0;
+}
+
+.mobile-db-menu .switch-profile a {
+	padding: 15px;
+	color: #fff;
+	display: block;
+	font-size: 16px;
+}
+
+.mobile-db-menu .switch-profile .arrow {
+	float: right;
+	font-size: 14px;
+	margin: 2px 5px 0 0;
+	margin-right: 5px;
+}
+
+.mobile-db-menu .sidebar .list {
+	border: 0px;
+}
+
+.mobile-db-menu .sidebar .list a.active::before {
+	width: 0px;
+}
+
+.mobile-db-menu .sidebar .list a:hover::after,
+.mobile-db-menu .sidebar .list a.active::before,
+.mobile-db-menu .sidebar .list .inner-list a:hover::after,
+.mobile-db-menu .sidebar .list .inner-list a.active::before {
+	display: none;
+}
+
+.mobile-db-menu .church-prof-drpdwn {
+	position: static;
+	border: 0px;
+	box-shadow: none;
+	border-radius: 0px;
+}
+
+.mobile-db-menu .church-prof-drpdwn:after, 
+.mobile-db-menu .church-prof-drpdwn:before {
+	border-width: 0px;
+}
+
+.mobile-db-menu .church-prof-drpdwn .icon-pos {
+    width: 100px;
+    text-align: center;
+    margin-top: 10px;
+    padding-right: 0;
+}
+
+.mobile-db-menu .church-prof-drpdwn .icon-pos .icons {
+    font-size: 55px;
+    color: #6e6e6e;
+}
+
+.mobile-db-menu .church-prof-drpdwn .list {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.mobile-db-menu .church-prof-drpdwn .icon-pos {
+    width: 100px;
+    text-align: center;
+    margin-top: 10px;
+    padding-right: 0;
+}
+
+.mobile-db-menu .church-prof-drpdwn .head {
+    margin: 0 0 2px 0;
+    font-family: 'AvenirLTStdRoman';
+    font-size: 14px;
+    color: #666666;
+    font-weight: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 20ch;
+    text-transform: capitalize;
+}
+
+.mobile-db-menu .church-prof-drpdwn .adrs-txt {
+    font-size: 11px;
+    color: #666666;
+    font-style: normal;
+    line-height: 20px;
+    text-transform: capitalize;
+}
+
+.mobile-db-menu .church-prof-drpdwn .icon-pos .icon-icon_building {
+    font-size: 50px;
+}
+
+
+/*** -----------------------------------------
+
+			PROFILE HEADER
+
+----------------------------------------- ***/
+
+.mob-profile-header {
+	height: auto;
+	display: block;
+	overflow:hidden;
+}
+
+.mob-profile-header .profile {
+	border:0px;
+	margin: 35px 0 10px 0;
+}
+
+.mob-profile-header .profile-sec {
+	display: block;
+	text-align: center;
+}
+
+.mob-profile-header .profile-sec li {
+	display: block;
+}
+
+.edit-icon-circle {
+	background: #fff;
+	width: 28px;
+	height: 28px;
+	border-radius: 100px;
+	color: #3C3D43;
+	font-size: 16px;
+	line-height: 26px;
+	border: 1px solid #f2f9f7;
+	text-align: center;
+}
+
+.mob-profile-header .profile-sec .profile-img {
+	border: 4px solid #fff;
+	width: 90px;
+	height: 90px;
+	margin: 0 auto;
+	display: inline-block;
+}
+
+.mob-profile-header .profile-sec .profile-img img {
+	width: 90px;
+	height: 90px;
+	object-fit: cover;
+}
+
+.mob-profile-header .profile-sec .heading {
+	color: #fff;
+	font-size: 18px;
+	text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 24ch;
+    text-transform: capitalize;
+    margin: 0 auto;
+}
+
+.mob-profile-header .profile .profile-sec .sub-head {
+	font-family: 'AvenirLTStdLight';
+	font-size: 14px;
+	margin: 10px 0 15px 0;
+	line-height: 24px;
+}
+
+/*** -----------------------------------------
+
+			PROFILE EDIT
+
+----------------------------------------- ***/
+
+.mob-profile-edit .sidebar {
+	border:0px;
+	text-transform: capitalize;
+}
+
+.mob-profile-edit .sidebar .list,
+.mob-profile-edit .sidebar .list a {
+	text-transform: capitalize;
+	border-top: 0px;
+}
+
+.mob-profile-edit .sidebar .list a {
+	padding: 25px 20px;
+	border-color: #f0f0f0;
+}
+
+.mob-profile-edit .sidebar .list a .icon {
+	font-size: 24px;
+    margin-right: 12px;
+}
+
+.mob-profile-edit .sidebar .list a .icon-phone {
+	font-size: 28px;
+	line-height: 22px;
+}
+
+.mob-profile-edit .myrole {
+	padding: 10px 20px;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.mob-profile-edit .myrole .head {
+	font-size: 16px;
+	margin: 10px 0;
+}
+
+.mob-profile-edit .myrole .subhead {
+	font-size: 15px;
+	font-weight: bold;
+	color: #47BFA6;
+	margin-bottom: 2px;
+	display: block;
+}
+
+.mob-profile-edit {
+	padding: 20px;
+	background: #fff;
+	margin: 0px;
+}
+    
+.mob-profile-edit .text-field-big {
+	width: 100%;
+}
+
+.mob-edit-photo {
+	margin: 1em 0 2.5em 0;
+	text-align: center;
+}
+
+.mob-edit-photo .change-photo .img {
+	border: 4px solid #47BFA6;
+}
+
+.mob-profile-edit .sub-head-border {
+	margin-top: 40px;
+}
+
+.mob-profile-edit .file-upload input[type='file'] {
+	right: 0;
+	width: 150px;
+	height: 35px;
+	margin: 0 auto;
+}
+
+
+/*** -----------------------------------------
+
+			SECTION HEADER
+
+----------------------------------------- ***/
+
+.section-header {
+	font-family: 'AvenirLTStdRoman';
+    font-size: 14px;
+    padding: 0px;
+    border-bottom: 4px solid #47BFA6;
+    background: #fff;
+    margin: 0 0 10px 0;
+    padding: 8px 10px 8px 14px;
+    font-weight: normal;
+    position: relative;
+}
+
+.section-header .icon {
+	font-size: 20px;
+    line-height: 14px;
+    vertical-align: top;
+    margin-right: 5px;
+    margin: 2px 5px 0 0;
+    display: inline-block;
+}
+
+.section-header .sorting-icon-arrow .icon,
+.section-header .icon-search2 {
+	font-size: 16px;
+	color: #878787;
+	margin-right: 0px;
+}
+
+.section-header .icon-search2 {
+	margin-right: 5px;
+}
+
+.section-header .search-box {
+	border: 1px solid #cbcbcb;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 4px;
+    position: relative;
+    background: #fff;
+    z-index: 1;
+}
+
+.section-header .search-box .close {
+	font-size: 11px;
+	position: absolute;
+	right: 0px;
+	margin: 4px;
+	height: 18px;
+	width: 18px;
+}
+
+.section-header .search-box .close:before,
+.section-header .search-box .close:after {
+	width: 14px;
+}
+
+.section-header .search-box .text-field {
+	border: 0px;
+	padding: 2px 10px;
+	font-size: 12px;
+	width: 100%;
+	line-height: 20px;
+}
+
+.search-header {
+	padding: 4.5px 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.search-header .icon {
+	display: inline-block;
+	margin: 5px 0;
+}
+
+.search-header .sorting-icon-arrow {
+	text-align: right;
+}
+
+
+
+/*** -----------------------------------------
+
+			UPCOMING PROGRAMS
+
+----------------------------------------- ***/
+
+.mob-upcom-prgms .order-row {
+	position: relative;
+}
+
+.mob-upcom-prgms .order-row > .list.list {
+	padding: 10px 0;
+	align-items: flex-start;
+}
+
+.mob-upcom-prgms .order-row .total-items {
+	font-size: 18px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 22ch;
+}
+
+.mob-upcom-prgms .order-row .more-icon {
+	position: absolute;
+	top: 5px;
+	right: 10px;
+}
+
+.mob-upcom-prgms .program-details .total-items {
+	white-space: normal;
+}
+
+.mob-upcom-prgms .program-details > .list {
+	border:0px;
+}
+
+.mob-upcom-prgms .program-details .details-txt {
+	padding: 0 20px 20px 20px;
+}
+
+
+/*** -----------------------------------------
+
+	MANAGE PROGRAMS MATSELECT ARROE FIX
+
+----------------------------------------- ***/
+
+.mobile .mat-radio-button.mat-radio-button, 
+.mobile .mat-select.mat-select {
+	font-family: 'AvenirLTStdBook', Arial;
+}
+
+.mobile .mat-select.mat-select {
+	background: #fff url(../img/caret-arrow-down.png) right 12px center no-repeat;
+}
+
+.mobile .mat-select.mat-select .mat-select-value {
+	overflow: visible;
+}
+
+.mobile .mat-select .mat-select-arrow.mat-select-arrow {
+	 border-left: 0px solid transparent;
+     border-right: 0px solid transparent;
+     border-top: 0px solid;
+}
+
+.mobile .mat-select .mat-select-arrow.mat-select-arrow, 
+.mobile .mat-select .mat-select-disabled .mat-select-value {
+    color: rgba(0,0,0,.64);
+}
+
+.mobile .text-field .mat-select-arrow.mat-select-arrow {
+    margin: 0 3px 0 0;   
+}
+
+.mobile .text-field-big .mat-select-arrow.mat-select-arrow {
+    margin: 0 -2px 0 0;   
+}
+
+
+
+/*** -----------------------------------------
+
+			MOBILE MODAL
+
+----------------------------------------- ***/
+
+.mobile .modal {
+	z-index: 1002;
+}
+
+.mobile-modal .modal-content {
+	width: 100%;
+	margin: 10% auto;
+}
+
+.mobile-modal .modal-content .close {
+	font-size: 24px;
+}
+
+.mobile-modal .modal-content .content-pad {
+    padding: 20px;
+}
+
+.mobile-modal .cal-icon-pos .icon-icon_calendar {
+	right: 0px;
+}
+
+.mobile-modal-alert {
+	position: relative;
+}
+
+.mobile .modal-alert .toast-msg.toast-msg.toast-msg {
+	left: 0;
+	right: 0;
+}
+
+/*** -----------------------------------------
+
+			PROFILE WITH CHURCH
+
+----------------------------------------- ***/
+
+.mobile .adrs-sec {
+	margin: 4px 0 20px;
+}
+
+.ship-adrs {
+	padding-top: 15px;
+	align-items: center;
+	/*border-bottom: 2px solid #f3f3f3;*/
+}
+
+.ship-adrs .icon {
+	font-size: 2.8em;
+	color: #6b6b6b;
+}
+
+.ship-adrs li:first-child {
+	padding-right: 0px;
+}
+
+.ship-adrs .adrs-txt {
+	font-style: normal;
+	line-height: 26px;
+}
+
+/*** MyChurch **/
+
+.mob-mychurch {
+	color: #6e6e6e;
+	margin-top: 1.5em;
+}
+
+.mob-mychurch .church-head-sec {
+	background: #fff;
+	border:1px #dadada;
+	border-style: solid none;
+}
+
+.mob-mychurch .church-head-sec .para-txt {
+	line-height: 24px;
+	margin: 16px;
+}
+
+.mob-mychurch .church-head {
+	font-size: 18px;
+	font-weight: bold;
+	margin: 0 0 8px 0;
+	color: #666666;
+	border-bottom: 1px solid #ececec;
+	padding: 14px 16px;
+}
+
+.mob-mychurch .chuch-card {
+	border: 0px;
+	border-bottom: 4px solid #d6d6d6;
+    margin-top: 6px;
+    border-radius: 0px;
+   	letter-spacing: .5px;
+   	padding: 16px;
+}
+
+.mob-mychurch .chuch-card .church-status {
+	border-top: 2px solid #f3f3f3;
+	padding: 8px 16px 0px 16px;
+    margin: 10px -16px -4px -16px;
+    position: relative;
+    left: 0;
+    right: 0
+}
+
+.mob-mychurch .chuch-card .adrs-txt {
+	margin-bottom: 0px;
+}
+
+.mob-mychurch .chuch-card .card-head {
+	font-size: 16px;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin-bottom: 8px;
+	color: #666666;
+}
+
+
+
+/*** -----------------------------------------
+
+			MANAGE LEADERS MOBILE
+
+----------------------------------------- ***/
+
+.mob-mange-lead-row .list.list.list {
+	border-bottom: 0px;
+}
+
+.mob-mange-lead-row .list li {
+	padding: .3em 1.4em;
+	font-size: 12px;
+}
+
+.mob-mange-lead-row .lead-head {
+	font-family: 'AvenirLTStdRoman';
+	font-size: 16px;
+	color: #47bfa6;
+	margin: 8px 0 4px 0;
+	display: block;
+}
+
+.mob-mange-lead-row .btn-row {
+	padding: 10px 1em;
+	border-top: 2px solid #f2f2f2;
+	text-align: center;
+	margin-top: 10px;
+}
+
+.mob-mange-lead-row .btn-row .btn {
+	min-width: 110px;
+}
+
+.mob-mange-lead-row .active-links {
+	text-transform: uppercase;
+	font-size: 11px;
+	color: #6b6b6b;
+	padding: 0px;
+}
+
+.mob-mange-lead-row .active-links .row li {
+	border-right: 1px solid #f3f3f3;
+}
+
+.mob-mange-lead-row .active-links .row li:last-child {
+	border-right: 0px;
+}
+
+.mob-mange-lead-row .active-links .icon {
+	font-size: 12px;
+	margin-right: 2px;
+}
+
+.mob-mange-lead-row .active-links .icon-trash-o {
+	font-size: 14px;
+}
+
+.mob-mange-lead-row .active-links .icon-icon_visibility {
+	font-size: 10px;
+}
+
+.mobile .licence-count-txt {
+	font-size: 13px;
+	padding: 12px 8px;
+}
+
+.mobile .mob-pending-invite {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 13px;
+    color: #222222;
+    padding: 10px 10px 10px 14px;
+    margin-top: 0px; 
+}
+
+.mobile .btn-curve-line.btn-curve-line {
+	font-size: 10px;
+	padding: 2px 10px;
+}
+
+.mobile .invite-btn-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+
+/*** -----------------------------------------
+
+			UPDATE LEADER
+
+----------------------------------------- ***/
+
+.mob-update-leader {
+	padding: 1.4em 0;
+	margin: 0px;
+	text-align: center;
+}
+
+.mob-update-leader .icon {
+	font-size: 4em;
+	color: #666666;
+	margin-bottom: .2em;
+	display: inline-block;
+	margin-top: 5px;
+}
+
+.mob-update-leader .order-id {
+	font-family: 'AvenirLTStdRoman';
+}
+
+
+/*** -----------------------------------------
+
+			MANAGE PROGRAMS
+
+----------------------------------------- ***/
+
+.mobile .meeting-day-dropdown {
+    min-width: 160px;
+}
+
+
+/*** -----------------------------------------
+
+			MOBILE SORTING
+
+----------------------------------------- ***/
+
+
+.mobile-sorting.mobile-sorting.mobile-sorting  {
+	margin-top: 98px;
+	-webkit-box-shadow: 0px -5px 10px 0px rgba(0,0,0,0.1);
+	-moz-box-shadow: 0px -5px 10px 0px rgba(0,0,0,0.1);
+	box-shadow: 0px -5px 10px 0px rgba(0,0,0,0.1);
+	position: absolute;
+	overflow: visible;
+	z-index: 1000;
+}
+
+.mobile-sorting:after,
+.mobile-sorting:before  {
+	right: 6px;
+	top: -22px;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-width: 12px;
+}
+
+.mobile-sorting:after {
+	border-bottom-color: #fff;
+    margin-top: 0;
+}
+
+.mobile-sorting:before {
+	border-bottom-color: #d3d3d3;
+    margin-top: -1px;
+}
+
+.mobile-sorting .list {
+	margin: 0px;
+	position: relative;
+}
+
+.mobile-sorting.mobile-sorting .list li {
+	font-family: 'AvenirLTStdRoman';
+	border-bottom: 1px solid #e4e4e4;
+	padding: 12px 16px;
+	font-size: .8em;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.mobile-sorting .list li:first-child {
+	padding: 8px 16px;
+	font-size: .7em;
+}
+
+
+/*** -----------------------------------------
+
+        CUSTOME CHECKBOX AND RDIO
+
+----------------------------------------- ***/
+
+
+.mobile-sorting .list input[type=radio   ]:not(old){
+    width     : 2em;
+    margin    : 0;
+    padding   : 0;
+    font-size : 1em;
+    opacity   : 0;
+    position: absolute;
+}
+
+.mobile-sorting .list input[type=radio   ]:not(old) + label{
+    display      : inline-block;
+    width        : 1.8em;
+}
+
+.mobile-sorting .list input[type=radio   ]:not(old) + label > span{
+    display          : inline-block;
+    width            : 12px;
+    height           : 12px;
+    margin           : 0 0.15em 0 0.25em;
+    border           : 0.0625em solid rgb(192,192,192);
+    background       : #fff;
+    vertical-align   : middle;
+    position: relative;
+    top: -1px;
+}
+
+.mobile-sorting .list input[type=radio   ]:not(old) + label > span {
+    width            : 14px;
+    height           : 14px;
+    border           : 0.0625em solid #dddddd;
+}
+
+.mobile-sorting .list input[type=radio   ]:not(old) + label > span > span {
+    display          : block;
+    width            : 6px;
+    height           : 6px;
+    margin           : 4px auto;
+    border-radius    : 100px;
+    background       : #dddddd;
+}
+
+.mobile-sorting .list input[type=radio   ]:not(old) + label > span {
+    border-radius: 100px;
+}
+
+.mobile-sorting .list input[type=radio   ]:not(old):checked + label > span{
+    background: #fff;
+    border: 0.0625em solid #47BFA6;
+}
+
+.mobile-sorting .list input[type=radio]:not(old):checked + label > span > span{
+    display          : block;
+    width            : 6px;
+    height           : 6px;
+    margin           : 4px auto;
+    border-radius    : 100px;
+    background       : #47BFA6;
+}
+
+
+
+/*** -----------------------------------------
+
+        DASHBOARD EMPTY STATE
+
+----------------------------------------- ***/
+
+
+
+.mobile .db-empty-orders-donation .icons {
+    color: #bbbbbb;
+    font-size: 50px;
+}
+
+.mobile .complete-profile {
+	background: #edf5f9;
+    border: 1px dashed #aac3d0;
+    display: block;
+    text-align: center;
+    margin: 10px;
+}
+
+.mobile .complete-profile .para-txt {
+	margin-bottom: 15px;
+	display: block;
+}
+
+.mobile .contact-info {
+	font-family: 'AvenirLTStdRoman';
+	line-height: 22px;
+	margin: 3em 0 0 0;
+	text-align: center;
+	font-size: 12px;
+}
+
+
+/*** -----------------------------------------
+
+        	ADD YOUR SEARCH
+
+----------------------------------------- ***/
+
+.mobile .search-input {
+	height: 55px;
+}
+
+.mobile .search-input-dropdown {
+	max-height: 200px;
+	overflow-x: hidden;
+}
+
+.mobile .search-input-dropdown.selected .church-icon {
+	width: 40px;
+}
+
+.mobile .search-input .text-field {
+	padding-left: 12px;
+    padding-right: 40px;
+    font-size: 13px;
+    height: 55px;
+}
+
+.mobile .search-input .icon-search {
+	right: 12px;
+	font-size: 20px;
+}
+
+.mobile .search-input-dropdown .church-head,
+.mobile .search-input-dropdown .church-adrs {
+	padding-right: 50px;
+	letter-spacing: 0;
+	text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.mobile .search-input-dropdown .church-icon .icon {
+	font-size: 30px;
+}
+
+.mobile .search-input-dropdown .row [class*='col'] {
+	padding: .5em 1em;
+}
+
+
+/*** -----------------------------------------
+
+       PROFILE COMPLETE REGISTRATION
+
+----------------------------------------- ***/
+
+
+.mobile .complete-reg {
+	background: #fff;
+}
+
+.mobile .complete-reg .heading.heading.heading.heading {
+	letter-spacing: 1px;
+}
+
+.mobile .complete-reg .register-icon {
+	margin: 3rem 0 2em 0;
+}
+
+.mobile .complete-reg .para-txt {
+	margin: 1em;
+}
+
+
+/*** -----------------------------------------
+
+			CHURCH REMOVE CONNECTION
+
+----------------------------------------- ***/
+
+.mobile .remove-connection .church-adrs {
+	display: block;
+	text-align: center;
+}
+
+.mobile .remove-connection .church-icon {
+	margin: .5em auto 1em auto;
+}
+
+.mobile .remove-connection .db-alert-message {
+	margin: 0 0 1.5em 0;
+}
+
+
+/*** -----------------------------------------
+
+				ALERT MESSAGE
+
+----------------------------------------- ***/
+
+.mobile .db-alert-msg-small {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 12px;
+}
+
+.mobile .db-alert-msg-small .para-txt {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.mobile .db-alert-msg-small .btn {
+	font-size: 11px;
+}
+
+.mobile .db-alert-msg-small .btn:first-child {
+    margin-right: 10px;
+}
+
+.mobile .db-alert-msg-small .btn:last-child {
+    margin-right: 0px;
+}
+
+
+
+
+/*** -----------------------------------------
+
+				BUTTON
+
+----------------------------------------- ***/
+
+.mobile .btn .icon {
+	position: relative;
+    right: 0;
+    top: 2px;
+}
+
+.mobile .btn:hover .icon {
+	color: #fff;
+}
+
+
+/*** -----------------------------------------
+
+				LOADER
+
+----------------------------------------- ***/
+
+.mobile-loader {
+	position: absolute;
+	top: 250px;
+	left: 0;
+	right: 0;
+	z-index: 200;
+}
+
+
+/*** -----------------------------------------
+
+			ADD CHURCH CUSTOM DROPDOWN
+
+----------------------------------------- ***/
+
+.cuppa-dropdown .dropdown-list {
+	right: 0 !important;
+}
+
+.cuppa-dropdown .lazyContainer {
+	max-height: 210px !important;
+}
+
+
+
+/*** -----------------------------------------
+
+        	ORDER HISTORY FILTER
+
+----------------------------------------- ***/
+
+.mob-filt-by-date.mob-filt-by-date.mob-filt-by-date li {
+	display: block;
+	border-bottom: 0px;
+	font-family: 'AvenirLTStdRoman';
+}
+
+.mob-filt-by-date .mob-filt-head {
+	margin: -.8em 0 1em 0;
+	font-size: 13px;
+	text-transform: capitalize;
+}
+
+.mob-filt-by-date .form-group .text-field {
+	width: 100%;
+	border-color: #999999;
+}
+
+.mob-filt-by-date .cal-icon-pos .icon-icon_calendar {
+	right: 0px;
+}
+
+
+/*** -----------------------------------------
+
+			HELP AND SUPPORT
+
+----------------------------------------- ***/
+
+.mobile .help-support {
+	background: #fff;
+	margin: 0 0 1.5em 0;
+	padding-top: 1.5em;
+}
+
+.mobile .help-support .hs-head {
+	font-size: 16px;
+}
+
+.mobile .help-support .row {
+	flex-direction: column;
+}
+
+.mobile .help-support .row [class*="col-"] {
+	flex: 1;
+	width: 100%;
+}
+
+.mobile .help-support .para-txt {
+	font-size: 12px;
+}
+
+.mobile .help-support .details span {
+	font-size: 14px;
+	margin-top: 18px;
+} 
+
+.mobile .help-support .icon {
+	font-size: 4em;
+}
+
+.mobile .help-support .icon.icon-icon_chat {
+	font-size: 3.4em;
+}
+
+.mobile .help-support .chat-with-us {
+	border: 1px dashed #b5e5db;
+	padding-top: 1.3em;
+	margin: .8em 0 1.5em 0 ;
+}
+
+
+
+/*** -----------------------------------------
+
+		PROFILE ADDRESS VERIFICATION
+
+----------------------------------------- ***/
+
+.mobile .adrs-verfy {
+	border-radius: 0px;
+	margin: 5% auto;
+	left: 0;
+	max-width: 90%;
+}
+
+.mobile .adrs-verfy:before,
+.mobile .adrs-verfy:after {
+	border-right-color: transparent; 
+     border-width: 0px; 
+}
+
+
+/*** -----------------------------------------
+
+				CHANGE PHOTO
+
+----------------------------------------- ***/
+
+.mobile .profile-change-photo {
+	text-align: center;
+	padding: 1.5em 2em;
+}
+
+.mobile .profile-change-photo .btn {
+	font-size: 14px;
+}
+
+.mobile .crop-photo .img-border  {
+	padding: .4em;
+}
+
+.mobile .crop-photo {
+	flex-direction: column;
+	margin: 0;
+}
+
+.mobile .crop-photo [class*='col'] {
+	flex: 1;
+	width: 100%;
+}
+
+.mobile .crop-photo .small-photo {
+	width: 150px;
+	margin: 2em auto;
+}
+
+
+/*** -----------------------------------------
+
+				CONTENT PAD
+
+----------------------------------------- ***/
+
+.mobile .content-pad {
+	padding: 1.4em;
+	background: #fff;
+}
+
+.mobile .content-pad-small {
+	padding: 1em;
+	background: #fff;
+}
+
+.mobile .content-pad .para-txt {
+	line-height: 28px;
+}
+
+
+/*** -----------------------------------------
+
+            ADDRESS AUTO COMPLETE
+
+----------------------------------------- ***/
+
+.mobile .adrs-auto-complete .adrs-list {
+	margin: 0;
+	max-height: 190px;
+}
+
+.mobile .adrs-auto-complete .adrs-list li {
+    padding: 6px 12px;
+}
+
+
+/*** -----------------------------------------
+
+				TOAST MESSAGE
+
+----------------------------------------- ***/
+
+.mobile .toast-msg.toast-msg {
+	top: auto;
+	bottom: 10px;
+	left: 10px;
+	right: 10px;
+	margin: 0 auto;
+	z-index: 1003;
+}
+
+
+/*** -----------------------------------------
+
+                POPOVER 
+
+----------------------------------------- ***/
+
+
+.mob-popover .heading.heading.heading.heading {
+	padding: .7em .8em;
+	font-size: 1.2em;
+	display: flex;
+	align-items: center;
+	margin-bottom: 0;
+}
+
+.mob-popover .heading .icon {
+	margin-right: .6em;
+	font-size: 1.4em;
+}
+
+.mob-popover .mob-pop-content {
+	text-align: center;
+	padding: 2.5em 2em;
+}
+
+.mob-popover .mob-pop-content span {
+	display: block;
+	line-height: 22px;
+}
+
+/*** Popup Warning ***/
+
+.mob-popover.warning .heading.heading.heading.heading {
+	background-color: #F89406;
+	color: #fff;
+}
+
+.mob-popover.warning .mob-pop-content {
+	background-color: #fff8ef;
+}
+
+
+
+
+/*** -----------------------------------------
+
+        		MEDIA QUERY
+
+----------------------------------------- ***/
+
+
+/*@media only screen and (min-width: 501px) and (max-width: 767px) {
+
+	.mobile .db-overview-notify {
+		display: inline-block;
+	}
+
+	.mobile .db-overview-notify li {
+	    width: 48%;
+	    margin-bottom: 1.4em;
+	}
+
+	.mobile .db-overview-notify li:nth-child(2n) {
+	    float: right;
+	}
+
+}*/
+
+
+@media only screen and (min-width: 401px) and (max-width: 767px) {
+	.mobile .login, {
+	    width: 400px;
+	    margin: 0 auto;
+	}
+
+	.mobile .complete-reg .heading.heading.heading.heading,
+	.mobile .complete-reg .para-txt,
+	.mobile .complete-reg .mob-profile-edit,
+	.mobile .complete-reg .btn-block-small {
+		width: 400px;
+		margin: 0 auto;
+	}
+
+	.mobile .complete-reg .register-icon {
+		width: 400px;
+		margin: 3rem auto 2em auto;
+	}
+
+	/*.mobile .foot-list-links {
+		display: flex;
+	    flex-direction: row;
+	    justify-content: space-around;
+	}
+
+	.mobile .foot-list-links li {
+	    margin-bottom: 0;
+	}*/
+
+	.mobile .foot-botlinks {
+		display: block;
+	}
+
+	.mobile .foot-botlinks li {
+		margin: 0 10px;
+	}
+
+	/*.mobile .remove-connection .church-adrs {
+		display: flex;
+		text-align: left;
+	}
+
+	.mobile .remove-connection .church-icon {
+		margin: 0 20px 0 10px;
+	}
+
+	.mobile .db-alert-message {
+		display: flex;
+		text-align: left;
+	}
+
+	.mobile .db-alert-message .icon {
+		display: inline-block;
+		margin-bottom: 0px;
+	}*/
+
+	
+}
+
+@media only screen and (min-width: 280px) and (max-width: 400px) {
+	.mobile .login {
+	    width: 100%;
+	}
+
+	.mobile .login-div.login-div.login-div,
+	.mobile .register-div.register-div.register-div  {
+		padding: 45px 30px;
+	}
+
+	.mobile .meeting-day-dropdown {
+		min-width: 140px;
+	}
+
+	.mobile .btn {
+		font-size: 13px;
+	}
+
+	.mobile-db-menu .profile .heading {
+		max-width: 150px;
+	}
+
+	.mobile-db-menu .church-prof-drpdwn .icon-pos .icons {
+	    font-size: 50px;
+	}
+
+	.mobile-db-menu .church-prof-drpdwn .icon-pos .icon-icon_building {
+	    font-size: 45px;
+	}
+
+	.mobile-db-menu .church-prof-drpdwn .icon-pos {
+		width: 90px;
+	}
+
+	.mobile-db-menu .sidebar .list a {
+		font-size: 14px;
+	}
+
+	.mobile .db-notify-box .para-txt .notify-txt {
+		font-size: 13px;
+	}
+
+}
+
+
+@media only screen and (min-width: 280px) and (max-width: 330px) {
+
+	.mob-mange-lead-row .list span > span.text-muted {
+		display: block;
+	}
+
+	.complete-profile {
+		padding: 10px;
+		text-align: center;
+	}
+
+	.mobile .licence-count-txt {
+		font-size: 13px;
+		padding: 6px 8px;
+	}
+
+	.mobile .db-notify-box .para-txt .notify-txt {
+		font-size: 12px;
+	}
+
+}
+
+
+@media only screen and (min-width: 280px) and (max-width: 300px) {
+
+	.mobile .mob-mange-lead-row .btn-row .btn {
+		min-width: 80px;
+	}
+
+	.mobile .footer-btn .btn-width-110 {
+		min-width: 80px;
+	}
+
+}
+
+
+@media screen and (orientation:landscape) {
+   .mobile-header {
+   		position: relative;
+   }
+
+   .mobile .page-content,
+   .mob-db-menu-open .page-content {
+   		padding-top: 0px;
+   }
+}
+
+
+

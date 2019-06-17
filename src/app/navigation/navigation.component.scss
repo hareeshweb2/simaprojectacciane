@@ -1,0 +1,98 @@
+.transitionNone {
+  width: 0%;
+  left: -100%;
+  position:fixed;
+  z-index:200;
+  top: 0;
+  background: #fff;
+  height: 100%;
+  display: none;
+}
+.transitionFront {
+  width: 100%;
+  left: 0;
+  position:fixed;
+  z-index:200;
+  top: 0;
+  background: #fff;
+  height: 100%;
+  display: block;
+}
+.transitionFront {
+  -webkit-animation: run 0.4s;
+  -webkit-animation-timing-function: linear;
+  animation: run 0.4s;
+  animation-timing-function: linear;
+}
+
+@-webkit-keyframes run {
+  0% {
+    left: -100%;
+  }
+  25% {
+    left: -75%;
+  }
+  50% {
+    left: -50%;
+  }
+  75% {
+    left: -25%;
+  }
+  100% {
+    left: 0;
+  }
+}
+.transitionBack {
+  width: 100%;
+  left: -100%;
+  position: absolute;
+  top: 0;
+  background: #fff;
+  height: 100%;
+  display: block;
+}
+.transitionBack {
+  -webkit-animation: runBack 0.4s;
+  -webkit-animation-timing-function: linear;
+  animation: runBack 0.4s;
+  animation-timing-function: linear;
+}
+
+@-webkit-keyframes runBack {
+  100% {
+    left: -100%;
+  }
+  75% {
+    left: -75%;
+  }
+  50% {
+    left: -50%;
+  }
+  25% {
+    left: -25%;
+  }
+  0% {
+    left: 0%;
+  }
+}
+.sidebar .list .inner-list a{
+  cursor:pointer;
+}
+.ellepse{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 20ch;
+
+}
+.elle{
+  display:inline-block;
+  //overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 21ch;
+}
+
+
+// .mobile-db-menu .sidebar {
+//   position: fixed;
+//   width: 100%;
+// }

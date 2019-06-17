@@ -1,0 +1,109 @@
+/*** -----------------------------------------
+
+            ORDER HISTORY
+
+----------------------------------------- ***/
+
+
+.myorders-sec .filter {
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2em;
+}
+
+.myorders-sec .filter > .heading > .icon {
+    font-size: 30px;
+    margin-right: 6px;
+}
+
+.filter .label-txt {
+	font-size: 14px;
+}
+
+.filter .pending-invite {
+	line-height: 30px;
+	display: inline-block;
+}
+
+.filter .pending-invite .check-label-txt {
+	font-size: 13px;
+	color: #222222;
+}
+
+.filter .pending-invite .switch {
+	margin-right: 15px;
+	top: 6px;
+}
+
+.filter .search-field {
+	position: relative;
+	display: inline-block;
+}
+
+.filter .search-field .icon-search {
+	-webkit-border-top-right-radius: 6px;
+	-webkit-border-bottom-right-radius: 6px;
+	-moz-border-top-right-radius: 6px;
+	-moz-border-bottom-right-radius: 6px;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+    color: #ccc;
+    font-size: 14px;
+    float: right;
+    padding: 0 10px;
+	height: 30px;
+	line-height: 30px;
+	/*border:1px solid #f4f4f4;
+	border-left: 0px;*/
+	border: 0px;
+	position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.filter .search-field .icon-search::before {
+	opacity: .5;
+}
+
+.filter .search-field .text-field {
+	font-size: 12px;
+	/*-webkit-border-top-left-radius: 6px;
+	-webkit-border-bottom-left-radius: 6px;
+	-moz-border-top-left-radius: 6px;
+	-moz-border-bottom-left-radius: 6px;
+	border-top-left-radius: 6px;
+	border-bottom-left-radius: 6px;*/
+	padding: 0 10px 0 30px;
+	height: 32px;
+	width: 220px;
+	border-radius: 4px;
+	/*border-right: 0px;*/
+}
+
+
+
+/**** Filter by Date ***/
+
+.filter-by-date {
+	text-align: right;
+	background: #f5f5f5;
+	padding: .8em;
+}
+
+.filter-by-date .filter-head {
+	font-size: 16px;
+	margin: 0 1em 0 0;
+	color: #4f4b4c;
+}
+
+.filter-by-date .from-to {
+	margin-right: 1em;
+}
+
+.filter-by-date .from-to .text-field {
+	background: #fbfbfb;
+	border-color: #999999;
+}
+

@@ -1,0 +1,438 @@
+<div class="loader-overlay" *ngIf="loading">
+  <div class="loader"></div>
+</div>
+<div class="toast-msg toast-error"  *ngIf="registerLinkExpire">
+    <span class="close" data-dismiss="alert">×</span>
+    <div class="toast-content">
+      <span class="icon icon-icon_error" ></span>
+      <p class="para-txt">
+          {{messagesShared.registerationLinkExpired}}<a href="http://dev1.my.awana.org/register" class="link-underline">Click here</a>{{messagesShared.registerationLinkExpired1}}
+      </p>
+    </div>
+  </div>
+<div class="modal complete-reg" style="display: block;" *layout="'desktop'">  
+  <!-- Modal content -->
+  <form *ngIf="showForm" (ngSubmit)="socialRegister()" [formGroup]="registerUserForm" novalidate>
+    <div class="modal-content animated fadeInDown">
+      <div class="content-pad">
+        <div class="register-icon">
+          <span class="icon-icon_user_register icon prof-img" *ngIf="photoURL !=''">
+            <img src="{{photoURL}}" alt="Profile" width="100px">
+          </span>
+          <span class="icon-icon_user_register icon" *ngIf="photoURL==''">
+            <span class="path1"></span>
+            <span class="path2"></span>
+          </span>
+        </div>
+        <!-- <div *ngIf="registerLinkExpire" class="alert-msg error">
+            <span>{{messagesShared.registerationLinkExpired}}<a href="http://dev1.my.awana.org/register" class="link-underline">Click here</a>{{messagesShared.registerationLinkExpired1}} </span> 
+        </div> -->
+        		<!-- Toast Error Message -->
+        <h2 class="heading text-center">{{messagesShared.completeRegistration}}</h2>
+        <!-- <div *ngIf="registerLinkExpire" class="alert-msg error">
+          <span>{{messagesShared.registerationLinkExpired}}<a  href="http://dev1.my.awana.org/register">Click</a>{{messagesShared.registerationLinkExpired1}} </span> 
+        </div> -->
+        <div class={{formFieldDisable}}>
+          <div class="row">
+            <div class="col-3 text-right">
+              <label>{{messagesShared.firstName}}* :</label>
+            </div>
+            <div class="col-7">
+              <input type="text" formControlName="firstName" id="firstName" placeholder="First Name" class="text-field text-field-big"
+                required [(ngModel)]="fName">
+              <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="field-error-txt">
+                <div class="field-error-txt animated fadeInRight" *ngIf="firstName.errors.required">
+                  {{messagesShared.firstNameReqValidation}}
+                </div>
+                <div class="field-error-txt animated fadeInRight" *ngIf="firstName.errors.minlength">
+                  {{messagesShared.firstNameMinLength}}
+                </div>
+                <div class="field-error-txt animated fadeInRight" *ngIf="firstName.errors.maxlength">
+                  {{messagesShared.firstNameMaxLength}}
+                </div>
+                <div class="field-error-txt animated fadeInRight" *ngIf="firstName.errors.pattern && !firstName.errors.required && !firstName.errors.minlength && !firstName.errors.maxlength">
+                  {{messagesShared.alphaOnlyFName}}
+                </div>
+              </div>
+            </div>
+            <div class="col-2"></div>
+          </div>
+          <div class="row">
+            <div class="col-3 text-right">
+              <label>{{messagesShared.lastName}}* :</label>
+            </div>
+            <div class="col-7">
+              <input type="text" name="lastName" class="text-field text-field-big" placeholder="Last Name" formControlName="lastName" required
+                [(ngModel)]="lName">
+              <div *ngIf="lastName.errors && (lastName.dirty || lastName.touched)" class="field-error-txt">
+                <div class="field-error-txt animated fadeInRight" *ngIf="lastName.errors.required">
+                  {{messagesShared.lastNameReqValidation}}
+                </div>
+                <div class="field-error-txt animated fadeInRight" *ngIf="lastName.errors.minlength">
+                  {{messagesShared.lasNameMinLength}}
+                </div>
+                <div class="field-error-txt animated fadeInRight" *ngIf="lastName.errors.maxlength">
+                  {{messagesShared.lastNameMaxLength}}
+                </div>
+                <div class="field-error-txt animated fadeInRight" *ngIf="lastName.errors.pattern && !lastName.errors.required && !lastName.errors.minlength && !lastName.errors.maxlength">
+                  <span>{{messagesShared.alphaOnlyLtName}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-2"></div>
+          </div>
+          <div class="row" *ngIf="!paramId">
+            <div class="col-3 text-right">
+              <label>Email* :</label>
+            </div>
+            <div class="col-7">
+              <input type="text" name="socialemail" class="text-field text-field-big" placeholder="Email" formControlName="socialemail">
+              <div *ngIf="socialemail.errors && (socialemail.dirty || socialemail.touched)" class="field-error-txt">
+                <div class="field-error-txt animated fadeInRight" *ngIf="socialemail.errors.required">
+                  Email is required.
+                </div>
+                <div class="field-error-txt animated fadeInRight" *ngIf="socialemail.errors.pattern">
+                  Please enter valid email ID.
+                </div>
+              </div>
+            </div>
+            <div class="col-2"></div>
+          </div>
+          <!-- update for invite user start -->
+          <input type="hidden" formControlName="email" *ngIf="paramId">
+          <section formGroupName="passwordGroup" *ngIf="paramId">
+            <div class="row">
+              <div class="col-3 text-right">
+                <label>{{messagesShared.password}}* :</label>
+              </div>
+              <div class="col-7">
+                <!-- <div class="form-group"> -->
+                <input type="password" name="password" class="text-field text-field-big" formControlName="password" placeholder="Password" minlength="8"
+                  [ngClass]="{'field-error': (registerUserForm.get('passwordGroup.password').touched || 
+        registerUserForm.get('passwordGroup.password').dirty) && !registerUserForm.get('passwordGroup.password').valid }">
+                <span class="field-error-txt" *ngIf="(registerUserForm.get('passwordGroup.password').touched || 
+                registerUserForm.get('passwordGroup.password').dirty) && 
+                registerUserForm.get('passwordGroup.password').errors">
+                    <span class="field-error-txt animated fadeInRight" *ngIf="registerUserForm.get('passwordGroup.password').errors?.required"> {{messagesShared.passValidation}}</span>	
+                    <span class="field-error-txt animated fadeInRight" *ngIf="registerUserForm.get('passwordGroup.password').errors?.minlength">{{messagesShared.passValidationNinCharec}}</span>
+                    <span class="field-error-txt animated fadeInRight" *ngIf="registerUserForm.get('passwordGroup.password').errors?.commonPasswordSet && !registerUserForm.get('passwordGroup.password').errors.minlength && !registerUserForm.get('passwordGroup.password').errors?.pattern && !registerUserForm.get('passwordGroup.password').errors?.containFirstLastEmail">{{messagesShared.passwordValidationAvoid}}</span>
+                    <span class="field-error-txt animated fadeInRight" *ngIf="registerUserForm.get('passwordGroup.password').errors?.charValidation">{{messagesShared.spaceNotAllowed}}</span>
+                    <span class="field-error-txt animated fadeInRight" *ngIf="registerUserForm.get('passwordGroup.password').errors?.pattern && !registerUserForm.get('passwordGroup.password').errors.minlength && !registerUserForm.get('passwordGroup.password').errors?.commonPasswordSet && !registerUserForm.get('passwordGroup.password').errors?.containFirstLastEmail">{{messagesShared.passwordValidationFormat}}</span>
+                    <span class="field-error-txt animated fadeInRight" *ngIf="!registerUserForm.get('passwordGroup.password').errors?.commonPasswordSet && !registerUserForm.get('passwordGroup.password').errors.minlength && !registerUserForm.get('passwordGroup.password').errors?.pattern && registerUserForm.get('passwordGroup.password').errors?.containFirstLastEmail">{{messagesShared.containFirstLastEmail}}</span>					                                                              
+                </span>
+                <!-- </div> -->
+              </div>
+              <div class="col-2"></div>
+            </div>
+            <div class="row">
+              <div class="col-3 text-right">
+                <label style="font-size: small;">{{messagesShared.confirmPassword}}* :</label>
+              </div>
+              <div class="col-7">
+                <input type="password" name="confirmPassword" class="text-field text-field-big" formControlName="confirmPassword" placeholder="Confirm Password"
+                  [ngClass]="{'field-error': (registerUserForm.get('passwordGroup.confirmPassword').touched || 
+        registerUserForm.get('passwordGroup.confirmPassword').dirty) && !registerUserForm.get('passwordGroup.confirmPassword').valid }">
+                <span class="field-error-txt" *ngIf="(registerUserForm.get('passwordGroup.confirmPassword').touched || 
+                registerUserForm.get('passwordGroup.confirmPassword').dirty)">
+                  <span class="field-error-txt animated fadeInRight" *ngIf="registerUserForm.get('passwordGroup.confirmPassword').errors?.required">
+                    {{messagesShared.confirmPasswordValidation}}</span>
+                  <span class="field-error-txt animated fadeInRight" *ngIf="registerUserForm.get('passwordGroup').errors?.match && !registerUserForm.get('passwordGroup.confirmPassword').errors?.required">{{messagesShared.passwordMatchValidate}}</span>
+                </span>
+
+              </div>
+              <div class="col-2"></div>
+            </div>
+          </section>
+          <!-- update for invite user end -->
+          <div class="row">
+            <div class="col-3 text-right">
+              <label>{{messagesShared.dob}}* :</label>
+            </div>
+            <div class="col-7">
+              <ul class="row dob">
+                <li class="col-5">
+                  <select class="text-field text-field-big" name="month" formControlName="month" required>
+                    <option value="">MM</option>
+                    <option *ngFor="let title of monthValue;let i = index" [value]="title.value">
+                      {{title.label}}
+                    </option>
+                  </select>
+                </li>
+                <li class="col-3">
+                  <select class="text-field text-field-big" name="date" required formControlName="date">
+                    <option value="">DD</option>
+                    <option *ngFor="let date of chooseDateCount(registerUserForm.get('year').value,registerUserForm.get('month').value);let i = index" [value]="date">
+                      {{date}}
+                    </option>
+                  </select>
+                </li>
+                <li class="col-4">
+                  <select class="text-field text-field-big" name="year" required formControlName="year" (change)="onYearChange($event.target.value)">
+                    <option value="">YYYY</option>
+                    <option *ngFor="let year of register.getYear();let i = index">
+                      {{year}}
+                    </option>
+                  </select>
+                </li>
+              </ul>
+              <ul class="row dob">
+                <li class="col-5">
+                  <div *ngIf="month.errors && (month.dirty || month.touched)" class="field-error-txt">
+                    <div class="field-error-txt animated fadeInRight" [hidden]="!month.errors.required">
+                      {{messagesShared.monthReq}}
+                    </div>
+                  </div>
+                </li>
+                <li class="col-3">
+                  <div *ngIf="date.errors && (date.dirty || date.touched)" class="field-error-txt">
+                    <div class="field-error-txt animated fadeInRight" [hidden]="!date.errors.required">
+                      {{messagesShared.dateReq}}
+                    </div>
+                  </div>
+                </li>
+                <li class="col-4">
+                  <div *ngIf="year.errors && (year.dirty || year.touched)" class="field-error-txt">
+                    <div class="field-error-txt animated fadeInRight" [hidden]="!year.errors.required">
+                      {{messagesShared.yearReq}}
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="col-2"></div>
+          </div>
+          <div class="row">
+            <div class="col-3 text-right">
+              <label></label>
+            </div>
+            <div class="col-7">
+              <ul class="terms">
+                <li class="margin-r10">
+                  <input type="checkbox" name="term" formControlName="term" required>
+                </li>
+                <li class="text-muted term-txt">
+                  I am above 13 years of age and agree
+                  <br>to
+                  <a class="link-border" href="https://www.awana.org/privacy-policies" target="_blank">Terms and Conditions</a>
+                  </li>
+              </ul>
+              <div *ngIf="term.errors && (term.dirty || term.touched)" class="field-error-txt">
+                <div class="field-error-txt animated fadeInRight" [hidden]="!term.errors.required">
+                  {{messagesShared.pleaseAgree}}
+                </div>
+              </div>
+              <div *ngIf="LesserYear" class="field-error-txt">
+                <div>{{messagesShared.ageValidation}}</div>
+              </div>
+            </div>
+            <div class="col-2"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer text-center">
+        <button type="submit" class="btn btn-med btn-green btn-relative" [disabled]="!registerUserForm.valid || loading==true || registerLinkExpire" style="padding-right:40px">
+          <img class="btn-spinner" id="mySpinner" *ngIf="loading" src="assets/img/spinner_Btn.gif" /> {{messagesShared.completeRegistration}}
+        </button>
+        <!-- <span>
+                <a href="#" class="btn btn-med btn-green">
+                  Complete Registration
+                </a>
+            </span> -->
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="mobile body-bg" *layout="'mobile'">
+  <form *ngIf="showForm" (ngSubmit)="socialRegister()" [formGroup]="registerUserForm" novalidate>
+    <div class="container">
+      <!--- HEADER -->
+      <header class="mobile-header login-header">
+        <a href="#nogo">
+          <img src="/assets/img/awana_Logo_white.png" alt="MyAwana">
+        </a>
+      </header>
+      <section class="page-content">
+        <div class="complete-reg clearfix">
+          <div class="register-icon">
+            <span class="icon-icon_user_register icon prof-img" *ngIf="photoURL !=''">
+              <img src="{{photoURL}}" alt="Profile" width="100px">
+            </span>
+            <span class="icon-icon_user_register icon" *ngIf="photoURL==''">
+              <span class="path1"></span>
+              <span class="path2"></span>
+            </span>
+          </div>
+          <h2 class="heading text-center">Complete Registration</h2>
+          <!-- <p class="text-center para-txt">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's text ever.
+        </p> -->
+
+          <div class="form-fields mob-profile-edit">
+            <div class="form-group">
+              <label>{{messagesShared.firstName}}* :</label>
+              <input type="text" formControlName="firstName" id="firstName" placeholder="First Name" class="text-field text-field-big"
+                required [(ngModel)]="fName">
+              <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="field-error-txt">
+                <div class="field-error-txt animated fadeInRight" *ngIf="firstName.errors.required">
+                  {{messagesShared.firstNameReqValidation}}
+                </div>
+                <div class="field-error-txt animated fadeInRight" *ngIf="firstName.errors.minlength">
+                  {{messagesShared.firstNameMinLength}}
+                </div>
+                <div class="field-error-txt animated fadeInRight" *ngIf="firstName.errors.maxlength">
+                  {{messagesShared.firstNameMaxLength}}
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>{{messagesShared.lastName}}* :</label>
+              <input type="text" name="lastName" class="text-field text-field-big" placeholder="Last Name" formControlName="lastName" required
+                [(ngModel)]="lName">
+              <div *ngIf="lastName.errors && (lastName.dirty || lastName.touched)" class="field-error-txt">
+                <div class="field-error-txt animated fadeInRight" *ngIf="lastName.errors.required">
+                  {{messagesShared.lastNameReqValidation}}
+                </div>
+                <div class="field-error-txt animated fadeInRight" *ngIf="lastName.errors.minlength">
+
+                  {{messagesShared.lasNameMinLength}}
+                </div>
+                <div class="field-error-txt animated fadeInRight" *ngIf="lastName.errors.maxlength">
+                  {{messagesShared.lastNameMaxLength}}
+                </div>
+              </div>
+            </div>
+            <div class="form-group" *ngIf="!paramId">
+              <label>Email* :</label>
+              <input type="text" name="socialemail" class="text-field text-field-big" placeholder="Email" formControlName="socialemail">
+              <div *ngIf="socialemail.errors && (socialemail.dirty || socialemail.touched)" class="field-error-txt">
+                <div class="field-error-txt animated fadeInRight" *ngIf="socialemail.errors.required">
+                  Email is required.
+                </div>
+                <div class="field-error-txt animated fadeInRight" *ngIf="socialemail.errors.pattern">
+                  Please enter valid email ID.
+                </div>
+              </div>
+            </div>
+
+            <!-- update for invite user start -->
+            <input type="hidden" formControlName="email" *ngIf="paramId">
+            <section formGroupName="passwordGroup" *ngIf="paramId">
+              <div class="form-group">
+                <label>{{messagesShared.password}}* :</label>
+                <!-- <div class="form-group"> -->
+                <input type="password" name="password" class="text-field text-field-big" formControlName="password" minlength="8" placeholder="Password"
+                  [ngClass]="{'field-error': (registerUserForm.get('passwordGroup.password').touched || 
+                  registerUserForm.get('passwordGroup.password').dirty) && !registerUserForm.get('passwordGroup.password').valid }">
+                <span class="field-error-txt" *ngIf="(registerUserForm.get('passwordGroup.password').touched || 
+                          registerUserForm.get('passwordGroup.password').dirty) && 
+                          registerUserForm.get('passwordGroup.password').errors">
+                          <span class="field-error-txt animated fadeInRight" *ngIf="registerUserForm.get('passwordGroup.password').errors?.required"> {{messagesShared.passValidation}}</span>	
+                          <span class="field-error-txt animated fadeInRight" *ngIf="registerUserForm.get('passwordGroup.password').errors?.minlength">{{messagesShared.passValidationNinCharec}}</span>
+                          <span class="field-error-txt animated fadeInRight" *ngIf="registerUserForm.get('passwordGroup.password').errors?.commonPasswordSet && !registerUserForm.get('passwordGroup.password').errors.minlength && !registerUserForm.get('passwordGroup.password').errors?.pattern && !registerUserForm.get('passwordGroup.password').errors?.containFirstLastEmail">{{messagesShared.passwordValidationAvoid}}</span>
+                          <span class="field-error-txt animated fadeInRight" *ngIf="registerUserForm.get('passwordGroup.password').errors?.charValidation">{{messagesShared.spaceNotAllowed}}</span>
+                          <span class="field-error-txt animated fadeInRight" *ngIf="registerUserForm.get('passwordGroup.password').errors?.pattern && !registerUserForm.get('passwordGroup.password').errors.minlength && !registerUserForm.get('passwordGroup.password').errors?.commonPasswordSet && !registerUserForm.get('passwordGroup.password').errors?.containFirstLastEmail">{{messagesShared.passwordValidationFormat}}</span>
+                          <span class="field-error-txt animated fadeInRight" *ngIf="!registerUserForm.get('passwordGroup.password').errors?.commonPasswordSet && !registerUserForm.get('passwordGroup.password').errors.minlength && !registerUserForm.get('passwordGroup.password').errors?.pattern && registerUserForm.get('passwordGroup.password').errors?.containFirstLastEmail">{{messagesShared.containFirstLastEmail}}</span>					                                                              
+                </span>
+                <!-- </div> -->
+              </div>
+              <div class="form-group">
+                <label style="font-size: small;">{{messagesShared.confirmPassword}}* :</label>
+                <input type="password" name="confirmPassword" class="text-field text-field-big" formControlName="confirmPassword" placeholder="Confirm Password"
+                  [ngClass]="{'field-error': (registerUserForm.get('passwordGroup.confirmPassword').touched || 
+                registerUserForm.get('passwordGroup.confirmPassword').dirty) && !registerUserForm.get('passwordGroup.confirmPassword').valid }">
+                <span class="field-error-txt" *ngIf="(registerUserForm.get('passwordGroup.confirmPassword').touched || 
+                        registerUserForm.get('passwordGroup.confirmPassword').dirty)">
+                  <span class="field-error-txt animated fadeInRight" *ngIf="registerUserForm.get('passwordGroup.confirmPassword').errors?.required">
+                    {{messagesShared.confirmPasswordValidation}}</span>
+                  <span class="field-error-txt animated fadeInRight" *ngIf="registerUserForm.get('passwordGroup').errors?.match && !registerUserForm.get('passwordGroup.confirmPassword').errors?.required">{{messagesShared.passwordMatchValidate}}</span>
+                </span>
+              </div>
+            </section>
+            <!-- update for invite user end -->
+
+            <div class="form-group">
+              <label>{{messagesShared.dob}}* :</label>
+              <ul class="row dob">
+                <li class="col-5">
+                  <select class="text-field text-field-big" name="month" formControlName="month" required>
+                    <option value="">MM</option>
+                    <option *ngFor="let title of register.getMonth();let i = index">
+                      {{title}}
+                    </option>
+                  </select>
+                </li>
+                <li class="col-3">
+                  <select class="text-field text-field-big" name="date" required formControlName="date">
+                    <option value="">DD</option>
+                    <option *ngFor="let date of chooseDateCount(registerUserForm.get('year').value,registerUserForm.get('month').value);let i = index" [value]="date">
+                      {{date}}
+                    </option>
+                  </select>
+                </li>
+                <li class="col-4">
+                  <select class="text-field text-field-big" name="year" required formControlName="year" (change)="onYearChange($event.target.value)">
+                    <option value="">YYYY</option>
+                    <option *ngFor="let year of register.getYear();let i = index">
+                      {{year}}
+                    </option>
+                  </select>
+                </li>
+              </ul>
+              <ul class="row dob">
+                <li class="col-5">
+                  <div *ngIf="month.errors && (month.dirty || month.touched)" class="field-error-txt">
+                    <div class="field-error-txt animated fadeInRight" [hidden]="!month.errors.required">
+                      {{messagesShared.monthReq}}
+                    </div>
+                  </div>
+                </li>
+                <li class="col-3">
+                  <div *ngIf="date.errors && (date.dirty || date.touched)" class="field-error-txt">
+                    <div class="field-error-txt animated fadeInRight" [hidden]="!date.errors.required">
+                      {{messagesShared.dateReq}}
+                    </div>
+                  </div>
+                </li>
+                <li class="col-4">
+                  <div *ngIf="year.errors && (year.dirty || year.touched)" class="field-error-txt">
+                    <div class="field-error-txt animated fadeInRight" [hidden]="!year.errors.required">
+                      {{messagesShared.yearReq}}
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="form-group">
+              <ul class="terms">
+                <li class="margin-r10">
+                  <input type="checkbox" name="term" formControlName="term" required>
+                  <span style="display:inline-block;" class="text-muted term-txt">I am above 13 years of age and agree
+                    <br>to
+                    <a style="border-bottom:1px solid #3C3D43;color: #666666;" href="https://www.awana.org/privacy-policies" target="_blank">Terms and Conditions</a>
+                  </span>
+                </li>
+              </ul>
+              <div *ngIf="term.errors && (term.dirty || term.touched)" class="field-error-txt">
+                <div class="field-error-txt animated fadeInRight" [hidden]="!term.errors.required">
+                  {{messagesShared.pleaseAgree}}
+                </div>
+              </div>
+              <div *ngIf="LesserYear" class="field-error-txt">
+                <div>{{messagesShared.ageValidation}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-green btn-block btn-block-small" [disabled]="!registerUserForm.valid || loading==true"
+              style="padding-right:40px">
+              <img class="btn-spinner" id="mySpinner" *ngIf="loading" src="assets/img/spinner_Btn.gif" /> {{messagesShared.completeRegistration}}
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </form>
+</div>

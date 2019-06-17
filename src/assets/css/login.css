@@ -1,0 +1,332 @@
+.login {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.login .heading {
+	font-family: 'AvenirLTStdRoman';
+	font-size: 24px;
+	color: #000000;
+	font-weight: bold;
+	margin: 0 0 20px 0;
+}
+
+.login-logo {
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.login-foot {
+	background: #F3F3F3;
+	font-family: 'AvenirLTStdRoman';
+	text-align: center;
+	padding: 30px;
+}
+
+.login-foot a {
+	color: #3C3D43;
+	border-bottom: 1px solid #999999;
+}
+
+.login-maindiv {
+	border: 1px solid #F3F3F3;
+}
+
+.login-maindiv .btn {
+	cursor: pointer;
+}
+
+
+
+/**** Login Small ***/
+
+.login-small {
+	max-width: 400px;
+	margin: 0 auto;
+}
+
+.login-small .login-div {
+	width: 100%;
+	border: 0px;
+	box-sizing: border-box;
+}
+
+
+/** Login Div **/
+
+.login-div.login-div,
+.register-div.register-div,
+.thankyou-div.thankyou-div {
+	background: #fff;
+	padding: 45px 60px;
+}
+
+.login .thankyou-div {
+	padding: 25px 30px 10px 30px;
+}
+
+.login-div {
+	border-right: 1px solid #D9D9D9;
+}
+
+.login-div .form-group {
+	margin-bottom: 15px;
+}
+
+.login-div .text-field-big {
+	width: 100%;
+}
+
+.login-div .checkbox {
+	font-family: 'AvenirLTStdRoman';
+	font-size: 12px;
+	display: block;
+}
+
+.login-div .checkbox a {
+	border-bottom: 1px solid #999999;
+	float: right;
+}
+
+.login-div .btn-block {
+	margin-top: 5px;
+}
+
+.login-div .fp-btn {
+	text-transform: capitalize;
+}
+
+.login-div .social-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.social-row .btn {
+	width: 42px;
+	height: 42px;
+	text-align: center;
+	padding: 0px;
+	position: relative;
+}
+
+.social-row .social-icons {
+	line-height: 42px;
+}
+
+.login .social-row .btn .social-icons {
+	font-size: 0px;
+}
+
+.social-row a:hover:after, 
+.social-row a:focus:after {
+    -webkit-transition: -webkit-transform 0.4s ease-out;
+    transition: -webkit-transform 0.4s ease-out;
+    transition: transform 0.4s ease-out;
+    transition: transform 0.4s ease-out, -webkit-transform 0.4s ease-out;
+    -webkit-transform: rotateZ(360deg);
+    transform: rotateZ(360deg);
+}
+
+.social-row .btn .fb-btn-blue:hover:before, 
+.social-row .btn .fb-btn-blue:focus:before {
+    background: #0077b5;
+}
+
+.social-row .fb-btn-blue:after {
+    content: "\e92f";
+}
+
+.social-row .gplus-btn-red:after {
+    content: "\e930";
+}
+
+.social-row .twitter-btn-blue:after {
+    content: "\e931";
+}
+
+.social-row a:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    margin-top: -50%;
+    margin-left: -50%;
+    border-radius: 0px;
+    -webkit-transition: all 400ms;
+    transition: all 400ms;
+}
+
+.social-row a:after {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    font-family: 'icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    color: #fff;
+    font-size: 16px;
+   	line-height: 45px;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+
+
+/** Register Div **/
+
+.register-div {
+	position: relative;
+}
+
+.register-div .icon-icon_register {
+	font-size: 75px;
+}
+
+.register-div .icon-icon_cv {
+	font-size: 60px;
+	 margin-top: 40px;
+	 display: block;
+}
+
+.register-div .btn-register {
+	width: 115px;
+	font-size: 12px;
+}
+
+.register-div .para-text {
+	font-family: 'AvenirLTStdRoman';
+	margin: 30px 0 35px 0;
+}
+
+.register-div .change-photo {
+	margin: 60px 0 28px 0;
+}
+
+.register-div .file-upload input[type='file'] {
+	height: 35px;
+}
+
+.register-div .btn .icon-icon_change_photo {
+	font-size: 18px;
+    vertical-align: middle;
+    line-height: 14px;
+}
+
+.login .ortxt {
+	font-family: Arial;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.register-div .ortxt-circle {
+	font-family: Arial;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	-webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    height: 60px;
+    width:60px;
+    line-height: 60px;
+    border: 1px solid #D9D9D9;
+    background: #fff;
+    position: absolute;
+    left: -30px;
+    top: 180px;
+    /*margin-top: -25px;*/
+}
+
+.register-div .btn {
+	font-size: 12px;
+	letter-spacing: 0px;
+}
+
+.login .btn .social-icons {
+	font-size: 16px;
+	vertical-align: middle;
+	margin-left: 4px;
+	transition: all .3s ease-out;
+}
+
+.register-div .btn:hover .social-icons {
+	margin-left: 8px;
+}
+
+.register-div .btn.btn-block {
+	padding: 12px 18px 12px 42px;
+	text-align: left;
+	font-family: Arial;
+	font-weight: bold;
+}
+
+/*.login .btn .social-icons.icon-icon_mail:before {
+	color: #47bfa6;
+}*/
+
+
+
+/** ThankYou Div **/
+
+.thankyou-div .thanks-msg {
+	background: #f0f5ee;
+    border: 1px dashed #b5e4da;
+    padding: 20px;
+    font-size: 16px;
+    line-height: 28px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 50px 0;
+    align-items: center;
+}
+
+.thanks-msg .icon {
+	font-size: 45px;
+	margin-right: 20px;
+	color: #5d625c;
+	width: 100px;
+	text-align: center;
+}
+
+.thanks-msg .icon .icon-icon_mail {
+	font-size: 32px;
+}
+
+.thanks-msg .close {
+	color: #595b56;
+	font-size: 25px;
+    text-align: right;
+    display: inline-block;
+    line-height: 50px;
+    margin-left: 30px
+}
+
+
+/*** Terms ***/
+
+.terms {
+	display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.terms li input[type="checkbox"] {
+	margin-right: 2px;
+}
+
+.terms .term-txt {
+	line-height: 22px;
+}

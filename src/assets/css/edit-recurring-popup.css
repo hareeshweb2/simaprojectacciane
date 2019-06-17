@@ -1,0 +1,21 @@
+/*** -----------------------------------------
+
+            EDIT RECURRING POPUP
+
+----------------------------------------- ***/
+
+
+.er-donation-popup .cal-icon-small {
+	margin: 10px;
+    right: 0;
+}
+
+.er-donation-popup .addnew-card-btn {
+	height: 21px;
+    line-height: 22px;
+    padding: 10px 12px;
+}
+
+.er-donation-popup select.text-field-big {
+	height: 43px;
+}

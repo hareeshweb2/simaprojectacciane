@@ -1,0 +1,568 @@
+<div class="clearfix" *layout="'desktop'">
+    <div class="bor-boxshadow margin-b2em">
+        <div class="myorders-sec approve-leader">
+            <h3 class="heading">
+                <span class="icon-icon_church icon"></span>
+                <!-- Update Leader -->
+                {{clickedButton + ' Leader'}}
+            </h3>
+            <!--- Alert -->
+            <div *ngIf="!loading">
+                <div class="approve-user-details">
+                    <ul class="row list">
+                        <li class="col-1 text-center icon-width">
+                            <span class="profile-img">
+                                <img *ngIf="profilePic" class="bor-radius-profile" src="{{profilePic}}">
+                                <span *ngIf="!profilePic" class="icon-icon_user_new user-icon"></span>
+                            </span>
+                        </li>
+                        <li class="col-5">
+                            <ul class="list-unstyled inner-list">
+                                <li>
+                                    <span class="text-muted">{{messages.email}}:</span>
+                                    <span title="{{email}}" class="text-bold text-ellipsis">{{email}}</span>
+                                </li>
+                                <li>
+                                    <span class="text-muted">{{messages.name}}:</span>
+                                    <span title="{{name}}" class="text-bold text-ellipsis">{{name.replace(' - ',' ')}}</span>
+                                </li>
+                                <li>
+                                    <span class="text-muted">{{messages.phone}}:</span>
+                                    <span title="{{phone}}" class="text-bold text-ellipsis">{{phone}}</span>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="col-6">
+                            <div class="form-group" *ngIf="mailingStreet || mailingStreet2 ||mailingCityCountryAndPostalCode">
+                                <label class="text-muted">Shipping Address</label>
+                                <div class="text-ellipsis" *ngIf="mailingStreet">
+                                    <span title="{{mailingStreet}}" class="text-bold">{{mailingStreet}}</span>
+                                </div>
+                                <div class="text-ellipsis" *ngIf="mailingStreet2">
+                                    <span title="{{mailingStreet2}}" class="text-bold">{{mailingStreet2}}</span>
+                                </div>
+                                <div class="text-ellipsis" title="{{mailingCityCountryAndPostalCode}}">
+                                    <span *ngIf="mailingCityCountryAndPostalCode" class="text-bold">{{mailingCityCountryAndPostalCode}}</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="form-fields">
+                    <div class="row clearfix">
+                        <div class="col-8 align-center">
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.awanaRole}} :</label>
+                                </div>
+                                <div class="col-8">
+                                    <div>
+                                        <div class="multiselect " style="display: block; ">
+                                            <div class="selectBox " style="display:none; ">
+                                                <select class="text-field text-field-big ">
+                                                    <option>{{messages.selectAwanaRole}}</option>
+                                                </select>
+                                                <div class="overSelect "></div>
+                                            </div>
+                                            <div class=" " style="display: block;">
+                                                <angular2-multiselect style="outline:none;" class="multiselect" name="awanaRoles" [data]="allAwanaRoles" [(ngModel)]="selectedAwanaRoles"
+                                                    [settings]="awanaSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"
+                                                    (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
+                                                </angular2-multiselect>
+                                            </div>
+                                            <div class="animated fadeInRight" *ngIf="awanaRolesErrorMessage" class="field-error-txt ">
+                                                {{awanaRolesErrorMessage}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.churchRole}} :</label>
+                                </div>
+                                <div class="col-8">
+                                    <form>
+                                        <div class="multiselect " style="display: block; ">
+                                            <div class="selectBox " style="display:none; ">
+                                                <select class="text-field text-field-big ">
+                                                    <option>{{messages.selectChurchRole}}</option>
+                                                </select>
+                                                <div class="overSelect "></div>
+                                            </div>
+                                            <div class="selected-list" style="display: block;">
+                                                <select class="c-btn text-field text-field-big" name="churchRoles" [(ngModel)]="selectedChurchRoles" (change)="updateRoles()">
+                                                    <option value="">Select Church Role</option>
+                                                    <option *ngFor="let churchRoles of allChurchRoles" [value]="churchRoles.Role">
+                                                        {{churchRoles.Role}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.mozoLevel}} :</label>
+                                </div>
+                                <div class="col-8">
+                                    <ul class="row dob">
+                                        <li class="col-6">
+                                            <select tabindex="6" class="text-field text-field-big cptr" (change)="getChurchMozoLevel(selectedMozoLevel)" [(ngModel)]="selectedMozoLevel">
+                                                <option *ngFor="let selectedMozoLevel of mozoDropDown" [value]="selectedMozoLevel">{{selectedMozoLevel}}</option>
+                                            </select>
+                                        </li>
+                                        <li class="col-6">
+                                            <div class="text-field text-field-big text-center disabled licence-count-txt" *ngIf="mozoLevelFull">
+                                                License Count: {{mozoLicenceUsed}}/{{mozoLicenceAvailable}}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <span class="field-error-txt animated fadeInRight" *ngIf="licenseExceed">{{messages.mozoLicenseExceed}}</span>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label></label>
+                                </div>
+                                <div class="col-8 switch-on-off">
+                                    <div class="popover-div">
+                                        <label class="switch margin-r10">
+                                            <input type="checkbox" name="accountOwner" [(ngModel)]="accountOwner" (change)="checkClicked(accountOwner)">
+                                            <span class="input-slider round"></span>
+                                        </label>
+                                        <span class="check-label-txt" (click)="popUpAccountOwner=true">{{messages.accountOwner}}
+                                            <span class="icon icon-help cptr"></span>
+                                        </span>
+                                        <div class="popover animated fadeInUp" style="display: block;" *ngIf="accountOwner==false && email==profile.currentProfile.user.Email && popAccountOwnerFlag">
+                                                <div class="toast-msg toast-warning">
+                                                    <span class="close" data-dismiss="alert" (click)="popAccountOwnerFlag=false">×</span>
+                                                        <div class="toast-content">
+                                                            <span class="icon icon-icon_warning"></span>
+                                                            <p class="para-txt">
+                                                                {{messages.DisablePermissionValidatePart1}} <br>
+                                                        <b>{{messages.DisablePermissionValidatePart2}}</b> {{messages.DisablePermissionValidatePart3}} 
+                                                            </p>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <!-- <div class="popover animated fadeInUp" style="display: block;" *ngIf="accountOwner==false && email==profile.currentProfile.user.Email && popAccountOwnerFlag">
+                                            <div class="popover-content">
+                                                <span class="close" (click)="popAccountOwnerFlag=false">
+                                                </span>{{messages.DisablePermissionValidatePart1}}
+                                                <br>
+                                                <b>{{messages.DisablePermissionValidatePart2}}</b> {{messages.DisablePermissionValidatePart3}}
+                                            </div>
+                                        </div> -->
+                                    </div>
+
+                                    <!-- Account Owner Modal -->
+                                    <div class="modal text-left" style="display:block;" *ngIf="popUpAccountOwner==true">
+                                        <!-- Modal content -->
+                                        <div class="modal-content">
+                                            <div class="modal-scroll">
+                                                <div class="content-pad">
+                                                    <span class="close icon-icon_close" (click)="popUpAccountOwner=false"></span>
+                                                    <h2 class="heading">An Account Owner will be able to:</h2>
+                                                    <ul class="checklist">
+                                                        <li>
+                                                            <span class="icon icon-check"></span>
+                                                            <p class="paratxt">Edit your church's profile information (programs, addresses,
+                                                                website etc.)
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <span class="icon icon-check"></span>
+                                                            <p class="paratxt">Edit each leader's role</p>
+                                                        </li>
+                                                        <li>
+                                                            <span class="icon icon-check"></span>
+                                                            <p class="paratxt">Edit a leader's authorization for Account Owner and Authorized
+                                                                Purchaser
+                                                            </p>
+
+                                                        </li>
+                                                        <li>
+                                                            <span class="icon icon-check"></span>
+                                                            <p class="paratxt">Edit a leader's Mozo license level (active or not) and access
+                                                                level (Full or Learning &amp; Resources only)
+                                                            </p>
+
+                                                        </li>
+                                                        <li>
+                                                            <span class="icon icon-check"></span>
+                                                            <p class="paratxt">Upgrade/downgrade Mozo license level
+                                                            </p>
+
+                                                        </li>
+                                                        <li>
+                                                            <span class="icon icon-check"></span>
+                                                            <p class="paratxt">Manage children and leaders
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="modal-footer text-right">
+                                                    <span>
+                                                        <a href="#" class="btn btn-med btn-green" (click)="popUpAccountOwner=false">
+                                                            Close
+                                                        </a>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label></label>
+                                </div>
+                                <div class="col-8 switch-on-off">
+                                    <label class="switch margin-r10">
+                                        <input type="checkbox" name="authorisedPurchaser" [(ngModel)]="authorisedPurchaser">
+                                        <span class="input-slider round"></span>
+                                    </label>
+                                    <span class="check-label-txt" (click)="popUpAuthpurcheser=true"> {{messages.authorizedPurchaser}}
+                                        <span class="icon icon-help cptr"></span>
+                                    </span>
+
+                                    <!-- Authorized Purchaser Modal -->
+                                    <div class="modal text-left" style="display:block;" *ngIf="popUpAuthpurcheser==true">
+                                        <!-- Modal content -->
+                                        <div class="modal-content">
+                                            <div class="modal-scroll">
+                                                <div class="content-pad">
+                                                    <span class="close icon-icon_close" (click)="popUpAuthpurcheser=false"></span>
+                                                    <h2 class="heading">An An Authorized Purchaser will:</h2>
+                                                    <ul class="checklist">
+                                                        <li>
+                                                            <span class="icon icon-check"></span>
+                                                            <p class="paratxt">Be connected to your church's account for ordering
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <span class="icon icon-check"></span>
+                                                            <p class="paratxt">Be using a personal login</p>
+                                                        </li>
+                                                        <li>
+                                                            <span class="icon icon-check"></span>
+                                                            <p class="paratxt">Be receiving your church's member pricing benefit when ordering
+                                                                Awana items for him/herself
+                                                            </p>
+
+                                                        </li>
+                                                        <li>
+                                                            <span class="icon icon-check"></span>
+                                                            <p class="paratxt">Have payment options to invoice your church or pay with church
+                                                                credit card
+
+                                                            </p>
+
+                                                        </li>
+                                                        <li>
+                                                            <span class="icon icon-check"></span>
+                                                            <p class="paratxt">Be able to change/discern the best shipping address for each
+                                                                order
+                                                            </p>
+
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="modal-footer text-right">
+                                                    <span>
+                                                        <a href="#" class="btn btn-med btn-green" (click)="popUpAuthpurcheser=false">
+                                                            Close
+                                                        </a>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-4 text-center">
+                        </div>
+                    </div>
+                    <div class="btn-row">
+                        <button [disabled]="disableSubmitButton" [ngClass]="{'not-allowed': !selectedAwanaRoles?.length}" class="btn btn-green margin-r10 cptr" (click)="updateLeader()">
+                            {{clickedButton}}
+                        </button>
+                        <button class="btn cptr" (click)="cancel()">
+                            <div>{{messages.cancel}}</div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--- Spinner -->
+            <div *ngIf="loading" style="text-align:center">
+                <img id="mySpinner" src="assets/img/Awana_Spinner.gif" />
+            </div>
+            <div *ngIf="serviceError" style="text-align:center">
+                <p class="para-txt"> {{serviceMessage}} </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="page-content" *layout="'mobile'">
+    <div *ngIf="!mobileLoading">
+        <div class="myorders-sec">
+            <div class="order-row mob-update-leader">
+                <span *ngIf="!showProfilePic" class="icon-icon_user_new icon"></span>
+                <img class="bor-radius-profile pro-img mar-bot8px" src="{{profilePic}}" *ngIf="showProfilePic" />
+                <label class="order-id" *ngIf="name">{{name}}</label>
+                <div class="text-muted row-padding-5" *ngIf="mailingStreet">
+                    {{mailingStreet}}
+                </div>
+                <div class="text-muted row-padding-5" *ngIf="mailingStreet2">
+                    {{mailingStreet2}}
+                </div>
+                <div class="text-muted row-padding-5" *ngIf="mailingCityCountryAndPostalCode">
+                    {{mailingCityCountryAndPostalCode}}
+                </div>
+                <div class="text-muted row-padding-5" *ngIf="phone">{{phone}}</div>
+            </div>
+        </div>
+        <div class="form-fields mob-profile-edit order-row">
+            <div class="form-group">
+                <label>{{messages.awanaRole}} :</label>
+                <form>
+                    <div class="multiselect " style="display: block; ">
+                        <div class="selectBox " style="display:none; ">
+                            <select class="text-field text-field-big ">
+                                <option>{{messages.selectRole}}</option>
+                            </select>
+                            <div class="overSelect "></div>
+                        </div>
+                        <div class=" " style="display: block;">
+                            <angular2-multiselect style="outline:none;" class="multiselect" name="awanaRoles" [data]="allAwanaRoles" [(ngModel)]="selectedAwanaRoles"
+                                [settings]="awanaSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
+                            </angular2-multiselect>
+                        </div>
+                        <div *ngIf="awanaRolesErrorMessage" class="field-error-txt ">
+                            {{awanaRolesErrorMessage}}
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="form-group">
+                <label>{{messages.churchRole}} :</label>
+                <form>
+                    <div class="multiselect " style="display: block; ">
+                        <div class="selectBox " style="display:none; ">
+                            <select class="text-field text-field-big ">
+                                <option>{{messages.selectChurchRole}}</option>
+                            </select>
+                            <div class="overSelect "></div>
+                        </div>
+                        <div class=" " style="display: block;">
+                            <mat-select class="text-field text-field-big" name="churchRoles" [(ngModel)]="selectedChurchRoles" (change)="updateRoles()">
+                                <mat-option value="">Select Church Role</mat-option>
+                                <mat-option *ngFor="let churchRoles of allChurchRoles" [value]="churchRoles.Role">
+                                    {{churchRoles.Role}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="form-group">
+                <label>{{messages.mozoLevel}} :</label>
+                <div class="selectwrapper">
+                    <ul class="row dob">
+                        <li class="col-6">
+                            <mat-select tabindex="6" class="text-field text-field-big cptr" (change)="getChurchMozoLevel(selectedMozoLevel)" [(ngModel)]="selectedMozoLevel">
+                                <mat-option *ngFor="let selectedMozoLevel of mozoDropDown" [value]="selectedMozoLevel">{{selectedMozoLevel}}</mat-option>
+                            </mat-select>
+                        </li>
+                        <li class="col-6">
+                            <div class="text-field text-field-big text-center disabled licence-count-txt" *ngIf="mozoLevelFull">
+                                License Count: {{mozoLicenceUsed}}/{{mozoLicenceAvailable}}
+                            </div>
+                        </li>
+                    </ul>
+                    <span class="field-error-txt animated fadeInRight" *ngIf="licenseExceed">{{messages.mozoLicenseExceed}}</span>
+                </div>
+            </div>
+            <div class="form-group margin-t40">
+                <div class="switch-on-off">
+                    <label class="switch margin-r10">
+                        <input type="checkbox" name="accountOwner" [(ngModel)]="accountOwner" (change)="checkClicked(accountOwner)">
+                        <span class="input-slider round"></span>
+                    </label>
+                    <span class="check-label-txt" (click)="popUpAccountOwner=true">{{messages.accountOwner}}
+                        <span class="icon icon-help"></span>
+                    </span>
+
+                    <!-- User Permission disabling -->
+                    <div class="modal mobile-modal" style="display: block;" *ngIf="accountOwner==false && email==profile.currentProfile.user.Email && popAccountOwnerFlag">
+                        <div class="modal-content">
+                            <div class="content-pad-small">
+                                <h2 class="heading">{{messages.disableYourPermission}}:</h2>
+                                <div class="popover-content mob-pop-content">
+                                    <span class="margin-b20">
+                                        {{messages.DisablePermissionValidatePart1}}
+                                    </span>
+                                    <span>
+                                        <b>{{messages.DisablePermissionValidatePart2}}</b>
+                                        <br>{{messages.DisablePermissionValidatePart3}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <span class="row">
+                                    <a class="col-6 btn btn-med margin-r10 capitalize" (click)="popAccountOwnerFlag=false;accountOwner=true;">
+                                        {{messages.cancel}}
+                                    </a>
+                                    <a class="col-6 btn btn-med btn-green capitalize" (click)="popAccountOwnerFlag=false">
+                                        {{messages.yes}}
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Account Owner Modal -->
+                    <div class="modal text-left" style="display:block;" *ngIf="popUpAccountOwner==true">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <div class="modal-scroll">
+                                <div class="content-pad">
+                                    <span class="close icon-icon_close mobile_close" (click)="popUpAccountOwner=false"></span>
+                                    <h4 class="mobile-heading">An Account Owner will be able to:</h4>
+                                    <ul class="checklist-mobile">
+                                        <li>
+                                            <span class="icon icon-check"></span>
+                                            <p class="paratxt">Edit your church's profile information (programs, addresses, website etc.)
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <span class="icon icon-check"></span>
+                                            <p class="paratxt">Edit each leader's role</p>
+                                        </li>
+                                        <li>
+                                            <span class="icon icon-check"></span>
+                                            <p class="paratxt">Edit a leader's authorization for Account Owner and Authorized Purchaser</p>
+
+                                        </li>
+                                        <li>
+                                            <span class="icon icon-check"></span>
+                                            <p class="paratxt">Edit a leader's Mozo license level (active or not) and access level (Full or
+                                                Learning &amp; Resources only)
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <span class="icon icon-check"></span>
+                                            <p class="paratxt">Upgrade/downgrade Mozo license level
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <span class="icon icon-check"></span>
+                                            <p class="paratxt">Manage children and leaders
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="modal-footer text-right">
+                                    <span>
+                                        <a href="#" class="btn btn-med btn-green" (click)="popUpAccountOwner=false">
+                                            {{messages.close}}
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="switch-on-off">
+                    <label class="switch margin-r10">
+                        <input type="checkbox" name="authorisedPurchaser" [(ngModel)]="authorisedPurchaser">
+                        <span class="input-slider round"></span>
+                    </label>
+                    <span class="check-label-txt" (click)="popUpAuthpurcheser=true">{{messages.authorizedPurchaser}}
+                        <span class="icon icon-help"></span>
+                    </span>
+                    <!-- Authorized Purchaser Modal -->
+                    <div class="modal text-left" style="display:block;" *ngIf="popUpAuthpurcheser==true">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <div class="modal-scroll">
+                                <div class="content-pad">
+                                    <span class="close icon-icon_close mobile_close" (click)="popUpAuthpurcheser=false"></span>
+                                    <h4 class="mobile-heading">An An Authorized Purchaser will:</h4>
+                                    <ul class="checklist-mobile">
+                                        <li>
+                                            <span class="icon icon-check"></span>
+                                            <p class="paratxt">Be connected to your church's account for ordering
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <span class="icon icon-check"></span>
+                                            <p class="paratxt">Be using a personal login</p>
+                                        </li>
+                                        <li>
+                                            <span class="icon icon-check"></span>
+                                            <p class="paratxt">Be receiving your church's member pricing benefit when ordering Awana items for
+                                                him/herself
+                                            </p>
+
+                                        </li>
+                                        <li>
+                                            <span class="icon icon-check"></span>
+                                            <p class="paratxt">Have payment options to invoice your church or pay with church credit card
+
+                                            </p>
+
+                                        </li>
+                                        <li>
+                                            <span class="icon icon-check"></span>
+                                            <p class="paratxt">Be able to change/discern the best shipping address for each order
+                                            </p>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="modal-footer text-right">
+                                    <span>
+                                        <a href="#" class="btn btn-med btn-green" (click)="popUpAuthpurcheser=false">
+                                            {{messages.close}}
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-btn">
+            <button href="javascript:vid(0);" [disabled]="disableSubmitButton" [ngClass]="{'not-allowed': !selectedAwanaRoles?.length}" class="btn btn-green btn-width-110 margin-r10" (click)="updateLeader()">
+                {{messages.update}}
+            </button>
+            <button href="javascript:vid(0);" class="btn btn-width-110" (click)="cancel()">
+                {{messages.cancel}}
+            </button>
+        </div>
+    </div>
+    <!--- Spinner -->
+    <div *ngIf="mobileLoading" style="text-align:center">
+        <img id="mySpinner" src="assets/img/Awana_Spinner.gif" />
+    </div>
+    <div *ngIf="serviceError" style="text-align:center">
+        <p class="para-txt"> {{serviceMessage}} </p>
+    </div>
+</section>

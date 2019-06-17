@@ -1,0 +1,617 @@
+/*** -----------------------------------------
+
+				IE9 ONLY
+
+----------------------------------------- ***/
+
+.ie9 .container:before,
+.ie9 .container:after,
+.ie9 .bor-boxshadow:before,
+.ie9 .bor-boxshadow:after,
+.ie9 .myorders-sec .list:before,
+.ie9 .myorders-sec .list:after,
+.ie9 .rec-subscrib .list:before,
+.ie9 .rec-subscrib .list:after,
+.ie9 .profile .profile-sec:before,
+.ie9 .profile .profile-sec:after,
+.ie9 .profile .myrole:before,
+.ie9 .profile .myrole:after,
+.ie9 .profile .myrole ul:before,
+.ie9 .profile .myrole ul:after,
+.ie9 .page-content:before,
+.ie9 .page-content:after,
+.ie9 .login-maindiv:before,
+.ie9 .login-maindiv:after,
+.ie9 .footer-links:before,
+.ie9 .footer-links:after,
+.ie9 .search-input-dropdown > ul.row:before,
+.ie9 .search-input-dropdown > ul.row:after,
+.ie9 .complete-profile:before,
+.ie9 .complete-profile:after,
+.ie9 .content-pad:before,
+.ie9 .content-pad:after,
+.ie9 .product-details:before,
+.ie9 .product-details:after,
+.ie9 .db-alert-msg-small:before,
+.ie9 .db-alert-msg-small:after   {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+
+.ie9 .container:after,
+.ie9 .bor-boxshadow:after,
+.ie9 .myorders-sec .list:after,
+.ie9 .rec-subscrib .list:after,
+.ie9 .profile .profile-sec:after,
+.ie9 .profile .myrole:after,
+.ie9 .profile .myrole ul:after,
+.ie9 .page-content:after,
+.ie9 .login-maindiv:after,
+.ie9 .footer-links:after,
+.ie9 .search-input-dropdown > ul.row:after,
+.ie9 .complete-profile:after,
+.ie9 .content-pad:after,
+.ie9 .product-details:after,
+.ie9 .db-alert-msg-small:after    {
+    clear: both;
+}
+
+.ie9 .myorders-sec > .list > li:last-child {
+	/*width: 50px;*/
+	width: auto;
+	position: relative;
+}
+
+.ie9 .myorders-sec .list li:last-child .icon-icon_action_dots {
+	position: absolute;
+	right: 15px;
+	margin-top: -50px;
+}
+
+.ie9 .row [class*="col-"] {
+    float: left; 
+}
+
+.ie9 .profile .profile-sec li {
+	float: left;
+}
+
+.ie9 .child-reach .child-icon {
+	display: inline-block;
+}
+
+.ie9 .child-reach .child-icon .clearfix {
+	float: left;
+}
+
+.ie9 .profile .count {
+	float: right;
+	width: 115px;
+	text-align: right;
+}
+
+.ie9 .login-div, 
+.ie9 .register-div, 
+.ie9 .thankyou-div {
+	min-height: 350px;
+}
+
+.ie9 .top-links .org-link {
+	float: left;
+}
+
+.ie9 .top-links .top-nav {
+	float: right;
+}
+
+.ie9 .top-links .top-nav li {
+	display: inline-block;
+}
+
+.ie9 .main-nav .logo-sec, 
+.ie9 .main-nav .profile-sec {
+	display: inline-block;
+}
+
+.ie9 .main-nav .logo-sec li,
+.ie9 .main-nav .profile-sec li {
+	display: inline-block;
+	float: left;
+}
+
+.ie9 .main-nav .logo-sec li {
+	padding-top: 14px;
+}
+
+.ie9 .main-nav .logo-sec li > a {
+	height: 27px;
+	line-height: 27px;
+}
+
+.ie9 .main-nav .logo-sec li a.aChurch .dropdown-arrow {
+	top: -4px;
+}
+
+.ie9 .main-nav .logo-sec .dropdown {
+	margin-top: 8px;
+}
+
+.ie9 .main-nav .logo-sec {
+	float: left;
+}
+
+.ie9 .main-nav .profile-sec {
+	float: right;
+}
+
+.ie9 .main-nav .profile-sec {
+	margin: 0;
+}
+
+.ie9 .main-nav .profile-dropdown {
+	position: relative;
+	top: 5px;
+}
+
+.ie9 .thankyou-div .thanks-msg {
+	display: table;
+}
+
+.ie9 .thankyou-div .thanks-msg li {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.ie9 .db-alert-message .icon,
+.ie9 .db-alert-message .para-txt {
+	top: 0px;
+}
+
+.ie9 .search-church .thanks-msg {
+	display: block;
+}
+
+.ie9 .search-church .thankyou-div {
+	min-height: 50px;
+}
+
+.ie9 .search-input-dropdown .church-icon {
+    width: 50px;
+}
+
+.ie9 .search-input-dropdown .church-icon .icon {
+    margin-right: 5px;
+}
+
+.ie9 .search-input-dropdown.selected .church-icon {
+    width: 50px;
+}
+
+.ie9 .search-input-dropdown.selected .church-icon .icon {
+    margin-right: -12px;
+}
+
+.ie9 .myorders-sec .order-expand .list li:last-child {
+	width: auto;
+}
+
+.ie9 .myorders-sec .order-expand .list {
+	border-bottom: 1px solid #f2f2f2;
+}
+
+.ie9 .myorders-sec .order-expand .list:last-child {
+	border-bottom: 0px;
+}
+
+.ie9 .main-nav .logo-sec .dropdown .icon-pos {
+	width: 85px;
+}
+
+.ie9 .main-nav .logo-sec .dropdown .list .col-10 {
+	width: 65%;
+}
+
+.ie9 .myorders-sec .list li.amount-txt {
+	/*width: 80px;*/
+}
+
+.ie9 .profile .profile-sec .heading {
+	margin-top: 16px;
+}
+
+.ie9 .db-alert-message > a.btn-green {
+	float: right;
+}
+
+.ie9 .main-nav .logo-sec li a.active::before {
+	bottom: -18px;
+}
+
+.ie9 .myorders-sec .filter-field {
+	float: right;
+}
+
+.ie9 .myorders-sec .filter > .heading {
+	display: inline-block;
+}
+
+.ie9 .alert-msg-small .msg-div > span {
+	display: inline-block;
+}
+
+.ie9 .alert-msg-small .msg-div {
+	padding: 20px 15px;
+}
+
+.ie9 .alert-msg-small .msg-div .btn {
+	margin: 8px 0 0 5px;
+}
+
+.ie9 .myprofile .ieinput .col-6 {
+	width: 47%;
+	margin: 0;
+}
+
+.ie9 .myprofile .ieinput .col-6:last-child {
+	float: right;
+}
+
+.ie9 .order-details > .list li:last-child {
+	width: 130px;
+	float: right;
+	padding-top: 1.5em;
+}
+
+.ie9 .change-password .pwd-requirements {
+	width: 270px;
+}
+
+.ie9 .pwd-requirements .cpwd-list li {
+	font-size: 12px;
+}
+
+.ie9 .approve-user-details .icon-width {
+	width: auto;
+}
+
+.ie9 .approve-user-details .user-icon {
+	margin-left: 0px;
+}
+
+.ie9 .search-church .form-group .row > .col-6.padding-muted.margin-r20 {
+	margin-right: 0px;
+}
+
+.ie9 .chuch-card .church-status > div {
+	float: right;
+}
+
+.ie9 .terms {
+	overflow: hidden;
+}
+
+.ie9 .terms li {
+	float: left;
+}
+
+.ie9 .terms .term-txt {
+	width: 90%;
+}
+
+.ie9 .login .ieinput {
+	overflow: hidden;
+}
+
+.ie9 .login .ieinput [class*="col-"] {
+	margin: 0px;
+}
+
+.ie9 .myprofile-info .photo-column {
+	width: 130px;
+	padding-right: 1em;
+}
+
+.ie9 .myprofile-info .photo-column .btn {
+	min-width: auto;
+	font-size: 11px;
+}
+
+.ie9 .myprofile-info .inner-list {
+	float: left;
+}
+
+.ie9 .myprofile-info .inner-list li span.text-ellipsis {
+	display: inline-block;
+}
+
+.ie9 .myprofile-info .inner-list li span.text-muted {
+	float: left;
+}
+
+.ie9 .mychurch-info .church-card-row li .chuch-card,
+.ie9 .myprofile-info .adrs-card-row li .adrs-card {
+	min-height: 260px;
+}
+
+.ie9 .myprofile-info .adrs-card-row,
+.ie9 .mychurch-info .church-card-row {
+	clear: both;
+}
+
+/*.ie9 .adrs-card .church-status {
+	overflow: hidden;
+}*/
+
+.ie9 .adrs-card .church-status > span {
+	float: left;
+}
+
+.ie9 .adrs-card .church-status > div {
+	float: right;
+}
+
+.ie9 .foot-social {
+	text-align: center;
+}
+
+.ie9 .foot-social .icons {
+	margin: 0 10px;
+}
+
+.ie9 .remove-connection .church-icon {
+	float: left;
+}
+
+.ie9 .sidebar .list a {
+	display: block;
+}
+
+.ie9 .profile .profile-sec,
+.ie9 .profile .profile-sec .profile-img {
+	display: inline-block;
+}
+
+.ie9 .adrs-verfy:after, 
+.ie9 .adrs-verfy:before {
+	margin-top: -60px;
+}
+
+.ie9 .search-church .margin-r20 {
+	margin: 0px;
+}
+
+.ie9 .search-church .form-group:before,
+.ie9 .search-church .form-group:after {
+	content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.ie9 .search-church .form-group:after    {
+    clear: both;
+}
+
+.ie9 .crop-photo [class*='col'] {
+	margin: 0px;
+}
+
+.ie9 .notify-popup .list li {
+	display: table-cell;
+	float: none;
+}
+
+.ie9 select.text-field {
+	padding: 11px 12px 11px 12px;
+}
+
+.ie9 .login-div .social-row {
+	display: table;
+}
+
+.ie9 .login-div .social-row li {
+	display: table-cell;
+	padding-left: 1.5em;
+	text-align: center;
+}
+
+.ie9 .login-div .social-row li:first-child {
+	padding-left: .3em;
+}
+
+
+/*** -----------------------------------------
+
+	IE10 and IE11 - both use -ms-high-contrast
+
+----------------------------------------- ***/
+
+
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+	
+	body {
+		background: #3C3D43;
+	}
+
+	.myorders-sec .total-text { 
+		font-size: 13px; 
+	}
+
+	.container:before,
+	.container:after,
+	.bor-boxshadow:before,
+	.bor-boxshadow:after {
+	    content: " "; /* 1 */
+	    display: table; /* 2 */
+	}
+
+	.container:after,
+	.bor-boxshadow:after  {
+	    clear: both;
+	}
+
+	.thankyou-div .thanks-msg {
+		display: table;
+	}
+
+	.thankyou-div .thanks-msg li {
+		display: table-cell;
+		vertical-align: middle;
+	}
+
+	.search-church .thanks-msg {
+		display: block;
+	}
+
+	.myorders-sec .list li.amount-txt {
+		/*width: auto;*/
+	}
+
+	.myprofile .ieinput .col-6 {
+		width: 47%;
+		margin: 0;
+	}
+
+	.myprofile .ieinput .col-6:last-child {
+		float: right;
+	}
+
+	.change-password .pwd-requirements {
+		width: 300px;
+	}
+
+	.pwd-requirements .cpwd-list li {
+		font-size: 13px;
+	}
+
+	.terms li {
+		display: inline-block;
+	}
+
+	.terms li:first-child {
+		width: 20px;
+	}
+
+	.terms .term-txt {
+		width: 90%;
+	}
+
+	.mychurch-info .para-txt {
+		padding-right: 1em;
+	}
+
+	.foot-social {
+		text-align: center;
+	}
+
+	.foot-social .icons {
+		margin: 0 10px;
+	}
+
+	.adrs-verfy .head .close {
+		font-size: 1em;
+		transition: none;
+		margin-top: -10px;
+	}
+
+	.adrs-verfy .head .close:hover {
+		transform: none;
+	}
+
+	.adrs-verfy .head .close::after {
+		font-family: 'icomoon';
+		content: "\e925";
+		border: 0px;
+		transform: none;
+		transform-origin: inherit;
+	}
+
+	.adrs-verfy .head .close::before {
+		border: 0px;
+		transform: none;
+		transform-origin: inherit;
+	}
+
+	.myprofile-info .inner-list li span.text-ellipsis {
+		display: inline-block;
+	}
+
+	.artnews-row li {
+		display: inline-block;
+	}
+
+	.main-nav .logo-sec .dropdown {
+		max-width: 300px;
+	}
+
+}
+
+
+
+/*** -----------------------------------------
+
+	   IE11 - both use -ms-high-contrast
+
+----------------------------------------- ***/
+
+
+@media all and (-ms-high-contrast:none)
+ {
+ 
+
+ *::-ms-backdrop, 
+ 	.myorders-sec > .list > li.amount-txt {
+		/*width: auto;*/
+	} /* IE11 */
+	
+ }
+
+
+
+/*** -----------------------------------------
+
+	   			IE EDGE
+
+----------------------------------------- ***/
+
+
+
+@supports (-ms-ime-align: auto) {
+  	
+  	body {
+		background: #3C3D43;
+	}
+	
+}
+
+
+
+/*** -----------------------------------------
+
+	   		MOZILLA FIREFOX
+
+----------------------------------------- ***/
+
+
+/*@-moz-document url-prefix() { 
+  	input[type="checkbox"], 
+  	input[type="radio"] {
+	    top: 3px;
+	}
+}*/
+
+
+
+/*** -----------------------------------------
+
+	   		SAFARI 7.1+ - MAC
+
+----------------------------------------- ***/
+
+
+_::-webkit-full-page-media, _:future, :root input[type="checkbox"], 
+  	input[type="radio"] {
+
+  	top: 0px; 
+
+}

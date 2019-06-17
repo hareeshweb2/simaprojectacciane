@@ -1,0 +1,999 @@
+/*** -----------------------------------------
+
+				MEDIA QUIERIES
+
+----------------------------------------- ***/
+
+
+
+
+
+@media (max-width: 1200px) {
+
+	.container {
+		width: 100%;
+	}
+
+}
+
+
+@media only screen and (min-width: 768px) and (max-width: 1200px) {
+
+	.desktop .profile .profile-sec {
+	    display: block;
+	    text-align: center;
+	}
+
+	.desktop .sidebar .profile .profile-sec .profile-img {
+	    margin-right: 0px;
+	    display: inline-block;
+	}
+
+	.desktop .profile .profile-sec .heading {
+		margin: 0 auto;
+	}
+
+	.manage-lead-table tbody tr td, 
+	.manage-lead-table tbody tr th, 
+	.manage-lead-table tfoot tr td, 
+	.manage-lead-table tfoot tr th, 
+	.manage-lead-table thead tr td, 
+	.manage-lead-table thead tr th {
+		padding: 6px;
+	}
+
+	.manage-lead-table .table thead tr th {
+		font-size: 12px;
+		padding-bottom: 20px;
+	}
+
+	.manage-lead-table thead tr th:first-child,
+	.manage-lead-table tbody tr td:first-child {
+	    padding-left: 12px;
+	}
+
+	.manage-lead-table .btn {
+	    padding: 2px 8px;
+	    font-size: 11px;
+	}
+
+	.manage-lead-table .btn-curve-line {
+		font-size: 10px;
+		margin-right: 10px;
+	}
+
+	.db-overview-notify li {
+		width: 45%;
+		margin: 0 0 2em 0;
+	}
+
+	.db-overview-notify li:nth-child(2n) {
+		float: right;
+	}
+
+	.sidebar .list a {
+	    padding: 15px;
+	    font-size: 85%;
+	}
+
+	.sidebar .list a .plus, 
+	.sidebar .list a .minus {
+		font-size: 26px;
+	}
+
+	.sidebar .list a .icon {
+	    font-size: 1.1em;
+	    width: 25px;
+	}
+
+	.sidebar .list a .icon.icon-icon_donations2, 
+	.sidebar .list a .icon-icon_subscription {
+	    font-size: 13px;
+	}
+
+	.sidebar .list .inner-list a {
+		padding: 10px 20px;
+	}
+
+	.sidebar .list .inner-list li a:hover {
+		padding-left: 24px;
+	}
+
+	.sidebar .list .inner-list li a.active:hover {
+		padding-left: 20px;	
+	}
+	
+
+}
+
+
+@media (max-width: 1025px) {
+	
+	
+	/*.main-nav .logo-sec > li > a { 
+		padding: 0 55px;
+	}*/
+
+	.page-content > .row > .col-3 {
+		padding-right: 0px;
+	}
+
+	.sidebar .list {
+		font-size: 100%;
+	}
+
+	.sidebar .list a .icon {
+		font-size: 1.2em;
+		width: 25px;
+	}
+
+	.sidebar .list a {
+		padding: 15px;
+	}
+
+	.sidebar .list a .plus, 
+	.sidebar .list a .minus {
+		right: 8px;
+	}
+
+	.sidebar .list .inner-list a {
+		padding: 10px 20px;
+	}
+
+	.sidebar .list .inner-list li a:hover {
+		padding-left: 24px;
+	}
+
+	.sidebar .list .inner-list li a.active:hover {
+		padding-left: 20px;	
+	}
+
+	.sidebar .list .inner-list a .symbol {
+	    margin-right: 16px;
+	}
+
+	.sidebar .list a .icon.icon-icon_donations2, 
+	.sidebar .list a .icon-icon_subscription {
+	    font-size: 13px;
+	}
+
+	.sidebar .list a .icon.icon-icon_dashboard2 {
+	    font-size: 18px;
+	}
+
+	.myorders-sec .total-text > span {
+		display: block;
+	}
+
+	.profile .list a {
+		padding: 10px 10px 10px 20px;
+	}
+
+	.modal-content {
+		width: 65%;
+	}
+
+	.profile .church-profile .heading {
+		max-width: 100px;
+	}
+
+	.table tbody tr td, 
+	.table tbody tr th, 
+	.table tfoot tr td, 
+	.table tfoot tr th, 
+	.table thead tr td, 
+	.table thead tr th {
+		padding: 6px;
+	}
+
+	.table thead tr th:first-child,
+	.table tbody tr td:first-child {
+	    padding-left: 12px;
+	}
+
+	.change-password .row .row {
+    	flex-direction: column;
+    }
+
+    .change-password .row .row [class*='col'] {
+     	flex: 1;
+        width: 100%;
+     }
+
+    .desktop .form-fields .row > div.text-right > label {
+		margin-bottom: -20px;
+    	text-align: left;
+    	display: block;
+	}
+
+	.search-church .row.form-fields {
+		flex-direction: row;
+	}
+
+	.foot-social {
+		padding-right: 20px;
+	}
+
+	.adrs-verfy {
+		right: 0px;
+		margin-top: 90px;
+	}
+
+	.desktop .modal .adrs-verfy {
+		right: -100px;
+		margin-top: 32px;
+	}
+
+	.myprofile-info.myprofile-info .inner-list li span.text-ellipsis {
+		max-width: 180px;
+	}
+
+	/*.profile .profile-sec .heading {
+		max-width: 120px;
+	}*/
+
+	.filter-by-date {
+		text-align: left;
+	}
+
+	.filter-by-date li:first-child {
+		display: block;
+	}
+
+	.filter-by-date .filter-head {
+		margin-bottom: 1em;
+	}
+
+	.licence-count-txt {
+		font-size: 12px;
+		padding: 6px;
+	}
+
+	.change-password .pwd-requirements {
+		margin-top: -20px;
+	}
+
+	.change-password .form-fields {
+		margin-top: 0px;
+	}
+
+}
+  
+
+@media only screen and (min-width: 768px) and (max-width: 1000px) { 
+
+	.manage-lead-table .table {
+		font-size: 12px;
+	}
+
+	.manage-lead-table .table thead tr th {
+		font-size: 11px;
+	}
+
+	.footer .row {
+    	flex-direction: row;
+    }
+
+    .footer .row [class*='col'] {
+     	flex: inherit;
+        width: auto;
+    }
+
+    .footer .footer-links > .col-3 {
+    	min-width: 240px;
+    	text-align: center;
+    }
+
+    .footer .foot-social {
+    	padding: 0 24px;
+    	margin: 0 auto
+    }
+
+    .footer .foot-botlinks {
+    	text-align: center;
+    }
+
+    .foot-botlinks li {
+	    margin: 0 10px;
+	}
+
+	.foot-list-links,
+	.foot-botlinks {
+	    width: auto;
+	    float: none;
+	    padding-left: 4em;
+	}
+
+	.foot-botlinks {
+		display: inline-block;
+	}
+
+	.register-div .btn.btn-block {
+		padding: 12px 18px;
+		text-align: center;
+	}
+
+	.adrs-card .text-ellipsis {
+		max-width: 150px;
+	}
+
+	.db-alert-msg-small {
+		flex-direction: column;
+		text-align: center;
+		padding: 12px;
+	}
+
+	.db-alert-msg-small .para-txt {
+		display: block;
+		margin-bottom: 8px;
+	}
+
+	.db-alert-msg-small .close {
+		position: absolute;
+	    top: 0;
+	    right: 0;
+	    margin: 12px;
+	}
+
+	.db-overview-notify li {
+		width: 44%;
+		margin-bottom: 1.4em;
+	}
+
+	.db-notify-box .para-txt .digit-txt {
+		font-size: 2em;
+	}
+
+}
+
+
+@media only screen and (min-width: 768px) and (max-width: 900px) {
+
+	.top-link-header {
+		height: auto;
+	}
+
+	.page-content {
+		padding: 0px;
+		margin: 1em 0 0 0;
+	}
+
+	.page-content > .row {
+		flex-direction: row ; 
+	}
+
+	.page-content > .row > [class*='col'] {
+		flex: inherit;
+        width: auto; 
+	}
+
+	.page-content > .row > .col-3 {
+		width: 25%;
+	}
+
+	.page-content > .row > .col-9 {
+		width: 75%;
+	}
+
+	.main-nav .logo-sec > li > a {
+		margin: 0 15px;
+		font-size: 15px;
+	}
+
+	.main-nav .logo-sec li > a .church-name {
+		max-width: 120px;
+	}
+
+	.main-nav .logo-sec li a.active::before {
+		content: "";
+		height: 2px;
+		width: 60px;
+		background: #3CB495;
+		position: absolute;
+	    left: 50%;
+	    margin-left: -35px;
+	}
+
+	.myorders-sec .list {
+		display: flex;
+    	flex-direction: row;
+    	justify-content: space-between;
+	}
+
+	.myorders-sec .list.row [class*='col'] {
+		flex: auto;
+	}
+
+	.myorders-sec .list.border-no li.icon-column {
+		width: 115px;
+	}
+
+	.footer-links {
+		display: flex;
+    	flex-direction: row;
+    	justify-content: space-between;
+	}
+
+	.main-nav .logo-sec > li > a.logo {
+		margin-right: 15px;
+	}
+
+	.main .bor-boxshadow.margin-l20 {
+		margin-left: 0px;
+	}
+
+	.rec-subscrib .list {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	.foot-find-awana .text-field {
+		padding: 8px 10px;
+	}
+
+	.login {
+		width: 400px;
+		margin: 3em auto;
+	}
+
+	.login-div {
+		border-right: 0px;
+		border-bottom: 1px solid #F3F3F3;
+	}
+
+	.login-foot {
+		padding: 30px 50px;
+	}
+
+	.thanks-msg .close {
+		width: auto;
+	    text-align: right;
+	    display: block;
+	    line-height: normal;
+	    margin-right: 0px
+	}
+
+	.modal {
+		overflow-y: auto;
+	}
+
+	.modal-content {
+		width: 85%;
+	}
+
+	.main-nav .logo-sec .dropdown .row {
+		display: table;
+	}
+
+	.main-nav .logo-sec .dropdown .icon-pos {
+		float: left;
+		margin-bottom: 20px;
+	}
+
+	.register-div .ortxt-circle {
+		left: 50%;
+    	top: 0;
+    	margin-left: -30px;
+    	height: 50px;
+    	width: 50px;
+    	line-height: 50px;
+    	margin-top: -25px;
+	}
+
+	.myprofile > .row,
+	.form-fields > .row {
+		flex-direction: column;
+	}
+
+	.form-fields > .row {
+		margin-top: -16px;
+	}
+
+	.form-fields > .sub-head-border {
+		margin-bottom: 50px;
+	}
+
+	.myprofile > .row [class*='col'],
+	.form-fields > .row [class*='col'] {
+     	flex: 1;
+        width: 70%;
+        margin: 0 auto;
+     }
+
+	/*.myprofile .text-right > label,
+	.form-fields .text-right > label {
+	    margin-bottom: -20px;
+    	text-align: left;
+    	display: block;
+	}*/
+
+	.myprofile .ieinput,
+	.form-fields .ieinput  {
+		display: block;
+	}
+
+	.order-details .row,
+	.change-password .row {
+		flex-direction: row;
+	}
+
+	.change-password .row [class*='col'] {
+		padding-left: 0px;
+	}
+
+	.change-password .pwd-requirements.pwd-requirements {
+		width: 120px;
+		margin-bottom: 20px;
+	}
+
+	.terms {
+		flex-direction: row;
+	}
+
+	.meeting-day-dropdown {
+		min-width: 110px;
+	}
+
+	.mychurch-info .church-card-row li,
+	.myprofile-info .adrs-card-row li {
+		flex: inherit;
+		width: 50%;
+	}
+
+	.myprofile-info .adrs-card-row,
+	.mychurch-info .church-card-row {
+		margin-top: 0px;
+	}
+
+	.dob {
+		flex-direction: row;
+	}
+
+	.art-news-sec .row {
+		flex-direction: column;
+	}
+
+	.art-news-sec .row [class*='col'] {
+        flex: 1;
+        width: 100%; 
+    }
+
+    .myawana-heading {
+    	font-size: 22px;
+    }
+
+    .profile .profile-sec {
+    	display: block;
+    	text-align: center;
+    }
+
+    .sidebar .list a {
+    	padding: 1em;
+    	font-size: .75em;
+    }
+
+    .sidebar .list a .icon.icon-icon_dashboard2 {
+    	font-size: 1em;
+    }
+
+    .sidebar .list a .icon {
+    	font-size: 1em;
+    	width: 18px;
+    }
+
+    .sidebar .list a .icon.icon-icon_donations2, 
+    .sidebar .list a .icon-icon_subscription {
+    	font-size: .9em;
+    }
+
+    .sidebar .list a .plus, 
+    .sidebar .list a .minus {
+    	font-size: 1.5em;
+    }
+
+    .sidebar .list a .plus, .sidebar .list a .minus {
+	    right: 5px;
+	}
+
+	.sidebar .list a.active::before {
+		width: 2px;
+	}
+
+	.sidebar .list .inner-list a {
+		padding: .7em 1em;
+	}
+
+	.sidebar .list .inner-list li a:hover {
+		padding-left: 1.3em;
+	}
+
+	.sidebar .list .inner-list li a.active:hover {
+		padding-left: 1em;	
+	}
+
+	.sidebar .list .inner-list a .symbol {
+		margin: 1px 10px 0 5px;
+	}
+
+	.sidebar .profile .profile-sec .profile-img {
+		margin-right: 0px;
+		display: inline-block;
+	}
+
+	.myorders-sec,
+	.myorders-sec .text-pad {
+		font-size: 12px;
+	}
+
+	.myorders-sec .order-id,
+	.myorders-sec .total-items {
+		font-size: 14px;
+	}
+
+	.myorders-sec .icons {
+		font-size: 24px;
+	}
+
+	.myorders-sec > .list {
+		min-height: 60px;
+	}
+
+	.myorders-sec > .heading, 
+	.myorders-sec .filter > .heading,
+	.art-news-sec .heading {
+		font-size: 20px;
+	}
+
+	.tabs-nav a {
+		font-size: 16px;
+	}
+
+	.btn {
+		font-size: 12px;
+		padding: 6px 12px;
+	}
+
+	.profile .church-profile .heading {
+	    max-width: 135px;
+	}
+
+	.myorders-sec > .heading > .icon {
+	    font-size: 24px;
+	}
+
+	.myorders-sec > .list.border-no {
+		font-size: 11px;
+	}
+
+	.form-fields .row .row {
+    	flex-direction: column;
+    }
+
+    .form-fields .row .row [class*='col'] {
+     	flex: 1;
+        width: 100%;
+     }
+
+    .form-fields.form-fields.form-fields.form-fields .text-right > label {
+		margin-bottom: -18px;
+    	display: flex;
+	}
+
+	.form-fields .row.dob {
+		flex-direction: row;
+	}
+
+	.myprofile-info {
+		padding: 1.5em;
+	}
+
+	.myprofile-info .gi-head {
+		font-size: 20px;
+		margin-bottom: 15px;
+	}
+
+	.myprofile-info .inner-list-row {
+		/*display: block;*/
+	}
+
+	.myprofile-info .inner-list {
+		padding: 0px;
+		margin-bottom: 25px;
+	}
+
+	.myprofile-info .inner-list li {
+		margin-bottom: 10px;
+	}
+
+	.complete-reg.complete-reg .text-right > label {
+		margin-bottom: -20px;
+    	text-align: left;
+    	display: block;
+	}
+
+	.complete-reg .modal-content {
+		width: 65%;
+	}
+
+	.complete-reg .row > .col-2 {
+		padding: 0px;
+	}
+
+	.complete-reg .para-txt {
+		margin-top: -25px;
+		margin-bottom: 0px;
+	}
+
+	.manage-lead-table .table th:last-child {
+		width: 160px;
+	}
+
+	.db-alert-message {
+		font-size: 14px;
+	}
+
+	.db-alert-message .icon {
+		font-size: 18px;
+	}
+
+	.db-alert-message .icon-icon_like {
+		font-size: 26px;
+	}
+
+	.approve-user-details .view-detail-table .form-group > label {
+		font-size: 14px;
+	}
+
+	.pagination li a {
+		line-height: 1.72857143;
+	}
+
+	/*.complete-reg .row {
+		flex-direction: row;
+	}
+
+	.complete-reg .row [class*="col-"] {
+		flex: initial; 
+    	width: auto;
+    	justify-content: space-around; 
+	}*/
+
+	.help-support .row {
+    	flex-direction: row;		
+	}
+
+	.error-page {
+		padding: 1em 1.5em;
+		position: fixed;
+	    left: 0;
+	    right: 0;
+	    top: 0;
+	    bottom: 0;
+	    overflow-y: auto;
+	    height: auto;
+	    display: block;
+	}
+
+	.filter-by-date li {
+		padding: 0 2px;
+	}
+
+	.filter-by-date li .btn {
+		padding: 6px 8px;
+	}
+
+	.filter-by-date .from-to .text-field {
+		width: 142px;
+	}
+
+	.filter-by-date .from-to {
+		margin-right: 0;
+	}
+
+	.approve-leader .approve-user-details .user-icon {
+		margin: 0 16px 0 22px;
+	}
+
+	.approve-leader .approve-user-details .row li:first-child {
+		width: auto;
+	}
+
+	.edit-bill-adrs > .col-4 {
+		display: none;
+	}
+
+	.artnews-row {
+		display: inline-block;
+		-webkit-column-count: 2;
+    	column-count: 2;
+	}
+
+	.complete-profile {
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.complete-profile .btn-sec {
+		display: block;
+	}
+
+	.complete-profile .para-txt {
+		margin-bottom: 10px;
+	}
+
+	.top-nav a.active::after {
+		bottom: 0px;
+	}
+
+	.adrs-card {
+		padding: 2.5em 1.8em 1.8em 1.8em;
+	}
+
+	.crop-photo {
+		flex-direction: row;
+	}
+
+	.crop-photo [class*='col'] {
+		flex: auto;
+    	width: auto;
+	}
+
+	.product-details {
+		padding: 1em .5em;
+	}
+
+	.product-details .product-head {
+		max-width: 24ch;
+	}
+
+	.product-details .item-summary {
+		flex-direction: column;
+	}
+
+	.product-details .item-summary .item-head {
+		margin-bottom: -8px;
+	}
+
+	.product-details .item-summary li {
+		margin-bottom: 1em;
+	}
+
+	.product-details .item-summary li:last-child {
+		margin-bottom: 0;
+	}
+
+	.filter.manage-lead-filter {
+		display: block;
+	}
+
+	.manage-lead-filter .filter-field {
+		display: block;
+		text-align: right;
+	}
+
+	.licence-count-txt {
+		font-size: 13px;
+		padding: 12px 8px;
+	}
+
+	.desktop .modal .adrs-verfy {
+		right: -50px;
+		margin-top: 230px;
+	}
+
+}
+
+@media (max-width: 767px) { 
+
+	.product-details .product-head {
+		max-width: 350px;
+	}
+
+	.product-details .item-summary {
+		display: block;
+	}
+
+	.product-details .item-summary li:first-child {
+		margin-bottom: 35px;
+	}
+
+	.desktop {
+		display: none;
+	}
+
+	.mobile {
+		display: block;
+	}
+
+	.mobile .modal {
+	    overflow-y: auto;
+	}
+
+	.modal-content {
+	    width: 100%;
+	}
+
+	.content-pad {
+	    padding: 20px;
+	}
+
+	.modal-content .heading.heading.heading {
+		font-size: 16px;
+	}
+
+	.modal-content .close {
+		font-size: 16px;
+	}
+
+	.checklist li .icon {
+	    font-size: 16px;
+	}
+
+	.checklist {
+	    margin-top: 20px;
+	    padding-left: 0;
+	}
+
+	.checklist li .paratxt {
+		font-size: 14px;
+	}
+
+	.modal-content .btn-med {
+	    padding: 8px 14px;
+	    font-size: 14px;
+	}
+
+	.modal-alert {
+	    margin: 35px 0 25px 0;
+	}
+
+	.db-alert-message {
+		display: inherit;
+		text-align: center;
+		margin: .8em;
+	}
+
+	.db-alert-message .icon {
+		display: block;
+		text-align: center;
+		margin: 0 0 20px 0;
+	}
+
+	.error-page {
+		padding: 1em 1.5em;
+		position: fixed;
+	    left: 0;
+	    right: 0;
+	    top: 0;
+	    bottom: 0;
+	    overflow-y: auto;
+	    height: auto;
+	    display: block;
+	}
+
+	.error-page .error-head {
+		font-size: 2em;
+		line-height: 1.8em;
+	}
+
+	.error-page .error-head-big {
+		font-size: 2.4em;
+	}
+
+	.error-page .error-sub-head {
+		font-size: 1.6em;
+	}
+
+	.error-page .error-icon {
+		font-size: 190px;
+	}
+
+	.error-page .para-txt {
+		padding: 0 1.5em;
+	}
+
+}
+
+
+

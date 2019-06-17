@@ -1,0 +1,103 @@
+<div *layout="'desktop'" class="margin-b20" >
+  <ul class="dashboard-card-list" *ngIf="typeData == 'church' && userAuthorization && !loading">
+    <li class="col-4 dashboard-list">
+        <a routerLink="/order/history" routerLinkActive="active">
+        <div class="bor-boxshadow dashboard-card-row">  
+            <div class="dashboard-square">
+                <span class="icon-icon_my_orders icon"></span>
+            </div>
+            <div class="col-9">
+                 <h1 class="card-head">{{ordersCount}}</h1>
+                 <p class="card-text">Total Orders</p>
+            </div>
+        </div>
+        </a>
+    </li> 
+    <li class="col-4 dashboard-list">
+        <a routerLink="/manage-church/leaders" routerLinkActive="active">
+            <div class="bor-boxshadow dashboard-card-row">
+                <div class="dashboard-square">
+                    <span class="icon-icon_user_new icon"></span>
+                </div>
+                <div class="col-9">
+                    <h1 class="card-head">{{userRequestsCount}}</h1> 
+                    <p class="card-text">User Requests</p>
+                </div>        
+            </div>
+        </a>
+    </li>
+    <li class="col-4 dashboard-list">
+        <a routerLink="/manage-church/leaders" routerLinkActive="active">
+        <div class="bor-boxshadow dashboard-card-row">
+            <div class="dashboard-square">
+                <span class="icon-icon_key icon"></span>
+            </div>
+            <div class="col-9">
+                <h1 class="card-head">{{mozoLicensesUsedCount}}/{{totalMozoLicensesCount}}</h1> 
+                <p class="card-text">Total Mozo Licenses</p>
+            </div>        
+        </div>
+        </a>
+    </li>
+  </ul>
+  <div *ngIf="loading && typeData == 'church' && userAuthorization" style="text-align:center">
+    <img id="mySpinner" src="assets/img/Awana_Spinner.gif" />
+  </div>
+  <div *ngIf="serviceError && typeData == 'church' && userAuthorization" style="text-align:center">
+    <p class="para-txt">
+      {{serviceMessage}}
+    </p>
+  </div>
+</div>
+
+<section *layout="'mobile'" >
+    <ul class="dashboard-card-list" *ngIf="typeData == 'church' && userAuthorization">
+        <li class="col-4">
+            <a routerLink="/order/history" routerLinkActive="active">
+            <div class="bor-boxshadow dashboard-card-row">  
+                <div class="dashboard-square-mobile">
+                    <span class="icon-icon_my_orders icon"></span>
+                </div>
+                <div class="col-7">
+                     <h1 class="card-head-mobile">{{ordersCount}}</h1>
+                     <p class="card-text-mobile">Total Orders</p>
+                </div>
+            </div>
+            </a>
+        </li> 
+        <li class="col-4">
+            <a routerLink="/manage-church/leaders" routerLinkActive="active">
+                <div class="bor-boxshadow dashboard-card-row">
+                    <div class="dashboard-square-mobile">
+                        <span class="icon-icon_user_new icon"></span>
+                    </div>
+                    <div class="col-7">
+                        <h1 class="card-head-mobile">{{userRequestsCount}}</h1> 
+                        <p class="card-text-mobile">User Requests</p>
+                    </div>        
+                </div>
+            </a>
+        </li>
+        <li class="col-4">
+            <a routerLink="/manage-church/leaders" routerLinkActive="active">
+            <div class="bor-boxshadow dashboard-card-row">
+                <div class="dashboard-square-mobile">
+                    <span class="icon-icon_key icon"></span>
+                </div>
+                <div class="col-7">
+                    <h1 class="card-head-mobile">{{mozoLicensesUsedCount}}/{{totalMozoLicensesCount}}</h1> 
+                    <p class="card-text-mobile">Total Mozo Licenses</p>
+                </div>        
+            </div>
+            </a>
+        </li>
+      </ul>
+      <div *ngIf="loading && typeData == 'church' && userAuthorization" style="text-align:center">
+        <img id="mySpinner" src="assets/img/Awana_Spinner.gif" />
+      </div>
+      <div *ngIf="serviceError && typeData == 'church' && userAuthorization" style="text-align:center">
+        <p class="para-txt">
+          {{serviceMessage}}
+        </p>
+      </div>
+    </section>

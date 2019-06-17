@@ -1,0 +1,201 @@
+<div class="loader-overlay" *ngIf="loading">
+  <div class="loader"></div>
+</div>
+  <div class="container animated fadeInDown" *layout="'desktop'">
+    <section class="page-content">
+      <main class="login">
+        <div class="login-logo">
+          <img src="assets/img/login-logo.png" alt="Awana Logo">
+        </div>
+        <div class="row login-maindiv">
+          <div class="col-6 login-div">
+            <h1 class="heading">Login</h1>
+            <form id="loginForm" name="loginForm" (ngSubmit)="ssologin();false" #loginForm="ngForm" novalidate>
+              <div class="form-group">
+                <input tabIndex="0" type="text" class="form-control text-field text-field-big" required
+                  (blur)="validateEmail(model.email)" (focus)="removeEmailErrors(model.email);displayServerError=false" [(ngModel)]="model.email" name="email" #email="ngModel" placeholder="Email" [ngClass]="{ 'field-error': (email.errors && (email.dirty || email.touched)) || emailInvalidPattern}">
+                <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">
+                  <div class="field-error animated fadeInRight" [hidden]="!email.errors.required">
+                    {{loginInputValidations.emailRequired}}
+                  </div>
+                </div>
+                <div class="alert alert-danger">
+                  <div class="field-error animated fadeInRight" *ngIf="emailInvalidPattern && !(email.errors && (email.dirty || email.touched))">
+                    {{loginInputValidations.emailInvalid}}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input tabIndex="0" type="password" class="form-control text-field text-field-big" required [(ngModel)]="model.password" name="password"
+                (focus)="checkServerError(model.password);displayServerError=false" (blur)="displayServerError=false" (keydown)="change(model.password)" #password="ngModel" placeholder="Password" [ngClass]="{ 'field-error': (password.errors && (password.dirty || password.touched))}">
+                <div *ngIf="password.errors && (password.dirty || password.touched)" class="alert alert-danger">
+                  <div class="field-error animated fadeInRight" [hidden]="!password.errors.required">
+                    {{loginInputValidations.passwordRequired}}
+                  </div>
+                </div>
+                <div class="alert alert-danger"  *ngIf="displayServerError">
+                  <div class="field-error animated fadeInRight" *ngIf="error">{{errorMessage}}</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="checkbox">
+                  <input type="checkbox" tabIndex="0" [(ngModel)]="model.keepme" name="keepme"> Keep me signed in
+                  <a routerLink="/forgotpassword">Forgot Password?</a>
+                </label>
+              </div>
+              <div class="clearfix margin-b20">
+                <button tabIndex="0" type="submit" [disabled]="!loginForm.form.valid || loading==true || emailInvalidPattern || displayServerError" class="btn btn-block btn-green btn-relative" formnovalidate>
+                    <img class="btn-spinner" id="mySpinner" *ngIf="loading" src="assets/img/spinner_Btn.gif"/>
+                  LOG IN
+                </button>
+              </div>
+              <div class="margin-b20 ortxt">OR</div>
+              <!-- <div id="socialLogin"></div> -->
+              <ul class="social-row">
+                <li>
+                  <strong>Login With:</strong>
+                </li>
+                <li>
+                  <a tabIndex="0" class="btn fb-btn-blue" (keyup.enter)="sociallogin('facebook')" (click)="sociallogin('facebook')">
+                    <span class="social-icons icon-icon_fb"></span>
+                  </a>
+                </li>
+                <li>
+                  <a tabIndex="0" (click)="sociallogin('google')" (keyup.enter)="sociallogin('google')" class="btn gplus-btn-red">
+                    <span class="social-icons icon-icon_gplus"></span>
+                  </a>
+                </li>
+                <li>
+                  <a tabIndex="0" (click)="sociallogin('twitter')" (keyup.enter)="sociallogin('twitter')" class="btn twitter-btn-blue">
+                    <span class="social-icons icon-icon_twitter"></span>
+                  </a>
+                </li>
+              </ul>
+            </form>
+          </div>
+          <div class="col-6 register-div">
+            <h1 class="heading">Register</h1>
+            <p class="margin-muted margin-b20 text-justify">
+              MyAwana is helpful tool for managing your US Awana account.  If you don’t currently have an account and live in the US, click 
+              one of the buttons below to create your account, using your preferred method of registering.
+            </p>
+            <a tabIndex="0" routerLink="/register" class="btn btn-green btn-block margin-b20">
+              REGISTER WITH YOUR EMAIL
+              <span class="social-icons icon-icon_mail"></span>
+            </a>
+            <div class="margin-b20 ortxt">OR</div>
+            <!-- <div id="socialRegister"></div> -->
+            <a (keyup.enter)="sociallogin('facebook')"  tabIndex="0" (click)="sociallogin('facebook')" class="btn btn-block fb-btn-blue margin-b10">
+              REGISTER WITH FACEBOOK
+              <span class="social-icons icon-icon_fb"></span>
+            </a>
+            <a (keyup.enter)="sociallogin('google')" tabIndex="0" (click)="sociallogin('google')" class="btn btn-block gplus-btn-red margin-b10">
+              REGISTER WITH GOOGLE+
+              <span class="social-icons icon-icon_gplus"></span>
+            </a>
+            <a (keyup.enter)="sociallogin('twitter')" tabIndex="0" (click)="sociallogin('twitter')" class="btn btn-block twitter-btn-blue margin-b10">
+              REGISTER WITH TWITTER
+              <span class="social-icons icon-icon_twitter"></span>
+            </a>
+          </div>
+        </div>
+        <div class="login-foot">
+          Not able to login to your account?
+          <span>Contact us.
+            <span>
+              <a href="tel:+18662926227">(866)292-6227</a>
+            </span>
+            <span> / </span>
+            <span>
+              <a href="mailto:customercare@awana.org">customercare@awana.org</a>
+            </span>
+          </span>
+        </div>
+      </main>
+    </section>
+  </div>
+
+  <div *layout="'mobile'">
+    <!--- CONTENT -->
+    <main class="login page-content">
+      <div class="login-maindiv">
+        <div class="login-div">
+          <h1 class="heading">Login</h1>
+          <form name="loginForm" (ngSubmit)="ssologin();false" #loginForm="ngForm" novalidate>
+              <div class="form-group">
+                  <input type="text" class="form-control text-field text-field-big" required
+                    (blur)="validateEmail(model.email)" (focus)="removeEmailErrors(model.email);displayServerError=false" [(ngModel)]="model.email" name="email" #email="ngModel" placeholder="Email" [ngClass]="{ 'field-error': (email.errors && (email.dirty || email.touched)) || emailInvalidPattern}">
+                  <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">
+                    <div class="field-error animated fadeInRight" [hidden]="!email.errors.required">
+                      {{loginInputValidations.emailRequired}}
+                    </div>
+                  </div>
+                  <div class="alert alert-danger">
+                    <div class="field-error animated fadeInRight" *ngIf="emailInvalidPattern && !(email.errors && (email.dirty || email.touched))">
+                      {{loginInputValidations.emailInvalid}}
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group margin-b20">
+                  <input type="password" class="form-control text-field text-field-big" required [(ngModel)]="model.password" name="password"
+                  (focus)="checkServerError(model.password);displayServerError=false"  #password="ngModel" placeholder="Password" [ngClass]="{ 'field-error': (password.errors && (password.dirty || password.touched))}">
+                  <div *ngIf="password.errors && (password.dirty || password.touched)" class="alert alert-danger">
+                    <div class="field-error animated fadeInRight" [hidden]="!password.errors.required">
+                      {{loginInputValidations.passwordRequired}}
+                    </div>
+                  </div>
+                  <div class="alert alert-danger"  *ngIf="displayServerError==true">
+                    <div class="field-error animated fadeInRight" *ngIf="error">{{errorMessage}}</div>
+                  </div>
+                  <div class="alert alert-danger"  *ngIf="displaySessionTimeOutError">
+                    <div class="field-error animated fadeInRight">{{sessionTimeOutMessage}}</div>
+                  </div>
+                </div>
+            <div class="form-group margin-b20">
+              <div class="checkbox">
+                <b>New User?</b>
+                <a (click)="gotoRegisterPage()"><b>Register</b></a>
+                <span class="pull-right">
+                  <a routerLink="/forgotpassword"><b>Forgot Password?</b></a>
+                </span>
+              </div>
+            </div>
+            <div class="clearfix margin-b20">
+              <button type="submit" [disabled]="!loginForm.form.valid || loading==true || emailInvalidPattern || displayServerError" class="btn btn-block btn-green" formnovalidate>
+                  <img class="btn-spinner" id="mySpinner" *ngIf="loading" src="assets/img/spinner_Btn.gif"/>
+                <b>LOG IN </b>
+              </button>
+            </div>
+            <div class="margin-b20 ortxt">OR</div>
+            <div id="socialLoginMobile"></div>
+            <ul class="social-row">
+              <li>
+                <strong>Login With:</strong>
+              </li>
+              <li>
+                <a (click)="sociallogin('facebook')" class="btn fb-btn-blue">
+                  <span class="social-icons icon-icon_fb"></span>
+                </a>
+              </li>
+              <li>
+                <a (click)="sociallogin('google')" class="btn gplus-btn-red">
+                  <span class="social-icons icon-icon_gplus"></span>
+                </a>
+              </li>
+              <li>
+                <a (click)="sociallogin('twitter')" class="btn twitter-btn-blue">
+                  <span class="social-icons icon-icon_twitter"></span>
+                </a>
+              </li>
+            </ul>
+          </form>
+          <div class="contact-info">
+						Not able to login to your account? <br>
+						<a href="mailto:customercare@awana.org" class="text-green">customercare@awana.org</a>
+					</div>
+        </div>
+      </div>
+    </main>
+  </div>
+

@@ -1,0 +1,671 @@
+/*** -----------------------------------------
+
+            MY PROFILE
+
+----------------------------------------- ***/
+
+
+.myprofile {
+	padding: 0px;
+}
+
+.myprofile .heading {
+	color: #3C3D43;
+    font-size: 22px;
+    margin: 0 0 5px 0;
+    font-family: 'AvenirLTStdRoman';
+    font-weight: normal;
+    margin-bottom: 1em;
+    padding: .2em;
+}
+
+.myprofile .myprofile-fields {
+	padding-right: 15px;
+}
+
+.myprofile .text-field-big {
+	width: 100%;
+	border-color: #999999;
+}
+
+.myprofile .btn-row {
+	margin: 1em 0 1em 0;
+}
+
+.myprofile .change-photo {
+	margin-bottom: 2em;
+}
+
+.myprofile .change-photo .img {
+	width: 100px;
+	height: 100px;
+	overflow: hidden;
+	margin: 0 auto;
+	-webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+}
+
+.myprofile .file-upload .icon-icon_change_photo {
+	font-size: 18px;
+    line-height: 10px;
+    position: relative;
+    top: 4px;
+}
+
+
+
+/*** -----------------------------------------
+
+            MY CHURCH
+
+----------------------------------------- ***/
+
+.mychurch.mychurch {
+	padding: 1em 2em;
+	-webkit-box-shadow: -6px 0 15px -3px rgba(0,0,0,0.08);
+    -moz-box-shadow: -6px 0 15px -3px rgba(0,0,0,0.08);
+    box-shadow: -6px 0 15px -3px rgba(0,0,0,0.08);
+}
+
+.mychurch .churh-circle {
+	height: 100px;
+	width: 100px;
+	border: 1px solid #737373;
+	border-radius: 100px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.mychurch .churh-circle .icon {
+	font-size: 60px;
+	line-height: 90px;
+}
+
+.mychurch .church-head {
+	font-size: 24px;
+	font-family: 'AvenirLTStdRoman';
+	font-weight: normal;
+	margin: 24px 0;
+}
+
+.mychurch .para-txt {
+	text-align: center;
+	line-height: 24px;
+	margin-top: 0px;
+}
+
+/*** Church Card ***/
+
+.chuch-card {
+	border: 1px solid #bbbbbb;
+	padding: 14px 16px;
+	border-radius: 5px;
+	background: #fff;
+	position: relative;
+}
+
+.chuch-card .card-head {
+	font-size: 16px;
+	font-weight: bold;
+	font-family: 'AvenirLTStdRoman';
+	margin: 0 0 8px 0;
+	color: #3C3D43;
+}
+
+.chuch-card .adrs-txt {
+	font-style: normal;
+	line-height: 22px;
+	margin-bottom: 40px;
+}
+
+.chuch-card .church-status {
+	font-size: 14px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	position: absolute;
+    padding: 12px 0;
+    left: 16px;
+    right: 16px;
+    bottom: 0;
+}
+
+.chuch-card .church-status .divider {
+	margin: 0 5px;
+}
+
+.chuch-card .church-status .icon {
+	font-size: 18px;
+	vertical-align: middle;
+	color: #47bfa6;
+	transition: all 0.5s ease-out;
+}
+
+.chuch-card .church-status .icon:hover {
+	color: #D0021B;
+}
+
+.chuch-card .church-status .icon-icon_edit_pencil {
+	font-size: 13px;
+}
+
+.chuch-card .tooltip-black-content-small,
+.adrs-card .tooltip-black-content-small {
+	min-width: 45px;
+    margin-left: -23px;
+}
+
+/*** Address Card ***/
+
+.adrs-card {
+	border: 1px solid #47bfa6;
+	padding: 2.5em 1.8em 1.8em 2.5em;
+	border-radius: 5px;
+	position: relative;
+}
+
+.adrs-card .adrs-head {
+	font-weight: normal;
+	margin: 10px 0;
+}
+
+.adrs-card .text-ellipsis {
+	max-width: 30ch;
+	display: inline-block;
+}
+
+.adrs-card .adrs-head .adrs-btn {
+	background: #47bfa6;
+	font-family: 'AvenirLTStdRoman';
+	font-size: 16px;
+	color: #fff;
+	padding: 5px 12px;
+	border-radius: 4px;
+	position: absolute;
+	right: -1px;
+	top: -1px;
+	min-width: 120px;
+	text-align: center;
+}
+
+.adrs-card .adrs-txt {
+	font-family: 'AvenirLTStdRoman';
+	font-style: normal;
+	font-size: 16px;
+	line-height: 26px;
+	margin-bottom: 20px;
+}
+
+.adrs-card .church-status {
+	font-size: 12px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	position: absolute;
+    padding: 12px 0;
+    left: 22px;
+    right: 22px;
+    bottom: 5px;
+}
+
+.adrs-card .church-status .divider {
+	margin: 0 5px;
+}
+
+.adrs-card .church-status .icon {
+	font-size: 18px;
+	vertical-align: middle;
+	color: #47bfa6;
+	transition: all 0.5s ease-out;
+}
+
+.adrs-card .church-status .icon-icon_edit_pencil:hover {
+	color: #369E88;
+}
+
+.adrs-card .church-status .icon-trash-o:hover {
+	color: #D0021B;
+}
+
+.adrs-card .church-status .icon-icon_edit_pencil {
+	font-size: 15px;
+}
+
+
+/*** -----------------------------------------
+
+            MY PROFILE INFO
+
+----------------------------------------- ***/
+
+.myprofile-info {
+	padding: 1em 2.8em;
+}
+
+.myprofile-info .photo-column {
+	width: 180px;
+	text-align: center;
+	padding-left: 0px;
+	padding-right: 2em;
+	margin: 0 auto;
+}
+
+.myprofile-info .photo-column .btn {
+	min-width: 130px;
+	cursor: default;
+}
+
+.mychurch-info .myprofile-info .photo-column .btn {
+	cursor: pointer;
+}
+
+.change-photo {
+    margin-bottom: 2em;
+}
+
+.change-photo .img {
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+	border-radius: 100px;
+	overflow: hidden;
+}
+
+.change-photo .img img {
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+}
+
+.myprofile-info .file-upload input[type='file'] {
+	width: 145px;
+	height: 45px;
+	cursor: default;
+}
+
+.myprofile-info .gi-head {
+	font-size: 22px;
+	margin: 10px 0 20px 0;
+}
+
+.myprofile-info .gi-head .icon {
+	font-size: 16px;
+	margin-left: 5px;
+	color: #47bfa6;
+}
+
+.myprofile-info .inner-list-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.myprofile-info .inner-list {
+	font-family: 'AvenirLTStdRoman';
+	min-width: 40%;
+}
+
+.myprofile-info .inner-list li {
+	margin-bottom: 15px;
+	display: flex;
+}
+
+.myprofile-info .inner-list li span.text-muted {
+	margin-right: 5px;
+}
+
+.myprofile-info .adrs-card-row {
+	display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    overflow: hidden;
+    margin: 20px -1em;
+}
+
+.myprofile-info .adrs-card-row  li {
+    float: left;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.myprofile-info .adrs-card-row  li .adrs-card {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+
+/*** -----------------------------------------
+
+            MY CHURCH INFO
+
+----------------------------------------- ***/
+
+.mychurch-info {
+	background: #fafafa;
+	border-top: 1px solid #eeeeee;
+	padding-top: 1em;
+}
+
+.churh-circle {
+    height: 100px;
+    width: 100px;
+    border: 1px solid #737373;
+    border-radius: 100px;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 2em;
+    background: #fff;
+}
+
+.churh-circle .icon {
+    font-size: 60px;
+    line-height: 90px;
+}
+
+.churh-circle-small {
+    height: 65px;
+    width: 65px;
+    border: 1px solid #737373;
+    border-radius: 100px;
+    margin: 0 auto;
+    text-align: center;
+    background: #fff;
+}
+
+.churh-circle-small .icon {
+    font-size: 38px;
+    line-height: 60px;
+}
+
+.mychurch-info .para-txt {
+	line-height: 26px;
+}
+
+.mychurch-info .church-card-row {
+	margin: 20px -1em 20px -1em;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.mychurch-info .church-card-row li {
+    float: left;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.mychurch-info .church-card-row li .chuch-card {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+
+/*** -----------------------------------------
+
+            COMPLETE REGISTRATION
+
+----------------------------------------- ***/
+
+.complete-reg {
+	background-color: rgba(0,0,0,0.950); /* Black w/ opacity */
+}
+
+.complete-reg .modal-content {
+	max-height: inherit;
+    overflow-y: visible;
+}
+
+.complete-reg .register-icon {
+	text-align: center;
+    margin: 2rem 0;
+}
+
+.complete-reg .register-icon .icon {
+	font-size: 4.5rem;
+	border: 2px solid #979797;
+	padding: 10px;
+	border-radius: 100px;
+	width: 90px;
+	height: 90px;
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 6rem;
+ }
+
+ .complete-reg .register-icon .prof-img {
+ 	border: 0px;
+ 	overflow: hidden;
+ 	padding: 0px;
+ 	height: 120px;
+ 	width: 120px;
+ }
+
+ .complete-reg .register-icon .prof-img img {
+ 	height: 120px;
+ 	width: 120px;
+ 	object-fit: cover;
+ }
+
+.complete-reg .heading.heading.heading.heading {
+	margin: 0px;
+	font-size: 24px;
+}
+
+.complete-reg .para-txt {
+	color: #898989;
+	line-height: 26px;
+	margin-top: 0px;
+}
+
+
+/*** -----------------------------------------
+
+            ADDRESS VERFICATION
+
+----------------------------------------- ***/
+
+.adrs-verfy {
+	position: absolute;
+	right: -65px;
+	top: 0;
+	max-width: 275px;
+	background: #fff;
+	border: 1px solid #e6e6e6;
+	-webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.08);
+    -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.08);
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.08);
+    font-size: 12px;
+    z-index: 99;
+    margin-top: 80px;
+}
+
+.desktop .modal .adrs-verfy {
+	right: -200px;
+	margin-top: 32px;
+}
+
+.adrs-verfy:after,
+.adrs-verfy:before  {
+	right: 0;
+    left: -31px;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+    margin-top: 0px;
+}
+
+.adrs-verfy:after {
+	border-right-color: #fff;
+    border-width: 16px;
+    margin-left: 0;
+}
+
+.adrs-verfy:before {
+	border-right-color: #d3d3d3;
+    border-width: 16px;
+    margin-left: -1px;
+}
+
+.adrs-verfy .head .close {
+	width: 18px;
+	height: 18px;
+}
+
+.adrs-verfy .head .close:before,
+.adrs-verfy .head .close:after {
+	width: 18px;
+}
+
+.adrs-verfy .content {
+    -webkit-box-shadow: 0px -3px 6px -4px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px -3px 6px -4px rgba(0,0,0,0.2);
+	box-shadow: 0px -3px 6px -4px rgba(0,0,0,0.2);
+}
+
+.adrs-verfy .para-txt {
+	padding: 0 1em;
+	margin: .6em 0;
+}
+
+.adrs-verfy .head {
+	font-family: 'AvenirLTStdRoman';
+	font-size: 16px;
+	padding: .8em;
+	margin: 0px;
+}
+
+.adrs-verfy .sub-head {
+	font-family: 'AvenirLTStdRoman';
+	font-size: 14px;
+	margin: 0;
+	color: #6c6c6c;
+	padding: .8em .8em 0 .8em;
+}
+
+/*.adrs-verfy .adrs-sec {
+	padding: .5em 1em;
+}*/
+
+.adrs-verfy .select-adrs {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	font-size: 13px;
+	padding: 1em;
+	border-bottom: 1px solid #e6e6e6;
+}
+
+.adrs-verfy .select-adrs:last-child {
+	border-bottom: 0px;
+}
+
+.adrs-verfy .select-adrs > span {
+	position: relative;
+}
+
+.adrs-verfy .btn-row {
+	padding: 1em;
+}
+
+.adrs-verfy .org-adrs {
+	background: #fafafa;
+}
+
+.adrs-verfy input[type=radio]:not(old){
+    width     : 2em;
+    margin    : 0;
+    padding   : 0;
+    font-size : 1em;
+    opacity   : 1;
+    position: absolute;
+}
+
+.adrs-verfy input[type=radio]:not(old) + label{
+    display      : inline-block;
+    width        : 1.8em;
+}
+
+.adrs-verfy input[type=radio]:not(old) + label > span{
+    display          : inline-block;
+    width            : 12px;
+    height           : 12px;
+    margin           : 0 0.15em 0 0.25em;
+    border           : 0.0625em solid rgb(192,192,192);
+    background       : #fff;
+    vertical-align   : middle;
+    position: relative;
+    top: -1px;
+}
+
+.adrs-verfy input[type=radio]:not(old) + label > span {
+    width            : 14px;
+    height           : 14px;
+    border           : 0.0625em solid #dddddd;
+}
+
+.adrs-verfy input[type=radio]:not(old) + label > span > span {
+    display          : block;
+    width            : 6px;
+    height           : 6px;
+    margin           : 4px auto;
+    border-radius    : 100px;
+    background       : #dddddd;
+}
+
+.adrs-verfy input[type=radio]:not(old) + label > span {
+    border-radius: 100px;
+}
+
+.adrs-verfy input[type=radio]:not(old):checked + label > span{
+    background: #fff;
+    border: 0.0625em solid #47BFA6;
+}
+
+.adrs-verfy input[type=radio]:not(old):checked + label > span > span{
+    display          : block;
+    width            : 6px;
+    height           : 6px;
+    margin           : 4px auto;
+    border-radius    : 100px;
+    background       : #47BFA6;
+}
+
+.adrs-verfy .tooltip-black {
+	top: 1px;
+}
+
+.adrs-verfy .tooltip-black-content {
+	margin-left: -85px;
+}
+
+
+/**** Profile Label Fix **/
+
+.desktop .form-fields .row > div.text-right > label {
+	display: inline-block;
+	padding-top: .8em;
+}
+
+
+
+
+
+

@@ -1,0 +1,245 @@
+/*** -----------------------------------------
+
+				MANAGE LEADERS
+
+----------------------------------------- ***/
+
+.manage-lead-table .add-icon,
+.manage-lead-table .close-icon {
+	font-size: 22px;
+	cursor: pointer;
+	margin-right: 15px;
+	vertical-align: middle;
+	float: right;
+}
+
+.manage-lead-table .btn {
+    padding: 4px 8px;
+    font-size: 13px;
+}
+
+.manage-lead-table .btn-curve-line {
+	font-size: 11px;
+	margin-right: 20px;
+	padding: 4px 14px;
+	cursor: default;
+}
+
+.manage-lead-table .btn-curve-line:hover {
+	border-color: #c2ded0;
+}
+
+.manage-lead-table .btn-curve-line:before{
+    border-left: 0px dashed;
+    border-right: 0px dashed;
+    border-color: #c2ded0;
+}
+
+.manage-lead-table .btn-curve-line:after{
+    border-bottom: 0px dashed;
+    border-top: 0px dashed;
+    border-color: #c2ded0;
+}
+
+.manage-lead-table .table-odd-even tbody:nth-child(even) {
+    background: #fbfaf8;
+}
+
+.manage-lead-table .table-odd-even tbody:nth-child(odd) {
+    background: #fff;
+}
+
+.manage-lead-table .table-odd-even tbody tr:nth-child(odd),
+.manage-lead-table .table-odd-even tbody tr:nth-child(even) {
+    background: none;
+}
+
+.manage-lead-table .open-details td:first-child {
+	border-left: 1px solid #f2f2f2;
+}
+
+.manage-lead-table .open-details td:last-child {
+	border-right: 1px solid #f2f2f2;
+}
+
+.manage-lead-table .add-user-btn-pos {
+	position: relative;
+}
+
+.manage-lead-table .add-user-btn-pos .btn {
+	position: absolute;
+	right: 0;
+	bottom: 10px;
+}
+
+
+/*** Active TR TD **/
+
+.manage-lead-table  .table tbody tr.active td:first-child {
+    position: relative;
+}
+
+.manage-lead-table  .table tbody tr.active td:first-child::before {
+    content: "";
+    height: 100%;
+    width: 3px;
+    background: #3CB495;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.manage-lead-table  .table tbody tr.open-details.active td:first-child::before {
+    left: -1px;
+}
+
+
+/*** Approve Leader ***/
+
+.approve-leader .btn-row {
+	padding: 2.5em 1.3em;
+}
+
+.approve-leader .btn-row .btn-green {
+	min-width: 70px;
+}
+
+.approve-user-details {
+	border-left: 1px solid #f4f4f4;
+	border-right: 1px solid #f4f4f4;
+	background: #fff;
+	-webkit-box-shadow: 3px 3px 8px -4px rgba(0,0,0,0.08);
+    -moz-box-shadow: 3px 3px 8px -4px rgba(0,0,0,0.08);
+    box-shadow: 3px 3px 8px -4px rgba(0,0,0,0.08);
+}
+
+.approve-leader .approve-user-details {
+	border: 0px;
+	border-top: 1px solid #f2f2f2;
+	border-bottom: 1px solid #f2f2f2;
+	box-shadow: none;
+	margin: 3em -1.3em;
+}
+
+.approve-leader .approve-user-details .profile-img {
+	width: 75px;
+	height: 75px;
+	overflow: hidden;
+	border-radius: 100px;
+	display: inline-block;
+}
+
+.approve-leader .approve-user-details .profile-img img {
+	object-fit: cover;
+	width: 75px;
+	height: 75px;
+}
+
+.approve-leader .approve-user-details .list {
+	align-items: start;
+	border-bottom: 0px;
+}
+
+.approve-leader .approve-user-details .list:hover {
+	background: none;
+}
+
+.approve-leader .approve-user-details .icon-width {
+	padding-top: 2.2em;
+	width: 130px;
+	padding-left: 2em;
+}
+
+.approve-leader .approve-user-details .inner-list li {
+	margin-bottom: 15px;
+    display: flex;
+}
+
+.approve-leader .approve-user-details .inner-list li span.text-muted {
+    margin-right: 5px;
+}
+
+.approve-user-details .view-detail-table td {
+	background: #fff;
+	border-bottom: 0px;
+	padding: 10px;
+	vertical-align: top;
+}
+
+.approve-user-details .view-detail-table td .pro-img {
+	object-fit: cover;
+	top: 0;
+}
+
+.approve-user-details .view-detail-table .form-group  {
+	font-family: 'AvenirLTStdRoman';
+}
+
+.approve-user-details .view-detail-table .form-group > label  {
+	/*color: #a2a2a2;
+	font-size: 16px;
+	margin-bottom: 2px;*/
+	margin-bottom: 0px;
+}
+
+.approve-user-details .view-detail-table .form-group .more-link {
+	color: #a2a2a2;
+	display: inline-block;
+	margin-top: 5px;
+}
+
+.approve-user-details .view-detail-table .form-group .text-bold {
+	color: #4c4b49;
+	display: inline-block;
+	padding-right: 20px;
+}
+
+.approve-user-details .view-detail-table .user-icon {
+	display: inline-block;
+}
+
+.approve-user-details .btn-row {
+	padding: 18px 24px;
+	border-top: 1px solid #f4f4f4;
+}
+
+.approve-user-details .icon-width {
+	width: 90px;
+}
+
+.approve-user-details .row {
+	align-items: center;
+}
+
+.approve-user-details .user-icon {
+	font-size: 40px;
+	color: #9c9c9c;
+	margin-left: 10px;
+}
+
+
+.modal .approve-user-details {
+	border: 0px;
+	border-top: 1px solid #f2f2f2;
+	border-bottom: 1px solid #f2f2f2;
+	box-shadow: none;
+	margin: 3em -30px;
+}
+
+.licence-count-txt {
+	font-size: 13px;
+	padding: 12px 6px;
+}
+
+
+/*** Popover Fix **/
+
+.popover-div {
+	position: relative;
+}
+
+.popover-div .popover {
+	bottom: 40px;
+	left: 0;
+	margin-left: -245px;
+}

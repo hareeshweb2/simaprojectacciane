@@ -1,0 +1,52 @@
+/*** -----------------------------------------
+
+            MULTISELECT CSS
+
+----------------------------------------- ***/
+
+
+.multiselect {
+    position: relative;
+}
+
+.selectBox {
+    position: relative;
+}
+
+.overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.checkboxes {
+    display: none;
+    border: 1px #999999 solid;
+    border-top: 0px;
+    max-height: 200px;
+    overflow: auto;
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
+    background: #fff;
+    z-index: 1;
+}
+
+.checkboxes > label {
+    display: block;
+    padding: 12px;
+    border-bottom: 1px solid #f1f1f1;
+    position: relative;
+}
+
+.checkboxes label input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.checkboxes label:hover {
+    background-color: #fcfcfc;
+}
+
+

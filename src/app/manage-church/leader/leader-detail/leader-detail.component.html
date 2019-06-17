@@ -1,0 +1,483 @@
+<!-- Invite User for manage leaders -->
+<div class="bor-boxshadow margin-b2em" *layout="'desktop'">
+  <div class="myorders-sec">
+    <h3 class="heading margin-b20">
+      <span class="icon-icon_church icon"></span>
+      {{messages.addUser}}
+    </h3>
+    <!-- service error message -->
+    <div *ngIf="loading" class="loadinggif text-center">
+      <img id="mySpinner" src="assets/img/Awana_Spinner.gif" />
+    </div>
+    <div>
+      <form novalidate autocomplete="off" (keydown.enter)="$event.preventDefault()" [formGroup]="addLeaderForm" (ngSubmit)="saveUser()">
+        <div class="form-fields">
+          <div class="row clearfix">
+            <div class="col-8">
+              <div class="row">
+                <div class="col-4 text-right">
+                  <label>{{messages.email}}*:</label>
+                </div>
+                <div class="col-8">
+                  <input type="text" (blur)="checkExistingEmailId()" tabindex="1" name="email" placeholder="Enter Email" class="text-field text-field-big"
+                    formControlName="email" [ngClass]="{'field-error': (addLeaderForm.get('email').touched || addLeaderForm.get('email').dirty) &&
+                            !addLeaderForm.get('email').valid }">
+                  <span class="field-error-txt" *ngIf="(addLeaderForm.get('email').touched || addLeaderForm.get('email').dirty) && addLeaderForm.get('email').errors">
+                    <span class="field-error-txt animated fadeInRight" *ngIf="addLeaderForm.get('email').errors?.required">{{messages.emptyEmailValidationMessage}}</span>
+                    <span class="field-error-txt animated fadeInRight" *ngIf="addLeaderForm.get('email').errors?.pattern && !addLeaderForm.get('email').errors?.required">
+                      {{messages.validEmailValidationMessage}}</span>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4 text-right">
+                  <label>{{messages.firstName}}*:</label>
+                </div>
+                <div class="col-8">
+                  <input type="text" name="firstName" tabindex="2" formControlName="firstName" placeholder="Enter First name" class="text-field text-field-big"
+                    [(ngModel)]="fName" [ngClass]="{'field-error': (addLeaderForm.get('firstName').touched || addLeaderForm.get('firstName').dirty) &&
+                            !addLeaderForm.get('firstName').valid }">
+                  <span class="field-error-txt" *ngIf="(addLeaderForm.get('firstName').touched || 
+                            addLeaderForm.get('firstName').dirty) && 
+                            addLeaderForm.get('firstName').errors">
+                    <span class="field-error-txt animated fadeInRight" *ngIf="addLeaderForm.get('firstName').errors?.required">{{messages.firstNameValidationMessage}}</span>
+                    <span class="field-error-txt animated fadeInRight" *ngIf="addLeaderForm.get('firstName').errors?.minlength && !addLeaderForm.get('firstName').errors?.required">{{messages.firstNameValidationMinChar}}</span>
+                    <span class="field-error-txt animated fadeInRight" *ngIf="addLeaderForm.get('firstName').errors?.pattern && !addLeaderForm.get('firstName').errors?.minlength">{{messages.firstNameValidationAlpha}}</span>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4 text-right">
+                  <label>{{messages.lastName}}*:</label>
+                </div>
+                <div class="col-8">
+                  <input type="text" name="lastName" tabindex="3" formControlName="lastName" placeholder="Enter Last name" class="text-field text-field-big"
+                    [(ngModel)]="lName" [ngClass]="{'field-error': (addLeaderForm.get('lastName').touched || addLeaderForm.get('lastName').dirty) &&
+                            !addLeaderForm.get('lastName').valid }">
+                  <span class="field-error-txt" *ngIf="(addLeaderForm.get('lastName').touched || 
+                            addLeaderForm.get('lastName').dirty) && 
+                            addLeaderForm.get('lastName').errors">
+                    <span class="field-error-txt animated fadeInRight" *ngIf="addLeaderForm.get('lastName').errors?.required">{{messages.lastNameValidationMessage}}</span>
+                    <span class="field-error-txt animated fadeInRight" *ngIf="addLeaderForm.get('lastName').errors?.minlength && !addLeaderForm.get('lastName').errors?.required">{{messages.lasttNameValidationMinChar}}</span>
+                    <span class="field-error-txt animated fadeInRight" *ngIf="addLeaderForm.get('lastName').errors?.pattern && !addLeaderForm.get('lastName').errors?.minlength">{{messages.lastNameValidationAlpha}}</span>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4 text-right">
+                  <label>{{messages.awanaRole}}*:</label>
+                </div>
+                <div class="col-8">
+                  <angular2-multiselect tabindex="4"  (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"  style="outline:none;" [(ngModel)]="selectedItems" class="multiselect" name="selectedAwanaRoles" formControlName="awanaRole"
+                    [data]="tempRolesInLeaders">
+                  </angular2-multiselect>
+                  <span class="field-error-txt" *ngIf="(addLeaderForm.get('awanaRole').touched || 
+                            addLeaderForm.get('awanaRole').dirty) && 
+                            addLeaderForm.get('awanaRole').errors">
+                    <span class="field-error-txt animated fadeInRight" *ngIf="addLeaderForm.get('awanaRole').errors?.required">{{messages.awanaRoleValidationMessage}}</span>
+                  </span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4 text-right">
+                  <label>{{messages.churchRole}}:</label>
+                </div>
+                <div class="col-8 selected-list">
+                  <select class="c-btn text-field text-field-big" name="selectedRoles" tabindex="5" [(ngModel)]="selectedChurches" (change)="updateRoles()" formControlName="churchRole">
+                    <option value="">Select Church Role</option>
+                    <option *ngFor="let churchRoles of tempChurchRolesInLeaders" [value]="churchRoles.Role">
+                    {{churchRoles.Role}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4 text-right">
+                  <label>{{messages.mozoLevel}} :</label>
+                </div>
+                <div class="col-8">
+                  <ul class="row dob">
+                  <li class="col-6">
+                    <select tabindex="6" class="text-field text-field-big cptr" placeholder="Select" formControlName="mozoLevel" (change)="getChurchMozoLevel(mozoDropVal)" [(ngModel)]="mozoDropVal">
+                    <option value>Select</option>
+                    <option *ngFor="let mozoDropVal of mozoDropDown" [value]="mozoDropVal">{{mozoDropVal}}</option>
+                    </select>
+                  </li>
+                  <li class="col-6">
+                      <div class="text-field text-field-big text-center disabled licence-count-txt" *ngIf="mozoLevelFull">
+                        License Count: {{mozoLicenceUsed}}/{{mozoLicenceAvailable}}
+                      </div>
+                  </li>
+                  </ul>
+                  <span class="field-error-txt animated fadeInRight" *ngIf="licenseExceed">{{messages.mozoLicenseExceed}}</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4 text-right">
+                  <label></label>
+                </div>
+                <div class="col-8 switch-on-off">
+                  <label class="switch margin-r10" tabindex="7">
+                    <input type="checkbox" tabindex="7" [(ngModel)]="accOwner" formControlName="accountOwner">
+                    <span class="input-slider round"></span>
+                  </label>
+                  <span class="check-label-txt" (click)="popUpAccountOwner=true">{{messages.accountOwner}}
+                    <span class="icon icon-help"></span>
+                  </span>
+
+                  <!-- Account Owner Modal -->
+                  <div class="modal text-left" style="display:block;" *ngIf="popUpAccountOwner==true">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                      <div class="modal-scroll">
+                        <div class="content-pad">
+                          <span class="close icon-icon_close" (click)="popUpAccountOwner=false"></span>
+                          <h2 class="heading">{{messages.anaccountOwnerwillBeAbleTo}}</h2>
+                          <ul class="checklist">
+                            <li>
+                              <span class="icon icon-check"></span>
+                              <p class="paratxt">{{messages.editYourChurchProfileInfo}}
+                              </p>
+                            </li>
+                            <li>
+                              <span class="icon icon-check"></span>
+                              <p class="paratxt">{{messages.editEachLeadersRole}}</p>
+                            </li>
+                            <li>
+                              <span class="icon icon-check"></span>
+                              <p class="paratxt">{{messages.editALeadersAuthorization}}</p>
+
+                            </li>
+                            <li>
+                              <span class="icon icon-check"></span>
+                              <p class="paratxt">{{messages.editAleaderMozoLicenseLevel}}
+                              </p>
+
+                            </li>
+                            <li>
+                              <span class="icon icon-check"></span>
+                              <p class="paratxt">{{messages.upgradeDowngradeMozoLicenseLevel}}
+                              </p>
+
+                            </li>
+                            <li>
+                              <span class="icon icon-check"></span>
+                              <p class="paratxt">{{messages.manageChildrenAndLeaders}}
+                              </p>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="modal-footer text-right">
+                          <span>
+                            <a href="#" class="btn btn-med btn-green" (click)="popUpAccountOwner=false">
+                              {{messages.close}}
+                            </a>
+                          </span>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4 text-right">
+                  <label></label>
+                </div>
+                <div class="col-8 switch-on-off" >
+                  <label class="switch margin-r10" tabindex="8">
+                    <input type="checkbox"  [(ngModel)]="authPurchese" tabindex="8" formControlName="authPurchaser">
+                    <span class="input-slider round"></span>
+                  </label>
+                  <span class="check-label-txt" (click)="popUpAuthpurcheser=true"> {{messages.authorizedPurchaser}}
+                    <span class="icon icon-help"></span>
+                  </span>
+
+                  <!-- Authorized Purchaser Modal -->
+                  <div class="modal text-left" style="display:block;" *ngIf="popUpAuthpurcheser==true">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                      <div class="modal-scroll">
+                        <div class="content-pad">
+                          <span class="close icon-icon_close" (click)="popUpAuthpurcheser=false"></span>
+                          <h2 class="heading">{{messages.anAuthorizedPurchaserWill}}</h2>
+                          <ul class="checklist">
+                            <li>
+                              <span class="icon icon-check"></span>
+                              <p class="paratxt">{{messages.beConnectedToYourChurchAccountForOrdering}}
+                              </p>
+                            </li>
+                            <li>
+                              <span class="icon icon-check"></span>
+                              <p class="paratxt">{{messages.beUsingAPersonalLogin}}</p>
+                            </li>
+                            <li>
+                              <span class="icon icon-check"></span>
+                              <p class="paratxt">{{messages.beRecevingYourChurchMemberPricingBenefitWhenOrderingAwznaItemsFor}}
+                              </p>
+
+                            </li>
+                            <li>
+                              <span class="icon icon-check"></span>
+                              <p class="paratxt">{{messages.havePaymentOptionsToInvoiceYourChurch}}
+
+                              </p>
+
+                            </li>
+                            <li>
+                              <span class="icon icon-check"></span>
+                              <p class="paratxt">{{messages.beAbleToChangeDiscernTheBestShippingAddress}}
+                              </p>
+
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="modal-footer text-right">
+                          <span>
+                            <a class="btn btn-med btn-green" (click)="popUpAuthpurcheser=false">
+                              {{messages.close}}
+                            </a>
+                          </span>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4 text-center">
+            </div>
+          </div>
+          <div class="btn-row row-padding-20">
+            <button class="btn btn-green margin-r10" tabindex="9" [class.validate-form]="!addLeaderForm.valid || loading || userExistsFlag || licenseExceed" [disabled]="!addLeaderForm.valid || loading || userExistsFlag || licenseExceed">{{messages.inviteUser}}</button>
+            <a routerLink="/manage-church/leaders"  tabindex="10" class="btn">
+              {{messages.cancel}}
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile -->
+<section class="page-content" *layout="'mobile'">
+  <div *ngIf="loading" class="text-center mobile-loader">
+    <img id="mySpinner" src="assets/img/Awana_Spinner.gif" />
+  </div>
+  <form novalidate autocomplete="off" (keydown.enter)="$event.preventDefault()" [formGroup]="addLeaderForm" (ngSubmit)="saveUser()">
+    <div class="form-fields mob-profile-edit">
+      <div class="form-group">
+        <label>{{messages.email}}*:</label>
+        <input type="text" (blur)="checkExistingEmailId()" name="email" placeholder="Enter Your Email" class="text-field text-field-big"
+          formControlName="email" [ngClass]="{'field-error': (addLeaderForm.get('email').touched || addLeaderForm.get('email').dirty) &&
+                            !addLeaderForm.get('email').valid }">
+        <span class="field-error-txt" *ngIf="(addLeaderForm.get('email').touched || addLeaderForm.get('email').dirty) && addLeaderForm.get('email').errors">
+          <span class="field-error-txt animated fadeInRight" *ngIf="addLeaderForm.get('email').errors?.required"> {{messages.emptyEmailValidationMessage}}</span>
+          <span class="field-error-txt animated fadeInRight" *ngIf="addLeaderForm.get('email').errors?.pattern && !addLeaderForm.get('email').errors?.required">
+            {{messages.validEmailValidationMessage}}</span>
+        </span>
+      </div>
+      <div class="form-group">
+        <label>{{messages.firstName}}*:</label>
+        <input type="text" name="firstName" formControlName="firstName" placeholder="Enter Your First name" class="text-field text-field-big"
+          [(ngModel)]="fName" [ngClass]="{'field-error': (addLeaderForm.get('firstName').touched || addLeaderForm.get('firstName').dirty) &&
+                            !addLeaderForm.get('firstName').valid }">
+        <span class="field-error-txt" *ngIf="(addLeaderForm.get('firstName').touched || 
+                            addLeaderForm.get('firstName').dirty) && 
+                            addLeaderForm.get('firstName').errors">
+          <span class="field-error-txt animated fadeInRight" *ngIf="addLeaderForm.get('firstName').errors?.required">{{messages.firstNameValidationMessage}}</span>
+          <span class="field-error-txt animated fadeInRight" *ngIf="addLeaderForm.get('firstName').errors?.minlength && !addLeaderForm.get('firstName').errors?.required">{{messages.firstNameValidationMinChar}}</span>
+          <span class="field-error-txt animated fadeInRight" *ngIf="addLeaderForm.get('firstName').errors?.pattern && !addLeaderForm.get('firstName').errors?.minlength">{{messages.firstNameValidationAlpha}}</span>
+        </span>
+      </div>
+      <div class="form-group">
+        <label>{{messages.lastName}}*:</label>
+        <input type="text" name="lastName" formControlName="lastName" placeholder="Enter Your Last name" class="text-field text-field-big"
+          [(ngModel)]="lName" [ngClass]="{'field-error': (addLeaderForm.get('lastName').touched || addLeaderForm.get('lastName').dirty) &&
+                            !addLeaderForm.get('lastName').valid }">
+        <span class="field-error-txt" *ngIf="(addLeaderForm.get('lastName').touched || 
+                            addLeaderForm.get('lastName').dirty) && 
+                            addLeaderForm.get('lastName').errors">
+          <span class="field-error-txt animated fadeInRight" *ngIf="addLeaderForm.get('lastName').errors?.required">{{messages.lastNameValidationMessage}}</span>
+          <span class="field-error-txt animated fadeInRight" *ngIf="addLeaderForm.get('lastName').errors?.minlength && !addLeaderForm.get('lastName').errors?.required">{{messages.lasttNameValidationMinChar}}</span>
+          <span class="field-error-txt animated fadeInRight" *ngIf="addLeaderForm.get('lastName').errors?.pattern && !addLeaderForm.get('lastName').errors?.minlength">{{messages.lastNameValidationAlpha}}</span>
+        </span>
+      </div>
+      <div class="form-group">
+        <label>{{messages.awanaRole}}*:</label>
+        <angular2-multiselect style="outline:none;" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)" [(ngModel)]="selectedItems" class="multiselect" name="selectedAwanaRoles" formControlName="awanaRole"
+          [data]="tempRolesInLeaders">
+        </angular2-multiselect>
+        <span class="field-error-txt" *ngIf="(addLeaderForm.get('awanaRole').touched || 
+                            addLeaderForm.get('awanaRole').dirty) && 
+                            addLeaderForm.get('awanaRole').errors">
+          <span class="field-error-txt animated fadeInRight" *ngIf="addLeaderForm.get('awanaRole').errors?.required">{{messages.awanaRoleValidationMessage}}</span>
+        </span>
+      </div>
+      <div class="form-group">
+        <label>{{messages.churchRole}}:</label>
+        <mat-select class="text-field text-field-big" name="selectedRoles" tabIndex="5" [(ngModel)]="selectedChurches" formControlName="churchRole" (change)="updateRoles()">
+          <mat-option value="">Select Church Role</mat-option>
+          <mat-option *ngFor="let churchRoles of tempChurchRolesInLeaders" [value]="churchRoles.Role">
+            {{churchRoles.Role}}
+          </mat-option>
+        </mat-select>
+      </div>
+      <div class="form-group">
+        <label>{{messages.mozoLevel}}:</label>
+        <ul class="row dob">
+            <li class="col-6">
+                <mat-select tabindex="6" class="text-field text-field-big cptr" name="mozoLevel" formControlName="mozoLevel" placeholder="Select" (change)="getChurchMozoLevel(mozoDropVal)" [(ngModel)]="mozoDropVal">
+                    <mat-option value>Select</mat-option>
+                    <mat-option *ngFor="let mozoDropVal of mozoDropDown" [value]="mozoDropVal">{{mozoDropVal}}</mat-option>
+                </mat-select>
+            </li>
+            <li class="col-6">
+              <div *ngIf="mozoLevelFull" class="text-field text-field-big text-center disabled licence-count-txt">
+                  License Count: {{mozoLicenceUsed}}/{{mozoLicenceAvailable}}
+                </div>
+        </li>
+        </ul>
+      </div>
+      <div class="form-group margin-t40">
+        <div class="switch-on-off">
+          <label class="switch margin-r10">
+            <input type="checkbox" [(ngModel)]="accOwner" formControlName="accountOwner">
+            <span class="input-slider round"></span>
+          </label>
+          <span class="check-label-txt" (click)="popUpAccountOwner=true">{{messages.accountOwner}}
+            <span class="icon icon-help"></span>
+          </span>
+          <!-- Account Owner Modal -->
+          <div class="modal text-left" style="display:block;" *ngIf="popUpAccountOwner==true">
+            <!-- Modal content -->
+            <div class="modal-content">
+              <div class="modal-scroll">
+                <div class="content-pad">
+                  <span class="close icon-icon_close" (click)="popUpAccountOwner=false"></span>
+                  <h2 class="heading">{{messages.anaccountOwnerwillBeAbleTo}}</h2>
+                  <ul class="checklist">
+                    <li>
+                      <span class="icon icon-check"></span>
+                      <p class="paratxt">{{messages.editYourChurchProfileInfo}}
+                      </p>
+                    </li>
+                    <li>
+                      <span class="icon icon-check"></span>
+                      <p class="paratxt">{{messages.editEachLeadersRole}}</p>
+                    </li>
+                    <li>
+                      <span class="icon icon-check"></span>
+                      <p class="paratxt">{{messages.editALeadersAuthorization}}</p>
+
+                    </li>
+                    <li>
+                      <span class="icon icon-check"></span>
+                      <p class="paratxt">{{messages.editAleaderMozoLicenseLevel}}
+                      </p>
+
+                    </li>
+                    <li>
+                      <span class="icon icon-check"></span>
+                      <p class="paratxt">{{messages.upgradeDowngradeMozoLicenseLevel}}
+                      </p>
+
+                    </li>
+                    <li>
+                      <span class="icon icon-check"></span>
+                      <p class="paratxt">{{messages.manageChildrenAndLeaders}}
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+                <div class="modal-footer text-right">
+                  <span>
+                    <a href="#" class="btn btn-med btn-green" (click)="popUpAccountOwner=false">
+                      {{messages.close}}
+                    </a>
+                  </span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="switch-on-off">
+          <label class="switch margin-r10">
+            <input type="checkbox" [(ngModel)]="authPurchese" formControlName="authPurchaser">
+            <span class="input-slider round"></span>
+          </label>
+          <span class="check-label-txt" (click)="popUpAuthpurcheser=true">{{messages.authorizedPurchaser}}
+            <span class="icon icon-help"></span>
+          </span>
+          <!-- Authorized Purchaser Modal -->
+          <div class="modal text-left" style="display:block;" *ngIf="popUpAuthpurcheser==true">
+            <!-- Modal content -->
+            <div class="modal-content">
+              <div class="modal-scroll">
+                <div class="content-pad">
+                  <span class="close icon-icon_close" (click)="popUpAuthpurcheser=false"></span>
+                  <h2 class="heading">{{messages.anAuthorizedPurchaserWill}}</h2>
+                  <ul class="checklist">
+                    <li>
+                      <span class="icon icon-check"></span>
+                      <p class="paratxt">{{messages.beConnectedToYourChurchAccountForOrdering}}
+                      </p>
+                    </li>
+                    <li>
+                      <span class="icon icon-check"></span>
+                      <p class="paratxt">{{messages.beUsingAPersonalLogin}}</p>
+                    </li>
+                    <li>
+                      <span class="icon icon-check"></span>
+                      <p class="paratxt">{{messages.beRecevingYourChurchMemberPricingBenefitWhenOrderingAwznaItemsFor}}
+                      </p>
+
+                    </li>
+                    <li>
+                      <span class="icon icon-check"></span>
+                      <p class="paratxt">{{messages.havePaymentOptionsToInvoiceYourChurch}}
+
+                      </p>
+
+                    </li>
+                    <li>
+                      <span class="icon icon-check"></span>
+                      <p class="paratxt">{{messages.beAbleToChangeDiscernTheBestShippingAddress}}
+                      </p>
+
+                    </li>
+                  </ul>
+                </div>
+                <div class="modal-footer text-right">
+                  <span>
+                    <a class="btn btn-med btn-green" (click)="popUpAuthpurcheser=false">
+                      {{messages.close}}
+                    </a>
+                  </span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-btn">
+      <button class="btn btn-green btn-width-110 margin-r10" [class.validate-form]="!addLeaderForm.valid || loading || userExistsFlag" [disabled]="!addLeaderForm.valid || loading || userExistsFlag">
+        {{messages.inviteUser}}
+      </button>
+      <a routerLink="/manage-church/leaders" class="btn btn-width-110">
+        {{messages.cancel}}
+      </a>
+    </div>
+  </form>
+</section>

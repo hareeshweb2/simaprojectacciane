@@ -1,0 +1,95 @@
+<div class="clearfix" *layout="'desktop'">
+    <div class="bor-boxshadow margin-b2em">
+        <div class="myorders-sec">
+            <h3 class="heading">
+                <span class="icon-icon_church icon"></span>
+                Manage Programs
+                <button *ngIf="userAuthorization && userAuthorization.editManagePrograms" [disabled]="loading" class="btn btn-green pull-right cptr" (click)="modifyPrograms()">
+                    Edit Programs
+                </button>
+            </h3>
+            <!--- Alert -->
+            <div *ngIf="loading" style="text-align:center">  
+                <img id="mySpinner" src="assets/img/Awana_Spinner.gif"/>
+            </div> 
+            <div *ngIf="serviceError" style="text-align:center">
+                <p class="para-txt"> {{serviceMessage}} </p>
+            </div>
+            <ul class="row list border-no">
+                <li class="col-4 text-muted">
+                    PROGRAM
+                </li>
+                <li class="col-2 text-muted">
+                    ACTIVE
+                </li>
+                <li class="col-4 text-muted">
+                    MEETING DAY
+                </li>
+                <li class="col-2 text-muted">
+                    # KIDS
+                </li>
+            </ul>
+            <div *ngIf="programs">
+                <div *ngFor="let program of programs" >
+                    <ul class="row list">
+                        <li class="col-4">
+                            <label class="total-items">{{ program.programName }}</label>
+                        </li>
+                        <li class="col-2">
+                            <span class="meeting-day-txt">{{ (program.isActive === true) ? 'YES' : 'NO' }}</span>
+                        </li>
+                        <li class="col-4">
+                            <span class="meeting-day-txt">{{ ((program.meetingDay === null) || (program.isActive === false)) ? 'N/A' : program.meetingDay }}</span>
+                        </li>
+                        <li class="col-2">
+                            <span class="meeting-day-txt">{{ ((program.noOfKids === null) || (program.isActive === false)) ? 'N/A' : program.noOfKids }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clearfix margin-t20 margin-b10">
+            </div>
+        </div>
+    </div>
+</div>
+<!--- Mobile View -->
+<section class="page-content" *layout="'mobile'">
+    <h1 class="section-header">
+        <span class="icon-icon_church icon"></span>
+        Manage Programs
+    </h1>
+    <!--- Spinner -->
+    <div *ngIf="mobileLoading" style="text-align:center">
+        <img id="mySpinner" src="assets/img/Awana_Spinner.gif" />
+    </div>
+    <div *ngIf="programs">
+        <div class="order-row box-padding" *ngFor="let program of programs">
+            <ul class="row margin-b20">
+                <li class="col-9 padding-muted">
+                    <label class="fontsize-18 text-green">{{ program.programName }}</label>
+                </li>
+                <li class="col-3 padding-muted">
+                    <span class="pull-right">
+                        <span class="text-muted pull-left margin-r5">Active:</span>
+                        <strong>{{ (program.isActive === true) ? 'YES' : 'NO' }}</strong>
+                    </span>
+                </li>
+            </ul>
+            <ul class="row">
+                <li class="col-6 padding-muted form-group">
+                    <label class="text-muted">Meeting Day:</label>
+                    <strong>{{ ((program.meetingDay === null) || (program.isActive === false)) ? 'N/A' : program.meetingDay }}</strong>
+                </li>
+                <li class="col-6 padding-muted form-group">
+                    <label class="text-muted">No of Kids: </label>
+                    <strong>{{ ((program.noOfKids === null) || (program.isActive === false)) ? 'N/A' : program.noOfKids }}</strong>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-btn" *ngIf="programs">
+        <button class="btn btn-green btn-block btn-block-small" (click)="modifyPrograms()">
+            Edit Programs
+        </button>
+    </div>
+</section>

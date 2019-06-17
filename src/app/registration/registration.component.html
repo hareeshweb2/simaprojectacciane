@@ -1,0 +1,507 @@
+<!--- Contents  -->
+<!--section for desktop starts-->
+<div class="container animated fadeInDown" *layout="'desktop'">
+  <section class="page-content">
+    <main class="login">
+      <div class="login-logo">
+        <img class="logo-redirect" src="/assets/img/login-logo.png" routerLink="/login" alt="Awana Logo">
+      </div>
+      <!--registration form screen starts-->
+      <div class="row login-maindiv" *ngIf="!registrationSuccessfulPage">
+        <div class="col-6 login-div">
+          <h1 class="heading">Register</h1>
+          <form id="registrationForm" name="registrationForm" (keydown.enter)="$event.preventDefault()" (ngSubmit)="register(registrationForm)"
+            #registrationForm="ngForm" novalidate>
+            <div class="form-group">
+              <input type="text" name="firstName" tabIndex="0" [onReturn] class="text-field text-field-big" placeholder="First Name" [ngModel]="model.firstName"
+                #firstName="ngModel" required minlength="2" maxlength="40" (ngModelChange)="model.firstName=$event;" (blur)="validateFirstName(model.firstName)"
+                (focus)="checkFirstName()" [ngClass]="{ 'field-error': (firstName.errors && (firstName.dirty || firstName.touched)) || FirstNamePatternError}">
+              <div *ngIf="firstName.errors && (firstName.dirty || firstName.touched)" class="field-error-txt animated">
+                <div class="animated fadeInRight" [hidden]="!firstName.errors.required">
+                  {{RegistrationInputValidations.firstNameRequired}}
+                </div>
+                <div class="animated fadeInRight" [hidden]="!firstName.errors.minlength">
+                  {{RegistrationInputValidations.firstNameMinlength}}
+                </div>
+                <div class="animated fadeInRight" [hidden]="!firstName.errors.maxlength">
+                  {{RegistrationInputValidations.firstNameMaxlength}}
+                </div>
+              </div>
+              <div *ngIf="FirstNamePatternError && !(firstName.errors && (firstName.dirty || firstName.touched))" class="field-error-txt animated fadeInRight">
+                {{RegistrationInputValidations.firstNameInvalid}}
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" name="lastName" [onReturn] class="text-field text-field-big" tabIndex="0" placeholder="Last Name" [ngModel]="model.lastName"
+                #lastName="ngModel" required minlength="2" maxlength="40" (ngModelChange)="model.lastName=$event;" (blur)="validateLastName(model.lastName)"
+                (focus)="checkLastName()" [ngClass]="{ 'field-error': (lastName.errors && (lastName.dirty || lastName.touched)) || LastNamePatternError}">
+              <div *ngIf="lastName.errors && (lastName.dirty || lastName.touched)" class="field-error-txt">
+                <div class="animated fadeInRight" [hidden]="!lastName.errors.required">
+                  {{RegistrationInputValidations.lastNameRequired}}
+                </div>
+                <div class="animated fadeInRight" [hidden]="!lastName.errors.minlength">
+                  {{RegistrationInputValidations.lastNameMinlength}}
+                </div>
+                <div class="animated fadeInRight" [hidden]="!lastName.errors.maxlength">
+                  {{RegistrationInputValidations.lastNameMaxlength}}
+                </div>
+              </div>
+              <div class="animated fadeInRight" *ngIf="LastNamePatternError && !(lastName.errors && (lastName.dirty || lastName.touched))"
+                class="field-error-txt animated fadeInRight">
+                {{RegistrationInputValidations.lastNameInvalid}}
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" [onReturn] name="email" class="text-field text-field-big" tabIndex="0" placeholder="Your Email" [ngModel]="model.email|trimval"
+                #email="ngModel" required (ngModelChange)="model.email=$event;" (blur)="validateEmailId(model.email)" (focus)="checkEmailId()"
+                [ngClass]="{ 'field-error': (email.errors && (email.dirty ||email.touched)) || EmailPatternError}">
+              <div *ngIf="email.errors && (email.dirty || email.touched)" class="field-error-txt">
+                <div class="animated fadeInRight" [hidden]="!email.errors.required">
+                  {{RegistrationInputValidations.emailRequired}}
+                </div>
+              </div>
+              <div *ngIf="EmailPatternError && !(email.errors && (email.dirty || email.touched))" class="field-error-txt animated fadeInRight">
+                {{RegistrationInputValidations.emailPattern}}
+              </div>
+              <div *ngIf="emailAlreadyExists && !(email.errors && (email.dirty || email.touched))" class="field-error-txt animated fadeInRight">
+                {{RegistrationInputValidations.emailAlreadyExists}}
+              </div>
+            </div>
+            <div class="form-group">
+              <input [onReturn] type="password" name="password" tabIndex="0" class="text-field text-field-big" placeholder="Enter Your Password"
+                [ngModel]="model.password" #password="ngModel" required minlength="8" (blur)="validatePassword(model.password)"
+                (focus)="checkPassword()" (keyup)="comparePassword(model.password,model.reenterpassword)" (ngModelChange)="model.password=$event;"
+                [ngClass]="{ 'field-error': (password.errors && ( password.dirty || password.touched) || passwordPasswordError || PasswordMismatchError )}">
+              <div *ngIf="password.errors && (password.dirty ||password.touched)" class="field-error-txt">
+                <div class="animated fadeInRight" [hidden]="!password.errors.required">
+                  {{RegistrationInputValidations.passwordRequired}}
+                </div>
+                <div class="animated fadeInRight" [hidden]="!password.errors.minlength">
+                  {{RegistrationInputValidations.passwordMinlength}}
+                </div>
+              </div>
+              <div *ngIf="!(password.errors && (password.dirty ||password.touched))">
+                <div *ngIf="passwordDisplayMessage1!==''" class="field-error-txt animated fadeInRight">
+                  <!--  Password should be atleast 8 digits, should contain atleast three of following uppercase, lowercase, numbers, special characters. -->
+                  {{passwordDisplayMessage1}}
+                </div>
+                <div *ngIf="passwordDisplayMessage2!==''" class="field-error-txt animated fadeInRight">
+                  <!-- Password cannot contain Firstname, LastName or LoginID in it. -->
+                  {{passwordDisplayMessage2}}
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input [onReturn] type="password" name="reenterpassword" tabIndex="0" class="text-field text-field-big" placeholder="Re-enter Your Password"
+                [ngModel]="model.reenterpassword" #reenterpassword="ngModel" required (ngModelChange)="model.reenterpassword=$event;"
+                (blur)="comparePassword(model.password,model.reenterpassword)" (focus)="checkReenterpassword()" [ngClass]="{ 'field-error': (reenterpassword.errors && (reenterpassword.dirty || reenterpassword.touched)) || PasswordCompareError}">
+              <div *ngIf="reenterpassword.errors && (reenterpassword.dirty || reenterpassword.touched)" class="field-error-txt">
+                <div class="animated fadeInRight" [hidden]="!reenterpassword.errors.required">
+                  {{RegistrationInputValidations.ReenterpasswordRequired}}
+                </div>
+              </div>
+              <div *ngIf="PasswordCompareError && !(reenterpassword.errors && (reenterpassword.dirty || reenterpassword.touched))" class="field-error-txt animated fadeInRight">
+                {{RegistrationInputValidations.passwordCompareError}}
+              </div>
+            </div>
+
+
+            <div class="form-group align-items">
+              <label>Date of Birth*</label>
+              <ul class="row dob">
+                <li class="col-5">
+                  <select [onReturn] (focus)="clearLesserYear()" class="text-field text-field-big" name="month" tabIndex="0" required [(ngModel)]="model.month"
+                    #month="ngModel" [ngClass]="{ 'field-error': (month.errors && (month.dirty ||month.touched))}">
+                    <option value="" disabled>MM</option>
+                    <option *ngFor="let title of monthValue" [value]="title.value" [selected]="model.month == title.value">
+                      {{title.label}}
+                    </option>
+                  </select>
+                  <div *ngIf="month.errors && (month.dirty || month.touched)" class="field-error-txt">
+                    <div class="animated fadeInRight" [hidden]="!month.errors.required">
+                      {{RegistrationInputValidations.monthRequired}}
+                    </div>
+                  </div>
+                </li>
+                <li class="col-3">
+                  <select [onReturn] (focus)="clearLesserYear()" class="text-field text-field-big" name="date" tabIndex="0" [(ngModel)]="model.date"
+                    #date="ngModel" required [ngClass]="{ 'field-error': (date.errors && (date.dirty ||date.touched))}">
+                    <option value="" disabled>DD</option>
+                    <option *ngFor="let date of chooseDateCount(model.year,model.month);let i = index" [value]="date">
+                      {{date}}
+                    </option>
+                  </select>
+                  <div *ngIf="date.errors && (date.dirty || date.touched)" class="field-error-txt">
+                    <div class="animated fadeInRight" [hidden]="!date.errors.required">
+                      {{RegistrationInputValidations.dateRequired}}
+                    </div>
+                  </div>
+                </li>
+                <li class="col-4">
+                  <select [onReturn] class="text-field text-field-big" name="year" tabIndex="0" [(ngModel)]="model.year" (focus)="clearLesserYear()"
+                    #year="ngModel" required [ngClass]="{ 'field-error': (year.errors && (year.dirty ||year.touched))}">
+                    <option value="" disabled>YYYY</option>
+                    <option *ngFor="let year of createYearRange(choosenYearCount);let i = index" [value]="year">
+                      {{year}}
+                    </option>
+                  </select>
+                  <div *ngIf="year.errors && (year.dirty || year.touched)" class="field-error-txt">
+                    <div class="animated fadeInRight" [hidden]="!year.errors.required">
+                      {{RegistrationInputValidations.yearRequired}}
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <div *ngIf="LesserYear" style="color:#d1021c">
+                {{RegistrationInputValidations.lesserYear}}
+              </div>
+            </div>
+            <div class="form-group row-padding-10">
+              <ul class="row">
+                <li class="col-2 padding-muted">
+                  <label class="switch">
+                    <input type="checkbox" name="agree" #agree="ngModel" tabIndex="0" [ngModel]="model.agree" required>
+                    <span class="input-slider round"></span>
+                  </label>
+                </li>
+                <li class="col-10 padding-muted" style="color: #666666;">
+                  I am above 13 years of age and agree to
+                  <a style="border-bottom:1px solid #3C3D43;color: #666666;" href="https://www.awana.org/privacy-policies" target="_blank">Terms and Conditions</a>
+                </li>
+              </ul>
+              <div *ngIf="agree.errors && (agree.dirty || agree.touched)" class="field-error-txt animated fadeInRight">
+                <div [hidden]="!agree.errors.required">
+                  {{RegistrationInputValidations.agreeError}}
+                </div>
+              </div>
+            </div>
+            <div class="form-group row-padding-10">
+              <re-captcha name="captcha" [(ngModel)]="captchaControl" (resolved)="resolved($event)" siteKey="6LcbjUQUAAAAAPH-MY7W8NgnpxeQdSGvVvWE_DRv"></re-captcha>
+              <div *ngIf="catpchaError!='init'" class="field-error-txt">
+                <div [hidden]="catpchaError!=='error'">
+                  {{RegistrationInputValidations.captchaRequired}}
+                </div>
+              </div>
+            </div>
+            <div *ngIf="serverError" style="color:#d1021c">
+              {{error.detail}}
+            </div>
+            <div class="clearfix">
+              <button tabIndex="0" type="submit" class="btn btn-block btn-green" [disabled]="!registrationForm.form.valid ||FirstNamePatternError || LastNamePatternError || EmailPatternError || PhonePatternError || PasswordCompareError || passwordPasswordError || PasswordMismatchError || loading==true || catpchaError=='error'">
+                <img class="btn-spinner" id="mySpinner" *ngIf="loading" src="assets/img/spinner_Btn.gif" /> Register
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="col-6 register-div">
+          <div class="text-cent ortxt-circle">OR</div>
+          <h1 class="heading">&nbsp;</h1>
+          <p class="margin-muted margin-b20">
+            Register with your social profiles
+          </p>
+          <a tabIndex="0" (keyup.enter)="sociallogin('facebook')" (click)="sociallogin('facebook')" class="btn btn-block fb-btn-blue margin-b10">
+            REGISTER WITH FACEBOOK
+            <span class="social-icons icon-icon_fb"></span>
+          </a>
+          <a tabIndex="0" (keyup.enter)="sociallogin('google')" (click)="sociallogin('google')" class="btn btn-block gplus-btn-red margin-b10">
+            REGISTER WITH GOOGLE+
+            <span class="social-icons icon-icon_gplus"></span>
+          </a>
+          <a tabIndex="0" (keyup.enter)="sociallogin('twitter')" (click)="sociallogin('twitter')" class="btn btn-block twitter-btn-blue margin-b10">
+            REGISTER WITH TWITTER
+            <span class="social-icons icon-icon_twitter"></span>
+          </a>
+        </div>
+      </div>
+      <!--registration form screen ends-->
+      <!--registration thankyou screen starts-->
+      <div class="thankyou-div" *ngIf="registrationSuccessfulPage">
+        <h1 class="heading">Thank You</h1>
+        <ul class="thanks-msg">
+          <li class="icon">
+            <span class="icon-icon_like"></span>
+          </li>
+          <li>
+            Thank you for registering with MyAwana! Please check your email for account verification or
+            <a routerLink="/login" class="link-underline">click here</a> to login to your account.
+          </li>
+        </ul>
+      </div>
+      <!--registration thankyou screen ends-->
+      <div class="login-foot" *ngIf="!registrationSuccessfulPage">
+        Already have an account?
+        <a routerLink="/login">Sign in</a>
+      </div>
+    </main>
+  </section>
+</div>
+<!--section for desktop ends-->
+
+<!--section for mobile starts-->
+<div class="mobile" *layout="'mobile'">
+  <!--registration first screen for mobile starts-->
+  <div class="container" *ngIf="!common.mobileRegistrationForm">
+    <!--- CONTENT -->
+    <main class="login page-content">
+      <div class="login-maindiv">
+        <div class="register-div">
+          <h1 class="heading">Register</h1>
+          <a (click)="goToRegisterForm()" class="btn btn-big btn-block margin-b20">
+            REGISTER WITH YOUR EMAIL
+            <span class="social-icons icon-icon_mail"></span>
+          </a>
+          <div class="margin-b20 ortxt">OR</div>
+          <a (click)="sociallogin('facebook')" class="btn btn-block fb-btn-blue margin-b10">
+            REGISTER WITH FACEBOOK
+            <span class="social-icons icon-icon_fb"></span>
+          </a>
+          <a (click)="sociallogin('google')" class="btn btn-block gplus-btn-red margin-b10">
+            REGISTER WITH GOOGLE+
+            <span class="social-icons icon-icon_gplus"></span>
+          </a>
+          <a (click)="sociallogin('twitter')" class="btn btn-block twitter-btn-blue margin-b10">
+            REGISTER WITH TWITTER
+            <span class="social-icons icon-icon_twitter"></span>
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>
+  <!--registration first screen for mobile ends-->
+
+  <!--registration second screen for mobile starts-->
+  <!--- Contents  -->
+  <div class="container" *ngIf="common.mobileRegistrationForm && !registrationSuccessfulPage">
+    <main class="login page-content">
+      <div class="row login-maindiv">
+        <div class="login-div">
+          <h1 class="heading">Register</h1>
+          <form id="registrationForm" name="registrationForm" (keydown.enter)="$event.preventDefault()" (ngSubmit)="register(registrationForm);registrationForm.reset()"
+            #registrationForm="ngForm" novalidate>
+            <div class="form-group">
+              <input type="text" name="firstName" class="text-field text-field-big" placeholder="First Name" [ngModel]="model.firstName"
+                #firstName="ngModel" required minlength="2" maxlength="40" (ngModelChange)="model.firstName=$event;" (blur)="validateFirstName(model.firstName)"
+                (focus)="checkFirstName()" [ngClass]="{ 'field-error': (firstName.errors && (firstName.dirty || firstName.touched)) || FirstNamePatternError}">
+              <div *ngIf="firstName.errors && (firstName.dirty || firstName.touched)" class="field-error-txt">
+                <div [hidden]="!firstName.errors.required">
+                  {{RegistrationInputValidations.firstNameRequired}}
+                </div>
+                <div class="animated fadeInRight" [hidden]="!firstName.errors.minlength">
+                  {{RegistrationInputValidations.firstNameMinlength}}
+                </div>
+                <div class="animated fadeInRight" [hidden]="!firstName.errors.maxlength">
+                  {{RegistrationInputValidations.firstNameMaxlength}}
+                </div>
+              </div>
+              <div *ngIf="FirstNamePatternError && !(firstName.errors && (firstName.dirty || firstName.touched))" class="field-error-txt">
+                {{RegistrationInputValidations.firstNameInvalid}}
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" name="lastName" class="text-field text-field-big" placeholder="Last Name" [ngModel]="model.lastName" #lastName="ngModel"
+                required minlength="2" maxlength="40" (ngModelChange)="model.lastName=$event;" (blur)="validateLastName(model.lastName)"
+                (focus)="checkLastName()" [ngClass]="{ 'field-error': (lastName.errors && (lastName.dirty || lastName.touched)) || LastNamePatternError}">
+              <div *ngIf="lastName.errors && (lastName.dirty || lastName.touched)" class="field-error-txt">
+                <div [hidden]="!lastName.errors.required">
+                  {{RegistrationInputValidations.lastNameRequired}}
+                </div>
+                <div class="animated fadeInRight" [hidden]="!lastName.errors.minlength">
+                  {{RegistrationInputValidations.lastNameMinlength}}
+                </div>
+                <div class="animated fadeInRight" [hidden]="!lastName.errors.maxlength">
+                  {{RegistrationInputValidations.lastNameMaxlength}}
+                </div>
+              </div>
+              <div *ngIf="LastNamePatternError && !(lastName.errors && (lastName.dirty || lastName.touched))" class="field-error-txt">
+                {{RegistrationInputValidations.lastNameInvalid}}
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" name="email" class="text-field text-field-big" placeholder="Your Email" [ngModel]="model.email|trimval"
+                #email="ngModel" required (ngModelChange)="model.email=$event;" (blur)="validateEmailId(model.email)" (focus)="checkEmailId()"
+                [ngClass]="{ 'field-error': (email.errors && (email.dirty ||email.touched)) || EmailPatternError}">
+              <div *ngIf="email.errors && (email.dirty || email.touched)" class="field-error-txt">
+                <div [hidden]="!email.errors.required">
+                  {{RegistrationInputValidations.emailRequired}}
+                </div>
+              </div>
+              <div *ngIf="EmailPatternError && !(email.errors && (email.dirty || email.touched))" class="field-error-txt">
+                {{RegistrationInputValidations.emailPattern}}
+              </div>
+              <div *ngIf="emailAlreadyExists && !(email.errors && (email.dirty || email.touched))" class="field-error-txt">
+                {{RegistrationInputValidations.emailAlreadyExists}}
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="password" name="password" class="text-field text-field-big" placeholder="Enter Your Password" [ngModel]="model.password"
+                #password="ngModel" required minlength="8" (blur)="validatePassword(model.password)" (focus)="checkPassword()"
+                (keyup)="comparePassword(model.password,model.reenterpassword)" (ngModelChange)="model.password=$event;" [ngClass]="{ 'field-error': (password.errors && ( password.dirty || password.touched) || passwordPasswordError || PasswordMismatchError )}">
+              <div *ngIf="password.errors && (password.dirty ||password.touched)" class="field-error-txt">
+                <div class="animated fadeInRight" [hidden]="!password.errors.required">
+                  {{RegistrationInputValidations.passwordRequired}}
+                </div>
+                <div class="animated fadeInRight" [hidden]="!password.errors.minlength">
+                  {{RegistrationInputValidations.passwordMinlength}}
+                </div>
+              </div>
+              <div *ngIf="!(password.errors && (password.dirty ||password.touched))">
+                <div *ngIf="passwordDisplayMessage1!==''" class="field-error-txt animated fadeInRight">
+                  <!--  Password should be atleast 8 digits, should contain atleast three of following uppercase, lowercase, numbers, special characters. -->
+                  {{passwordDisplayMessage1}}
+                </div>
+                <div *ngIf="passwordDisplayMessage2!==''" class="field-error-txt animated fadeInRight">
+                  <!-- Password cannot contain Firstname, LastName or LoginID in it. -->
+                  {{passwordDisplayMessage2}}
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="password" name="reenterpassword" class="text-field text-field-big" placeholder="Re-enter Your Password" [ngModel]="model.reenterpassword"
+                #reenterpassword="ngModel" required (ngModelChange)="model.reenterpassword=$event;" (blur)="comparePassword(model.password,model.reenterpassword)"
+                (focus)="checkReenterpassword()" [ngClass]="{ 'field-error': (reenterpassword.errors && (reenterpassword.dirty || reenterpassword.touched)) || PasswordCompareError}">
+              <div *ngIf="reenterpassword.errors && (reenterpassword.dirty || reenterpassword.touched)" class="field-error-txt">
+                <div [hidden]="!reenterpassword.errors.required">
+                  {{RegistrationInputValidations.ReenterpasswordRequired}}
+                </div>
+              </div>
+              <div *ngIf="PasswordCompareError && !(reenterpassword.errors && (reenterpassword.dirty || reenterpassword.touched))" class="field-error-txt">
+                {{RegistrationInputValidations.passwordCompareError}}
+              </div>
+            </div>
+            <div class="form-group align-items">
+              <label>Date of Birth*</label>
+              <ul class="row dob">
+                <li class="col-5">
+                  <mat-select (focus)="clearLesserYear()" placeholder="MM" class="text-field text-field-big" name="month" required [(ngModel)]="model.month"
+                    #month="ngModel" [ngClass]="{ 'field-error': (month.errors && (month.dirty ||month.touched))}">
+                    <mat-option value="" disabled>MM</mat-option>
+                    <mat-option *ngFor="let title of monthValue" [value]="title.value">
+                      {{title.label}}
+                    </mat-option>
+                  </mat-select>
+
+                  <div *ngIf="month.errors && (month.dirty || month.touched)" class="field-error-txt">
+                    <div class="animated fadeInRight" [hidden]="!month.errors.required">
+                      {{RegistrationInputValidations.monthRequired}}
+                    </div>
+                  </div>
+                </li>
+                <li class="col-3">
+                  <mat-select (focus)="clearLesserYear()" placeholder="DD" class="text-field text-field-big" name="date" [(ngModel)]="model.date"
+                    #date="ngModel" required [ngClass]="{ 'field-error': (date.errors && (date.dirty ||date.touched))}">
+                    <mat-option value="" disabled>DD</mat-option>
+                    <mat-option *ngFor="let date of chooseDateCount(model.year,model.month);let i = index" [value]="date">
+                      {{date}}
+                    </mat-option>
+                  </mat-select>
+                  <div *ngIf="date.errors && (date.dirty || date.touched)" class="field-error-txt">
+                    <div class="animated fadeInRight" [hidden]="!date.errors.required">
+                      {{RegistrationInputValidations.dateRequired}}
+                    </div>
+                  </div>
+                </li>
+                <li class="col-4">
+                  <mat-select placeholder="YYYY" class="text-field text-field-big" name="year" [(ngModel)]="model.year" (focus)="clearLesserYear()"
+                    #year="ngModel" required [ngClass]="{ 'field-error': (year.errors && (year.dirty ||year.touched))}">
+                    <mat-option value="" disabled>YYYY</mat-option>
+                    <mat-option *ngFor="let year of createYearRange(choosenYearCount);let i = index" [value]="year">
+                      {{year}}
+                    </mat-option>
+                  </mat-select>
+                  <div *ngIf="year.errors && (year.dirty || year.touched)" class="field-error-txt">
+                    <div class="animated fadeInRight" [hidden]="!year.errors.required">
+                      {{RegistrationInputValidations.yearRequired}}
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <div *ngIf="LesserYear" style="color:#d1021c">
+                {{RegistrationInputValidations.lesserYear}}
+              </div>
+            </div>
+            <!-- <div class="form-group">
+              <input type="text" name="phone" class="text-field text-field-big" placeholder="Phone Number" [ngModel]="model.phone|phoneFormat"
+                maxlength="14" #phone="ngModel" (ngModelChange)="model.phone=$event;" (blur)="validatePhone(model.phone)" (focus)="checkPhone()"
+                [ngClass]="{ 'field-error': (phone.errors && (phone.dirty || phone.touched)) || PhonePatternError}">
+              <div *ngIf="PhonePatternError && !(phone.errors && (phone.dirty || phone.touched))" class="field-error-txt">
+                Mobile Number should consists only Numbers of 10 digits.
+              </div>
+            </div>
+            <div class="form-group">
+              <select class="text-field text-field-big" name="country" [ngModel]="model.country" #country="ngModel" required (ngModelChange)="model.country=$event;"
+                [ngClass]="{ 'field-error': country.errors && (country.dirty || country.touched)}">
+                <option value="">Country</option>
+                <option value="United States">United States</option>
+              </select>
+              <div *ngIf="country.errors && (country.dirty ||country.touched)" class="field-error-txt">
+                <div [hidden]="!country.errors.required">
+                  Country is required
+                </div>
+              </div>
+            </div> -->
+
+            <div class="form-group row-padding-10">
+              <ul class="row">
+                <li class="col-2 padding-muted">
+                  <label class="switch">
+                    <input type="checkbox" name="agree" #agree="ngModel" [ngModel]="model.agree" required>
+                    <span class="input-slider round"></span>
+                  </label>
+                </li>
+                <li class="col-10 padding-muted" style="color: #666666;">
+                  I am above 13 years of age and agree to
+                  <a style="border-bottom:1px solid #3C3D43;color: #666666;" href="https://www.awana.org/privacy-policies" target="_blank">Terms and Conditions</a>
+                </li>
+              </ul>
+              <div *ngIf="agree.errors && (agree.dirty || agree.touched)" class="field-error-txt">
+                <div [hidden]="!agree.errors.required">
+                  {{RegistrationInputValidations.agreeError}}
+                </div>
+              </div>
+            </div>
+            <div class="form-group row-padding-10">
+              <re-captcha name="captcha" [(ngModel)]="captchaControl" (resolved)="resolved($event)" siteKey="6LcbjUQUAAAAAPH-MY7W8NgnpxeQdSGvVvWE_DRv"></re-captcha>
+              <div *ngIf="catpchaError!='init'" class="field-error-txt">
+                <div [hidden]="catpchaError!=='error'">
+                  {{RegistrationInputValidations.captchaRequired}}
+                </div>
+              </div>
+            </div>
+            <div *ngIf="serverError" style="color:#d1021c">
+              {{error.detail}}
+            </div>
+            <div class="clearfix">
+              <button type="submit" class="btn btn-block btn-green" [disabled]="!registrationForm.form.valid ||FirstNamePatternError || LastNamePatternError || EmailPatternError || PasswordCompareError || passwordPasswordError || PasswordMismatchError  || loading==true || catpchaError=='error'">
+                Register
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+  <!--registration second screen for mobile ends-->
+
+  <!--registration third screen starts-->
+  <!--registration thankyou screen starts-->
+  <div class="container" *ngIf="registrationSuccessfulPage">
+    <main class="login page-content">
+      <div class="thankyou-div">
+        <h1 class="heading">Thank You</h1>
+        <ul class="thanks-msg">
+          <li class="icon">
+            <span class="icon-icon_like"></span>
+          </li>
+          <li>
+            Thank you for registering with MyAwana! Please check your email for account verification or
+            <a routerLink="/login" class="link-underline">Click Here</a> to login to your account.
+          </li>
+        </ul>
+      </div>
+    </main>
+  </div>
+  <!--registration third screen ends-->
+
+</div>
+<!--section for mobile ends-->

@@ -1,0 +1,34 @@
+/** Border Radius **/
+
+.bor-radius-profile {
+    border-radius: 100px;
+}
+
+.cptr{
+    cursor: pointer;
+}
+
+.bor-radius-profile{
+    border-radius: 100px;
+    height: 74px;
+    width: 74px;
+}
+.elle{
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 30ch;
+    position: relative;
+    top: 4px;
+}
+.btn:focus {
+    box-shadow: 1px 1px 7px #929292;
+  }
+
+.mar-bot8px {
+    margin-bottom: 8px;
+}
+.not-allowed {
+    cursor: not-allowed;   
+}

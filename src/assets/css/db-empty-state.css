@@ -1,0 +1,48 @@
+/*** -----------------------------------------
+
+            DASHBOARD EMPTY STATE
+
+----------------------------------------- ***/
+
+.complete-profile {
+	background: #edf5f9;
+    border: 1px dashed #aac3d0;
+    padding: 20px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 0 1.6em 0;
+    align-items: center;
+}
+
+.complete-profile .para-txt {
+	vertical-align: top;
+    line-height: 28px;
+}
+
+.complete-profile .btn-sec {
+    display: flex;
+    min-width: 290px;
+}
+
+.db-empty-orders-donation {
+	padding: 60px 0 70px 0;
+}
+
+.db-empty-orders-donation .icons {
+    color: #bbbbbb;
+    font-size: 50px;
+}
+
+.db-empty-orders-donation .para-txt {
+	color: #bbbbbb;
+	font-size: 18px;
+	margin: 30px 0 44px 0;
+}
+
+
+
+
+
+

@@ -1,0 +1,194 @@
+<div class="manage-prgm-edit clearfix" *layout="'desktop'">
+    <div class="bor-boxshadow margin-b2em">
+        <div class="myorders-sec">
+            <h3 class="heading">
+                <span class="icon-icon_church icon"></span>
+                Manage Programs
+            </h3>
+            <!--- Alert -->
+            <div *ngIf="loading" style="text-align:center">
+                <img id="mySpinner" src="assets/img/Awana_Spinner.gif" />
+            </div>
+            <div *ngIf="serviceError" style="text-align:center">
+                <p class="para-txt"> {{serviceMessage}} </p>
+            </div>
+            <ul class="row list border-no">
+                <li class="col-4 text-muted">
+                    PROGRAM
+                </li>
+                <li class="col-2 text-muted">
+                    ACTIVE
+                </li>
+                <li class="col-4 text-muted">
+                    MEETING DAY
+                </li>
+                <li class="col-2 text-muted">
+                    # KIDS
+                </li>
+            </ul>
+            <div *ngIf="programs && !loading">
+                <div *ngFor="let program of programs ; let idx = index">
+                    <ul class="row list">
+                        <li class="col-4">
+                            <label class="total-items">{{program.programName}}</label>
+                        </li>
+                        <li class="col-2">
+                            <label class="switch">
+                                <input type="checkbox" name="isActive" [(ngModel)]="program.isActive" (change)="enableSaveButton()">
+                                <span class="input-slider round"></span>
+                            </label>
+                        </li>
+                        <li *ngIf="!program.isActive" class="col-4">
+                            <select name="meetingDay" disabled class="text-field meeting-day-dropdown disabled">
+                                <option value="Select Day">Select Day</option>
+                            </select>
+                        </li>
+                        <li *ngIf="program.isActive" class="col-4">
+                            <select [(ngModel)]="program.meetingDay" name="meetingDay" class="text-field meeting-day-dropdown" (change)="enableSaveButton();meetingDayErrorMessage[idx]=null">
+                                <option disabled value="null">Select Day</option>
+                                <option value="Sunday">Sunday</option>
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday</option>
+                                <option value="Friday">Friday</option>
+                                <option value="Saturday">Saturday</option>
+                            </select>
+                            <div *ngIf="meetingDayErrorMessage[idx]" class="field-error-txt">
+                                {{meetingDayErrorMessage[idx]}}
+                            </div>
+                        </li>
+                        <li *ngIf="!program.isActive" class="col-2">
+                            <input type="text" disabled class="text-field no-of-kids-field" maxlength="4" name="noOfKids" placeholder="">
+                        </li>
+
+                        <li *ngIf="program.isActive" class="col-2">
+                            <input type="text" class="text-field no-of-kids-field" maxlength="4" name="noOfKids" required pattern={{commonRegex.onlyNumbersAllowed}}
+                                [(ngModel)]="program.noOfKids" #noOfKids="ngModel" [ngClass]="{ 'field-error': (noOfKids.errors && (noOfKids.dirty || noOfKids.touched))}"
+                                (focus)="enableSaveButton();noOfKidsIfEmptyErrorMessage[idx]=null" (click)="enableSaveButton();noOfKidsIfEmptyErrorMessage[idx]=null"
+                                (change)="enableSaveButton();noOfKidsIfEmptyErrorMessage[idx]=null">
+                        
+                            <div *ngIf="noOfKidsIfEmptyErrorMessage[idx]" class="field-error-txt ">
+                                {{noOfKidsIfEmptyErrorMessage[idx]}}
+                            </div>
+                            <div *ngIf="((noOfKids.errors && (noOfKids.dirty || noOfKids.touched)) && (!noOfKidsIfEmptyErrorMessage[idx]))" class="alert alert-danger">
+                                <div class="field-error animated fadeInRight" [hidden]="!noOfKids.errors.required">
+                                    {{noOfKidsErrorMessage}}
+                                </div>
+                                <div class="field-error animated fadeInRight" [hidden]="!noOfKids.errors.pattern">
+                                    {{noOfKidsInvalidNumberErrorMessage}}
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clearfix margin-t20 margin-b10">
+                        <button [disabled]="disableSaveButton" class="btn btn-green margin-r10 cptr" (click)="saveModifiedPrograms()">
+                            SAVE PROGRAMS
+                        </button>
+                        <button class="btn cptr" (click)="cancel()">
+                            Cancel
+                        </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--- Mobile View -->
+<section class="page-content" *layout="'mobile'">
+    <h1 class="section-header">
+        <span class="icon-icon_church icon"></span>
+        Manage Programs
+    </h1>
+    <!-- Status Message -->
+    <!-- <div class="db-alert-message" *ngIf="statusMessage">
+        <span>
+            <span class=""></span>
+            <span class="para-txt">{{statusMessage}}</span>
+        </span>
+        <a style="cursor: pointer;" class="close">
+            <span class="icon icon-icon_close" (click)="statusMessage=null;"></span>
+        </a>
+    </div> -->
+    <!-- Spinner -->
+    <div *ngIf="mobileLoading" style="text-align:center">
+        <img id="mySpinner" src="assets/img/Awana_Spinner.gif" />
+    </div>
+    <div *ngIf="serviceError" style="text-align:center">
+        <p class="para-txt"> {{serviceMessage}} </p>
+    </div>
+    <div *ngIf="programs && !mobileLoading">
+        <div class="order-row box-padding" *ngFor="let program of programs ; let idx = index">
+            <ul class="row margin-b20">
+                <li class="col-9 padding-muted">
+                    <label class="fontsize-18 text-green">{{program.programName}}</label>
+                </li>
+                <li class="col-3 padding-muted">
+                    <span class="pull-right">
+                        <span class="text-muted pull-left margin-r5">Active:</span>
+                        <label class="switch">
+                            <input type="checkbox" name="isActive" [(ngModel)]="program.isActive" (change)="enableSaveButton()">
+                            <span class="input-slider round"></span>
+                        </label>
+                    </span>
+                </li>
+            </ul>
+            <ul class="row">
+                <li class="col-7 padding-muted form-group" *ngIf="!program.isActive">
+                    <label class="text-muted">Meeting Day:</label>
+                    <select name="meetingDay" class="text-field meeting-day-dropdown" disabled>
+                        <option value="Select Day">Select Day</option>
+                    </select>
+                </li>
+                <li class="col-7 padding-muted form-group" *ngIf="program.isActive">
+                    <label class="text-muted">Meeting Day:</label>
+                    <mat-select class="text-field meeting-day-dropdown" placeholder="Select Day" name="meetingDay" [(ngModel)]="program.meetingDay" (change)="enableSaveButton();meetingDayErrorMessage[idx]=null">
+                        <mat-option disabled value="null">Select Day</mat-option>
+                        <mat-option value="Sunday">Sunday</mat-option>
+                        <mat-option value="Monday">Monday</mat-option>
+                        <mat-option value="Tuesday">Tuesday</mat-option>
+                        <mat-option value="Wednesday">Wednesday</mat-option>
+                        <mat-option value="Thursday">Thursday</mat-option>
+                        <mat-option value="Friday">Friday</mat-option>
+                        <mat-option value="Saturday">Saturday</mat-option>
+                    </mat-select>
+                    <div *ngIf="meetingDayErrorMessage[idx]" class="field-error-txt">
+                        {{meetingDayErrorMessage[idx]}}
+                    </div>
+                </li>
+                <li class="col-5 padding-muted form-group" *ngIf="!program.isActive">
+                    <label class="text-muted">No of Kids: </label>
+                    <input type="text" disabled class="text-field no-of-kids-field" maxlength="4" name="noOfKids" placeholder="">
+                </li>
+                <li class="col-5 padding-muted form-group" *ngIf="program.isActive">
+                    <label class="text-muted">No of Kids: </label>
+                    <input type="text" class="text-field no-of-kids-field" maxlength="4" name="noOfKids" required pattern={{commonRegex.onlyNumbersAllowed}}
+                        [(ngModel)]="program.noOfKids" #noOfKids="ngModel" [ngClass]="{ 'field-error': (noOfKids.errors && (noOfKids.dirty || noOfKids.touched))}"
+                        (focus)="enableSaveButton();noOfKidsIfEmptyErrorMessage[idx]=null" (click)="enableSaveButton();noOfKidsIfEmptyErrorMessage[idx]=null"
+                        (change)="enableSaveButton();noOfKidsIfEmptyErrorMessage[idx]=null">
+
+                    <div *ngIf="noOfKidsIfEmptyErrorMessage[idx]" class="field-error-txt ">
+                        {{noOfKidsIfEmptyErrorMessage[idx]}}
+                    </div>
+                    <div *ngIf="((noOfKids.errors && (noOfKids.dirty || noOfKids.touched)) && (!noOfKidsIfEmptyErrorMessage[idx]))" class="alert alert-danger">
+                        <div class="field-error animated fadeInRight" [hidden]="!noOfKids.errors.required">
+                            {{noOfKidsErrorMessage}}
+                        </div>
+                        <div class="field-error animated fadeInRight" [hidden]="!noOfKids.errors.pattern">
+                            {{noOfKidsInvalidNumberErrorMessage}}
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="footer-btn">
+                <button [disabled]="disableSaveButton" class="btn btn-green margin-r10 btn-width-110" (click)="saveModifiedPrograms()" *ngIf="programs">
+                    Save Programs
+                </button>
+                <button class="btn btn-width-110" (click)="cancel()">
+                    Cancel
+                </button>
+        </div>
+    </div>
+</section>

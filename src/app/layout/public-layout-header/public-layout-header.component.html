@@ -1,0 +1,33 @@
+<header class="top-link-header" *layout="'desktop'">
+  <div class="container">
+    <div class="top-links">
+      <span class="org-link">
+        <a href="https://www.awana.org/" target="_blank">
+          Back to Awana.org
+        </a>
+      </span>
+          <ul class="top-nav">
+              <li class="selected"><a class="active" routerLink="/login" title="My Awana">My Awana</a></li>
+              <li><a href="http://dev4.store.awana.org/" target="_blank" title="Awana Store">Awana Store</a></li>
+              <li><a href="#" title="Latest catalogs">Latest catalogs</a></li>
+              <li><a href="http://helpme.awana.org/" target="_blank" title="Help">Help</a></li>
+              <li><a href="#" title="live chat">live chat</a></li>
+              <li>
+                <a href="#nogo" class="flag-dropdown">
+                  <img src="assets/img/flag_us.png" alt="Flag" class="bor-radius">
+                  <span class="icon-icon_arrow_down dropdown-arrow"></span>
+                </a>
+              </li>
+          </ul>
+    </div>
+  </div>
+</header>
+
+<header class="mobile-header login-header"  *layout="'mobile'">
+  <a class="arrow-left" *ngIf="showBackButtonIcon" (click)="navigateBack()">
+		<span class="icon-previous"></span>
+	</a>
+  <a>
+    <img src="assets/img/awana_Logo_white.png" alt="MyAwana">
+  </a>
+</header>

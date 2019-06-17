@@ -1,0 +1,37 @@
+/*** -----------------------------------------
+
+		   CHURCH REMOVE CONNECTION
+
+----------------------------------------- ***/
+
+.remove-connection {
+	line-height: 22px;
+	margin: 3em 0;
+}
+
+.remove-connection .db-alert-message {
+	margin-bottom: 3em;
+}
+
+.remove-connection .church-adrs {
+	background: none;
+	display: flex;
+	padding: 1em;
+	align-items: center;
+}
+
+.remove-connection .church-icon {
+	text-align: center;
+	margin: 0 20px 0 10px;
+}
+
+.remove-connection .header {
+	font-size: 16px;
+	margin: 0px;
+	line-height: 28px;
+}
+
+.remove-connection address {
+	font-style: normal;
+}
+

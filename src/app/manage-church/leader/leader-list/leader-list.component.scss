@@ -1,0 +1,58 @@
+.cptr{
+    cursor: pointer;
+}
+.loadinggif{
+    z-index: 9999;
+    text-align: center;
+}
+.ellipsis{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100px;
+}
+.pro-img{
+    position:relative;
+    top:20px;
+}
+.bor-radius-profile{
+    border-radius: 100px;
+    height: 64px;
+    width: 64px;
+}
+.text-bold{
+    color: #4c4b49;
+}
+.elle{
+    display:inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 60ch;
+}
+
+.search-header {
+    display: block;
+}
+img.innerSpin {
+    position: absolute;
+    top: 25%;
+    left: 42%;
+}
+.approve-user-details
+{
+    position:relative;
+}
+
+.label-head-pending-list {
+    width: 55%;
+    display: inline-block !important;
+}
+
+.invitation-btn-pending-list {
+    float: right;
+    margin-top: 8px;
+}
+
+.block {
+    display: block;
+}

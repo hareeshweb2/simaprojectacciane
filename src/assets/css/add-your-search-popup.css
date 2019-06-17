@@ -1,0 +1,162 @@
+/*** -----------------------------------------
+
+            ADD YOUR SEARCH MODAL
+
+----------------------------------------- ***/
+
+.addsearch-modal .modal-content {
+    width: 55%;
+}
+
+
+.search-church {
+    margin: 0 0 10px 0;
+}
+
+.search-church .select-role-width {
+    display: inline-block;
+    min-width: 225px; 
+    margin: 8px 0;
+}
+
+.search-church .label-head {
+    font-family: 'AvenirLTStdRoman';
+    margin-bottom: 10px;
+    display: block;
+}
+
+.search-input {
+    height: 60px;
+    border: solid 1px #666666;
+    position: relative;
+}
+
+.search-input .text-field {
+    width: 100%;
+    box-sizing: border-box;
+    height: 60px;
+    border:0px;
+    padding-left: 20px;
+    padding-right: 50px;
+    color: #666666;
+}
+
+.search-input .icon-search {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-size: 22px;
+    color: #c2c2c2;
+    z-index: 2;
+}
+
+.search-church .form-group {
+    margin-bottom: 35px;
+}
+
+/*** Search Dropdown **/
+
+.search-input-dropdown {
+    border: solid 1px #666666;
+    color: #666666;
+    width: 100%;
+    position: absolute;
+    margin-left: -1px;
+    background: #fff;
+    z-index: 1;
+    display: none;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.search-input-dropdown > ul.row {
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+}
+
+.search-input-dropdown > ul.row:hover {
+    background: #fcfcfc;
+}
+
+.search-input-dropdown .church-icon .icon {
+    font-size: 38px;
+    margin-right: -12px;
+}
+
+.search-input-dropdown .church-icon {
+    width: 70px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.search-input-dropdown .church-head {
+    font-size: 14px;
+    font-family: 'AvenirLTStdRoman';
+    font-weight: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    letter-spacing: .4px;
+    margin: 5px 0;
+}
+
+.search-input-dropdown .church-adrs {
+    margin: 5px 0;
+    letter-spacing: .4px;
+    font-size: 11px;
+    font-weight: normal;
+}
+
+
+/*** Selected List **/
+
+.search-input-dropdown.selected {
+    top: -1px;
+    overflow: visible;
+}
+
+.search-input-dropdown.selected > ul.row li {
+    padding: 10px;
+}
+
+.search-input-dropdown.selected > ul.row {
+    cursor: text;
+}
+
+.search-input-dropdown.selected > ul.row:hover {
+    background: #fff;
+}
+
+.search-input-dropdown.selected .church-icon {
+    width: 60px;
+}
+
+.search-input-dropdown.selected .church-head,
+.search-input-dropdown.selected .church-adrs {
+    margin: 2px 0;
+}
+
+.search-input-dropdown.selected .church-icon .icon {
+    font-size: 26px;
+}
+
+
+/*** Thanks Message **/
+
+.search-church .thankyou-div {
+    padding: 0px;
+}
+
+.search-church .thanks-msg {
+    margin: 0px;
+}
+
+.search-church .thanks-msg {
+    padding: 15px 25px;
+    justify-content: left;
+}
+
+.search-church .thanks-msg .icon {
+    font-size: 32px;
+    width: 40px;
+}

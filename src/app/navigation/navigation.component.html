@@ -1,0 +1,378 @@
+<aside class="sidebar" *layout="'desktop'">
+  <div class="bor-boxshadow">
+    <h1 class="myawana-heading">
+      {{messages.my}}
+      <span>{{messages.awana}}</span>
+    </h1>
+    <div class="profile">
+      <ul class="profile-sec">
+        <li>
+          <span class="profile-img bor-radius" *ngIf="pName =='user'">
+            <img src="{{cProfile.profilePic}}" alt="Profile">
+          </span>
+          <div class="profile-img bor-radius" *ngIf="pName =='church'">
+              <div class="churh-circle-small">
+                  <span class="icon-icon_church icon"></span>
+              </div>
+          </div>
+        </li>
+        <li>
+          <h3 title="{{cProfile.name}}" class="heading ellepse">{{cProfile.name}}</h3>
+          <h5 class="sub-head text-muted" *ngIf="pName =='church'">
+             <span title="{{cProfile.street}}" class="elle" *ngIf="cProfile.street">{{cProfile.street}}</span><br>
+             <span *ngIf="cProfile.city" title="{{cProfile.state}} {{cProfile.postalcode}}" class="elle"> {{cProfile.city}},&nbsp;{{cProfile.state}}&nbsp;{{cProfile.postalcode}}</span>
+          </h5>
+        </li>
+      </ul>
+    </div>
+
+    <ul class="list">
+      <li routerLinkActive="active" *ngIf="((profile.currentProfile.selectedprofile == 'user') || (profile.currentProfile.selectedprofile == 'church' && userAuthorization && userAuthorization.viewOrderHistory == true))">
+        <a class="nav-hover" routerLink="/dashboard" routerLinkActive="active" (click)="navigationListClick('dashboard')">
+          <span class="icon-icon_dashboard2 icon"></span>
+          <span *ngIf="cProfile.profile">{{messages.my}}</span> &nbsp;{{messages.dashboard}}
+        </a>
+      </li>
+      <li routerLinkActive="active" *ngIf="((profile.currentProfile.selectedprofile == 'user') || (profile.currentProfile.selectedprofile == 'church' && userAuthorization && userAuthorization.viewOrderHistory == true))">
+        <a class="nav-hover" [ngClass]="{'active' : (route.url.split('/')[1] == 'order')}" (click)="navigationListClick('order')">
+          <span class="icon-icon_my_orders icon"></span>
+          <span *ngIf="cProfile.profile">{{messages.my}}</span> &nbsp;{{messages.orders}}
+          <span class="plus icon-add" *ngIf="currentElementClick != 'order'"></span>
+          <span class="plus icon-add" *ngIf="currentElementClick == 'order' && !show"></span>
+          <span class="minus icon-minus" *ngIf="currentElementClick == 'order' && show"></span>
+        </a>
+        <ul class="inner-list" *ngIf="currentElementClick == 'order' && show">
+          <li>
+            <a routerLink="/order/history" routerLinkActive="active">
+              <span class="symbol icon-caret-right"></span> {{messages.orderHistory}}
+            </a>
+            <!-- <a routerLink="/order/ship" routerLinkActive="active">
+              <span class="symbol"></span> Shipping &amp; Payment
+            </a>
+            <a routerLink="/order/report" routerLinkActive="active">
+              <span class="symbol"></span> Statement &amp; Reports
+            </a> -->
+          </li>
+        </ul>
+      </li>
+      <!-- <li>
+        <a routerLink="donation/history" routerLinkActive="active">
+          <span class="icon-icon_donations2 icon"></span>
+          My Donations
+          <span class="plus icon-add"></span>
+          <span class="minus icon-minus" style="display: none;"></span>
+        </a>
+        <ul class="inner-list">
+          <li>
+            <a routerLink="donation/history" routerLinkActive="active">
+              <span class="symbol"></span> Donations History
+            </a>
+            <a routerLink="donation/tax" routerLinkActive="active">
+              <span class="symbol"></span> Tax Receipts
+            </a>
+            <a routerLink="donation/payment" routerLinkActive="active">
+              <span class="symbol"></span> Payment Methods
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a routerLink="subscription/postal" routerLinkActive="active">
+          <span class="icon-icon_subscription icon"></span>
+          My Subscriptions
+          <span class="plus icon-add"></span>
+          <span class="minus icon-minus" style="display: none;"></span>
+        </a>
+        <ul class="inner-list">
+          <li>
+            <a routerLink="subscription/postal" routerLinkActive="active">
+              <span class="symbol"></span> Postal
+            </a>
+            <a routerLink="subscription/email" routerLinkActive="active">
+              <span class="symbol"></span> Email
+            </a>
+          </li>
+        </ul>
+      </li> -->
+      <li routerLinkActive="active" *ngIf="pName =='user'">
+        <a class="nav-hover" [ngClass]="{'active' : (route.url.split('/')[1] == 'profile')}" (click)="navigationListClick('profile')">
+          <span class="icon-icon_profile icon"></span>
+          {{messages.profileAndSettings}}
+          <span class="plus icon-add" *ngIf="currentElementClick != 'profile'"></span>
+          <span class="plus icon-add" *ngIf="currentElementClick == 'profile' && !show"></span>
+          <span class="minus icon-minus" *ngIf="currentElementClick == 'profile' && show"></span>
+        </a>
+        <ul class="inner-list" *ngIf="currentElementClick == 'profile' && show">
+          <li>
+            <a routerLink="/profile/detail" (click)="gotoprofile()" routerLinkActive="active">
+              <span class="symbol icon-caret-right"></span> {{messages.myProfile}}
+            </a>
+            <a routerLink="/profile/changepassword" routerLinkActive="active">
+              <span class="symbol icon-caret-right"></span> {{messages.changePassword}}
+            </a>
+            <a routerLink="/profile/addChurch" routerLinkActive="active">
+              <span class="symbol icon-caret-right"></span> {{messages.addYourChurch}}
+            </a>
+        </ul>
+        </li>
+
+        <li routerLinkActive="active" *ngIf="pName =='church'">
+          <a class="nav-hover" [ngClass]="{'active' : (route.url.split('/')[1] == 'church')}" (click)="navigationListClick('church')">
+            <span class="icon-icon_profile icon"></span>
+            {{messages.profileAndSettings}}
+            <span class="plus icon-add" *ngIf="currentElementClick != 'church'"></span>
+            <span class="plus icon-add" *ngIf="currentElementClick == 'church' && !show"></span>
+            <span class="minus icon-minus" *ngIf="currentElementClick == 'church' && show"></span>
+          </a>
+          <ul class="inner-list" *ngIf="currentElementClick == 'church' && show">
+            <li>
+              <a routerLink="/church/profile" routerLinkActive="active">
+                <span class="symbol icon-caret-right"></span> {{messages.churchProfile}}
+              </a>
+              <!-- <a routerLink="/profile/changepassword" routerLinkActive="active">
+                <span class="symbol"></span> Change Password
+              </a> -->
+            </li>
+          </ul>
+        </li>
+
+        <!--- Manage Church -->
+        <li routerLinkActive="active" *ngIf="pName =='church'">
+          <a class="nav-hover" [ngClass]="{'active' : (route.url.split('/')[1] == 'manage-church')}" (click)="navigationListClick('manage-church')">
+            <span class="icon-icon_church icon"></span>
+            {{messages.manageChurch}}
+            <span class="plus icon-add" *ngIf="currentElementClick != 'manage-church'"></span>
+            <span class="plus icon-add" *ngIf="currentElementClick == 'manage-church' && !show"></span>
+            <span class="minus icon-minus" *ngIf="currentElementClick == 'manage-church' && show"></span>
+          </a>
+          <ul class="inner-list" *ngIf="currentElementClick == 'manage-church' && show">
+            <li>
+              <a routerLink="/manage-church/programs" routerLinkActive="active">
+                <span class="symbol icon-caret-right"></span> {{messages.managePrograms}}
+              </a>
+            </li>
+            <li *ngIf="userAuthorization && userAuthorization.viewManageLeaders">
+              <a routerLink="/manage-church/leaders" routerLinkActive="active">
+                <span class="symbol icon-caret-right"></span> {{messages.manageLeaders}}
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li routerLinkActive="active">
+        <a class="nav-hover" routerLink="/help/support" routerLinkActive="active" (click)="navigationListClick('help')">
+          <span class="icon-discuss-issue icon"></span>
+          Help &amp; Support
+          <span class="plus icon-add" style="display:none;"></span>
+          <span class="minus icon-minus" style="display: none;"></span>
+        </a>
+        <!-- <ul class="inner-list">
+          <li>
+            <a routerLink="help/faq" routerLinkActive="active">
+              <span class="symbol"></span> FAQ
+            </a>
+            <a routerLink="help/contact" routerLinkActive="active">
+              <span class="symbol"></span> Contact Us
+            </a>
+          </li>
+        </ul> -->
+      </li>
+    </ul>
+
+  </div>
+</aside>
+<div *layout="'mobile'">
+  <div class="mobile-db-menu" style="display:block;">
+    <aside class="sidebar">
+      <div class="row">
+        <div class="col-10 sidebarmenu">
+          <h1 class="myawana-heading text-center">
+            {{messages.my}}
+            <span>{{messages.awana}}</span>
+          </h1>
+          <div class="profile">
+            <ul class="profile-sec" (click)="showProfileHeader()">
+              <li>
+                <span class="profile-img bor-radius">
+                  <img src="{{cProfile.profilePic}}" alt="Profile">
+                </span>
+              </li>
+              <li>
+                <h3 class="heading">{{cProfile.name}}</h3>
+                <h5 class="sub-head" *ngIf="cProfile.street">
+                  {{cProfile.street? cProfile.street:""}} 
+                </h5>
+                <h5 class="sub-head" *ngIf="cProfile.state || cProfile.city || cProfile.postalcode">
+                  {{cProfile.city? cProfile.city+', ':""}} {{cProfile.state? cProfile.state+' ':""}} {{cProfile.postalcode? cProfile.postalcode:""}}  
+                </h5> 
+              </li>
+            </ul>
+            <ul class="switch-profile" >
+              <li *ngIf="isCurrentChurch">
+                <a (click)="updateShowChurchProfile(true)" *ngIf="!showChurchOrProfile">
+                  <span>{{messages.switchProfile}} </span>
+                  <span class="arrow" >
+                    <span class="down-arrow icon-caret-down" ></span>
+                  </span>
+                </a>
+                <a (click)="updateShowChurchProfile(false)" *ngIf="showChurchOrProfile">
+                    <span>{{messages.switchProfile}} </span>
+                    <span class="arrow" >
+                      <span class="up-arrow icon-caret-up" ></span>
+                    </span>
+                </a>
+              </li>
+            </ul>
+
+            <!--- Church Profile -->
+            <div class="dropdown church-prof-drpdwn" style="display: block;" *ngIf="isCurrentChurch && showChurchOrProfile">
+              <div class="list" *ngIf="pName =='church'">
+                <ul class="profile-sec" (click)="selectUserProfile()">
+                  <li>
+                    <span class="profile-img bor-radius">
+                      <img src="{{profile.currentProfile.user.photoURL}}" alt="Profile">
+                      <img *ngIf="!profile.currentProfile.user.photoURL" src="assets/img/Default_Profile_Img.png" alt="Profile">
+                    </span>
+                  </li>
+                  <li>
+                    <h6 class="head text-green centered-align">{{userProfile.user.FirstName}} {{userProfile.user.LastName}}</h6>
+                    <!-- <span class="adrs-txt" *ngIf="userProfile.user.BillingStreet_1">{{userProfile.user.BillingStreet_1}}</span>
+                    <span class="adrs-txt" *ngIf="userProfile.user.BillingStreet_2">{{userProfile.user.BillingStreet_2}}</span>
+                    <span class="adrs-txt" *ngIf="userProfile.user.BillingStreet_3">{{userProfile.user.BillingStreet_3}}</span>
+                    <span class="adrs-txt" *ngIf="userProfile.user.BillingCity">{{userProfile.user.BillingCity}}</span>
+                    <span class="adrs-txt" *ngIf="userProfile.user.BillingPostalCode">{{userProfile.user.BillingPostalCode}}</span>
+                    <span class="adrs-txt" *ngIf="userProfile.user.BillingState">{{userProfile.user.BillingState}}</span> -->
+                  </li>
+                </ul>
+              </div>
+              <div (click)="selectChurch(item)" *ngFor="let item of dataSource">
+                <ul class="row list">
+                  <li class="col-2 icon-pos">
+                    <span class="icons icon-icon_church"></span>
+                  </li>
+                  <li class="col-10">
+                    <h6 class="head text-green">{{item.role}}</h6>
+                    <h6 class="head">{{item.name}}</h6>
+                    <address class="adrs-txt">
+                      {{item.billingStreet_1? item.billingStreet_1:""}}
+                      <br> {{item.billingCity?item.billingCity+', ':""}} {{item.billingState?item.billingState+' ':""}} {{item.billingPostalCode?item.billingPostalCode:""}}
+                    </address>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="no-church-message" *ngIf="!isCurrentChurch && showChurchOrProfile">
+              {{messages.noChurchFound}}
+            </div>
+          </div>
+
+          <!--- MyAccount Profile -->
+          <ul class="list" *ngIf="!showChurchOrProfile">
+            <li routerLinkActive="active" *ngIf="((profile.currentProfile.selectedprofile == 'user') || (profile.currentProfile.selectedprofile == 'church' && userAuthorization && userAuthorization.viewOrderHistory == true))">
+              <a routerLink="/dashboard" routerLinkActive="active selected-li" (click)="navigationListClick('dashboard'); closeSidebar()">
+                <span class="icon-icon_dashboard2 icon"></span>
+                <span *ngIf="cProfile.profile">{{messages.my}}</span> &nbsp; {{messages.dashboard}}
+              </a>
+            </li>
+            <li routerLinkActive="active" *ngIf="((profile.currentProfile.selectedprofile == 'user') || (profile.currentProfile.selectedprofile == 'church' && userAuthorization && userAuthorization.viewOrderHistory == true))">
+              <a [ngClass]="{'active' : (route.url.split('/')[1] == 'order')}" (click)="navigationListClick('order')">
+                <span class="icon-icon_my_orders icon"></span>
+                <span *ngIf="cProfile.profile">{{messages.my}}</span> &nbsp; {{messages.orders}}
+                <span class="plus icon-navigate_next" *ngIf="currentElementClick != 'order'"></span>
+                <span class="plus icon-navigate_next" *ngIf="currentElementClick == 'order' && !show"></span>
+                <span class="minus icon-keyboard_arrow_down" *ngIf="currentElementClick == 'order' && show"></span>
+              </a>
+              <ul class="inner-list" *ngIf="currentElementClick == 'order' && show">
+                <li>
+                  <a routerLink="/order/history" routerLinkActive="active" (click)="closeSidebar()">
+                    <span class="symbol icon-caret-right"></span> {{messages.orderHistory}}
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li routerLinkActive="active" *ngIf="pName =='user'">
+              <a [ngClass]="{'active' : (route.url.split('/')[1] == 'profile')}" (click)="navigationListClick('profile')">
+                <span class="icon-icon_profile icon"></span>
+                {{messages.profileAndSettings}}
+                <span class="plus icon-navigate_next" *ngIf="currentElementClick != 'profile'"></span>
+                <span class="plus icon-navigate_next" *ngIf="currentElementClick == 'profile' && !show"></span>
+                <span class="minus icon-keyboard_arrow_down" *ngIf="currentElementClick == 'profile' && show"></span>
+              </a>
+              <ul class="inner-list" *ngIf="currentElementClick == 'profile' && show">
+                <li>
+                  <a routerLink="/profile/detail" routerLinkActive="active" (click)="showProfileHead()">
+                    <span class="symbol icon-caret-right"></span> {{messages.myProfile}}
+                  </a>
+                  <a routerLink="/profile/changepassword" routerLinkActive="active" (click)="hideProfileHead()">
+                    <span class="symbol icon-caret-right"></span> {{messages.changePassword}}
+                  </a>
+                  <a routerLink="/profile/addChurch" routerLinkActive="active" (click)="hideProfileHead()">
+                    <span class="symbol icon-caret-right"></span> {{messages.addYourChurch}}
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li routerLinkActive="active" *ngIf="pName =='church'">
+              <a [ngClass]="{'active' : (route.url.split('/')[1] == 'church')}" (click)="navigationListClick('church')">
+                <span class="icon-icon_profile icon"></span>
+                {{messages.profileAndSettings}}
+                <span class="plus icon-navigate_next" *ngIf="currentElementClick != 'church'"></span>
+                <span class="plus icon-navigate_next" *ngIf="currentElementClick == 'church' && !show"></span>
+                <span class="minus icon-keyboard_arrow_down" *ngIf="currentElementClick == 'church' && show"></span>
+              </a>
+              <ul class="inner-list" *ngIf="currentElementClick == 'church' && show">
+                <li>
+                  <a routerLink="/church/profile" routerLinkActive="active" (click)="showProfileHead()">
+                    <span class="symbol icon-caret-right"></span> {{messages.churchProfile}}
+                  </a>
+                  <!-- <a routerLink="/profile/changepassword" routerLinkActive="active">
+                          <span class="symbol"></span> Change Password
+                        </a> -->
+                </li>
+              </ul>
+            </li>
+            <li routerLinkActive="active" *ngIf="pName =='church'">
+              <a [ngClass]="{'active' : (route.url.split('/')[1] == 'manage-church')}"  (click)="navigationListClick('manage-church')">
+                <span class="icon-icon_church icon"></span>
+                {{messages.manageChurch}}
+                <span class="plus icon-navigate_next" *ngIf="currentElementClick != 'manage-church'"></span>
+                <span class="plus icon-navigate_next" *ngIf="currentElementClick == 'manage-church' && !show"></span>
+                <span class="minus icon-keyboard_arrow_down" *ngIf="currentElementClick == 'manage-church' && show"></span>
+              </a>
+              <ul class="inner-list" *ngIf="currentElementClick == 'manage-church' && show">
+                <li>
+                  <a routerLink="/manage-church/programs" routerLinkActive="active" (click)="hideProfileHead()">
+                    <span class="symbol icon-caret-right"></span> {{messages.managePrograms}}
+                  </a>
+                </li>
+                <li *ngIf="userAuthorization && userAuthorization.viewManageLeaders">
+                  <a routerLink="/manage-church/leaders" routerLinkActive="active" (click)="hideProfileHead()">
+                    <span class="symbol icon-caret-right"></span> {{messages.manageLeaders}}
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a routerLink="/help/support" (click)="closeSidebar()">
+                <span class="icon-icon_discuss_issue icon"></span>
+                {{messages.helpAndSupport}}
+              </a>
+            </li>
+            <li>
+              <a (click)="logout()">
+                <span class="icon-icon_logout icon"></span>
+                {{messages.logOut}}
+              </a>
+            </li>
+          </ul>
+
+        </div>
+        <div class="col-2 close-icon">
+          <span class="icon-icon_close close" (click)="close()"></span>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+  <div class="db-menu-overlay"></div>
+
+</div>

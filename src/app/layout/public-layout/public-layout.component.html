@@ -1,0 +1,33 @@
+
+    <div class="desktop" *layout="'desktop'">
+            <alert></alert>
+        <!-- Header Directive Starts -->    
+        <app-public-layout-header ></app-public-layout-header>
+        <!-- Header Directive Ends -->
+        <!-- Router Outlet Starts -->
+        <section class="page">
+            <div class="container">
+                <router-outlet></router-outlet>
+            </div>
+        </section>
+        <!-- Router Outlet Ends -->
+        <!-- Footer Directive Starts -->
+        <app-layout-footer></app-layout-footer>
+        <!-- Footer Directive Ends -->
+    </div>
+    <div class="mobile" *layout="'mobile'">
+            <alert></alert>
+        <!-- Header Directive Starts -->  
+        <app-public-layout-header ></app-public-layout-header>
+        <!-- Header Directive Ends -->
+        <!-- Router Outlet Starts -->
+        <section>
+            <div class="container">
+                <router-outlet></router-outlet>
+            </div>
+        </section>
+        <!-- Router Outlet Ends -->
+        <!-- Footer Directive Starts -->
+        <app-layout-footer></app-layout-footer>
+        <!-- Footer Directive Ends -->
+    </div>

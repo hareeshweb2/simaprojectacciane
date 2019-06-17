@@ -1,0 +1,1474 @@
+/*** -----------------------------------------
+
+				HEADER
+
+----------------------------------------- ***/
+
+.container {
+	max-width: 1200px;
+	margin:0 auto;
+}
+
+.desktop {
+	display: block;
+	background: #FAFAFA;
+	position: relative;
+	min-height: 100%;
+}
+
+.mobile {
+	display: none;
+}
+
+
+/*** -----------------------------------------
+
+				TOP LINKS
+
+----------------------------------------- ***/
+
+.top-link-header {
+	background: #F4F0ED;
+	height: 36px;
+	padding: 0 10px;
+}
+
+.logo-header {
+	background: #fff;
+	padding: 8px 10px;
+	-webkit-box-shadow: 0 5px 14px 0 rgba(0,0,0,0.10);
+	-moz-box-shadow: 0 5px 14px 0 rgba(0,0,0,0.10);
+	box-shadow: 0 5px 14px 0 rgba(0,0,0,0.10);
+}
+
+.org-link {
+	margin: 0;
+}
+
+.top-nav li {
+	margin: 0 5px;
+}
+
+.top-nav li:last-child {
+	min-width: 50px;
+}
+
+.top-nav li:last-child a.flag-dropdown {
+	padding-right: 0px;
+}
+
+.org-link a,
+.top-nav a {
+	padding: 10px;
+	text-transform: uppercase;
+	text-align: center;
+	display: block;
+	font-size: 12px;
+	color: #3E3A36;
+	transition: all 0.3s ease-out;
+}
+
+.top-nav a {
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.top-nav a:before {
+	content: "";
+    position: absolute;
+    z-index: -1;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    background: #3CB495;
+    height: 2px;
+    -webkit-transition-property: left, right;
+    transition-property: left, right;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+    bottom: 1px;
+}
+
+.top-nav a:hover:before, 
+.top-nav a:focus:before, 
+.top-nav a:active:before {
+    left: 0;
+    right: 0;
+}
+
+.top-nav a.active::after {
+	content: "";
+	height: 2px;
+	background: #3CB495;
+	position: absolute;
+	right: 0;
+	bottom: 1px;
+	left: 0;
+}
+
+.top-nav a:hover,
+.top-nav a.active {
+	background: #fff;
+	position: relative;
+}
+
+.top-nav .flag-dropdown:hover {
+	background: none;
+}
+
+.top-nav a.flag-dropdown:before {
+	height: 0px;
+}
+
+.top-links,
+.top-nav,
+.main-nav {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+.top-links,
+.main-nav {
+	align-items: center;
+}
+
+
+/*** -----------------------------------------
+
+				MAIN NAV
+
+----------------------------------------- ***/
+
+.main-nav .logo-sec,
+.main-nav .profile-sec {
+	display: flex;
+	position: relative;
+	align-items: center;
+}
+
+.main-nav .logo-sec > li {
+	position: relative;
+}
+
+.main-nav .logo-sec li > a.logo {
+	margin: 0;
+	padding: 0;
+	top: 0px;
+}
+
+.main-nav .logo-sec li > a {
+	font-family: 'AvenirLTStdRoman';
+	color: #3E3A36;
+	font-size: 17px;
+	letter-spacing: .2px;
+	text-transform: uppercase;
+	margin: 0 45px;
+	position: relative;
+	display: block;
+	height: 50px;
+	line-height: 50px;
+	cursor: pointer;
+	padding: 0 10px;	
+}
+
+.main-nav .logo-sec li > a .church-name {
+	max-width: 22ch;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+	display: inline-block;
+	float: left;
+}
+
+.main-nav .logo-sec li a.aChurch .dropdown-arrow {
+	position: relative;
+	top: -2px;
+}
+
+.main-nav .logo-sec li a.active {
+	color: #47bfa6;
+}
+
+.main-nav .logo-sec li a.active::before {
+	content: "";
+	height: 2px;
+	width: 60px;
+	background: #3CB495;
+	position: absolute;
+	bottom: -9px;
+    left: 50%;
+    margin-left: -35px;
+}
+
+.main-nav .profile-sec {
+	justify-content: center;
+}
+
+.main-nav .profile-dropdown {
+	margin-left: 22px;
+}
+
+.main-nav .profile-dropdown .profile-img {
+	height: 45px;
+	width: 45px;
+	overflow: hidden;
+	display: inline-block;
+	float: left;
+}
+
+.main-nav .profile-dropdown .dropdown-arrow {
+	float: right;
+	margin-left: 0;
+    padding: 18px 8px;
+    margin-right: -8px;
+}
+
+.main-nav .profile-dropdown .profile-img img {
+	object-fit: cover;
+    height: 45px;
+    width: 45px;
+}
+
+.main-nav .profile-sec > li {
+	margin: 0 5px;
+}
+
+.main-nav .profile-sec li a {
+	display: block;
+	cursor: pointer;
+}
+
+.main-nav .profile-sec .icon-bell-o {
+	font-size: 32px;
+	color: #3CB495;
+	position: relative;
+	line-height: 50px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.main-nav .profile-sec li:hover .icon-bell-o {
+	animation: swing 1s linear infinite;
+}
+
+.main-nav .profile-sec .notification {
+	background: #F69D0B;
+	font-family: 'AvenirLTStdRoman';
+	color: #fff;
+	height: 20px;
+	width: 20px;
+	font-size: 12px;
+	font-weight: bold;
+	display: block;
+	text-align: center;
+	line-height: 20px;
+	position: absolute;
+	top: 2px;
+	margin-left: 12px;
+}
+
+.main-nav .profile-sec .dropdown {
+	margin-top: -8px;
+	right: -29px;
+	font-size: 12px;
+}
+
+.main-nav .profile-sec .dropdown:after, 
+.main-nav .profile-sec .dropdown:before {
+    right: 28px;
+    left: auto;
+}
+
+
+.main-nav .profile-sec .dropdown-links .icon-icon_logout {
+	font-size: 14px;
+}
+
+
+/*** -----------------------------------------
+
+			HEADER NOTIFICATION POPUP
+
+----------------------------------------- ***/
+
+.notification {
+	position: relative;
+}
+
+.notify-popup {
+	left: auto;
+	right: 0;
+	min-width: 375px;
+	max-width: 375px;
+	margin-top: 58px;
+	margin-right: 60px;
+	box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.08);
+}
+
+.notify-popup:after, 
+.notify-popup:before {
+	left: auto;
+	right: 50%;
+	margin-right: -145px;
+}
+
+.notify-popup:after {
+    border-width: 11px;
+    margin-top: -21px;
+}
+
+.notify-popup:before {
+    border-width: 11px;
+    margin-top: -22px;
+}
+
+.notify-popup .list {
+	display: table;
+	transition: all 0.5s ease-out;
+	width: 100%;
+}
+
+.notify-popup .list:first-child {
+	border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
+
+.notify-popup .list:hover {
+	background-color: #fafafa;
+}
+
+.notify-popup .list li {
+	display: table-cell;
+	vertical-align: top;
+	padding: 10px;
+}
+
+.notify-popup .list li.icon-column {
+	padding-right: 5px;
+    padding-left: 15px;
+}
+
+.notify-popup .list .total-items {
+	font-family: 'AvenirLTStdRoman';
+    color: #47bfa6;
+    display: block;
+    font-size: 14px;
+}
+
+.notify-popup .list .notify-para-txt {
+	font-size: 12px;
+	margin: 2px 0 6px 0;
+    line-height: 18px;
+}
+
+.notify-popup .list .notify-date-txt {
+	font-size: 11px;
+}
+
+.notify-popup .list .icons {
+	font-size: 35px;
+}
+
+.notify-popup .btn-row a {
+	background-color: #f5f5f5;
+	text-align: center;
+	padding: 10px;
+	display: block;
+	color: #47bfa6;
+	font-size: 14px;
+	transition: .3s;
+	border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.notify-popup .btn-row a:hover {
+	background-color: #47bfa6;
+	color: #fff;
+}
+
+
+/*** -----------------------------------------
+
+			HEADER DROPDOWN
+
+----------------------------------------- ***/
+
+.main-nav .logo-sec .dropdown {
+	right: 50px;
+}
+
+.main-nav .logo-sec .dropdown:after,
+.main-nav .logo-sec .dropdown:before {
+	right: 50px;
+	left: inherit;
+}
+
+.main-nav .logo-sec .dropdown {
+	border: 1px solid #e6e6e6;
+}
+
+.main-nav .logo-sec .dropdown .list {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.main-nav .logo-sec .dropdown a {
+	display: block;
+	transition: all 0.3s ease-out;
+}
+
+.main-nav .logo-sec .dropdown a:first-child {
+	border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom: 0px;
+}
+
+.main-nav .logo-sec .dropdown a:last-child {
+	border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-bottom: 0px;
+}
+
+.main-nav .logo-sec .dropdown a:hover {
+	background: #fcfcfc;
+}
+
+.main-nav .logo-sec .dropdown > a:last-child .list {
+    border-bottom: 0px;
+}
+
+.main-nav .logo-sec .dropdown .icon-pos {
+    width: 80px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.main-nav .logo-sec .dropdown .icon-pos .icons {
+    font-size: 55px;
+    color: #6e6e6e;
+}
+
+.main-nav .logo-sec .dropdown .icon-pos .icon-icon_building {
+    font-size: 50px;
+}
+
+.main-nav .logo-sec .dropdown .head {
+    margin: 0 0 2px 0;
+    font-family: 'AvenirLTStdRoman';
+    font-size: 14px;
+    color: #666666;
+    font-weight: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 20ch;
+}
+
+.main-nav .logo-sec .dropdown .adrs-txt {
+    font-size: 11px;
+    color: #666666;
+    font-style: normal;
+    line-height: 20px;
+}
+
+
+/*** -----------------------------------------
+
+				CONTENT
+
+----------------------------------------- ***/
+
+.page-content {
+	padding: 60px 0;
+	height: 100%;
+}
+
+/*** -----------------------------------------
+
+				SIDEBAR
+
+----------------------------------------- ***/
+
+
+
+
+.myawana-heading {
+	font-family: 'AvenirLTStdLight';
+	font-size: 28px;
+	color: #47bfa6;
+	font-weight: normal;
+	margin: 24px 22px;
+	text-transform: uppercase;
+}
+
+.myawana-heading span {
+	font-family: 'AvenirLTStdRoman';
+	color: #c1c1c1;
+	font-weight: bold;
+}
+
+.sidebar .list {
+	font-size: 16px;
+	letter-spacing: .3px;
+	border-top: 2px solid #ededed;
+	text-transform: uppercase;
+}
+
+.sidebar .list a {
+	font-family: 'AvenirLTStdRoman';
+	color: #535353;
+	border-bottom: 1px solid #e5e5e5;
+	padding: 18px 20px;
+	display: flex;
+	position: relative;
+	transition: all 0.5s ease-out;
+	align-items: center;
+}
+
+.sidebar .list a:hover {
+	color: #47bfa6;
+	background: #fafafa;
+}
+
+/*.sidebar .list a:hover::after {
+	content: "";
+	height: 100%;
+	width: 4px;
+	background: #3CB495;
+	position: absolute;
+    top: 0;
+    left: 0;
+    transition: .3s;
+   	-webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    z-index: 100;
+    -webkit-animation-name: bounce;
+    animation-name: bounce;
+}*/
+
+.sidebar .list a .icon {
+	font-size: 22px;
+	vertical-align: middle;
+	width: 35px;
+}
+
+.sidebar .list a .icon.icon-icon_donations2,
+.sidebar .list a .icon-icon_subscription {
+	font-size: 17px;
+}
+
+.sidebar .list a .icon.icon-icon_dashboard2 {
+	font-size: 20px;
+}
+
+.sidebar .list a .plus,
+.sidebar .list a .minus {
+	color: #ebebeb;
+    font-size: 30px;
+    line-height: 20px;
+    position: absolute;
+    right: 8px;
+}
+
+.sidebar .list a.active,
+.sidebar .list a.active .icon,
+.sidebar .list .inner-list a.active,
+.sidebar .list .inner-list a.active .symbol{
+	color: #47bfa6;
+}
+
+.desktop .sidebar .list a.active::after {
+	content: "";
+	height: 100%;
+	width: 4px;
+	background: #3CB495;
+	position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.desktop .sidebar .list a.active:hover {
+	background-color: #fff;
+}
+
+.desktop .sidebar .list a.active:hover::after {
+	-webkit-animation-duration: 0s;
+    animation-duration: 0s;
+    z-index: 100;
+    -webkit-animation-name: fadeInRight;
+    animation-name: fadeInRight;
+}
+
+.sidebar .list .inner-list {
+	text-transform: capitalize;
+	background: #fcfcfc;
+	padding: 12px 0px;
+	border-bottom: 1px solid #e5e5e5;
+	-webkit-box-shadow: inset 0 2px 9px -1px rgba(0,0,0,0.10);
+	-moz-box-shadow: inset 0 2px 9px -1px rgba(0,0,0,0.10);
+	box-shadow: inset 0 2px 9px -1px rgba(0,0,0,0.10);
+}
+
+.sidebar .list .inner-list a:hover::after {
+	content: "";
+	height: 100%;
+	width: 0px;
+	background: #3CB495;
+	position: absolute;
+    top: 0;
+    left: 0;
+    transition: .3s;
+}
+
+.sidebar .list .inner-list a {
+	border-bottom: 0px;
+	padding: 12px 14px 12px 32px;
+	align-items: flex-start;
+}
+
+.sidebar .list .inner-list li a:hover {
+	color: #3CB495;
+	background: none;
+	padding-left: 36px;
+}
+
+.sidebar .list .inner-list a.active::after {
+	content: "";
+	height: 0px;
+	width: 0px;
+}
+
+.sidebar .list .inner-list li a.active:hover {
+	background-color: transparent;
+	padding-left: 32px;	
+}
+
+.sidebar .list .inner-list a .symbol {
+	margin-right: 18px;
+	transition: all 0.3s ease-out;
+	margin-top: 1px;
+}
+
+.sidebar .list .inner-list a:hover .symbol {
+	transition: all 0.3s ease-out;
+	color: #3CB495;
+}
+
+
+
+
+/*** ------------------------------------
+
+DASHBOARD -- MY ORDERS
+
+------------------------------------ ***/
+
+
+.myorders-sec {
+	padding: 1.3em;
+}
+
+.myorders-sec .list {
+	position: relative;
+	border-bottom: 1px solid #f2f2f2;
+	align-items: center;
+	min-height: 75px;
+	transition: all 0.5s ease-out;
+}
+
+.desktop .myorders-sec .list:hover {
+	background: #fafafa;
+}
+
+.desktop .myorders-sec .list.border-no {
+	align-items: flex-end;
+	text-transform: uppercase;
+	min-height: 40px;
+}
+
+.myorders-sec .list.border-no:hover {
+	background: none;
+}
+
+.myorders-sec > .list > li,
+.order-expand > .list > li {
+	/*padding: .9em .5em;*/
+}
+
+.myorders-sec > .heading,
+.myorders-sec .filter > .heading {
+	color: #3C3D43;
+	font-size: 22px;
+	margin: 0 0 15px 0;
+	font-family: 'AvenirLTStdRoman';
+	font-weight: normal;
+}
+
+.section-heading {
+	color: #3C3D43;
+    font-size: 22px;
+    margin: 0;
+    font-family: 'AvenirLTStdRoman';
+    font-weight: normal;
+   padding: 0.8em;
+}
+
+.myorders-sec > .heading > .icon,
+.section-heading > .icon {
+	font-size: 30px;
+	margin-right: 6px;
+}
+
+.myorders-sec .order-id {
+	font-family: 'AvenirLTStdRoman';
+	color: #4F4A46;
+	display: block;
+	margin-bottom: 2px;
+	font-size: 16px;
+}
+
+.myorders-sec .list li.amount-txt {
+	/*width: 120px;*/
+}
+
+.myorders-sec .total-items {
+	font-family: 'AvenirLTStdRoman';
+	color: #47bfa6;
+	display: block;
+	font-size: 16px;
+	/*text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;*/
+}
+
+.myorders-sec .list li.icon-column {
+	width: 70px;
+	padding-left: 15px;
+}
+
+.myorders-sec .text-pad {
+	font-size: 14px;
+	margin-top: 20px;
+}
+
+.myorders-sec .status-txt label {
+	font-size: 14px;
+}
+
+.myorders-sec .list .notify-para-txt {
+	margin: 5px 0 8px 0;
+	line-height: 22px;
+}
+
+.myorders-sec .list .notify-date-txt {
+	font-size: 12px;
+}
+
+.myorders-sec .list.notify-recent-msg {
+	background-color: #FBFAF9;
+}
+
+.myorders-sec .icons {
+	display: block;
+	font-size: 30px;
+	color: #666563;
+	margin: 3px 0;
+}
+
+.myorders-sec .icon-icon_my_orders {
+	font-size: 30px;
+}
+
+.myorders-sec .icon-icon_my_donations {
+	font-size: 40px;
+}
+
+.myorders-sec .icon-icon_my_donations {
+	font-size: 40px;
+}
+
+.myorders-sec .icon-icon_calendar_heart {
+	/*font-size: 30px;*/
+}
+
+.myorders-sec .icon-icon_shipped {
+	font-size: 20px;
+}
+
+.myorders-sec .icon-icon_recurring {
+	font-size: 32px;
+	color: #47BFA6;
+}
+
+.myorders-sec .icon-icon_action_dots {
+	font-size: 6px;
+	color: #b5b4b2;
+}
+
+.myorders-sec .icon-icon_delivered {
+	color: #8fa479;
+}
+
+.myorders-sec .icon-icon_onetime {
+	color: #d7d7d7;
+	font-size: 30px;
+}
+
+.myorders-sec .icon-icon_notification {
+	font-size: 40px;
+}
+
+.myorders-sec .plus,
+.myorders-sec .minus {
+	color: #ebebeb;
+    font-size: 50px;
+}
+
+.myorders-sec .list.active {
+	background: #fbfaf8;
+}
+
+.myorders-sec .list.active::before {
+	content: "";
+	height: 100%;
+	width: 4px;
+	background: #3CB495;
+	position: absolute;
+    top: 0;
+    left: 0;
+    display: table-cell;
+}
+
+
+/** Order Expand **/
+
+.order-expand {
+	background: #fcfcfc;
+	border: 1px #f1f1f1;
+	border-style: none solid solid solid;
+}
+
+.order-expand .list {
+	border-bottom: 0px;
+	position: relative;
+	align-items: center;
+}
+
+.order-expand .list .icons {
+	font-size: 22px;
+}
+
+.order-expand .list:before {
+	content: "";
+	height: 1px;
+	background: #f2f2f2;
+	position: absolute;
+    left: 1em;
+    right: 1em;
+    bottom: 0;
+}
+
+.order-expand .list:last-child:before {
+	height: 0px;
+}
+
+
+/** Donation Dropdown **/
+
+.donate-dropdown {
+	top: inherit;
+	right: 0;
+	margin-top: 15px;
+	min-width: 230px;
+}
+
+.donate-dropdown.donate-dropdown li {
+	padding: 0px;
+}
+
+.donate-dropdown:after,
+.donate-dropdown:before {
+	right: 25px;
+	left: inherit;
+}
+
+
+/*** Mange Programe Dropdown **/
+
+.meeting-day-dropdown {
+	min-width: 160px;
+	border-color: #999999;
+}
+
+.no-of-kids-field {
+	width: 80px;
+	border-color: #999999;
+}
+
+.meeting-day-txt {
+	display: block;
+}
+
+
+/*** -----------------------------------------
+
+		DASHBOARD OVERVIRE NOTIFICATION
+
+----------------------------------------- ***/
+
+.db-overview-notify {
+	margin: 0;
+}
+
+.db-overview-notify li {
+	background-color: #fff;
+	margin: 0 1.4em 1.4em 0;
+	width: calc(7.2222222222%*4);
+	padding: .8em;
+	-webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.08);
+    -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.08);
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.08);
+}
+
+.desktop .db-overview-notify li:nth-child(3n) {
+	margin-right: 0;
+}
+
+.db-notify-box {
+    display: table;
+}
+
+.db-notify-box .icon,
+.db-notify-box .para-txt {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.db-notify-box .icon {
+    background-color: #47BFA6;
+    color: #fff;
+    text-align: center;
+    width: 70px;
+    height: 70px;
+    position: relative;
+    font-size: 2.4em;
+    line-height: 70px;
+}
+
+.db-notify-box .icon:before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right:0;
+	bottom: 0;
+}
+
+.db-notify-box .icon.icon-icon_donations2,
+.db-notify-box .icon-icon_subscription {
+	font-size: 1.8em;
+}
+
+.db-notify-box .para-txt {
+    padding: 6px 12px 0 16px;
+}
+
+.db-notify-box .para-txt .digit-txt {
+	font-size: 2.5em;
+	line-height: 1em;
+	display: block;
+	font-weight: bold;
+}
+
+.db-notify-box .para-txt .notify-txt {
+	font-size: 16px;
+	display: block;
+}
+
+
+
+
+
+
+    
+
+/*** -----------------------------------------
+
+DASHBOARD -- SIDEBAR RIGHT -- MY SUBSCRIBTION
+
+----------------------------------------- ***/
+
+.rec-subscrib {
+	position: relative;
+	height: 100%;
+}
+
+.rec-subscrib .heading {
+	font-family: 'AvenirLTStdRoman';
+	font-size: 18px;
+	font-weight: normal;
+	color: #3C3D43;
+	margin-top: 0;
+}
+
+.rec-subscrib .sub-head {
+	font-family: 'AvenirLTStdRoman';
+	font-size: 16px;
+	font-weight: normal;
+	color: #898989;
+}
+
+.rec-subscrib .list {
+	font-size: 14px;
+	margin-bottom: 21px;
+}
+
+.rec-subscrib .icon-icon_action_dots {
+	font-size: 6px;
+	color: #b5b4b2;
+}
+
+
+
+/*** ------------------------------------
+
+DASHBOARD -- SIDEBAR RIGHT -- PROFILE 
+
+------------------------------------ ***/
+
+.profile {
+	position: relative;
+	height: 100%;
+	border-top: 1px solid #e5e5e5;
+}
+
+/*** Profile Image **/
+
+.profile .profile-sec {
+	padding: 1.2em 1.2em;
+	display: flex;
+	align-items: center;
+}
+
+.profile .profile-sec .profile-img {
+	height: 70px;
+    width: 70px;
+    overflow: hidden;
+    display: flex;
+    margin-right: 15px;
+    align-items: center;
+}
+
+.profile .profile-sec .profile-img img {
+	object-fit: cover;
+	height: 70px;
+    width: 70px;
+}
+
+.profile .profile-sec .heading {
+	font-size: 16px;
+	color: #4F4A46;
+	font-weight: normal;
+	font-family: 'AvenirLTStdRoman';
+	margin: 0;
+	max-width: 18ch;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.profile .profile-sec .sub-head {
+	font-size: 12px;
+	font-weight: normal;
+	font-family: 'AvenirLTStdRoman';
+	margin: 4px 0 0 ;
+}
+
+.profile .profile-sec .sub-head a {
+	color: #47bfa6;
+}
+
+.profile .profile-sec .sub-head a .dropdown-arrow {
+	margin-left: 4px;
+}
+
+
+
+/*** Church Profile **/
+
+.profile .adrs-txt {
+    font-size: 12px;
+    color: #4f4a46;
+    font-style: normal;
+    line-height: 18px;
+}
+
+
+/** Links **/
+
+.profile .list a {
+	font-family: 'AvenirLTStdRoman';
+	color: #4F4A46;
+	font-size: 16px;
+	border-bottom: 1px solid #e5e5e5;
+    padding: 10px 20px;
+    display: block;
+    position: relative;
+}
+
+.profile .list a .dropdown-arrow {
+	vertical-align: middle;
+}
+
+/** Child Search **/
+
+.profile .child-reach {
+	padding: 41px 22px;
+	border-top: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+	position: relative;
+}
+
+.profile .count {
+	font-size: 34px;
+	color: #3CB495;
+	margin: 0px;
+}
+.child-reach .child-icon {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.child-reach .child-icon span {
+	display: inline-block;
+}
+
+.child-reach .child-icon .icon-icon_children {
+	font-size: 35px;
+	color: #3E3A36;
+	margin-right: 5px;
+}
+
+.child-reach .child-icon .label-text {
+	color: #4F4A46;
+	font-size: 16px;
+	line-height: 20px;
+}
+
+
+/** Slider **/
+
+.profile .slider {
+	position: relative;
+}
+
+.profile .slider .processing,
+.profile .slider .disabled {
+	height: 4px;
+	display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.profile .slider .processing {
+	background: #3CB495;
+	z-index: 1;
+	width: 90%;
+}
+
+.profile .slider .disabled {
+	background: #d8d8d8;
+}
+
+
+/** MyRole **/
+
+.profile .myrole {
+	font-size: 14px;
+	border-top: 1px solid #e5e5e5;
+}
+
+.profile .myrole ul {
+	margin-bottom: 15px;
+}
+
+.profile .myrole ul li {
+	padding: 0 1em;
+}
+
+.profile .myrole .heading {
+	font-family: 'AvenirLTStdRoman';
+	padding: 1em;
+	font-size: 16px;
+	font-weight: normal;
+	margin: 0px;
+	color: #4F4A46;
+}    
+
+/*** Articles and NewsLetters **/
+
+.art-news-sec {
+	margin-left: -1em;
+	margin-right: -1em;
+}
+
+.art-news-sec .heading {
+	font-family: 'AvenirLTStdRoman';
+	font-size: 22px;
+	font-weight: normal;
+	color: #3C3D43;
+	margin: 50px 0 10px 20px;
+}
+
+.artnews-row {
+	display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.artnews-row li {
+	float: left;
+    display: -webkit-flex; 
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.artnews-row li > .card {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+
+/*** -----------------------------------------
+
+				FOOTER
+
+----------------------------------------- ***/
+
+.footer {
+	background: #3C3D43;
+	font-size: 14px;
+	color: #818184;
+	padding: 1em 0;
+	position: absolute;
+	width: 100%;
+	top: 100%;
+}
+
+.footer-signup {
+	position: relative;
+	margin-bottom: 20px;
+}
+
+.footer-signup .btn-green {
+	width: 160px;
+	height: 40px;
+	position: absolute;
+	right: 0;
+	margin: 6px;
+	font-size: 16px;
+}
+
+.footer-signup .text-field {
+	background: #6a6b6f;
+	color: #92939b;
+	font-size: 28px;
+	border: 0px;
+	height: 52px;
+	width: 100%;
+	padding: 8px 20px;
+	box-sizing: border-box;
+}
+
+.footer-links {
+	align-items: center;
+}
+
+.foot-list-links {
+	margin: 0 0 1.5em 0;  
+}
+
+.foot-list-links,
+.foot-botlinks {
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 50em;
+    float: right;
+    text-align: left;
+}
+
+.foot-list-links a {
+	font-family: 'AvenirLTStdLight';
+	font-size: 14px;
+	color: #FFFFFF;
+}
+
+.foot-list-links a:hover {
+	opacity: .8;
+}
+
+.foot-botlinks a {
+	color: #818184;
+	font-size: .9em;
+}
+
+.foot-botlinks a:hover {
+	opacity: .8;
+}
+
+.foot-find-awana {
+	position: relative;
+}
+
+.foot-find-awana li:first-child {
+	margin-bottom: 35px;
+}
+
+.foot-find-awana .label-txt {
+	font-family: 'AvenirLTStdLight';
+	font-size: 18px;
+	color: #FFFFFF;
+	margin-bottom: 10px;
+	display: block;
+	line-height: 20px;
+}
+
+.foot-find-awana .icon {
+	position: absolute;
+	right: 0;
+	margin: 10px;
+	color: #fff;
+	font-size: 11px;
+}
+
+.foot-find-awana .text-field {
+	background: #56565B;
+	color: #92939b;
+	font-size: 16px;
+	border: 0px;
+	height: 32px;
+	width: 100%;
+	padding: 8px 20px 8px 14px;
+	box-sizing: border-box;
+}
+
+.foot-find-awana .phone-no {
+	font-size: 14px;
+	color: #FFFFFF;
+	font-family: 'AvenirLTStdRoman';
+	font-weight: bold;
+	margin: 0;
+}
+
+.footer-signup ::-webkit-input-placeholder,
+.foot-find-awana ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #92939b;
+}
+.footer-signup ::-moz-placeholder,
+.foot-find-awana ::-moz-placeholder { /* Firefox 19+ */
+  color: #92939b;
+}
+.footer-signup :-ms-input-placeholder,
+.foot-find-awana :-ms-input-placeholder { /* IE 10+ */
+  color: #92939b;
+}
+.footer-signup :-moz-placeholder,
+.foot-find-awana :-moz-placeholder { /* Firefox 18- */
+  color: #92939b;
+}
+
+.footer-signup::placeholder,
+.foot-find-awana::placeholder  {
+	color: #92939b;
+}
+
+.foot-logo {
+	margin-bottom: .8em;
+}
+
+.foot-logo .foot-logo-img {
+	margin-right: 20px;
+}
+
+.foot-social {
+	display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    max-width: 205px;
+}
+
+.foot-social .icons {
+	font-size: 24px;
+	color: #8f979d;
+}
+
+
+/*** -----------------------------------------
+
+			404 ERROR PAGE
+
+----------------------------------------- ***/
+
+.error-page {
+	background: #FAFAFA;
+	padding: 3.5em 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100%;
+    position: relative;
+}
+
+.error-page .page-content {
+	max-width: 50em;
+	text-align: center;
+	margin: 0 auto;
+	color: #626262;
+	padding: 0px;
+}
+
+.error-page .error-head {
+	font-size: 2.8em;
+	line-height: 1.8em;
+}
+
+.error-page .error-head-big {
+	font-size: 3.5em;
+	line-height: 1.8em;
+}
+
+.error-page .error-sub-head {
+	font-family: 'AvenirLTStdRoman';
+	font-size: 2.2em;
+	font-weight: normal;
+	margin: -.8em 0 1em 0;
+}
+
+.error-page .para-txt {
+	font-family: 'AvenirLTStdRoman';
+	font-size: 16px;
+	line-height: 35px;
+	padding: 0 4.5em;
+}
+
+.error-page .error-icon {
+	font-size: 290px;
+	color: #47BFA6;
+	display: inline-block;
+	margin: 10px 0;
+}
+

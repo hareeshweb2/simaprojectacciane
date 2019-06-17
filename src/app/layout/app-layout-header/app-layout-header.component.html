@@ -1,0 +1,252 @@
+<header class="top-link-header" *layout="'desktop'">
+  <div class="container">
+    <div class="top-links">
+      <span class="org-link">
+        <a href="https://www.awana.org/" target="_blank">
+          Back to Awana.org
+        </a>
+      </span>
+      <ul class="top-nav">
+        <li class="selected">
+          <a class="active" routerLink="/dashboard" title="My Awana">My Awana</a>
+        </li>
+        <li>
+          <a href="{{awanaStore}}" target="_blank" title="Awana Store">Awana Store</a>
+        </li>
+        <li>
+          <a href="#" title="Latest catalogs">Latest catalogs</a>
+        </li>
+        <li>
+          <a href="http://helpme.awana.org/" target="_blank" title="Help">Help</a>
+        </li>
+        <li>
+          <a href="#" title="live chat">live chat</a>
+        </li>
+        <li>
+          <a class="flag-dropdown">
+            <img src="assets/img/flag_us.png" alt="Flag" class="bor-radius">
+            <span class="icon-icon_arrow_down dropdown-arrow"></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+<header class="logo-header" *layout="'desktop'">
+  <div class="container">
+    <div class="main-nav">
+      <ul class="logo-sec">
+        <li>
+          <a class="logo">
+            <img src="assets/img/awana_Logo.png" alt="Awana Logo">
+          </a>
+        </li>
+        <li>
+          <a class='pointer' title="My Account" (click)="selectUserProfile()" [ngClass]="{'active': activeTab=='MyAccount'}">My Account</a>
+        </li>
+        <li *ngIf="isCurrentChurch">
+          <a style="cursor:default" title="{{churchTitle}}" (click)="myChurchProfile=!myChurchProfile;" [ngClass]="{'active': activeTab=='MyChurch' && churchTitle!=='My Church'}"
+            class="aChurch">
+            <label class="church-name">
+              <span class="text-ellipsis church-txt">{{churchTitle}}</span>
+            </label>
+            <span class="icon-icon_arrow_down dropdown-arrow icn_churh"></span>
+          </a>
+          <div class="dropdown animated fadeInDown" *ngIf="myChurchProfile==true">
+            <div class="dropdown-scroll">
+              <a *ngFor="let item of dataSource">
+                <ul class="row list" (click)="selectChurch(item);activeTab='MyChurch'">
+                  <li class="col-2 icon-pos">
+                    <span class="icons icon-icon_church"></span>
+                    <!-- <span class="icons icon-icon_building" *ngIf="item.Awana_Role__c=='Club Leader'"></span> -->
+                  </li>
+                  <li class="col-10 church-dropdown-letter">
+                    <h6 class="head text-green pointer">{{item.role}}</h6>
+                    <h6 class="head pointer" title="{{item.name}}">{{item.name}}</h6>
+                    <address class="adrs-txt pointer">
+                      <div *ngIf="item.billingStreet_1">{{item.billingStreet_1}}</div>
+                      <div>
+                        <span *ngIf="item.billingCity">{{item.billingCity}}, </span>
+                        <span *ngIf="item.billingState" >{{item.billingState}}</span>
+                        <span *ngIf="item.billingPostalCode">{{item.billingPostalCode}}</span>
+                      </div>
+                    </address>
+                  </li>
+                </ul>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <ul class="profile-sec">
+        <li>
+          <span class="icon-bell-o" (click)="showNotification()">
+            <span class="notification bor-radius" *ngIf="showNotificationCount">{{records.length}}</span>
+          </span>
+          <div class="tooltip notify-popup" *ngIf="showHeaderNotification">
+            <ul class="list notify-recent-msg" *ngFor="let notification of records| slice:0:5; let i = index;" (click)="goToParticularPage(notification)" [ngClass]="{'addReadStyles':notification.read=='true'}">
+              <li class="icon-column text-center">
+                <span class="icons icon-icon_notification"></span>
+              </li>
+              <li>
+                <label class="total-items">{{notification.Heading}}</label>
+                <p class="notify-para-txt">
+                  {{notification.Description}}
+                </p>
+                <div class="text-muted notify-date-txt">
+                  {{notification.Date}}
+                </div>
+              </li>
+            </ul>
+            <div class="btn-row">
+              <a (click)="goToNotification()">
+                View All Notifications
+              </a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a (click)="showProfile()" class="profile-dropdown">
+            <span class="profile-img bor-radius">
+              <img src="{{profilePic}}" alt="Profile:Logout" class="img-profile">
+            </span>
+            <span class="icon-icon_arrow_down dropdown-arrow"></span>
+          </a>
+          <div class="dropdown small-dropdown animated fadeInDown" *ngIf="showProfileDropdown">
+            <ul class="dropdown-links">
+              <li>
+                <a routerLink="/profile" (click)="refreshAccountProfile()">
+                  <span class="icon icon-icon_user"></span> MY PROFILE
+                </a>
+              </li>
+              <li>
+                <a (click)="logout()" style="cursor: pointer;">
+                  <span class="icon icon-icon_logout"></span> LOG OUT
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<header *layout="'mobile'">
+  <div *ngIf="!common.showHeaderProfile" class="mobile-header">
+    <div *ngIf="!common.backHeader" class="notify-header">
+      <div class="logo-sec">
+        <a class="icon-nav" (click)="showSidebar()">
+          <span class="icons icon-navicon"></span>
+        </a>
+        <a>
+          <img src="assets/img/awana_Logo_white.png" alt="MyAwana">
+        </a>
+      </div>
+      <div class="search-sec">
+        <!-- <span class="icons icon-search margin-r15"></span> -->
+        <span class="icons notify icon-bell-o" (click)="showNotification()">
+          <span class="bubble bor-radius" *ngIf="showNotificationCount">{{records.length}}</span>
+        </span>
+      </div>
+      <div class="tooltip notify-popup" *ngIf="showHeaderNotification">
+        <ul class="list notify-recent-msg" *ngFor="let notification of records| slice:0:5; let i = index;" (click)="goToParticularPage(notification)" [ngClass]="{'addReadStyles':notification.read=='true'}">
+            <li class="icon-column text-center">
+              <span class="icons icon-icon_notification"></span>
+            </li>
+            <li>
+              <label class="total-items">{{notification.Heading}}</label>
+              <p class="notify-para-txt">
+                {{notification.Description}}
+              </p>
+              <div class="text-muted notify-date-txt">
+                {{notification.Date}}
+              </div>
+            </li>
+          </ul>
+          <div class="btn-row">
+            <a (click)="goToNotification()">
+              View All Notifications
+            </a>
+          </div>
+      </div>
+    </div>
+    <div class="clearfix" *ngIf="common.backHeader">
+      <a class="arrow-left" (click)="navigateBackHead()">
+        <span class="icon-previous"></span>
+      </a>
+      <span class="header-txt">
+        {{common.backHeaderName}}
+      </span>
+    </div>
+  </div>
+</header>
+
+
+<header *layout="'mobile'">
+  <div *ngIf="common.showHeaderProfile" class="mobile-header mob-header-static mob-profile-header">
+    <div class="clearfix">
+      <a class="icon-nav arrow-left" (click)="showSidebarFromHeader()">
+        <span class="icons icon-navicon"></span>
+      </a>
+      <a (click)="editUserProfile()" routerLink="/profile/detail/edit-general" class="edit-icon-circle icon-right" *ngIf="!common.churchHeader">
+        <span class="icon-mode_edit">
+        </span>
+      </a>
+      <div *ngIf="common.churchHeader">
+        <a (click)="editChurchProfile()"  routerLink='/church/profile/modify' class="edit-icon-circle icon-right" *ngIf="common.userAuthorization && common.userAuthorization.editChurchProfile">
+          <span class="icon-mode_edit">
+          </span>
+        </a>
+      </div>
+    </div>
+    <div class="profile">
+      <ul class="profile-sec">
+        <li>
+          <div  *ngIf="common.churchHeader">
+            <!-- <a href="javascript:void(0);" class="edit-icon">
+              <span class="icon-mode_edit"></span>
+            </a> -->
+            <span class="profile-img bor-radius">
+              <img class="mobile-profile-pic" src="assets/img/Church_Default_Img.png" alt="Church Profile">
+            </span>
+          </div>
+          <div class="edit-icon-pos" *ngIf="!common.churchHeader">
+            <!-- <a href="javascript:void(0);" class="edit-icon">
+              <span class="icon-mode_edit user-profile-edit">
+                <input type="file" name="profilepic" id="profilepic" (change)="onFileChange($event)" #profilepic accept="image/x-png,image/jpeg">
+              </span>
+            </a> -->
+            <span class="profile-img bor-radius">
+              <img class="mobile-profile-pic" src="{{profilePic}}" alt="User Profile">
+            </span>
+          </div>
+        </li>
+        <li>
+            <div class="row-padding-5 heading">
+								{{cProfile.name}}
+							</div>
+							<div class="row-padding-5">
+								Acc ID: {{cProfile.accountId}}
+							</div>
+							<div class="row-padding-5 text-light">
+								Email: {{cProfile.email}}
+              </div>
+              <div class="row-padding-5 text-light">
+                Date of Birth: {{cProfile.DOB}}
+                </div>
+							<div class="row-padding-5 text-light">
+								Mobile: {{cProfile.mobileNo}}
+							</div>
+							<div class="row-padding-5 text-light">
+								Home: {{cProfile.homeNo}}
+							</div>
+							<div class="row-padding-5 text-light">
+								Work: {{cProfile.workNo}}
+							</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>

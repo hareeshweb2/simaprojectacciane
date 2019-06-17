@@ -1,0 +1,49 @@
+<div class="animated fadeInRight" *layout="'desktop'" infiniteScroll infiniteScrollDistance="0.2" infiniteScrollThrottle="50"
+(scrolled)="onScroll()">
+  <div class="clearfix">
+    <div class="bor-boxshadow margin-b2em">
+      <div class="myorders-sec align-top">
+        <h3 class="heading">Notifications</h3>
+        <ul class="row list notify-recent-msg" *ngFor="let notification of records| slice:0:mobileRecordsLimit" (click)="goToParticularPage(notification)" [ngClass]="{'addReadStyles':notification.read=='true'}">
+          <li class="col-1 icon-column text-center">
+            <span class="icons icon-icon_notification"></span>
+          </li>
+          <li class="col-11">
+            <label class="total-items">{{notification.Heading}}</label>
+            <p class="notify-para-txt">
+              {{notification.Description}}
+            </p>
+            <div class="text-muted notify-date-txt">
+              {{notification.Date}}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="page-content" *layout="'mobile'" infiniteScroll infiniteScrollDistance="0.2" infiniteScrollThrottle="50"
+(scrolled)="onScroll()">
+  <div class="myorders-sec margin-b2em align-top">
+    <h1 class="section-header">
+      Notifications
+    </h1>
+    <div class="order-row">
+      <ul class="row list notify-recent-msg" *ngFor="let notification of records| slice:0:mobileRecordsLimit" (click)="goToParticularPage(notification)" [ngClass]="{'addReadStyles':notification.read=='true'}">
+        <li class="col-1 icon-column text-center">
+          <span class="icons icon-icon_notification"></span>
+        </li>
+        <li class="col-11">
+          <label class="total-items">{{notification.Heading}}</label>
+          <p class="notify-para-txt">
+            {{notification.Description}}
+          </p>
+          <div class="text-muted notify-date-txt">
+            {{notification.Date}}
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

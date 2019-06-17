@@ -1,0 +1,26 @@
+{
+  "short_name": "MyAwana",
+  "name": "MyAwana",
+  "icons": [
+    {
+      "src": "img/apple-touch-icon-57x57.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "img/favicon-96x96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "img/favicon-160x160.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "background_color": "#47BFA6",
+  "display": "standalone",
+  "theme_color": "#47BFA6",
+  "orientation":"portrait",
+  "start_url": "/"
+}

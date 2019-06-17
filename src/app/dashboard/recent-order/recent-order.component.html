@@ -1,0 +1,171 @@
+<!-- My Recent Order -->
+<div class="bor-boxshadow margin-b20" *layout="'desktop'">
+  <div class="myorders-sec">
+    <h3 class="heading" *ngIf="typeData == 'household'">
+      {{messages.myRecentOrders}}
+    </h3>
+    <h3 class="heading" *ngIf="typeData == 'church'">
+      <span class="icon-icon_church icon"></span>
+      {{messages.churchRecentOrders}}
+    </h3>
+    <div *ngIf="dataSource?.records!==null && !loading">
+      <ul class="row list border-no">
+        <li class="col-1 icon-column">
+        </li>
+        <li class="col-5 text-muted text-left capitalize">
+          {{messages.Order}}
+        </li>
+        <li class="col-1 amount-txt text-muted text-center capitalize">
+          {{messages.total}}
+        </li>
+        <li class="col-3 text-muted text-center capitalize">
+          {{messages.orderDate}}
+        </li>
+        <li class="col-2 text-muted text-center capitalize" *ngIf="typeData == 'church'">
+          {{messages.oderedBy}}
+        </li>
+      </ul>
+      <ul class="row list" *ngFor="let order of dataSource?.records">
+        <li class="col-1 icon-column text-center">
+          <span class="icons icon-icon_my_orders"></span>
+        </li>
+        <li class="col-5">
+            <label class="order-id">
+                <a *ngIf="typeData == 'household'" class="total-items" href="{{storePath}}{{order.OrderNumber}}" target="_blank">{{messages.orderHash}}{{order.OrderNumber}}</a>
+                <a *ngIf="typeData == 'church'" class="total-items" href="{{storePath}}{{order.OrderNumber}}{{churchIdForOrder}}{{currentAccountId}}" target="_blank">{{messages.orderHash}}{{order.OrderNumber}}</a>
+               </label>
+        </li>
+        <li class="col-1 text-center amount-txt">
+          {{order.TotalAmount ? '$'+ (order.TotalAmount|number:'1.2-2') : 0 }}
+        </li>
+        <li class="col-3 text-center">
+          {{order.CreatedDate | date:'mediumDate'}}
+        </li>
+        <li class="col-2 text-center" *ngIf="typeData == 'church'">
+          {{order.Order_Contact_Roles__r?.records[0]?.Contact__r.Name}}
+        </li>
+      </ul>
+      <div class="clearfix margin-t20">
+        <a class="btn btn-green margin-r20" href="" routerLink="/order/history">
+          {{messages.viewAllOrders}}
+        </a>
+        <a class="btn btn-icon" href="{{awanaStore}}" target="_blank">
+          {{messages.shopMore}}
+          <span class="icon-external-link icon"></span>
+        </a>
+      </div>
+    </div>
+    <div class="db-empty-orders-donation" *ngIf="NorecordsOrder && !loading">
+      <div class="text-center">
+        <span class="icons icon-icon_cart">
+          <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span>
+        </span>
+        <p class="para-txt">
+          {{messages.noOrderHistory}}
+        </p>
+      </div>
+      <div class="clearfix margin-t20 margin-b10 text-center">
+        <a href="{{awanaStore}}" target="_blank" class="btn btn-icon">
+          {{messages.shopNow}}
+          <span class="icon-external-link icon"></span>
+        </a>
+      </div>
+    </div>
+    <div *ngIf="loading" style="text-align:center">
+      <img id="mySpinner" src="assets/img/Awana_Spinner.gif" />
+    </div>
+    <div *ngIf="serviceError" style="text-align:center">
+      <p class="para-txt">
+        {{serviceMessage}}
+      </p>
+    </div>
+  </div>
+</div>
+
+<section *layout="'mobile'">
+  <div class="myorders-sec margin-b20">
+    <!-- Recent Orders -->
+
+    <h1 class="section-header" *ngIf="typeData == 'household'">
+      <label for="orders">
+        <span></span>
+        {{messages.myRecentOrders}}
+      </label>
+    </h1>
+    <h1 class="section-header" *ngIf="typeData == 'church'">
+      <label for="orders">
+        <span class="icon-icon_church icon"></span>
+        {{messages.churchRecentOrders}}
+      </label>
+    </h1>
+    <!--- Recent Orders -->
+    <div *ngIf="dataSource?.records!==null && !loading">
+      <div class="order-row" *ngFor="let order of dataSource?.records">
+        <ul class="row list">
+          <li class="col-1 icon-column text-center">
+            <span class="icons icon-icon_my_orders"></span>
+          </li>
+          <li class="col-11">
+              <label class="order-id">
+                  <a *ngIf="typeData == 'household'" class="total-items" href="{{storePath}}{{order.OrderNumber}}" target="_blank">{{messages.orderHash}}{{order.OrderNumber}}</a>
+                  <a *ngIf="typeData == 'church'" class="total-items" href="{{storePath}}{{order.OrderNumber}}{{churchIdForOrder}}{{currentAccountId}}" target="_blank">{{messages.orderHash}}{{order.OrderNumber}}</a>
+                </label>
+            <div class="clearfix total-text padding-muted margin-muted" *ngIf="typeData == 'church'">
+              <span class="margin-r10">
+                <span class="text-muted">{{messages.total}}:</span> {{order.TotalAmount ? '$'+ (order.TotalAmount|number:'1.2-2'): 0 }}</span>
+            </div>
+          </li>
+        </ul>
+        <div class="clearfix total-text">
+          <span *ngIf="typeData == 'church'">
+            <span class="text-muted">{{messages.oderedBy}}:</span>
+            {{order.Order_Contact_Roles__r?.records[0]?.Contact__r.Name}}
+          </span>
+          <span class="clearfix total-text padding-muted margin-muted" *ngIf="typeData != 'church'">
+            <span class="margin-r10">
+              <span class="text-muted">{{messages.total}}:</span> {{order.TotalAmount ? '$'+ (order.TotalAmount|number:'1.2-2'): 0 }}</span>
+          </span>
+          <span class="pull-right">
+            <span class="text-muted">{{messages.orderDate}}:</span>
+            {{order.CreatedDate | date:'mediumDate'}}
+          </span>
+        </div>
+      </div>
+
+      <div class="footer-btn">
+        <a href="" routerLink="/order/history" class="btn btn-green margin-r10 capitalize">
+          {{messages.viewAllOrders}}
+        </a>
+        <a href="{{awanaStore}}" class="btn capitalize sm-margin-top" target="_blank">
+          {{messages.shopMore}}
+          <span class="icon-external-link icon"></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="db-empty-orders-donation order-row margin-b2em" *ngIf="dataSource?.records==null && !loading">
+      <div class="text-center">
+        <span class="icons icon-icon_cart">
+          <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span>
+        </span>
+        <p class="para-txt">
+          {{messages.noOrderHistory}}
+        </p>
+      </div>
+      <div class="clearfix margin-t20 margin-b10 text-center">
+          <a href="{{awanaStore}}" target="_blank" class="btn capitalize sm-margin-top">
+            {{messages.shopNow}}
+            <span class="icon-external-link icon"></span>
+          </a>
+        </div>
+    </div>
+    <div *ngIf="loading" style="text-align:center">
+        <img id="mySpinner" src="assets/img/Awana_Spinner.gif" />
+    </div>
+    <div *ngIf="serviceError" style="text-align:center">
+        <p class="para-txt">
+          {{serviceMessage}}
+        </p>
+    </div>
+  </div>
+</section>

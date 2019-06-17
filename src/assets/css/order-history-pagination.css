@@ -1,0 +1,164 @@
+/* Updated styles for pagination on orderhistory start */
+.awana-pagination {
+    margin-left: 0!important;
+    margin-bottom: 1rem!important; }
+    .awana-pagination::before, .awana-pagination::after {
+      content: ' '!important; }
+    .awana-pagination::after {
+      clear: initial!important; }
+    .awana-pagination li {
+      margin-right: 0 !important;
+      border-radius: 0!important; }
+    .awana-pagination li {
+      float: left; }
+   
+      .awana-pagination a:hover,
+      .awana-pagination button:hover {
+        background: #e6e6e6!important;
+      color: #23527c !important; }
+    
+    .awana-pagination .disabled {
+      padding: 0.1875rem 0.625rem!important;
+      color: #cacaca!important;
+      cursor: default!important; } 
+      .awana-pagination .disabled:hover {
+        background: transparent!important; }
+    .awana-pagination .ellipsis::after {
+      content: '…'!important;
+      padding: 0.1875rem 0.625rem!important;
+      color: #0a0a0a!important; }
+    .awana-pagination a, .awana-pagination button {
+      cursor: pointer!important; }
+  
+  .awana-pagination .pagination-previous a::before,
+  .awana-pagination .pagination-previous.disabled::before { 
+    font-family: 'icomoon';
+    content: '\e963'!important;
+   
+    display: initial!important;
+    margin-right: initial!important; }
+  
+  .awana-pagination .pagination-next a::after,
+  .awana-pagination .pagination-next.disabled::after {
+    font-family: 'icomoon';
+    content: '\e962'!important;
+    display:initial!important;
+    margin-left: initial!important; }
+    .awana-pagination .pagination-previous a
+    {border-bottom-left-radius: 4px;
+        border-top-left-radius: 4px;}
+        .awana-pagination .pagination-next a
+        {border-bottom-right-radius: 4px;
+            border-top-right-radius: 4px;}
+  
+  .awana-pagination .show-for-sr {
+    position: absolute!important;
+    width: 1px!important;
+    height: 1px!important;
+    overflow: hidden!important;
+    clip: rect(0, 0, 0, 0)!important; }
+
+  .awana-pagination .pagination-previous.disabled,
+  .awana-pagination .pagination-next.disabled {
+    border: 1px solid #ddd;
+    padding: 6px 12px !important;
+    height: 22px;
+    line-height: 1.62857143 !important;
+  }
+
+  .awana-pagination .pagination-previous.disabled{
+    border-bottom-left-radius: 4px !important;
+    border-top-left-radius: 4px !important;
+  }
+
+  .awana-pagination .pagination-next.disabled {
+      border-bottom-right-radius: 4px !important;
+      border-top-right-radius: 4px !important;
+  }
+
+
+
+
+
+
+ul.ngx-pagination{
+  float:left;
+}
+
+    .awana-pagination .current {
+      padding: 6px 12px!important;
+      z-index: 3!important;
+      color: #fff!important;
+      cursor: default!important;
+      line-height: 1.62857143 !important;
+      background-color: #47bfa6!important;
+      border: 1px solid transparent !important;
+      border-color: #47bfa6!important;
+      height: 22px; }
+
+
+
+      .awana-pagination a,
+      .awana-pagination button {
+        display: block!important;
+        padding: 6px 12px!important;
+        margin-left: -1px!important;
+        line-height: 1.62857143 !important;
+        color: #47bfa6!important;
+        text-decoration: none!important;
+        background-color: #fff!important;
+        border: 1px solid #ddd!important;
+        height: 22px;
+        transition: all 0.3s ease-out;
+      }
+
+
+      .paginator .fist-btn,
+      .paginator .last-btn {
+          position:relative;
+          padding:6px 16px;
+          margin-left:-1px;
+          line-height:1.42857143;
+          color:#47bfa6;
+          text-decoration:none;
+          background-color:#fff;
+          border:1px solid #ddd;
+          float: left;
+          border-radius:4px;
+          font-size: 15px;
+      }
+      .paginator .fist-btn:hover,
+      .paginator .last-btn:hover {
+           z-index:2;
+          color:#23527c;
+          background-color:#eee;
+          border-color:#ddd;
+          cursor: pointer;  
+      }
+      .paginator .fist-btn {
+        margin-right: 12px;
+    }
+      .paginator .last-btn {
+          margin-left: 12px;
+      }
+      .paginator ul li{
+        display: inline;
+      }
+      .paginator{
+        float: right;
+    margin-top: 19px;
+      }
+      /* li.pagination-next {
+        margin-left: -4px!important;
+      }
+      li.pagination-previous{
+        margin-right: -4px!important;
+      } */
+
+
+      .paginator .disabled{
+        color:#777;
+        cursor:not-allowed!important;
+        background-color:#fff !important;
+        border-color:#ddd !important;
+      }

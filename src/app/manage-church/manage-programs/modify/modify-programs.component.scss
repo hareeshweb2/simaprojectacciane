@@ -1,0 +1,15 @@
+.mat-select {
+    width:160px;
+    height: 35px;
+}
+
+@media only screen and (max-width: 400px) and (min-width: 280px){
+    .mobile .meeting-day-dropdown{
+        width: 140px;
+        height: 35px;
+    }
+    .mat-select {
+        width:140px;
+        height: 35px;
+    }    
+}

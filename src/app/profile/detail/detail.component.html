@@ -1,0 +1,2053 @@
+<!--myProfile edit form screens (sprint5)-->
+<div *layout="'desktop'">
+    <div class="clearfix" *ngIf="openEditFormDetails">
+        <!-- My Profile -->
+        <div class="bor-boxshadow">
+            <div class="myorders-sec">
+                <h3 class="heading">{{messages.labels.editProfile}}</h3>
+                <div *ngIf="LesserYear" class="db-alert-message">
+                    <span>{{messages.messages.lesserYear}}</span>
+                </div>
+                <!--- General Information -->
+                <div *ngIf="!loading">
+                    <form (keydown.enter)="$event.preventDefault()" (ngSubmit)="updateProfile(updateForm)" #updateForm="ngForm" novalidate>
+                        <div class="form-fields margin-b2em">
+                            <h2 class="sub-head-border" id="generalinfo">{{messages.labels.generalInformation}}</h2>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.labels.accountLabel}}</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" tabIndex="0" name="IntacctID__c" [(ngModel)]="userProfile.IntacctID__c" disabled="" class="text-field text-field-big disabled">
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.labels.emailLabel}}</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" tabIndex="0" name="email" [(ngModel)]="userProfile.Email" disabled="" class="text-field text-field-big disabled">
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.labels.firstnameLabel}}</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" tabIndex="0" class="form-control text-field text-field-big" required pattern={{commonRegex.firstLastNameValidation}}
+                                        minlength="2" maxlength="40" [(ngModel)]="userProfile.FirstName" name="FirstName" #FirstName="ngModel"
+                                        [ngClass]="{ 'field-error': (FirstName.errors && (FirstName.dirty || FirstName.touched))}">
+                                    <div class="error-msg">
+                                        <div *ngIf="FirstName.errors && (FirstName.dirty || FirstName.touched)" class="alert alert-danger">
+                                            <div class="field-error animated fadeInRight" [hidden]="!FirstName.errors.required">
+                                                {{profileInputValidations.firstNameRequired}}
+                                            </div>
+                                            <div class="field-error animated fadeInRight" [hidden]="!FirstName.errors.pattern">
+                                                {{profileInputValidations.firstNameInvalid}}
+                                            </div>
+                                            <div class="field-error animated fadeInRight" [hidden]="!FirstName.errors.minlength">
+                                                {{profileInputValidations.firstNameMinChar}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.labels.lastnameLabel}}</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" tabIndex="0" class="text-field text-field-big" required pattern={{commonRegex.firstLastNameValidation}}
+                                        minlength="2" maxlength="40" [(ngModel)]="userProfile.LastName" name="LastName" #LastName="ngModel"
+                                        [ngClass]="{ 'field-error': (LastName.errors && (LastName.dirty || LastName.touched))}">
+                                    <div class="error-msg">
+                                        <div *ngIf="LastName.errors && (LastName.dirty || LastName.touched)" class="alert alert-danger">
+                                            <div class="field-error animated fadeInRight" [hidden]="!LastName.errors.required">
+                                                {{profileInputValidations.lastNameRequired}}
+                                            </div>
+                                            <div class="field-error animated fadeInRight" [hidden]="!LastName.errors.pattern">
+                                                {{profileInputValidations.lastNameInvalid}}
+                                            </div>
+                                            <div class="field-error animated fadeInRight" [hidden]="!LastName.errors.minlength">
+                                                {{profileInputValidations.lastNameMinChar}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.labels.dateLabel}}</label>
+                                </div>
+                                <div class="col-5">
+                                    <ul class="row dob">
+                                        <li class="col-5">
+                                            <select tabIndex="0" class="text-field text-field-big" name="month" required [(ngModel)]="userProfile.month" #month="ngModel">
+                                                <option value="" disabled>MM</option>
+                                                <option *ngFor="let title of monthValue" [value]="title.value" [selected]="userProfile.month == title.value">
+                                                    {{title.label}}
+                                                </option>
+                                            </select>
+                                            <div class="error-msg">
+                                                <div *ngIf="month.errors && (month.dirty || month.touched)" class="alert alert-danger">
+                                                    <div class="field-error animated fadeInRight" [hidden]="!month.errors.required">
+                                                        {{profileInputValidations.monthRequired}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="col-3">
+                                            <select tabIndex="0" class="text-field text-field-big" name="date" required [(ngModel)]="userProfile.date" #date="ngModel">
+                                                <option value="" disabled>DD</option>
+                                                <option *ngFor="let date of chooseDateCount(userProfile.year,userProfile.month);let i = index" [value]="date">
+                                                    {{date}}
+                                                </option>
+                                            </select>
+                                            <div class="error-msg">
+                                                <div *ngIf="date.errors && (date.dirty || date.touched)" class="alert alert-danger">
+                                                    <div class="field-error animated fadeInRight" [hidden]="!date.errors.required">
+                                                        {{profileInputValidations.dateRequired}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="col-4">
+                                            <select tabIndex="0" class="text-field text-field-big" name="year" required [(ngModel)]="userProfile.year" (focus)="clearLesserYear()"
+                                                #year="ngModel">
+                                                <option value="" disabled>YYYY</option>
+                                                <option *ngFor="let year of createYearRange(choosenYearCount);let i = index" [value]="year">
+                                                    {{year}}
+                                                </option>
+                                            </select>
+                                            <div class="error-msg">
+                                                <div *ngIf="year.errors && (year.dirty || year.touched)" class="alert alert-danger">
+                                                    <div class="field-error animated fadeInRight" [hidden]="!year.errors.required">
+                                                        {{profileInputValidations.yearRequired}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.labels.mobileLabel}}</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" tabIndex="0" class="text-field text-field-big" [textMask]="{mask: mask}" [(ngModel)]="userProfile.MobilePhone"
+                                        name="MobilePhone" (blur)="checkMobileFormat(userProfile.MobilePhone)" (focus)="checkPhone()"
+                                        #MobilePhone="ngModel" [ngClass]="{ 'field-error': (MobilePhone.errors && (MobilePhone.dirty || MobilePhone.touched))|| PhonePatternError}">
+                                    <div class="error-msg">
+                                        <div *ngIf="PhonePatternError && !(MobilePhone.errors && (MobilePhone.dirty || MobilePhone.touched))" class="alert alert-danger">
+                                            <div class="phone-error field-error animated fadeInRight">{{profileInputValidations.mobilePhonePattern}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.labels.homeLabel}}</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" tabIndex="0" name="HomePhone" class="text-field text-field-big" (blur)="checkHomeFormat(userProfile.HomePhone)"
+                                        (focus)="checkHomePhone()" [textMask]="{mask: mask}" [(ngModel)]="userProfile.HomePhone"
+                                        #HomePhone="ngModel" [ngClass]="{ 'field-error': (HomePhone.errors && (HomePhone.dirty || HomePhone.touched) || HomePhonePatternError)}">
+                                    <div class="error-msg">
+                                        <div *ngIf="HomePhonePatternError && !(HomePhone.errors && (HomePhone.dirty || HomePhone.touched))" class="alert alert-danger">
+                                            <div class="phone-error field-error animated fadeInRight">{{profileInputValidations.homePhonePattern}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.labels.workLabel}}</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" tabIndex="0" name="WorkPhone" class="text-field text-field-big" (blur)="checkWorkFormat(userProfile.WorkPhone)"
+                                        (focus)="checkWorkPhone()" [textMask]="{mask: mask}" [(ngModel)]="userProfile.WorkPhone"
+                                        #WorkPhone="ngModel" [ngClass]="{ 'field-error': (WorkPhone.errors && (WorkPhone.dirty || WorkPhone.touched)) || WorkPhonePatternError}">
+                                    <div class="error-msg">
+                                        <div *ngIf="WorkPhonePatternError && !(WorkPhone.errors && (WorkPhone.dirty || WorkPhone.touched))" class="alert alert-danger">
+                                            <div class="phone-error field-error animated fadeInRight">{{profileInputValidations.workPhonePattern}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                        </div>
+
+                        <!--- Billing Address -->
+                        <div class="form-fields margin-b2em">
+                            <h2 class="sub-head-border" id="billadrs">{{messages.labels.billingAddress}}</h2>
+                            <!-- Address Verification -->
+                            <div class={{addressStyle}} *ngIf="showBillingAddressPopOver" [@scrollAnimation]="state">
+                                <h2 class="head">
+                                    Address Verification
+                                    <span class="close" (click)="closeSuggession()"></span>
+                                </h2>
+                                <div class="content clearfix">
+                                    <p class="text-red para-txt">
+                                        We are unable to verify your address with the postal database. Using the address you entered may cause delays with delivery.
+                                    </p>
+                                    <div class="adrs-sec org-adrs">
+                                        <h4 class="sub-head">Original Address</h4>
+                                        <div class="select-adrs">
+                                            <span class="margin-r10">
+                                                <input id="option1" type="radio" name="option1" value="option1" (change)="onSelectionChange('Original')">
+                                                <label for="option1">
+                                                    <span>
+                                                        <span></span>
+                                                    </span>
+                                                </label>
+                                            </span>
+                                            <address>
+                                                {{originalstreet}}
+                                                <br> {{originalCityState}}
+                                            </address>
+                                        </div>
+                                    </div>
+                                    <p class="para-txt">
+                                        Please select one of the suggested options or continue with the original address entered.
+                                    </p>
+                                    <div class="adrs-sec">
+                                        <h4 class="sub-head">Did You Mean:</h4>
+                                        <div class="select-adrs">
+                                            <span class="margin-r10">
+                                                <input id="option2" type="radio" name="option1" value="option2" (change)="onSelectionChange('Suggested')">
+                                                <label for="option2">
+                                                    <span>
+                                                        <span></span>
+                                                    </span>
+                                                </label>
+                                            </span>
+                                            <address>
+                                                {{suggestedStreet}}
+                                                <br> {{suggestedCityState}}
+                                            </address>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="btn-row text-right">
+                                    <button class="btn btn-green margin-r20 btn-width-80" type="submit" (click)="continueSuggession('billing')">
+                                        Continue
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.labels.addressLineOne}}</label>
+                                </div>
+                                <div class="col-5 adrs-auto-complete">
+                                    <input type="text" tabIndex="0" class="text-field text-field-big" required minlength="3" maxlength="40" [(ngModel)]="userProfile.BillingStreet_1"
+                                        name="BillingStreet_1" #BillingStreet_1="ngModel" [ngClass]="{ 'field-error': (BillingStreet_1.errors && (BillingStreet_1.dirty || BillingStreet_1.touched))}"
+                                        (keyup)="searchTerm$.next($event.target.value); enableAddress('billing')">
+                                    <ul class="list-unstyled adrs-list" (clickOutside)="onClickedOutside($event)" *ngIf="enableBillingAddress">
+                                        <li *ngFor="let address of addressSuggestion">
+                                            <div (click)="completeAddress(address.street,address.city,address.state,'billing')">{{address.name}}</div>
+                                        </li>
+                                    </ul>
+                                    <div class="error-msg">
+                                        <div *ngIf="BillingStreet_1.errors && (BillingStreet_1.dirty || BillingStreet_1.touched)" class="alert alert-danger">
+                                            <div class="field-error animated fadeInRight" [hidden]="!BillingStreet_1.errors.required">
+                                                {{profileInputValidations.billingAddressLineOneRequired}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.labels.addressLineTwo}}</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" tabIndex="0" class="text-field text-field-big" pattern={{commonRegex.addressValidation}} minlength="3"
+                                        maxlength="40" [(ngModel)]="userProfile.BillingStreet_2" name="BillingStreet_2" #BillingStreet_2="ngModel"
+                                        [ngClass]="{ 'field-error': (BillingStreet_2.errors && (BillingStreet_2.dirty || BillingStreet_2.touched))}"
+                                        (focus)="emptyAddressEntries();validateAddress(userProfile.BillingStreet_1,userProfile.BillingStreet_2,userProfile.BillingStreet_3,
+                                                userProfile.BillingCity,userProfile.BillingState,userProfile.BillingPostalCode,userProfile.BillingCountry,'billing')">
+                                    <div class="error-msg">
+                                        <div *ngIf="BillingStreet_2.errors && (BillingStreet_2.dirty || BillingStreet_2.touched)" class="alert alert-danger">
+                                            <div class="field-error animated fadeInRight" [hidden]="!BillingStreet_2.errors.pattern">
+                                                {{profileInputValidations.billingAddressLineTwoInvalid}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.labels.addressLinethree}}</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" tabIndex="0" class="text-field text-field-big" pattern={{commonRegex.addressValidation}} minlength="3"
+                                        maxlength="40" [(ngModel)]="userProfile.BillingStreet_3" name="BillingStreet_3" #BillingStreet_3="ngModel"
+                                        [ngClass]="{ 'field-error': (BillingStreet_3.errors && (BillingStreet_3.dirty || BillingStreet_3.touched))}">
+                                    <div class="error-msg">
+                                        <div *ngIf="BillingStreet_3.errors && (BillingStreet_3.dirty || BillingStreet_3.touched)" class="alert alert-danger">
+                                            <div class="field-error animated fadeInRight" [hidden]="!BillingStreet_3.errors.pattern">
+                                                {{profileInputValidations.billingAddressLineThreeInvalid}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.labels.City}}</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" tabIndex="0" class="text-field text-field-big" required pattern={{commonRegex.cityValidation}} maxlength="40"
+                                        [(ngModel)]="userProfile.BillingCity" name="BillingCity" #BillingCity="ngModel" [ngClass]="{ 'field-error': (BillingCity.errors && (BillingCity.dirty || BillingCity.touched))}"
+                                        (blur)="validateAddress(userProfile.BillingStreet_1,userProfile.BillingStreet_2,userProfile.BillingStreet_3,
+                                                userProfile.BillingCity,userProfile.BillingState,userProfile.BillingPostalCode,userProfile.BillingCountry,'billing')">
+                                    <div class="error-msg">
+                                        <div *ngIf="BillingCity.errors && (BillingCity.dirty || BillingCity.touched)" class="alert alert-danger">
+                                            <div class="field-error animated fadeInRight" [hidden]="!BillingCity.errors.required">
+                                                {{profileInputValidations.billingCityRequired}}
+                                            </div>
+                                            <div class="field-error animated fadeInRight" [hidden]="!BillingCity.errors.pattern">
+                                                {{profileInputValidations.billingCityInvalid}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.labels.state}} &amp; {{messages.labels.zip}}</label>
+                                </div>
+                                <div class="col-5">
+                                    <ul class="row dob">
+                                        <li class="col-6">
+                                            <select tabIndex="0" class="text-field text-field-big" name="BillingState" required [(ngModel)]="userProfile.BillingState"
+                                                #BillingState="ngModel" (change)="validateAddress(userProfile.BillingStreet_1,userProfile.BillingStreet_2,userProfile.BillingStreet_3,
+                                                    userProfile.BillingCity,userProfile.BillingState,userProfile.BillingPostalCode,userProfile.BillingCountry,'billing')">
+                                                <option value="">Select State</option>
+                                                <option *ngFor="let state of States" [ngValue]="state.abbreviation">{{state.name}}</option>
+                                            </select>
+                                            <div class="error-msg">
+                                                <div *ngIf="BillingState.errors && (BillingState.dirty || BillingState.touched)" class="alert alert-danger">
+                                                    <div class="field-error animated fadeInRight" [hidden]="!BillingState.errors.required">
+                                                        {{profileInputValidations.billingStateRequired}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="col-6">
+                                            <input tabIndex="0" type="text" class="form-control text-field text-field-big" required pattern={{commonRegex.numberwith5and9limit}}
+                                                minlength="5" maxlength="10" [ngModel]="userProfile.BillingPostalCode| zipCodeFormat"
+                                                (ngModelChange)="userProfile.BillingPostalCode = $event" name="BillingPostalCode"
+                                                #BillingPostalCode="ngModel" [ngClass]="{ 'field-error': (BillingPostalCode.errors && (BillingPostalCode.dirty || BillingPostalCode.touched))}"
+                                                (change)="validateAddress(userProfile.BillingStreet_1,userProfile.BillingStreet_2,userProfile.BillingStreet_3,
+                                                        userProfile.BillingCity,userProfile.BillingState,userProfile.BillingPostalCode,userProfile.BillingCountry,'billing')">
+                                            <div class="error-msg">
+                                                <div *ngIf="BillingPostalCode.errors && (BillingPostalCode.dirty || BillingPostalCode.touched)" class="alert alert-danger">
+                                                    <div class="field-error animated fadeInRight" [hidden]="!BillingPostalCode.errors.required">
+                                                        {{profileInputValidations.billingPostalCodeRequired}}
+                                                    </div>
+                                                    <div class="field-error animated fadeInRight" [hidden]="!BillingPostalCode.errors.pattern">
+                                                        {{profileInputValidations.billingPostalCodeInvalid}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.labels.country}}</label>
+                                </div>
+                                <div class="col-5">
+                                    <select tabIndex="0" class="text-field text-field-big" name="BillingCountry" [(ngModel)]="userProfile.BillingCountry">
+                                        <option value="United States">United States</option>
+                                    </select>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row edit-bill-adrs">
+                                <div class="col-4 text-right">
+                                    <label>&nbsp;</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="checkbox" tabIndex="0" [checked]="false" (change)="updateAddrs($event)"> Apply billing address to all
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                        </div>
+
+                        <!--- Shipping Address -->
+                        <div class="form-fields margin-b2em">
+                            <h2 class="sub-head-border" id="shipadrs">{{messages.labels.shippingAddress}}</h2>
+                            <!-- Address Verification -->
+                            <div class={{addressStyle}} *ngIf="showShippingAddressPopOver" [@scrollAnimation]="state">
+                                <h2 class="head">
+                                    Address Verification
+                                    <span class="close" (click)="closeSuggession()"></span>
+                                </h2>
+                                <div class="content clearfix">
+                                    <p class="text-red para-txt">
+                                        We are unable to verify your address with the postal database. Using the address you entered may cause delays with delivery.
+                                    </p>
+                                    <div class="adrs-sec org-adrs">
+                                        <h4 class="sub-head">Original Address</h4>
+                                        <div class="select-adrs">
+                                            <span class="margin-r10">
+                                                <input id="option1" type="radio" name="option1" value="option1" (change)="onSelectionChange('Original')">
+                                                <label for="option1">
+                                                    <span>
+                                                        <span></span>
+                                                    </span>
+                                                </label>
+                                            </span>
+                                            <address>
+                                                {{originalstreet}}
+                                                <br> {{originalCityState}}
+                                            </address>
+                                        </div>
+                                    </div>
+                                    <p class="para-txt">
+                                        Please select one of the suggested options or continue with the original address entered.
+                                    </p>
+                                    <div class="adrs-sec">
+                                        <h4 class="sub-head">Did You Mean:</h4>
+                                        <div class="select-adrs">
+                                            <span class="margin-r10">
+                                                <input id="option2" type="radio" name="option1" value="option2" (change)="onSelectionChange('Suggested')">
+                                                <label for="option2">
+                                                    <span>
+                                                        <span></span>
+                                                    </span>
+                                                </label>
+                                            </span>
+                                            <address>
+                                                {{suggestedStreet}}
+                                                <br> {{suggestedCityState}}
+                                            </address>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="btn-row text-right">
+                                    <button class="btn btn-green margin-r20 btn-width-80" type="submit" (click)="continueSuggession('shipping')">
+                                        Continue
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.labels.addressLineOne}}</label>
+                                </div>
+                                <div class="col-5 adrs-auto-complete">
+                                    <input tabIndex="0" type="text" class="text-field text-field-big" required minlength="3" maxlength="40" [(ngModel)]="userProfile.ShippingStreet_1"
+                                        name="ShippingStreet_1" #ShippingStreet_1="ngModel" [ngClass]="{ 'field-error': (ShippingStreet_1.errors && (ShippingStreet_1.dirty || ShippingStreet_1.touched))}"
+                                        (keyup)="searchTerm$.next($event.target.value); enableAddress('shipping')">
+                                    <ul class="list-unstyled adrs-list" (clickOutside)="onClickedOutside($event)" *ngIf="enableShippingAddress">
+                                        <li *ngFor="let address of addressSuggestion">
+                                            <div (click)="completeAddress(address.street,address.city,address.state,'shipping')">{{address.name}}</div>
+                                        </li>
+                                    </ul>
+                                    <div class="error-msg">
+                                        <div *ngIf="ShippingStreet_1.errors && (ShippingStreet_1.dirty || ShippingStreet_1.touched)" class="alert alert-danger">
+                                            <div class="field-error animated fadeInRight" [hidden]="!ShippingStreet_1.errors.required">
+                                                {{profileInputValidations.shippingAddressLineOneRequired}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.labels.addressLineTwo}}</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" tabIndex="0" class="text-field text-field-big" pattern={{commonRegex.addressValidation}} minlength="3"
+                                        maxlength="40" [(ngModel)]="userProfile.ShippingStreet_2" name="ShippingStreet_2" #ShippingStreet_2="ngModel"
+                                        [ngClass]="{ 'field-error': (ShippingStreet_2.errors && (ShippingStreet_2.dirty || ShippingStreet_2.touched))}"
+                                        (focus)="emptyAddressEntries(); validateAddress(userProfile.ShippingStreet_1,userProfile.ShippingStreet_2,userProfile.ShippingStreet_3,
+                                                userProfile.ShippingCity,userProfile.ShippingState,userProfile.ShippingPostalCode,userProfile.ShippingCountry,'shipping')">
+                                    <div class="error-msg">
+                                        <div *ngIf="ShippingStreet_2.errors && (ShippingStreet_2.dirty || ShippingStreet_2.touched)" class="alert alert-danger">
+                                            <div class="field-error animated fadeInRight" [hidden]="!ShippingStreet_2.errors.pattern">
+                                                {{profileInputValidations.shippingAddressLineTwoInvalid}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.labels.addressLinethree}}</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" tabIndex="0" class="text-field text-field-big" pattern={{commonRegex.addressValidation}} minlength="3"
+                                        maxlength="40" [(ngModel)]="userProfile.ShippingStreet_3" name="ShippingStreet_3" #ShippingStreet_3="ngModel"
+                                        [ngClass]="{ 'field-error': (ShippingStreet_3.errors && (ShippingStreet_3.dirty || ShippingStreet_3.touched))}">
+                                    <div class="error-msg">
+                                        <div *ngIf="ShippingStreet_3.errors && (ShippingStreet_3.dirty || ShippingStreet_3.touched)" class="alert alert-danger">
+                                            <div class="field-error animated fadeInRight" [hidden]="!ShippingStreet_3.errors.pattern">
+                                                {{profileInputValidations.shippingAddressLineThreeInvalid}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.labels.City}}</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" tabIndex="0" class="text-field text-field-big" required pattern={{commonRegex.cityValidation}} maxlength="40"
+                                        [(ngModel)]="userProfile.ShippingCity" name="ShippingCity" #ShippingCity="ngModel" [ngClass]="{ 'field-error': (ShippingCity.errors && (ShippingCity.dirty || ShippingCity.touched))}"
+                                        (blur)="validateAddress(userProfile.ShippingStreet_1,userProfile.ShippingStreet_2,userProfile.ShippingStreet_3,
+                                                userProfile.ShippingCity,userProfile.ShippingState,userProfile.ShippingPostalCode,userProfile.ShippingCountry,'shipping')">
+                                    <div class="error-msg">
+                                        <div *ngIf="ShippingCity.errors && (ShippingCity.dirty || ShippingCity.touched)" class="alert alert-danger">
+                                            <div class="field-error animated fadeInRight" [hidden]="!ShippingCity.errors.required">
+                                                {{profileInputValidations.shippingCityRequired}}
+                                            </div>
+                                            <div class="field-error animated fadeInRight" [hidden]="!ShippingCity.errors.pattern">
+                                                {{profileInputValidations.shippingCityInvalid}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.labels.state}} &amp; {{messages.labels.zip}}</label>
+                                </div>
+                                <div class="col-5">
+                                    <ul class="row dob">
+                                        <li class="col-6">
+                                            <select tabIndex="0" class="text-field text-field-big" name="ShippingState" required [(ngModel)]="userProfile.ShippingState"
+                                                #ShippingState="ngModel" (change)="validateAddress(userProfile.ShippingStreet_1,userProfile.ShippingStreet_2,userProfile.ShippingStreet_3,
+                                                    userProfile.ShippingCity,userProfile.ShippingState,userProfile.ShippingPostalCode,userProfile.ShippingCountry,'shipping')">
+                                                <option value="">Select State</option>
+                                                <option *ngFor="let state of States" [ngValue]="state.abbreviation">{{state.name}}</option>
+                                            </select>
+                                            <div class="error-msg">
+                                                <div *ngIf="ShippingState.errors && (ShippingState.dirty || ShippingState.touched)" class="alert alert-danger">
+                                                    <div class="field-error animated fadeInRight" [hidden]="!ShippingState.errors.required">
+                                                        {{profileInputValidations.shippingStateRequired}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="col-6">
+                                            <input tabIndex="0" type="text" class="form-control text-field text-field-big" required pattern={{commonRegex.numberwith5and9limit}}
+                                                minlength="5" maxlength="10" [ngModel]="userProfile.ShippingPostalCode| zipCodeFormat"
+                                                (ngModelChange)="userProfile.ShippingPostalCode = $event" name="ShippingPostalCode"
+                                                #ShippingPostalCode="ngModel" [ngClass]="{ 'field-error': (ShippingPostalCode.errors && (ShippingPostalCode.dirty || ShippingPostalCode.touched))}"
+                                                (change)="validateAddress(userProfile.ShippingStreet_1,userProfile.ShippingStreet_2,userProfile.ShippingStreet_3,
+                                                        userProfile.ShippingCity,userProfile.ShippingState,userProfile.ShippingPostalCode,userProfile.ShippingCountry,'shipping')">
+                                            <div class="error-msg">
+                                                <div *ngIf="ShippingPostalCode.errors && (ShippingPostalCode.dirty || ShippingPostalCode.touched)" class="alert alert-danger">
+                                                    <div class="field-error animated fadeInRight" [hidden]="!ShippingPostalCode.errors.required">
+                                                        {{profileInputValidations.shippingPostalCodeRequired}}
+                                                    </div>
+                                                    <div class="field-error animated fadeInRight" [hidden]="!ShippingPostalCode.errors.pattern">
+                                                        {{profileInputValidations.shippingPostalCodeInvalid}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    <label>{{messages.labels.country}}</label>
+                                </div>
+                                <div class="col-5">
+                                    <select tabIndex="0" class="text-field text-field-big" name="ShippingCountry" [(ngModel)]="userProfile.ShippingCountry">
+                                        <option value="United States">United States</option>
+                                    </select>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix margin-t20 margin-b10">
+                            <button type="submit" tabIndex="0" [disabled]="!updateForm.form.valid || PhonePatternError || HomePhonePatternError || WorkPhonePatternError"
+                                class="btn btn-green margin-r20 btn-width-80">
+                                {{messages.labels.saveLabel}}
+                            </button>
+                            <a routerLink="/profile/detail" tabIndex="0" class="btn btn-width-80">
+                                {{messages.labels.cancelLabel}}
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                <div *ngIf="loading" style="text-align:center">
+                    <img id="mySpinner" src="assets/img/Awana_Spinner.gif" />
+                </div>
+                <div *ngIf="serviceError" style="text-align:center">
+                    <p class="para-txt"> {{serviceMessage}} </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--myProfile general information(sprint5)-->
+    <div class="clearfix" *ngIf="!openEditFormDetails">
+        <!-- My Profile -->
+        <div class="bor-boxshadow">
+            <div class="clearfix">
+                <h3 class="section-heading">
+                    {{messages.labels.myprofileLabel}}
+                    <a routerLink="/profile/detail/edit" class="btn pull-right btn-green">
+                        {{messages.labels.editProfile}}
+                        <span class="icon-icon_edit_pencil icon"></span>
+                    </a>
+                </h3>
+                <div *ngIf="updateSuccess" class="db-alert-message db-alert-msg-success margin-1em">
+                    <span>
+                        <span class="icon icon-icon_like"></span>
+                        <span class="para-txt">{{messages.messages.profileUpdate}}</span>
+                    </span>
+                </div>
+                <div *ngIf="profilePictureUpdate" class="db-alert-message db-alert-msg-success margin-1em">
+                    <span>
+                        <span class="icon icon-icon_like"></span>
+                        <span class="para-txt">{{messages.messages.pictureupdate}}</span>
+                    </span>
+                </div>
+                <div *ngIf="!loading">
+                    <!--- My Profile Information -->
+                    <div class="myprofile-info clearfix">
+                        <ul class="row">
+                            <li class="col-2 photo-column">
+                                <div class="change-photo">
+                                    <div class="img">
+                                        <img [src]="profilePic" alt="Profile Image">
+                                    </div>
+                                </div>
+                                <div class="file-upload" (click)="openPhotoUpdatePopupOver = true">
+                                    <button class="btn btn-green">{{messages.labels.editPhoto}}
+                                        <span class="icon-icon_change_photo"></span>
+                                    </button>
+                                </div>
+                            </li>
+                            <li class="col-10">
+                                <h2 class="gi-head">
+                                    {{messages.labels.generalInformation}}
+                                </h2>
+                                <div class="inner-list-row">
+                                    <ul class="inner-list">
+                                        <li>
+                                            <span class="text-muted"> {{messages.labels.nameLabel}}</span>
+                                            <span class="text-ellipsis" title="{{profile.currentProfile.user.FirstName}} {{profile.currentProfile.user.LastName}}">{{profile.currentProfile.user.FirstName}} {{profile.currentProfile.user.LastName}}</span>
+                                        </li>
+                                        <li>
+                                            <span class="text-muted">{{messages.labels.accountLabel}}</span>
+                                            <span class="text-ellipsis" title="{{profile.currentProfile.user.IntacctID__c}}">{{profile.currentProfile.user.IntacctID__c}}</span>
+                                        </li>
+                                        <li>
+                                            <span class="text-muted">{{messages.labels.emailLabel}}</span>
+                                            <span class="text-ellipsis" title="{{profile.currentProfile.user.Email}}">{{profile.currentProfile.user.Email}}</span>
+                                        </li>
+                                        <li>
+                                            <span class="text-muted">{{messages.labels.datewithoutAsterisk}}</span>
+                                            <span class="text-ellipsis" title="{{dateFormat(profile.currentProfile.user.Birthdate)}}">{{dateFormat(profile.currentProfile.user.Birthdate)}}</span>
+                                        </li>
+                                    </ul>
+                                    <ul class="inner-list">
+                                        <li>
+                                            <span class="text-muted">{{messages.labels.mobileLabel}}</span>
+                                            <span class="text-ellipsis text-ellipsis-small" title="{{profile.currentProfile.user.MobilePhone}}">{{profile.currentProfile.user.MobilePhone}}</span>
+                                        </li>
+                                        <li>
+                                            <span class="text-muted">{{messages.labels.homeLabel}}</span>
+                                            <span class="text-ellipsis text-ellipsis-small" title="{{profile.currentProfile.user.HomePhone}}">{{profile.currentProfile.user.HomePhone}}</span>
+                                        </li>
+                                        <li>
+                                            <span class="text-muted">{{messages.labels.workLabel}}</span>
+                                            <span class="text-ellipsis text-ellipsis-small" title="{{profile.currentProfile.user.WorkPhone}}">{{profile.currentProfile.user.WorkPhone}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <!--- Address Cards Row -->
+                        <ul class="adrs-card-row">
+                            <li class="col-6">
+                                <div class="adrs-card">
+                                    <h4 class="adrs-head">
+                                        <span class="adrs-btn">{{messages.labels.billingAddress}}</span>
+                                    </h4>
+                                    <address class="adrs-txt" *ngIf="!(profile.currentProfile.user.BillingStreet_1=='' && profile.currentProfile.user.BillingCity=='' && profile.currentProfile.user.BillingState=='' && profile.currentProfile.user.BillingPostalCode=='')">
+                                        <div class="text-ellipsis">{{profile.currentProfile.user.BillingStreet_1}}</div>
+                                        <div class="text-ellipsis">{{profile.currentProfile.user.BillingStreet_2}}</div>
+                                        <div class="text-ellipsis">{{profile.currentProfile.user.BillingStreet_3}}</div>
+                                        <div class="text-ellipsis">
+                                            <span>{{profile.currentProfile.user.BillingCity}}</span>
+                                            <span *ngIf="profile.currentProfile.user.BillingCity">,</span> {{profile.currentProfile.user.BillingState}} {{profile.currentProfile.user.BillingPostalCode
+                                            | zipCodeFormat}}
+                                        </div>
+                                    </address>
+                                    <address class="adrs-txt" *ngIf="profile.currentProfile.user.BillingStreet_1=='' && profile.currentProfile.user.BillingCity=='' && profile.currentProfile.user.BillingState=='' && profile.currentProfile.user.BillingPostalCode==''">
+                                        <span>{{messages.messages.noBillingAddress}}</span>
+                                    </address>
+                                    <div class="church-status">
+                                        <span></span>
+                                        <div>
+                                            <a (click)="openEditAddressPopup('Billing')" class="tooltip-black">
+                                                <span class="icon-icon_edit_pencil icon"></span>
+                                                <div class="tooltip-black-content tooltip-black-content-small animated fadeInDown">
+                                                    Edit
+                                                </div>
+                                            </a>
+                                            <!-- <span class="divider">|</span>
+                                            <a (click)="deleteAddress('Billing')" class="tooltip-black">
+                                                <span class="icon-trash-o icon"></span>
+                                                <div class="tooltip-black-content tooltip-black-content-small animated fadeInDown">
+                                                    Delete
+                                                </div>
+                                            </a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="col-6">
+                                <div class="adrs-card">
+                                    <h4 class="adrs-head">
+                                        <span class="adrs-btn">{{messages.labels.shippingAddress}}</span>
+                                    </h4>
+                                    <address class="adrs-txt" *ngIf="!(profile.currentProfile.user.ShippingStreet_1=='' && profile.currentProfile.user.ShippingCity=='' && profile.currentProfile.user.ShippingState=='' && profile.currentProfile.user.ShippingPostalCode=='')">
+                                        <div class="text-ellipsis">{{profile.currentProfile.user.ShippingStreet_1}}</div>
+                                        <div class="text-ellipsis">{{profile.currentProfile.user.ShippingStreet_2}}</div>
+                                        <div class="text-ellipsis">{{profile.currentProfile.user.ShippingStreet_3}}</div>
+                                        <div class="text-ellipsis">
+                                            <span>{{profile.currentProfile.user.ShippingCity}}</span>
+                                            <span *ngIf="profile.currentProfile.user.ShippingCity">,</span> {{profile.currentProfile.user.ShippingState}} {{profile.currentProfile.user.ShippingPostalCode
+                                            | zipCodeFormat}}
+                                        </div>
+                                    </address>
+                                    <address class="adrs-txt" *ngIf="profile.currentProfile.user.ShippingStreet_1=='' && profile.currentProfile.user.ShippingCity=='' && profile.currentProfile.user.ShippingState=='' && profile.currentProfile.user.ShippingPostalCode==''">
+                                        <span>{{messages.messages.noShippingAddress}}</span>
+                                    </address>
+                                    <div class="church-status">
+                                        <span></span>
+                                        <div>
+                                            <a (click)="openEditAddressPopup('Shipping')" class="tooltip-black">
+                                                <span class="icon-icon_edit_pencil icon"></span>
+                                                <div class="tooltip-black-content tooltip-black-content-small animated fadeInDown">
+                                                    Edit
+                                                </div>
+                                            </a>
+                                            <!-- <span class="divider">|</span>
+                                            <a (click)="deleteAddress('Shipping')" class="tooltip-black">
+                                                <span class="icon-trash-o icon"></span>
+                                                <div class="tooltip-black-content tooltip-black-content-small animated fadeInDown">
+                                                    Delete
+                                                </div>
+                                            </a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!--- My Church Information -->
+                    <div class="mychurch-info">
+                        <div class="myprofile-info">
+                            <ul class="row">
+                                <li class="col-2 photo-column">
+                                    <div class="churh-circle">
+                                        <span class="icon-icon_church icon"></span>
+                                    </div>
+                                    <a routerLink="/profile/addChurch" class="btn btn-background btn-green">
+                                        {{messages.labels.addChurchLabel}}
+                                    </a>
+                                </li>
+                                <li class="col-10">
+                                    <h2 class="gi-head">
+                                        {{messages.labels.myChurchLabel}}
+                                    </h2>
+                                    <p class="para-txt">
+                                        {{messages.labels.churchDescription}}
+                                    </p>
+                                </li>
+                            </ul>
+
+                            <!--- Church Cards Row -->
+                            <ul class="church-card-row">
+                                <li *ngFor="let selectedChurches of pendingChurches" class="col-6">
+                                    <div class="chuch-card">
+                                        <h4 class="card-head">{{selectedChurches.npe5__Organization__r.Name }}
+                                        </h4>
+                                        <address class="adrs-txt">
+                                            <div>{{selectedChurches.npe5__Organization__r.Physical_Street_1__c}}</div>
+                                            <div>{{selectedChurches.npe5__Organization__r.Physical_Street_2__c}}</div>
+                                            <div>{{selectedChurches.npe5__Organization__r.PhysicalStreet3__c}}</div>
+                                            <div>
+                                                <span>{{selectedChurches.npe5__Organization__r.Physical_City__c}}</span>
+                                                <span *ngIf="selectedChurches.npe5__Organization__r.Physical_City__c">,</span>
+                                                <span>{{selectedChurches.npe5__Organization__r.Physical_State__c}}</span> {{selectedChurches.npe5__Organization__r.Physical_Zip__c}}
+                                            </div>
+                                            <div> {{selectedChurches.Awana_Role__c!==null ? selectedChurches.Awana_Role__c.split(";").join(",
+                                                ") : selectedChurches.Awana_Role__c}}</div>
+                                        </address>
+                                        <div class="church-status">
+                                            <span>
+                                                <span class="text-green">{{messages.labels.statusLabel}}</span> {{selectedChurches.npe5__Status__c}}
+                                            </span>
+                                            <div>
+                                                <a class="tooltip-black" (click)="DeleteChurch(selectedChurches)">
+                                                    <span class="icon-trash-o icon"></span>
+                                                    <div class="tooltip-black-content tooltip-black-content-small animated fadeInDown">
+                                                        Delete
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <div *ngIf="loading" style="text-align:center">
+                    <img id="mySpinner" src="assets/img/Awana_Spinner.gif" />
+                </div>
+                <div *ngIf="serviceError" style="text-align:center">
+                    <p class="para-txt"> {{serviceMessage}} </p>
+                </div>
+            </div>
+        </div>
+        <!-- Profile Edit Billing/Shipping Address Modal -->
+        <div class="modal" style="display:block;" *ngIf="openEditAddressesPopup">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <form (keydown.enter)="$event.preventDefault()" (ngSubmit)="submitEditAddress()" #editAddressForm="ngForm" novalidate>
+                    <div class="content-pad form-fields">
+                        <span class="close icon-icon_close" (click)="closeEditAddressForm()"></span>
+                        <h2 class="heading">{{messages.labels.edit}} {{BillingAddress?'Billing':'Shipping'}} {{messages.labels.address}}</h2>
+                        <!-- Address Verification -->
+                        <div class="adrs-verfy animated fadeInRight billing-address" *ngIf="showShippingAddressPopOver || showBillingAddressPopOver">
+                            <h2 class="head">
+                                {{messages.labels.addressVerification}}
+                                <span class="close" (click)="closeSuggession()"></span>
+                            </h2>
+                            <div class="content clearfix">
+                                <p class="text-red para-txt">
+                                    {{messages.labels.addressRedText}}
+                                </p>
+                                <div class="adrs-sec org-adrs">
+                                    <h4 class="sub-head">{{messages.labels.originalAddress}}</h4>
+                                    <div class="select-adrs">
+                                        <span class="margin-r10">
+                                            <input id="option1" type="radio" name="option1" value="option1" (change)="onSelectionChange('Original')">
+                                            <label for="option1">
+                                                <span>
+                                                    <span></span>
+                                                </span>
+                                            </label>
+                                        </span>
+                                        <address>
+                                            {{originalstreet}}
+                                            <br> {{originalCityState}}
+                                        </address>
+                                    </div>
+                                </div>
+                                <p class="para-txt">
+                                    {{messages.labels.suggestText}}
+                                </p>
+                                <div class="adrs-sec">
+                                    <h4 class="sub-head">{{messages.labels.didYouMean}}</h4>
+                                    <div class="select-adrs">
+                                        <span class="margin-r10">
+                                            <input id="option2" type="radio" name="option2" value="option2" (change)="onSelectionChange('Suggested')">
+                                            <label for="option2">
+                                                <span>
+                                                    <span></span>
+                                                </span>
+                                            </label>
+                                        </span>
+                                        <address>
+                                            {{suggestedStreet}}
+                                            <br> {{suggestedCityState}}
+                                        </address>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="btn-row text-right">
+                                <button class="btn btn-green" type="submit" (click)="continueSuggestionAddress()">
+                                    {{messages.labels.continue}}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 text-right">
+                                <label>{{messages.labels.addressLineOne}}</label>
+                            </div>
+                            <div class="col-7 adrs-auto-complete" *ngIf="BillingAddress">
+                                <input type="text" tabIndex="0" class="text-field text-field-big" required minlength="3" maxlength="40" [(ngModel)]="userProfile.BillingStreet_1"
+                                    name="BillingStreet_1" #BillingStreet_1="ngModel" [ngClass]="{ 'field-error': (BillingStreet_1.errors && (BillingStreet_1.dirty || BillingStreet_1.touched))}"
+                                    (keyup)="searchTerm$.next($event.target.value); enableAddress('billing')">
+                                <ul class="list-unstyled adrs-list" (clickOutside)="onClickedOutside($event)" *ngIf="enableBillingAddress">
+                                    <li *ngFor="let address of addressSuggestion">
+                                        <div (click)="completeAddress(address.street,address.city,address.state,'billing')">{{address.name}}</div>
+                                    </li>
+                                </ul>
+                                <div class="error-msg">
+                                    <div *ngIf="BillingStreet_1.errors && (BillingStreet_1.dirty || BillingStreet_1.touched)" class="alert alert-danger">
+                                        <div class="field-error animated fadeInRight" [hidden]="!BillingStreet_1.errors.required">
+                                            {{profileInputValidations.billingAddressLineOneRequired}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-7 adrs-auto-complete" *ngIf="ShippingAddress">
+                                <input tabIndex="0" type="text" class="text-field text-field-big" required minlength="3" maxlength="40" [(ngModel)]="userProfile.ShippingStreet_1"
+                                    name="ShippingStreet_1" #ShippingStreet_1="ngModel" [ngClass]="{ 'field-error': (ShippingStreet_1.errors && (ShippingStreet_1.dirty || ShippingStreet_1.touched))}"
+                                    (keyup)="searchTerm$.next($event.target.value); enableAddress('shipping')">
+                                <ul class="list-unstyled adrs-list" (clickOutside)="onClickedOutside($event)" *ngIf="enableShippingAddress">
+                                    <li *ngFor="let address of addressSuggestion">
+                                        <div (click)="completeAddress(address.street,address.city,address.state,'shipping')">{{address.name}}</div>
+                                    </li>
+                                </ul>
+                                <div class="error-msg">
+                                    <div *ngIf="ShippingStreet_1.errors && (ShippingStreet_1.dirty || ShippingStreet_1.touched)" class="alert alert-danger">
+                                        <div class="field-error animated fadeInRight" [hidden]="!ShippingStreet_1.errors.required">
+                                            {{profileInputValidations.shippingAddressLineOneRequired}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 text-right">
+                                <label>{{messages.labels.addressLineTwo}}</label>
+                            </div>
+                            <div class="col-7" *ngIf="BillingAddress">
+                                <input type="text" tabIndex="0" class="text-field text-field-big" pattern={{commonRegex.addressValidation}} minlength="3"
+                                    maxlength="40" [(ngModel)]="userProfile.BillingStreet_2" name="BillingStreet_2" #BillingStreet_2="ngModel"
+                                    [ngClass]="{ 'field-error': (BillingStreet_2.errors && (BillingStreet_2.dirty || BillingStreet_2.touched))}"
+                                    (focus)="emptyAddressEntries();validateAddress(userProfile.BillingStreet_1,userProfile.BillingStreet_2,userProfile.BillingStreet_3,
+                                    userProfile.BillingCity,userProfile.BillingState,userProfile.BillingPostalCode,userProfile.BillingCountry,'billing')">
+                                <div class="error-msg">
+                                    <div *ngIf="BillingStreet_2.errors && (BillingStreet_2.dirty || BillingStreet_2.touched)" class="alert alert-danger">
+                                        <div class="field-error animated fadeInRight" [hidden]="!BillingStreet_2.errors.pattern">
+                                            {{profileInputValidations.billingAddressLineTwoInvalid}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-7" *ngIf="ShippingAddress">
+                                <input type="text" tabIndex="0" class="text-field text-field-big" pattern={{commonRegex.addressValidation}} minlength="3"
+                                    maxlength="40" [(ngModel)]="userProfile.ShippingStreet_2" name="ShippingStreet_2" #ShippingStreet_2="ngModel"
+                                    [ngClass]="{ 'field-error': (ShippingStreet_2.errors && (ShippingStreet_2.dirty || ShippingStreet_2.touched))}"
+                                    (focus)="emptyAddressEntries(); validateAddress(userProfile.ShippingStreet_1,userProfile.ShippingStreet_2,userProfile.ShippingStreet_3,
+                                    userProfile.ShippingCity,userProfile.ShippingState,userProfile.ShippingPostalCode,userProfile.ShippingCountry,'shipping')">
+                                <div class="error-msg">
+                                    <div *ngIf="ShippingStreet_2.errors && (ShippingStreet_2.dirty || ShippingStreet_2.touched)" class="alert alert-danger">
+                                        <div class="field-error animated fadeInRight" [hidden]="!ShippingStreet_2.errors.pattern">
+                                            {{profileInputValidations.shippingAddressLineTwoInvalid}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 text-right">
+                                <label>{{messages.labels.addressLinethree}}</label>
+                            </div>
+                            <div class="col-7" *ngIf="BillingAddress">
+                                <input type="text" tabIndex="0" class="text-field text-field-big" pattern={{commonRegex.addressValidation}} minlength="3"
+                                    maxlength="40" [(ngModel)]="userProfile.BillingStreet_3" name="BillingStreet_3" #BillingStreet_3="ngModel"
+                                    [ngClass]="{ 'field-error': (BillingStreet_3.errors && (BillingStreet_3.dirty || BillingStreet_3.touched))}">
+                                <div class="error-msg">
+                                    <div *ngIf="BillingStreet_3.errors && (BillingStreet_3.dirty || BillingStreet_3.touched)" class="alert alert-danger">
+                                        <div class="field-error animated fadeInRight" [hidden]="!BillingStreet_3.errors.pattern">
+                                            {{profileInputValidations.billingAddressLineThreeInvalid}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-7" *ngIf="ShippingAddress">
+                                <input type="text" tabIndex="0" class="text-field text-field-big" pattern={{commonRegex.addressValidation}} minlength="3"
+                                    maxlength="40" [(ngModel)]="userProfile.ShippingStreet_3" name="ShippingStreet_3" #ShippingStreet_3="ngModel"
+                                    [ngClass]="{ 'field-error': (ShippingStreet_3.errors && (ShippingStreet_3.dirty || ShippingStreet_3.touched))}">
+                                <div class="error-msg">
+                                    <div *ngIf="ShippingStreet_3.errors && (ShippingStreet_3.dirty || ShippingStreet_3.touched)" class="alert alert-danger">
+                                        <div class="field-error animated fadeInRight" [hidden]="!ShippingStreet_3.errors.pattern">
+                                            {{profileInputValidations.shippingAddressLineThreeInvalid}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 text-right">
+                                <label>{{messages.labels.City}}</label>
+                            </div>
+                            <div class="col-7" *ngIf="BillingAddress">
+                                <input type="text" tabIndex="0" class="text-field text-field-big" required pattern={{commonRegex.cityValidation}} maxlength="40"
+                                    [(ngModel)]="userProfile.BillingCity" name="BillingCity" #BillingCity="ngModel" [ngClass]="{ 'field-error': (BillingCity.errors && (BillingCity.dirty || BillingCity.touched))}"
+                                    (blur)="validateAddress(userProfile.BillingStreet_1,userProfile.BillingStreet_2,userProfile.BillingStreet_3,
+                                    userProfile.BillingCity,userProfile.BillingState,userProfile.BillingPostalCode,userProfile.BillingCountry,'billing')">
+                                <div class="error-msg">
+                                    <div *ngIf="BillingCity.errors && (BillingCity.dirty || BillingCity.touched)" class="alert alert-danger">
+                                        <div class="field-error animated fadeInRight" [hidden]="!BillingCity.errors.required">
+                                            {{profileInputValidations.billingCityRequired}}
+                                        </div>
+                                        <div class="field-error animated fadeInRight" [hidden]="!BillingCity.errors.pattern">
+                                            {{profileInputValidations.billingCityInvalid}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-7" *ngIf="ShippingAddress">
+                                <input type="text" tabIndex="0" class="text-field text-field-big" required pattern={{commonRegex.cityValidation}} maxlength="40"
+                                    [(ngModel)]="userProfile.ShippingCity" name="ShippingCity" #ShippingCity="ngModel" [ngClass]="{ 'field-error': (ShippingCity.errors && (ShippingCity.dirty || ShippingCity.touched))}"
+                                    (blur)="validateAddress(userProfile.ShippingStreet_1,userProfile.ShippingStreet_2,userProfile.ShippingStreet_3,
+                                    userProfile.ShippingCity,userProfile.ShippingState,userProfile.ShippingPostalCode,userProfile.ShippingCountry,'shipping')">
+                                <div class="error-msg">
+                                    <div *ngIf="ShippingCity.errors && (ShippingCity.dirty || ShippingCity.touched)" class="alert alert-danger">
+                                        <div class="field-error animated fadeInRight" [hidden]="!ShippingCity.errors.required">
+                                            {{profileInputValidations.shippingCityRequired}}
+                                        </div>
+                                        <div class="field-error animated fadeInRight" [hidden]="!ShippingCity.errors.pattern">
+                                            {{profileInputValidations.shippingCityInvalid}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 text-right">
+                                <label>{{messages.labels.state}} &amp; {{messages.labels.zip}}</label>
+                            </div>
+                            <div class="col-7">
+                                <ul class="row dob">
+                                    <li class="col-6" *ngIf="BillingAddress">
+                                        <select tabIndex="0" class="text-field text-field-big" name="BillingState" required [(ngModel)]="userProfile.BillingState"
+                                            #BillingState="ngModel" (change)="validateAddress(userProfile.BillingStreet_1,userProfile.BillingStreet_2,userProfile.BillingStreet_3,
+                                            userProfile.BillingCity,userProfile.BillingState,userProfile.BillingPostalCode,userProfile.BillingCountry,'billing')">
+                                            <option value="">Select State</option>
+                                            <option *ngFor="let state of States" [ngValue]="state.abbreviation">{{state.name}}</option>
+                                        </select>
+                                        <div class="error-msg">
+                                            <div *ngIf="BillingState.errors && (BillingState.dirty || BillingState.touched)" class="alert alert-danger">
+                                                <div class="field-error animated fadeInRight" [hidden]="!BillingState.errors.required">
+                                                    {{profileInputValidations.billingStateRequired}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="col-6" *ngIf="ShippingAddress">
+                                        <select tabIndex="0" class="text-field text-field-big" name="ShippingState" required [(ngModel)]="userProfile.ShippingState"
+                                            #ShippingState="ngModel" (change)="validateAddress(userProfile.ShippingStreet_1,userProfile.ShippingStreet_2,userProfile.ShippingStreet_3,
+                                            userProfile.ShippingCity,userProfile.ShippingState,userProfile.ShippingPostalCode,userProfile.ShippingCountry,'shipping')">
+                                            <option value="">Select State</option>
+                                            <option *ngFor="let state of States" [ngValue]="state.abbreviation">{{state.name}}</option>
+                                        </select>
+                                        <div class="error-msg">
+                                            <div *ngIf="ShippingState.errors && (ShippingState.dirty || ShippingState.touched)" class="alert alert-danger">
+                                                <div class="field-error animated fadeInRight" [hidden]="!ShippingState.errors.required">
+                                                    {{profileInputValidations.shippingStateRequired}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="col-6" *ngIf="BillingAddress">
+                                        <input tabIndex="0" type="text" class="form-control text-field text-field-big" required pattern={{commonRegex.numberwith5and9limit}}
+                                            minlength="5" maxlength="10" [ngModel]="userProfile.BillingPostalCode| zipCodeFormat"
+                                            (ngModelChange)="userProfile.BillingPostalCode = $event" name="BillingPostalCode"
+                                            #BillingPostalCode="ngModel" [ngClass]="{ 'field-error': (BillingPostalCode.errors && (BillingPostalCode.dirty || BillingPostalCode.touched))}"
+                                            (change)="validateAddress(userProfile.BillingStreet_1,userProfile.BillingStreet_2,userProfile.BillingStreet_3,
+                                            userProfile.BillingCity,userProfile.BillingState,userProfile.BillingPostalCode,userProfile.BillingCountry,'billing')">
+                                        <div class="error-msg">
+                                            <div *ngIf="BillingPostalCode.errors && (BillingPostalCode.dirty || BillingPostalCode.touched)" class="alert alert-danger">
+                                                <div class="field-error animated fadeInRight" [hidden]="!BillingPostalCode.errors.required">
+                                                    {{profileInputValidations.billingPostalCodeRequired}}
+                                                </div>
+                                                <div class="field-error animated fadeInRight" [hidden]="!BillingPostalCode.errors.pattern">
+                                                    {{profileInputValidations.billingPostalCodeInvalid}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="col-6" *ngIf="ShippingAddress">
+                                        <input tabIndex="0" type="text" class="form-control text-field text-field-big" required pattern={{commonRegex.numberwith5and9limit}}
+                                            minlength="5" maxlength="10" [ngModel]="userProfile.ShippingPostalCode| zipCodeFormat"
+                                            (ngModelChange)="userProfile.ShippingPostalCode = $event" name="ShippingPostalCode"
+                                            #ShippingPostalCode="ngModel" [ngClass]="{ 'field-error': (ShippingPostalCode.errors && (ShippingPostalCode.dirty || ShippingPostalCode.touched))}"
+                                            (change)="validateAddress(userProfile.ShippingStreet_1,userProfile.ShippingStreet_2,userProfile.ShippingStreet_3,
+                                            userProfile.ShippingCity,userProfile.ShippingState,userProfile.ShippingPostalCode,userProfile.ShippingCountry,'shipping')">
+                                        <div class="error-msg">
+                                            <div *ngIf="ShippingPostalCode.errors && (ShippingPostalCode.dirty || ShippingPostalCode.touched)" class="alert alert-danger">
+                                                <div class="field-error animated fadeInRight" [hidden]="!ShippingPostalCode.errors.required">
+                                                    {{profileInputValidations.shippingPostalCodeRequired}}
+                                                </div>
+                                                <div class="field-error animated fadeInRight" [hidden]="!ShippingPostalCode.errors.pattern">
+                                                    {{profileInputValidations.shippingPostalCodeInvalid}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 text-right">
+                                <label>{{messages.labels.country}}</label>
+                            </div>
+                            <div class="col-7" *ngIf="BillingAddress">
+                                <select tabIndex="0" class="text-field text-field-big" name="BillingCountry" [(ngModel)]="userProfile.BillingCountry">
+                                    <option value="United States">United States</option>
+                                </select>
+                            </div>
+                            <div class="col-7" *ngIf="ShippingAddress">
+                                <select tabIndex="0" class="text-field text-field-big" name="ShippingCountry" [(ngModel)]="userProfile.ShippingCountry">
+                                    <option value="United States">United States</option>
+                                </select>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer text-right">
+                        <span>
+                            <button type="submit" [disabled]="!editAddressForm.form.valid" class="btn btn-med btn-green margin-r10">
+                                Submit
+                            </button>
+                            <a (click)="closeEditAddressPopup()" class="btn btn-med btn-grey">
+                                Cancel
+                            </a>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Photo Modal -->
+    <div class="modal" style="display: block;" *ngIf="openPhotoUpdatePopupOver">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="content-pad">
+                <span class="close icon-icon_close" (click)="openPhotoUpdatePopupOver=false; cropPhotoPopup=false;"></span>
+                <h2 class="heading" *ngIf="!cropPhotoPopup">{{messages.labels.changePhoto}} :</h2>
+                <h2 class="heading" *ngIf="cropPhotoPopup">{{messages.labels.cropYourPhoto}}:</h2>
+                <div class="profile-change-photo" [hidden]="cropPhotoPopup">
+                    <div class="upload-icon">
+                        <input type="file" accept="image/x-png,image/png,image/jpeg" (change)="profileFileGetter()">
+                        <span class="icon icon-cloud-download"></span>
+                        <span>{{messages.labels.dragAndDropaFile}}</span>
+                    </div>
+                    <div class="or-txt">
+                        {{messages.labels.or}}
+                    </div>
+
+                    <div class="file-upload text-center">
+                        <button class="btn btn-green" (click)="profileFileGetter()">{{messages.labels.selectYourPhoto}}
+                            <span class="icon-icon_change_photo"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row crop-photo" [hidden]="!cropPhotoPopup">
+                    <div class="col-9 img-border margin-r30">
+                        <img-cropper [image]="imageData" id="imageCropBtn" [settings]="cropperSettings"> </img-cropper>
+                    </div>
+                    <div class="col-3 img-border small-photos">
+                        <img id="croppedImage" [src]="imageData.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-right">
+                <a href="javascript:void(0);" class="btn btn-med btn-green margin-r10" *ngIf="cropPhotoPopup" (click)="saveProfileImage();">
+                    {{messages.labels.savePhoto}}
+                </a>
+                <a href="javascript:void(0);" (click)="openPhotoUpdatePopupOver=false; cropPhotoPopup=false;" class="btn btn-med btn-grey">
+                    {{messages.labels.cancel}}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Church Remove connection Confirmation Modal -->
+    <div class="modal text-left" style="display: block;" *ngIf="openDeleteChurchPopup">
+        <!-- Modal content -->
+        <div class="modal-content animated fadeInDown">
+            <div class="content-pad">
+                <button class="close icon-icon_close removeButtonClass" [disabled]="disableCrossIcon" (click)="closeRemoveChurchPopup();"></button>
+                <h2 class="heading">Remove Connection</h2>
+                <div class="remove-connection">
+                    <!-- Alert MSg -->
+                    <div class="db-alert-message">
+                        <span>
+                            <span class="icon icon-icon_danger"></span>
+                            <span class="para-txt">Are you sure you want to remove this connection?</span>
+                        </span>
+                    </div>
+
+                    <!-- Church Connection -->
+                    <div class="db-alert-msg-success church-adrs">
+                        <div class="church-icon">
+                            <div class="churh-circle-small">
+                                <span class="icon-icon_church icon"></span>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <h3 class="header">{{churchName}}</h3>
+                            <address>
+                                <div>{{churchStreetName1}}</div>
+                                <div>{{churchStreetName2}}</div>
+                                <div>{{churchStreetName3}}</div>
+                                <div>
+                                    <span>{{churchCity}}</span>
+                                    <span *ngIf="churchCity">,</span> {{churchState}} {{churchPostalCode}}
+                                </div>
+                            </address>
+                            <label>
+                                {{awanaRole!==null ? awanaRole.split(";").join(", ") : awanaRole}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer text-right">
+                <span>
+                    <button (click)="removeChurchProfile()" class="btn btn-med btn-green margin-r10">
+                        Remove
+                    </button>
+                    <button [disabled]="disableCrossIcon" (click)="closeRemoveChurchPopup()" class="btn btn-med btn-grey">
+                        Cancel
+                    </button>
+                </span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div *layout="'mobile'">
+    <!--- Profile View -->
+    <section class="page-content padding-muted" *ngIf="showProfileDetail">
+        <!--- Spinner -->
+        <div *ngIf="loading" class="text-center mobile-loader">
+            <img id="mySpinner" src="assets/img/Awana_Spinner.gif" />
+        </div>
+        <div *ngIf="serviceError" style="text-align:center">
+            <p class="para-txt"> {{serviceMessage}} </p>
+        </div>
+        <div class="myorders-sec">
+            <!--Tabs -->
+            <ul class="clearfix tabs-nav mobile-tabs-nav">
+                <li [class.tab-active]="billingShippingTab">
+                    <a (click)="billingShippingTab = true" rel="nofollow">{{messages.labels.billingAddress}}</a>
+                </li>
+                <li [class.tab-active]="!billingShippingTab">
+                    <a (click)="billingShippingTab = false" rel="nofollow">{{messages.labels.shippingAddress}}</a>
+                </li>
+            </ul>
+            <div class="tabs-stage order-row">
+                <div id="tab-1" class="tab-content" *ngIf="billingShippingTab" style="display: block;">
+                    <ul class="row ship-adrs">
+                        <li class="col-3 text-center">
+                            <span class="icon-icon_location icon"></span>
+                        </li>
+                        <li class="col-9">
+                            <address class="adrs-txt" *ngIf="!(profile.currentProfile.user.BillingStreet_1=='' && profile.currentProfile.user.BillingStreet_2=='' && profile.currentProfile.user.BillingStreet_3=='' && profile.currentProfile.user.BillingCity=='' && profile.currentProfile.user.BillingState=='' && profile.currentProfile.user.BillingPostalCode=='' )">
+                                <div *ngIf="profile.currentProfile.user.BillingStreet_1">{{profile.currentProfile.user.BillingStreet_1}}</div>
+                                <div *ngIf="profile.currentProfile.user.BillingStreet_2">{{profile.currentProfile.user.BillingStreet_2}}</div>
+                                <div *ngIf="profile.currentProfile.user.BillingStreet_3">{{profile.currentProfile.user.BillingStreet_3}}</div>
+                                <span *ngIf="profile.currentProfile.user.BillingCity">{{profile.currentProfile.user.BillingCity | AppendCommaAndSpace}}</span>
+                                <span *ngIf="profile.currentProfile.user.BillingState">{{profile.currentProfile.user.BillingState + ' '}}</span>
+                                <span *ngIf="profile.currentProfile.user.BillingPostalCode">{{profile.currentProfile.user.BillingPostalCode | zipCodeFormat}}</span>
+                            </address>
+                            <address class="adrs-txt" *ngIf="profile.currentProfile.user.BillingStreet_1=='' && profile.currentProfile.user.BillingStreet_2=='' && profile.currentProfile.user.BillingStreet_3=='' && profile.currentProfile.user.BillingCity=='' && profile.currentProfile.user.BillingState=='' && profile.currentProfile.user.BillingPostalCode==''">
+                                <span>{{messages.messages.noBillingAddress}}</span>
+                            </address>
+                        </li>
+                    </ul>
+                    <div class="text-center row-padding-15">
+                        <button (click)="editBillingAddress()" class="btn btn-green margin-r10">
+                            Edit Address
+                        </button>
+                        <!-- <button (click)="deleteBillinShippinAddress('billing')" class="btn" *ngIf="!(profile.currentProfile.user.BillingStreet_1=='' && profile.currentProfile.user.BillingStreet_2=='' && profile.currentProfile.user.BillingStreet_3=='' && profile.currentProfile.user.BillingCity=='' && profile.currentProfile.user.BillingState=='' && profile.currentProfile.user.BillingPostalCode=='')">
+                            Delete Address
+                        </button> -->
+                    </div>
+                </div>
+                <div id="tab-2" class="tab-content" *ngIf="!billingShippingTab" style="display:block;">
+                    <ul class="row ship-adrs">
+                        <li class="col-3 text-center">
+                            <span class="icon-icon_location icon"></span>
+                        </li>
+                        <li class="col-9">
+                            <address class="adrs-txt" *ngIf="!(profile.currentProfile.user.ShippingStreet_1=='' && profile.currentProfile.user.ShippingStreet_2=='' && profile.currentProfile.user.ShippingStreet_3=='' && profile.currentProfile.user.ShippingCity=='' && profile.currentProfile.user.ShippingState=='' && profile.currentProfile.user.ShippingPostalCode=='' )">
+                                <div *ngIf="profile.currentProfile.user.ShippingStreet_1">{{profile.currentProfile.user.ShippingStreet_1}}</div>
+                                <div *ngIf="profile.currentProfile.user.ShippingStreet_2">{{profile.currentProfile.user.ShippingStreet_2}}</div>
+                                <div *ngIf="profile.currentProfile.user.ShippingStreet_3">{{profile.currentProfile.user.ShippingStreet_3}}</div>
+                                <span *ngIf="profile.currentProfile.user.ShippingCity">{{profile.currentProfile.user.ShippingCity | AppendCommaAndSpace}}</span>
+                                <span *ngIf="profile.currentProfile.user.ShippingState">{{profile.currentProfile.user.ShippingState + ' '}}</span>
+                                <span *ngIf="profile.currentProfile.user.ShippingPostalCode">{{profile.currentProfile.user.ShippingPostalCode | zipCodeFormat}}</span>
+                            </address>
+                            <address class="adrs-txt" *ngIf="profile.currentProfile.user.ShippingStreet_1=='' && profile.currentProfile.user.ShippingStreet_2=='' && profile.currentProfile.user.ShippingStreet_3=='' && profile.currentProfile.user.ShippingCity=='' && profile.currentProfile.user.ShippingState=='' && profile.currentProfile.user.ShippingPostalCode==''">
+                                <span>{{messages.messages.noShippingAddress}}</span>
+                            </address>
+                        </li>
+                    </ul>
+                    <div class="text-center row-padding-15">
+                        <button (click)="editShippingAddress()" class="btn btn-green margin-r10">
+                            Edit Address
+                        </button>
+                        <!-- <button (click)="deleteBillinShippinAddress('shipping')" class="btn" *ngIf="!(profile.currentProfile.user.ShippingStreet_1=='' && profile.currentProfile.user.ShippingStreet_2=='' && profile.currentProfile.user.ShippingStreet_3=='' && profile.currentProfile.user.ShippingCity=='' && profile.currentProfile.user.ShippingState=='' && profile.currentProfile.user.ShippingPostalCode=='')">
+                            Delete Address
+                        </button> -->
+                    </div>
+                </div>
+            </div>
+            <!--- Success Message -->
+            <div class="db-alert-message db-alert-msg-success" *ngIf="updateSuccess">
+                <span>
+                    <span class="icon icon-icon_like"></span>
+                    <span class="para-txt">{{messages.messages.profileUpdate}} </span>
+                </span>
+            </div>
+            <!--- Church Information -->
+            <div class="mob-mychurch">
+                <div class="church-head-sec">
+                    <h4 class="church-head">{{messages.labels.myChurchLabel}}</h4>
+                    <p class="para-txt">
+                        {{messages.labels.churchDescription}}
+                    </p>
+                </div>
+                <!--- Church Cards Row -->
+                <ul>
+                    <li *ngFor="let selectedChurches of pendingChurches">
+                        <div class="chuch-card">
+                            <h4 class="card-head">{{selectedChurches.npe5__Organization__r.Name }}</h4>
+                            <address class="adrs-txt">
+                                <div>{{selectedChurches.npe5__Organization__r.Physical_Street_1__c}}</div>
+                                <div>{{selectedChurches.npe5__Organization__r.Physical_Street_2__c}}</div>
+                                <div>{{selectedChurches.npe5__Organization__r.PhysicalStreet3__c}}</div>
+                                <div>
+                                    <span>{{selectedChurches.npe5__Organization__r.Physical_City__c}}</span>
+                                    <span *ngIf="selectedChurches.npe5__Organization__r.Physical_City__c">,</span>
+                                    <span>{{selectedChurches.npe5__Organization__r.Physical_State__c}}</span> {{selectedChurches.npe5__Organization__r.Physical_Zip__c}}
+                                </div>
+                                <div> {{selectedChurches.Awana_Role__c!==null ? selectedChurches.Awana_Role__c.split(";").join(",")
+                                    : selectedChurches.Awana_Role__c}}</div>
+                            </address>
+                            <div class="church-status">
+                                <span>
+                                    <span class="text-green">{{messages.labels.statusLabel}}</span> {{selectedChurches.npe5__Status__c}}
+                                </span>
+                                <div>
+                                    <a class="tooltip-black" (click)="DeleteChurch(selectedChurches)">
+                                        <span class="icon-trash-o icon"></span>
+                                        <div class="tooltip-black-content tooltip-black-content-small animated fadeInDown">
+                                            Delete
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="footer-btn">
+                    <a routerLink="/profile/addChurch" class="btn btn-green btn-block btn-block-small">
+                        {{messages.labels.addChurchLabel}}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Edit Shipping Address -->
+    <section class="page-content" *ngIf="showShippingAddress">
+        <!-- Lesser Year Error Message -->
+        <div class="db-alert-message" *ngIf="LesserYear">
+            <span>
+                <span class="icon icon-icon_danger"></span>
+                <span class="para-txt">{{messages.messages.lesserYear}} </span>
+            </span>
+        </div>
+        <!--- Spinner -->
+        <div *ngIf="loading" class="text-center mobile-loader">
+            <img id="mySpinner" src="assets/img/Awana_Spinner.gif" />
+        </div>
+        <div *ngIf="serviceError" style="text-align:center">
+            <p class="para-txt"> {{serviceMessage}} </p>
+        </div>
+        <form (keydown.enter)="$event.preventDefault()" (ngSubmit)="updateMobileShippingProfile()" #updateShippingForm="ngForm" novalidate>
+            <div class="form-fields mob-profile-edit">
+                <!--- Address Verification Popover for Shippping -->
+                <div class="modal" *ngIf="showShippingAddressPopOver" style="display: block;">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <div class="adrs-verfy animated fadeInDown billing-address">
+                            <h2 class="head">
+                                Address Verification
+                                <span class="close" (click)="closeSuggession()"></span>
+                            </h2>
+                            <div class="content clearfix">
+                                <p class="text-red para-txt">
+                                    We are unable to verify your address with the postal database. Using the address you entered may cause delays with delivery.
+                                </p>
+                                <div class="adrs-sec org-adrs">
+                                    <h4 class="sub-head">Original Address</h4>
+                                    <div class="select-adrs">
+                                        <span class="margin-r10">
+                                            <input id="option1" type="radio" name="option1" value="option1" (change)="onSelectionChange('Original')">
+                                            <label for="option1">
+                                                <span>
+                                                    <span></span>
+                                                </span>
+                                            </label>
+                                        </span>
+                                        <address>
+                                            {{originalstreet}}
+                                            <br> {{originalCityState}}
+                                        </address>
+                                    </div>
+                                </div>
+                                <p class="para-txt">
+                                    Please select one of the suggested options or continue with the original address entered.
+                                </p>
+                                <div class="adrs-sec">
+                                    <h4 class="sub-head">Did You Mean:</h4>
+                                    <div class="select-adrs">
+                                        <span class="margin-r10">
+                                            <input id="option2" type="radio" name="option1" value="option2" (change)="onSelectionChange('Suggested')">
+                                            <label for="option2">
+                                                <span>
+                                                    <span></span>
+                                                </span>
+                                            </label>
+                                        </span>
+                                        <address>
+                                            {{suggestedStreet}}
+                                            <br> {{suggestedCityState}}
+                                        </address>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="btn-row text-right">
+                                <button class="btn btn-green margin-r20 btn-width-80" type="submit" (click)="continueSuggession('shipping')">
+                                    Continue
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>{{messages.labels.addressLineOne}}</label>
+                    <div class="adrs-auto-complete">
+                        <input type="text" class="text-field text-field-big" required minlength="3" maxlength="40" [(ngModel)]="userProfile.ShippingStreet_1"
+                            name="ShippingStreet_1" #ShippingStreet_1="ngModel" [ngClass]="{ 'field-error': (ShippingStreet_1.errors && (ShippingStreet_1.dirty || ShippingStreet_1.touched))}"
+                            (keyup)="searchTerm$.next($event.target.value); enableAddress('shipping')">
+                        <ul class="list-unstyled adrs-list" (clickOutside)="onClickedOutside($event)" *ngIf="enableShippingAddress">
+                            <li *ngFor="let address of addressSuggestion">
+                                <div (click)="completeAddress(address.street,address.city,address.state,'shipping')">{{address.name}}</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row error-msg">
+                    <div *ngIf="ShippingStreet_1.errors && (ShippingStreet_1.dirty || ShippingStreet_1.touched)" class="alert alert-danger">
+                        <div class="field-error" [hidden]="!ShippingStreet_1.errors.required">
+                            {{profileInputValidations.shippingAddressLineOneRequired}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>{{messages.labels.addressLineTwo}}</label>
+                    <input type="text" class="text-field text-field-big" pattern={{commonRegex.addressValidation}} minlength="3" maxlength="40"
+                        [(ngModel)]="userProfile.ShippingStreet_2" name="ShippingStreet_2" #ShippingStreet_2="ngModel" [ngClass]="{ 'field-error': (ShippingStreet_2.errors && (ShippingStreet_2.dirty || ShippingStreet_2.touched))}"
+                        (focus)="emptyAddressEntries(); validateAddress(userProfile.ShippingStreet_1,userProfile.ShippingStreet_2,userProfile.ShippingStreet_3,
+                        userProfile.ShippingCity,userProfile.ShippingState,userProfile.ShippingPostalCode,userProfile.ShippingCountry,'shipping')">
+                </div>
+                <div class="row error-msg">
+                    <div *ngIf="ShippingStreet_2.errors && (ShippingStreet_2.dirty || ShippingStreet_2.touched)" class="alert alert-danger">
+                        <div class="field-error" [hidden]="!ShippingStreet_2.errors.pattern">
+                            {{profileInputValidations.shippingAddressLineTwoInvalid}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>{{messages.labels.addressLinethree}}</label>
+                    <input type="text" class="text-field text-field-big" pattern={{commonRegex.addressValidation}} minlength="3" maxlength="40"
+                        [(ngModel)]="userProfile.ShippingStreet_3" name="ShippingStreet_3" #ShippingStreet_3="ngModel" [ngClass]="{ 'field-error': (ShippingStreet_3.errors && (ShippingStreet_3.dirty || ShippingStreet_3.touched))}">
+                </div>
+                <div class="row error-msg">
+                    <div *ngIf="ShippingStreet_3.errors && (ShippingStreet_3.dirty || ShippingStreet_3.touched)" class="alert alert-danger">
+                        <div class="field-error" [hidden]="!ShippingStreet_3.errors.pattern">
+                            {{profileInputValidations.shippingAddressLineThreeInvalid}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>{{messages.labels.City}}</label>
+                    <input type="text" class="text-field text-field-big" required pattern={{commonRegex.cityValidation}} [(ngModel)]="userProfile.ShippingCity"
+                        name="ShippingCity" #ShippingCity="ngModel" [ngClass]="{ 'field-error': (ShippingCity.errors && (ShippingCity.dirty || ShippingCity.touched))}"
+                        (blur)="validateAddress(userProfile.ShippingStreet_1,userProfile.ShippingStreet_2,userProfile.ShippingStreet_3,
+                        userProfile.ShippingCity,userProfile.ShippingState,userProfile.ShippingPostalCode,userProfile.ShippingCountry,'shipping')">
+                </div>
+                <div class="row error-msg">
+                    <div *ngIf="ShippingCity.errors && (ShippingCity.dirty || ShippingCity.touched)" class="alert alert-danger">
+                        <div class="field-error animated fadeInRight" [hidden]="!ShippingCity.errors.required">
+                            {{profileInputValidations.shippingCityRequired}}
+                        </div>
+                        <div class="field-error animated fadeInRight" [hidden]="!ShippingCity.errors.pattern">
+                            {{profileInputValidations.shippingCityInvalid}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>{{messages.labels.state}}</label>
+                    <mat-select placeholder="Select State" class="text-field text-field-big" name="ShippingState" required [(ngModel)]="userProfile.ShippingState"
+                        #ShippingState="ngModel" (change)="validateAddress(userProfile.ShippingStreet_1,userProfile.ShippingStreet_2,userProfile.ShippingStreet_3,
+                    userProfile.ShippingCity,userProfile.ShippingState,userProfile.ShippingPostalCode,userProfile.ShippingCountry,'shipping')">
+                        <mat-option *ngFor="let state of States" [value]="state.abbreviation">
+                            {{state.name}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="row error-msg">
+                    <div *ngIf="ShippingState.errors && (ShippingState.dirty || ShippingState.touched)" class="alert alert-danger">
+                        <div class="field-error" [hidden]="!ShippingState.errors.required">
+                            {{profileInputValidations.shippingStateRequired}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>{{messages.labels.zip}}</label>
+                    <input type="text" class="form-control text-field text-field-big" required pattern={{commonRegex.numberwith5and9limit}} minlength="5"
+                        maxlength="10" [ngModel]="userProfile.ShippingPostalCode | zipCodeFormat" (ngModelChange)="userProfile.ShippingPostalCode = $event"
+                        name="ShippingPostalCode" #ShippingPostalCode="ngModel" [ngClass]="{ 'field-error': (ShippingPostalCode.errors && (ShippingPostalCode.dirty || ShippingPostalCode.touched))}"
+                        (change)="validateAddress(userProfile.ShippingStreet_1,userProfile.ShippingStreet_2,userProfile.ShippingStreet_3,
+                        userProfile.ShippingCity,userProfile.ShippingState,userProfile.ShippingPostalCode,userProfile.ShippingCountry,'shipping')">
+                </div>
+                <div class="row error-msg">
+                    <div *ngIf="ShippingPostalCode.errors && (ShippingPostalCode.dirty || ShippingPostalCode.touched)" class="alert alert-danger">
+                        <div class="field-error" [hidden]="!ShippingPostalCode.errors.required">
+                            {{profileInputValidations.shippingPostalCodeRequired}}
+                        </div>
+                        <div class="field-error" [hidden]="!ShippingPostalCode.errors.pattern">
+                            {{profileInputValidations.shippingPostalCodeInvalid}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>{{messages.labels.country}}</label>
+                    <mat-select placeholder="Select Country" class="text-field text-field-big" name="ShippingCountry" [(ngModel)]="userProfile.ShippingCountry">
+                        <mat-option value="United States">
+                            United States
+                        </mat-option>
+                    </mat-select>
+                </div>
+
+            </div>
+            <div class="footer-btn">
+                <button type="submit" [disabled]="!updateShippingForm.form.valid" class="btn btn-green margin-r10 btn-width-80">
+                    {{messages.labels.saveLabel}}
+                </button>
+                <button (click)="GeneralCloseEditForm()" class="btn btn-width-80">
+                    {{messages.labels.cancelLabel}}
+                </button>
+            </div>
+        </form>
+    </section>
+    <!-- Edit Billing Address -->
+    <section class="page-content" *ngIf="showBillingAddress">
+        <!-- Lesser Year Error Message -->
+        <div class="db-alert-message" *ngIf="LesserYear">
+            <span>
+                <span class="icon icon-icon_danger"></span>
+                <span class="para-txt">{{messages.messages.lesserYear}} </span>
+            </span>
+        </div>
+        <!--- Spinner -->
+        <div *ngIf="loading" class="text-center mobile-loader">
+            <img id="mySpinner" src="assets/img/Awana_Spinner.gif" />
+        </div>
+        <div *ngIf="serviceError" style="text-align:center">
+            <p class="para-txt"> {{serviceMessage}} </p>
+        </div>
+        <form (keydown.enter)="$event.preventDefault()" (ngSubmit)="updateMobileBillingProfile()" #updateBillingForm="ngForm" novalidate>
+            <div class="form-fields mob-profile-edit">
+                <!--- Address Verification Popover for Billing -->
+                <div class="modal" *ngIf="showBillingAddressPopOver" style="display: block;">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <div class="adrs-verfy animated fadeInDown billing-address">
+                            <h2 class="head">
+                                Address Verification
+                                <span class="close" (click)="closeSuggession()"></span>
+                            </h2>
+                            <div class="content clearfix">
+                                <p class="text-red para-txt">
+                                    We are unable to verify your address with the postal database. Using the address you entered may cause delays with delivery.
+                                </p>
+                                <div class="adrs-sec org-adrs">
+                                    <h4 class="sub-head">Original Address</h4>
+                                    <div class="select-adrs">
+                                        <span class="margin-r10">
+                                            <input id="option1" type="radio" name="option1" value="option1" (change)="onSelectionChange('Original')">
+                                            <label for="option1">
+                                                <span>
+                                                    <span></span>
+                                                </span>
+                                            </label>
+                                        </span>
+                                        <address>
+                                            {{originalstreet}}
+                                            <br> {{originalCityState}}
+                                        </address>
+                                    </div>
+                                </div>
+                                <p class="para-txt">
+                                    Please select one of the suggested options or continue with the original address entered.
+                                </p>
+                                <div class="adrs-sec">
+                                    <h4 class="sub-head">Did You Mean:</h4>
+                                    <div class="select-adrs">
+                                        <span class="margin-r10">
+                                            <input id="option2" type="radio" name="option1" value="option2" (change)="onSelectionChange('Suggested')">
+                                            <label for="option2">
+                                                <span>
+                                                    <span></span>
+                                                </span>
+                                            </label>
+                                        </span>
+                                        <address>
+                                            {{suggestedStreet}}
+                                            <br> {{suggestedCityState}}
+                                        </address>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="btn-row text-right">
+                                <button class="btn btn-green margin-r20 btn-width-80" type="submit" (click)="continueSuggession('billing')">
+                                    Continue
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>{{messages.labels.addressLineOne}}</label>
+                    <div class="adrs-auto-complete">
+                        <input type="text" class="text-field text-field-big" required minlength="3" maxlength="40" [(ngModel)]="userProfile.BillingStreet_1"
+                            name="BillingStreet_1" #BillingStreet_1="ngModel" [ngClass]="{ 'field-error': (BillingStreet_1.errors && (BillingStreet_1.dirty || BillingStreet_1.touched))}"
+                            (keyup)="searchTerm$.next($event.target.value); enableAddress('billing')">
+                        <ul class="list-unstyled adrs-list" (clickOutside)="onClickedOutside($event)" *ngIf="enableBillingAddress">
+                            <li *ngFor="let address of addressSuggestion">
+                                <div (click)="completeAddress(address.street,address.city,address.state,'billing')">{{address.name}}</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row error-msg">
+                    <div *ngIf="BillingStreet_1.errors && (BillingStreet_1.dirty || BillingStreet_1.touched)" class="alert alert-danger">
+                        <div class="field-error" [hidden]="!BillingStreet_1.errors.required">
+                            {{profileInputValidations.billingAddressLineOneRequired}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>{{messages.labels.addressLineTwo}}</label>
+                    <input type="text" class="text-field text-field-big" pattern={{commonRegex.addressValidation}} minlength="3" maxlength="40"
+                        [(ngModel)]="userProfile.BillingStreet_2" name="BillingStreet_2" #BillingStreet_2="ngModel" [ngClass]="{ 'field-error': (BillingStreet_2.errors && (BillingStreet_2.dirty || BillingStreet_2.touched))}"
+                        (focus)="emptyAddressEntries();validateAddress(userProfile.BillingStreet_1,userProfile.BillingStreet_2,userProfile.BillingStreet_3,
+                        userProfile.BillingCity,userProfile.BillingState,userProfile.BillingPostalCode,userProfile.BillingCountry,'billing')">
+                </div>
+                <div class="row error-msg">
+                    <div *ngIf="BillingStreet_2.errors && (BillingStreet_2.dirty || BillingStreet_2.touched)" class="alert alert-danger">
+                        <div class="field-error" [hidden]="!BillingStreet_2.errors.pattern">
+                            {{profileInputValidations.billingAddressLineTwoInvalid}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>{{messages.labels.addressLinethree}}</label>
+                    <input type="text" class="text-field text-field-big" pattern={{commonRegex.addressValidation}} minlength="3" maxlength="40"
+                        [(ngModel)]="userProfile.BillingStreet_3" name="BillingStreet_3" #BillingStreet_3="ngModel" [ngClass]="{ 'field-error': (BillingStreet_3.errors && (BillingStreet_3.dirty || BillingStreet_3.touched))}">
+                </div>
+                <div class="row error-msg">
+                    <div *ngIf="BillingStreet_3.errors && (BillingStreet_3.dirty || BillingStreet_3.touched)" class="alert alert-danger">
+                        <div class="field-error" [hidden]="!BillingStreet_3.errors.pattern">
+                            {{profileInputValidations.billingAddressLineThreeInvalid}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>City :</label>
+                    <input type="text" class="text-field text-field-big" required pattern={{commonRegex.cityValidation}} [(ngModel)]="userProfile.BillingCity"
+                        name="BillingCity" #BillingCity="ngModel" [ngClass]="{ 'field-error': (BillingCity.errors && (BillingCity.dirty || BillingCity.touched))}"
+                        (blur)="validateAddress(userProfile.BillingStreet_1,userProfile.BillingStreet_2,userProfile.BillingStreet_3,
+                        userProfile.BillingCity,userProfile.BillingState,userProfile.BillingPostalCode,userProfile.BillingCountry,'billing')">
+                </div>
+                <div class="row error-msg">
+                    <div *ngIf="BillingCity.errors && (BillingCity.dirty || BillingCity.touched)" class="alert alert-danger">
+                        <div class="field-error animated fadeInRight" [hidden]="!BillingCity.errors.required">
+                            {{profileInputValidations.billingCityRequired}}
+                        </div>
+                        <div class="field-error animated fadeInRight" [hidden]="!BillingCity.errors.pattern">
+                            {{profileInputValidations.billingCityInvalid}}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>State :</label>
+                    <mat-select placeholder="Select State" class="text-field text-field-big" name="BillingState" required [(ngModel)]="userProfile.BillingState"
+                        #BillingState="ngModel" (change)="validateAddress(userProfile.BillingStreet_1,userProfile.BillingStreet_2,userProfile.BillingStreet_3,
+                    userProfile.BillingCity,userProfile.BillingState,userProfile.BillingPostalCode,userProfile.BillingCountry,'billing')">
+                        <mat-option *ngFor="let state of States" [value]="state.abbreviation">
+                            {{state.name}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="row error-msg">
+                    <div *ngIf="BillingState.errors && (BillingState.dirty || BillingState.touched)" class="alert alert-danger">
+                        <div class="field-error" [hidden]="!BillingState.errors.required">
+                            {{profileInputValidations.billingStateRequired}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Zip :</label>
+                    <input type="text" class="form-control text-field text-field-big" required pattern={{commonRegex.numberwith5and9limit}} minlength="5"
+                        maxlength="10" [ngModel]="userProfile.BillingPostalCode | zipCodeFormat" (ngModelChange)="userProfile.BillingPostalCode = $event"
+                        name="BillingPostalCode" #BillingPostalCode="ngModel" [ngClass]="{ 'field-error': (BillingPostalCode.errors && (BillingPostalCode.dirty || BillingPostalCode.touched))}"
+                        (change)="validateAddress(userProfile.BillingStreet_1,userProfile.BillingStreet_2,userProfile.BillingStreet_3,
+                        userProfile.BillingCity,userProfile.BillingState,userProfile.BillingPostalCode,userProfile.BillingCountry,'billing')">
+                </div>
+                <div class="row error-msg">
+                    <div *ngIf="BillingPostalCode.errors && (BillingPostalCode.dirty || BillingPostalCode.touched)" class="alert alert-danger">
+                        <div class="field-error" [hidden]="!BillingPostalCode.errors.required">
+                            {{profileInputValidations.billingPostalCodeRequired}}
+                        </div>
+                        <div class="field-error" [hidden]="!BillingPostalCode.errors.pattern">
+                            {{profileInputValidations.billingPostalCodeInvalid}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>{{messages.labels.country}}</label>
+                    <mat-select placeholder="Select Country" class="text-field text-field-big" name="BillingCountry" [(ngModel)]="userProfile.BillingCountry">
+                        <mat-option value="" disabled>Select Country</mat-option>
+                        <mat-option value="United States">
+                            United States
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" [checked]="false" (change)="updateAddrs($event)">Apply billing address to shipping address
+                </div>
+            </div>
+            <div class="footer-btn">
+                <button type="submit" [disabled]="!updateBillingForm.form.valid" class="btn btn-green margin-r10 btn-width-80">
+                    {{messages.labels.saveLabel}}
+                </button>
+                <button (click)="GeneralCloseEditForm()" class="btn btn-width-80">
+                    {{messages.labels.cancelLabel}}
+                </button>
+            </div>
+        </form>
+    </section>
+    <!--Edit General Profile-->
+    <section class="page-content" *ngIf="showGeneralEditInfo">
+        <form (keydown.enter)="$event.preventDefault()" (ngSubmit)="updateMobileGeneralProfile()" #updateGeneralForm="ngForm" novalidate>
+            <div class="form-fields mob-profile-edit">
+                <div class="mob-edit-photo">
+                    <div class="change-photo">
+                        <div class="img">
+                            <img class="mobile-profile-pic" [src]="profilePic" alt="Profile Image">
+                        </div>
+                    </div>
+                    <div class="file-upload">
+                        <button class="btn" routerLink="/profile/detail/edit-profile-pic">
+                            {{messages.labels.editPhoto}}
+                            <span class="icon-icon_change_photo"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Lesser Year Error Message -->
+                <div class="db-alert-message" *ngIf="LesserYear">
+                    <span>
+                        <span class="icon icon-icon_danger"></span>
+                        <span class="para-txt">{{messages.messages.lesserYear}} </span>
+                    </span>
+                </div>
+                <!--- Spinner -->
+                <div *ngIf="loading" class="text-center mobile-loader">
+                    <img id="mySpinner" src="assets/img/Awana_Spinner.gif" />
+                </div>
+                <div *ngIf="serviceError" style="text-align:center">
+                    <p class="para-txt"> {{serviceMessage}} </p>
+                </div>
+                <div class="form-group">
+                    <label>{{messages.labels.accountLabel}}</label>
+                    <input type="text" name="IntacctID__c" [(ngModel)]="userProfile.IntacctID__c" disabled="" class="text-field text-field-big disabled">
+                </div>
+                <div class="form-group">
+                    <label>{{messages.labels.emailLabel}}</label>
+                    <input type="text" name="email" [(ngModel)]="userProfile.Email" disabled="" class="text-field text-field-big disabled">
+                </div>
+                <div class="form-group">
+                    <label>{{messages.labels.firstnameLabel}}</label>
+                    <input type="text" class="form-control text-field text-field-big" required pattern={{commonRegex.firstLastNameValidation}}
+                        minlength="2" maxlength="40" [(ngModel)]="userProfile.FirstName" name="FirstName" #FirstName="ngModel"
+                        [ngClass]="{ 'field-error': (FirstName.errors && (FirstName.dirty || FirstName.touched))}">
+                </div>
+                <div class="row error-msg">
+                    <div *ngIf="FirstName.errors && (FirstName.dirty || FirstName.touched)" class="alert alert-danger">
+                        <div class="field-error animated fadeInRight" [hidden]="!FirstName.errors.required">
+                            {{profileInputValidations.firstNameRequired}}
+                        </div>
+                        <div class="field-error animated fadeInRight" [hidden]="!FirstName.errors.pattern">
+                            {{profileInputValidations.firstNameInvalid}}
+                        </div>
+                        <div class="field-error animated fadeInRight" [hidden]="!FirstName.errors.minlength">
+                            {{profileInputValidations.firstNameMinChar}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>{{messages.labels.lastnameLabel}}</label>
+                    <input type="text" class="text-field text-field-big" required pattern={{commonRegex.firstLastNameValidation}} minlength="2"
+                        maxlength="40" [(ngModel)]="userProfile.LastName" name="LastName" #LastName="ngModel" [ngClass]="{ 'field-error': (LastName.errors && (LastName.dirty || LastName.touched))}">
+                </div>
+                <div class="row error-msg">
+                    <div *ngIf="LastName.errors && (LastName.dirty || LastName.touched)" class="alert alert-danger">
+                        <div class="field-error animated fadeInRight" [hidden]="!LastName.errors.required">
+                            {{profileInputValidations.lastNameRequired}}
+                        </div>
+                        <div class="field-error animated fadeInRight" [hidden]="!LastName.errors.pattern">
+                            {{profileInputValidations.lastNameInvalid}}
+                        </div>
+                        <div class="field-error animated fadeInRight" [hidden]="!LastName.errors.minlength">
+                            {{profileInputValidations.lastNameMinChar}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group align-items">
+                    <label>{{messages.labels.dateLabel}}</label>
+                    <ul class="row dob">
+                        <li class="col-5">
+                            <mat-select placeholder="MM" class="text-field text-field-big" name="month" required [(ngModel)]="userProfile.month" #month="ngModel">
+                                <mat-option value="" disabled>MM</mat-option>
+                                <mat-option *ngFor="let title of monthValue" [value]="title.value">
+                                    {{title.label}}
+                                </mat-option>
+                            </mat-select>
+                        </li>
+                        <li class="col-3">
+                            <mat-select id="date" placeholder="DD" class="text-field text-field-big" name="date" required [(ngModel)]="userProfile.date"
+                                #date="ngModel">
+                                <mat-option value="" disabled>DD</mat-option>
+                                <mat-option *ngFor="let date of chooseDateCount(userProfile.year,userProfile.month);let i = index" [value]="date">
+                                    {{date}}
+                                </mat-option>
+                            </mat-select>
+                        </li>
+                        <li class="col-4">
+                            <mat-select placeholder="YYYY" class="text-field text-field-big" name="year" required [(ngModel)]="userProfile.year" (focus)="clearLesserYear()"
+                                #year="ngModel">
+                                <mat-option value="" disabled>YYYY</mat-option>
+                                <mat-option *ngFor="let year of createYearRange(choosenYearCount);let i = index" [value]="year">
+                                    {{year}}
+                                </mat-option>
+                            </mat-select>
+
+                        </li>
+                    </ul>
+                </div>
+                <div class="row error-msg">
+                    <div *ngIf="month.errors && (month.dirty || month.touched)" class="alert alert-danger">
+                        <div class="field-error animated fadeInRight" [hidden]="!month.errors.required">
+                            {{profileInputValidations.monthRequired}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row error-msg">
+                    <div *ngIf="date.errors && (date.dirty || date.touched)" class="alert alert-danger">
+                        <div class="field-error animated fadeInRight" [hidden]="!date.errors.required">
+                            {{profileInputValidations.dateRequired}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row error-msg">
+                    <div *ngIf="year.errors && (year.dirty || year.touched)" class="alert alert-danger">
+                        <div class="field-error animated fadeInRight" [hidden]="!year.errors.required">
+                            {{profileInputValidations.yearRequired}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>{{messages.labels.mobileLabel}}</label>
+                    <input type="text" class="text-field text-field-big" [(ngModel)]="userProfile.MobilePhone" name="MobilePhone" [textMask]="{mask: mask}"
+                        (blur)="checkMobileFormat(userProfile.MobilePhone)" (focus)="checkPhone()" #MobilePhone="ngModel" [ngClass]="{ 'field-error': (MobilePhone.errors && (MobilePhone.dirty || MobilePhone.touched))|| PhonePatternError}">
+                </div>
+                <div class="row error-msg">
+                    <div *ngIf="PhonePatternError && !(MobilePhone.errors && (MobilePhone.dirty || MobilePhone.touched))" class="alert alert-danger">
+                        <div class="phone-error">{{profileInputValidations.mobilePhonePattern}}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>{{messages.labels.homeLabel}}</label>
+                    <input type="text" name="HomePhone" class="text-field text-field-big" (blur)="checkHomeFormat(userProfile.HomePhone)" (focus)="checkHomePhone()"
+                        [(ngModel)]="userProfile.HomePhone" [textMask]="{mask: mask}" #HomePhone="ngModel" [ngClass]="{ 'field-error': (HomePhone.errors && (HomePhone.dirty || HomePhone.touched) || HomePhonePatternError)}">
+                </div>
+                <div class="row error-msg">
+                    <div *ngIf="HomePhonePatternError && !(HomePhone.errors && (HomePhone.dirty || HomePhone.touched))" class="alert alert-danger">
+                        <div class="phone-error">{{profileInputValidations.homePhonePattern}}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>{{messages.labels.workLabel}}</label>
+                    <input type="text" name="WorkPhone" class="text-field text-field-big" (blur)="checkWorkFormat(userProfile.WorkPhone)" (focus)="checkWorkPhone()"
+                        [(ngModel)]="userProfile.WorkPhone" [textMask]="{mask: mask}" #WorkPhone="ngModel" [ngClass]="{ 'field-error': (WorkPhone.errors && (WorkPhone.dirty || WorkPhone.touched)) || WorkPhonePatternError}">
+                </div>
+                <div class="row error-msg">
+                    <div *ngIf="WorkPhonePatternError && !(WorkPhone.errors && (WorkPhone.dirty || WorkPhone.touched))" class="alert alert-danger">
+                        <div class="phone-error">{{profileInputValidations.workPhonePattern}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-btn">
+                <button type="submit" [disabled]="!updateGeneralForm.form.valid || PhonePatternError || HomePhonePatternError || WorkPhonePatternError"
+                    class="btn btn-green margin-r10 btn-width-80">
+                    {{messages.labels.saveLabel}}
+                </button>
+                <button (click)="GeneralCloseEditForm()" class="btn btn-width-80">
+                    {{messages.labels.cancelLabel}}
+                </button>
+            </div>
+        </form>
+    </section>
+    <!--Edit Profile Picture-->
+    <section class="page-content" *ngIf="showEditProfilePic">
+        <!-- profile picture Success Message -->
+        <div class="db-alert-message db-alert-msg-success" *ngIf="profilePictureUpdate">
+            <span>
+                <span class="icon icon-icon_like"></span>
+                <span class="para-txt">{{messages.messages.pictureupdate}} </span>
+            </span>
+        </div>
+        <!--- Spinner -->
+        <div *ngIf="loading" class="text-center mobile-loader">
+            <img id="mySpinner" src="assets/img/Awana_Spinner.gif" />
+        </div>
+
+        <div class="content-pad" [hidden]="cropPhotoPopup">
+            <div class="profile-change-photo">
+                <a href="javascript:void(0);" (click)="profileFileGetter();" class="btn btn-green">
+                    {{messages.labels.selectYourPhoto}}
+                </a>
+            </div>
+        </div>
+        <div class="content-pad" [hidden]="!cropPhotoPopup">
+            <div class="row crop-photo">
+                <div class="col-9 img-border">
+                    <img-cropper [image]="imageData" id="imageCropBtn" [settings]="cropperSettings"> </img-cropper>
+                </div>
+                <div class="col-3 img-border small-photo">
+                    <img id="croppedImage" [src]="imageData.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+                </div>
+            </div>
+        </div>
+        <div class="footer-btn" [hidden]="!cropPhotoPopup">
+            <a href="javascript:void(0);" class="btn btn-green margin-r10 btn-width-110" (click)="saveProfileImage();">
+                {{messages.labels.savePhoto}}
+            </a>
+            <a href="javascript:void(0);" (click)="cropPhotoPopup=false;" class="btn btn-width-110">
+                {{messages.labels.cancel}}
+            </a>
+        </div>
+    </section>
+    <!-- Church Remove connection Confirmation Modal -->
+    <div class="modal text-left" style="display: block;" *ngIf="openDeleteChurchPopup">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="content-pad">
+                <button class="close icon-icon_close removeButtonClass" [disabled]="disableCrossIcon" (click)="closeRemoveChurchPopup();"></button>
+                <h2 class="heading">Remove Connection</h2>
+                <div class="remove-connection">
+                    <!-- Alert MSg -->
+                    <div class="db-alert-message modified-message">
+                        <span>
+                            <span class="icon icon-icon_danger"></span>
+                            <span class="para-txt">Are you sure you want to remove this connection?</span>
+                        </span>
+                    </div>
+
+                    <!-- Church Connection -->
+                    <div class="db-alert-msg-success church-adrs">
+                        <div class="church-icon">
+                            <div class="churh-circle-small">
+                                <span class="icon-icon_church icon"></span>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <h3 class="header">{{churchName}}</h3>
+                            <address>
+                                <div>{{churchStreetName1}}</div>
+                                <div>{{churchStreetName2}}</div>
+                                <div>{{churchStreetName3}}</div>
+                                <div>
+                                    <span>{{churchCity}}</span>
+                                    <span *ngIf="churchCity">,</span> {{churchState}} {{churchPostalCode}}
+                                </div>
+                            </address>
+                            <label>
+                                {{awanaRole!==null ? awanaRole.split(";").join(", ") : awanaRole}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer text-right">
+                <span>
+                    <button (click)="removeChurchProfile()" class="btn btn-med btn-green margin-r10">
+                        Remove
+                    </button>
+                    <button [disabled]="disableCrossIcon" (click)="closeRemoveChurchPopup()" class="btn btn-med btn-grey">
+                        Cancel
+                    </button>
+                </span>
+            </div>
+        </div>
+
+    </div>
+</div>

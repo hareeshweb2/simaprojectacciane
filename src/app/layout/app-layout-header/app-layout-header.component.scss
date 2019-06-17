@@ -1,0 +1,57 @@
+.dropdown {
+  display: block;
+}
+
+.pointer {
+  cursor: pointer;
+}
+.dropdown-scroll {
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 260px;
+  height: auto;
+}
+.pointer {
+  cursor: pointer;
+}
+.church-dropdown-letter {
+  text-transform: initial;
+}
+.arrow-left {
+  z-index: 999;
+}
+
+.user-profile-edit > input {
+  position: absolute;
+  left: -30px;
+  opacity: 0;
+}
+
+.main-nav .logo-sec li > a .church-name {
+  margin-left: -25px;
+}
+
+.main-nav .logo-sec li > a .church-name .church-txt {
+    display: block;
+    padding: 0 8px 0 25px;
+}
+
+.main-nav .logo-sec li a.aChurch .dropdown-arrow {
+  margin: 0;
+  padding: 25px 25px 25px 0;
+  cursor: pointer;
+}
+
+.mobile-header .notify-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.notify-recent-msg {
+  background-color: #FBFAF9;
+}
+.addReadStyles{
+  background:#fff;
+}

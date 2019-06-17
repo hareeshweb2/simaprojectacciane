@@ -1,0 +1,48 @@
+/*** -----------------------------------------
+
+                HELP AND SUPPORT
+
+----------------------------------------- ***/
+
+
+.help-support {
+    text-align: center;
+    margin: 4em 0;
+}
+
+.help-support .hs-head {
+    font-size: 18px;
+    color: #666666;
+}
+
+.help-support .divider {
+    border-right: 1px solid #e1e1e1;
+}
+
+.help-support .icon {
+    font-size: 6em;
+    color: #47BFA6;
+    margin-bottom: .3em;
+    display: inline-block;
+}
+
+.help-support .icon.icon-icon_chat {
+    font-size: 5em;
+    margin-top: .3em;
+}
+
+.help-support .details {
+    margin-top: 1.8em;
+}
+
+.help-support .details span {
+    display: block;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.help-support .tooltip-black-content {
+    min-width: 110px;
+    text-transform: capitalize;
+}
+

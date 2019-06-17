@@ -1,0 +1,275 @@
+<div class="clearfix" *layout="'desktop'">
+  <!-- My Profile -->
+  <div class="bor-boxshadow">
+    <div class="myorders-sec">
+      <h3 class="heading margin-b2em">
+        <span class="icon-icon_church icon"></span>
+        {{messages.labels.addChurch}}
+      </h3>
+
+      <!--search area-->
+      <div class="search-church">
+        <div class="form-group">
+          <label class="label-head">{{messages.labels.SearchChurchLabel}}</label>
+          <div class="search-input">
+            <input tabIndex="0" id="searchDetail" name="search" type="text" #search="ngModel" [(ngModel)]="query" (keyup)="searchTerm($event.target.value);filterSearch($event)" class="text-field"
+              placeholder="Search by Church name and zip code" required [ngClass]="{ 'field-error': search.invalid && (search.dirty || search.touched)}">
+            <div *ngIf="search.invalid && (search.dirty || search.touched)" class="field-error-txt">
+              <div class="animated fadeInRight" *ngIf="search.errors.required">
+                {{messages.validations.churchRequired}}
+              </div>
+            </div>
+            <div class="suggestions" *ngIf="query" style="display: none;">
+              <ul *ngFor="let item of filteredList">
+                <li>
+                  <a (click)="select(item)">{{item}}</a>
+                </li>
+              </ul>
+            </div>
+            <!-- Search Input Dropdown Selected -->
+            <div class="search-input-dropdown selected" (click)="removeItem()" *ngIf="query && displaySelected " style="display:block;">
+              <ul class="row">
+                <li class="col-1 church-icon">
+                  <span class="icon icon-icon_church"></span>
+                </li>
+                <li class="col-11">
+                  <h4 class="church-head">{{query.name}}</h4>
+                  <h6 class="church-adrs">
+                    <span *ngIf="query.physical_street_1">{{query.physical_street_1}},</span> 
+                    <span *ngIf="query.physical_street_2">{{query.physical_street_2}},</span> 
+                    <span *ngIf="query.physical_street_3">{{query.physical_street_3}},</span> 
+                    <span *ngIf="query.physical_city">{{query.physical_city}},</span>
+                    <span *ngIf="query.physical_state">{{query.physical_state}}</span>
+                    <span *ngIf="query.physical_zip"> {{query.physical_zip}},</span>
+                    <span *ngIf="query.physical_country">{{query.physical_country}}</span>
+                  </h6>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Search Input Dropdown -->
+            <div id="search-list" class="search-input-dropdown search-hover " style="display: block;" *ngIf="filteredList.length > 0 && errorHandleObject.dataNotFound==false && query!==''">
+              <ul class="row" *ngFor="let item of (filteredList | sortByChurchName : 'name')" (click)="select(item) ">
+                <li class="col-1 church-icon ">
+                  <span class="icon icon-icon_church "></span>
+                </li>
+                <li class="col-11 ">
+                  <h4 class="church-head ">{{item.name}}</h4>
+                  <h6 class="church-adrs ">
+                      <span *ngIf="item.physical_street_1">{{item.physical_street_1}},</span>
+                      <span *ngIf="item.physical_street_2">{{item.physical_street_2}},</span>
+                      <span *ngIf="item.physical_street_3">{{item.physical_street_3}},</span>
+                      <span *ngIf="item.physical_city">{{item.physical_city}},</span>
+                      <span *ngIf="item.physical_state">{{item.physical_state}}</span>
+                      <span *ngIf="item.physical_zip"> {{item.physical_zip}},</span>
+                      <span *ngIf="item.physical_country">{{item.physical_country}}</span>
+                  </h6>
+                </li>
+              </ul>
+            </div>
+            <div class="search-input-dropdown search-hover " style="display: block; " *ngIf="filteredList.length ==0 && errorHandleObject.dataNotFound==true && query!==''">
+              <ul class="row ">
+                <li class="col-1 church-icon ">
+                  <span class="icon icon-icon_church "></span>
+                </li>
+                <li class="col-11 ">
+                  <h4 class="church-head ">{{messages.validations.noChurchFound}}</h4>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form-group ">
+
+          <div class="row form-fields">
+            <div class="col-6 padding-muted margin-r20 ">
+              <label class="label-head ">{{messages.labels.awanaLabel}}</label>
+              <form>
+                <div class="multiselect " style="display: block; ">
+                  <div class="selectBox " style="display:none; ">
+                    <select class="text-field text-field-big ">
+                      <option>Select Awana Role</option>
+                    </select>
+                    <div class="overSelect "></div>
+                  </div>
+                  <div class=" " style="display: block; ">
+                    <angular2-multiselect tabIndex="0" class="multiselect" name="selectedItems " [data]="tempRoles
+                " [(ngModel)]="selectedItems " [settings]="settings " (onSelect)="onItemSelect($event) " (onDeSelect)="OnItemDeSelect($event) "
+                      (onSelectAll)="onSelectAll($event) " (onDeSelectAll)="onDeSelectAll($event) "></angular2-multiselect>
+                  </div>
+                  <div class="animated fadeInRight" *ngIf="selectedItems.length==0 && errorHandleObject.roleError " class="field-error-txt ">
+                    {{messages.validations.awanaRoleRequired}}
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-6 padding-muted ">
+              <label class="label-head ">{{messages.labels.churchRoleLabel}}</label>
+              <form>
+                <div class="multiselect ">
+                  <div class="selectBox " style="display:none; ">
+                    <select class="text-field text-field-big ">
+                      <option>Select Church Role</option>
+                    </select>
+                    <div class="overSelect "></div>
+                  </div>
+                  <div class="selected-list" style="display: block; ">
+                      <select  tabIndex="0"  class="c-btn text-field text-field-big" name="selectedChurchItems" tabIndex="0" [(ngModel)]="selectedChurchItems">
+                        <option value="">Select Church Role</option>
+                        <option *ngFor="let churchRoles of tempRolesChurch" [value]="churchRoles.Role">
+                        {{churchRoles.Role}}
+                        </option>
+                      </select>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+        <!--add your church button-->
+        <div class="clearfix margin-t20 margin-b10">
+          <button tabIndex="0" (click)="addChurch(query) " [disabled]="query=='' || displaySelected==false
+        || lessCharactersEntered==true || selectedItems.length==0 || !addchurchbutton" class="btn btn-green margin-r10 btn-width-80">
+          {{messages.labels.addButton}}
+          </button>
+          <button tabIndex="0" routerLink="/profile/detail" class="btn btn-width-80">
+            {{messages.labels.cancelButton}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- mobile screen content -->
+<section class="page-content" *layout="'mobile'">
+  <h1 class="section-header">
+    <span class="icon-icon_church icon"></span>
+    {{messages.labels.addChurch}}
+  </h1>
+
+  <div class="form-fields mob-profile-edit" *ngIf="displayAddChruch">
+    <div class="form-group">
+      <label>{{messages.labels.SearchChurchLabel}}</label>
+      <div class="search-input">
+         
+        <input id="searchDetail" name="search" type="text" #search="ngModel" [(ngModel)]="query" (keyup)="searchTerm($event.target.value)" class="text-field"
+          placeholder="Search by Church name and zip code" required [ngClass]="{ 'field-error': search.invalid && (search.dirty || search.touched)}">
+          
+        <div *ngIf="search.invalid && (search.dirty || search.touched)" class="field-error-txt">
+          <div *ngIf="search.errors.required">
+            {{messages.validations.churchRequired}}
+          </div>
+        </div>
+        <div class="suggestions" *ngIf="query" style="display: none;">
+          <ul *ngFor="let item of filteredList">
+            <li>
+              <a (click)="select(item)">{{item}}</a>
+            </li>
+          </ul>
+        </div>
+        <a (click)="searchTerm$.next($event.target.value)" *ngIf="!(query && displaySelected)">
+          <span class="icon-search"></span>
+        </a>
+        <!-- <span class="close icon-icon_close icon-search" (click)="removeItem()" *ngIf="query && displaySelected"></span> -->
+        <!-- Search Input Dropdown Selected -->
+        <div class="search-input-dropdown selected"  *ngIf="query && displaySelected " style="display:block;">
+            <span class="close icon-icon_close icon-search" (click)="removeItem()"></span>
+          <ul class="row">
+            <li class="col-1 church-icon">
+              <span class="icon icon-icon_church"></span>
+            </li>
+            <li class="col-11">
+              <h4 class="church-head">{{query.name}}</h4>
+              <h6 class="church-adrs">
+                <span *ngIf="query.physical_street_1">{{query.physical_street_1}},</span> 
+                <span *ngIf="query.physical_street_2">{{query.physical_street_2}},</span> 
+                <span *ngIf="query.physical_street_3">{{query.physical_street_3}},</span> 
+                <span *ngIf="query.physical_city">{{query.physical_city}},</span>
+                <span *ngIf="query.physical_state">{{query.physical_state}}</span>
+                <span *ngIf="query.physical_zip"> {{query.physical_zip}},</span>
+                <span *ngIf="query.physical_country">{{query.physical_country}}</span>
+              </h6>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Search Input Dropdown -->
+        <div class="search-input-dropdown search-hover" style="display: block;" *ngIf="filteredList.length > 0 && errorHandleObject.dataNotFound==false && query!==''">
+          <ul class="row" *ngFor="let item of (filteredList | sortByChurchName : 'name')" (click)="select(item) ">
+            <li class="col-1 church-icon ">
+              <span class="icon icon-icon_church "></span>
+            </li>
+            <li class="col-11 ">
+              <h4 class="church-head ">{{item.name}}</h4>
+              <h6 class="church-adrs ">
+                <span *ngIf="item.physical_street_1">{{item.physical_street_1}},</span>
+                <span *ngIf="item.physical_street_2">{{item.physical_street_2}},</span>
+                <span *ngIf="item.physical_street_3">{{item.physical_street_3}},</span>
+                <span *ngIf="item.physical_city">{{item.physical_city}},</span>
+                <span *ngIf="item.physical_state">{{item.physical_state}}</span>
+                <span *ngIf="item.physical_zip"> {{item.physical_zip}},</span>
+                <span *ngIf="item.physical_country">{{item.physical_country}}</span>
+              </h6>
+            </li>
+          </ul>
+        </div>
+        <div class="search-input-dropdown search-hover " style="display: block; " *ngIf="filteredList.length == 0 && errorHandleObject.dataNotFound==true && query!==''">
+          <ul class="row ">
+            <li class="col-1 church-icon ">
+              <span class="icon icon-icon_church "></span>
+            </li>
+            <li class="col-11 ">
+              <h4 class="church-head ">{{messages.validations.noChurchFound}}</h4>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>{{messages.labels.awanaLabel}}</label>
+      <form>
+        <div class="multiselect" style="display: block;">
+          <div class=" " style="display: block; ">
+            <angular2-multiselect style="outline:none;" class="multiselect " name="selectedItems " [data]="tempRoles
+          " [(ngModel)]="selectedItems " [settings]="settings " (onSelect)="onItemSelect($event) " (onDeSelect)="OnItemDeSelect($event) "
+              (onSelectAll)="onSelectAll($event) " (onDeSelectAll)="onDeSelectAll($event) "></angular2-multiselect>
+          </div>
+          <div *ngIf="selectedItems.length==0 && errorHandleObject.roleError " class="field-error-txt ">
+            {{messages.validations.awanaRoleRequired}}
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="form-group">
+      <label>{{messages.labels.churchRoleLabel}}</label>
+      <form>
+        <div class="multi-select">
+         
+              <mat-select  class="text-field text-field-big" name="selectedChurchItems"  [(ngModel)]="selectedChurchItems">
+                <mat-option value="">Select Church Role</mat-option>
+                <mat-option *ngFor="let churchRoles of tempRolesChurch" [value]="churchRoles.Role">
+                  {{churchRoles.Role}}
+                </mat-option>
+              </mat-select>
+         
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="footer-btn" *ngIf="displayAddChruch">
+    <button *ngIf="!AddChurchSuccess " (click)="addChurch(query) " [disabled]="query=='' || displaySelected==false
+  || lessCharactersEntered==true || selectedItems.length==0 || !addchurchbutton" class="btn btn-green margin-r10 btn-width-80">
+      {{messages.labels.addButtonMobile}}
+    </button>
+    <button *ngIf="!AddChurchSuccess" routerLink="/profile/detail" class="btn btn-width-80">
+      {{messages.labels.cancelButton}}
+    </button>
+  </div>
+
+</section>

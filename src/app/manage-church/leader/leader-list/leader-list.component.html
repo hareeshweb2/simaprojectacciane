@@ -1,0 +1,797 @@
+<!-- My Recent Order -->
+<div class="bor-boxshadow margin-b2em" *layout="'desktop'">
+  <div class="myorders-sec" *ngIf="!removePopUp">
+    <div class="filter">
+      <h3 class="heading">
+        <span class="icon-icon_church icon"></span>
+        {{messages.manageLeaders}}
+      </h3>
+      <span class="filter-field">
+          <span class="switch-on-off pending-invite">
+              <span class="check-label-txt">
+                {{messages.pendingInvitation}}
+              </span>
+              <label class="switch">
+                 <input type="checkbox"  [(ngModel)]="toggle"  (change) = "searchItem='';getleaders()">
+                  <span class="input-slider round"></span>
+              </label>
+            </span>
+        <span class="search-field margin-r10">
+          <input type="text" [(ngModel)]="searchItem" name="" placeholder="Search by name, email or role..." class="text-field" (keyup)="searchLeader$.next($event.target.value)">
+          <a>
+            <span class="icon-search" (click)="searchByFilter()"></span>
+          </a>
+        </span>
+      </span>
+    </div>
+
+    <!--- MOZO Level Alert -->
+    <div class="db-alert-message db-alert-msg-info db-alert-msg-small" *ngIf="mozoTrailExpiryDays && showTrailExpiry == '1' && showTrailDisable!='true' && userAuthorization.authorizationLevel">
+      <span *ngIf="mozoFreeTrail">
+        <span class="para-txt" ><b>{{mozoTrailExpiryDays}} {{messages.days}}</b> {{messages.leftForYour}} <b>{{messages.mozo}}</b> {{messages.liscenseTrialVersionToExpire}}</span>
+      </span>
+      <span *ngIf="mozoRemainingLicense">
+        <span class="para-txt" >{{messages.only}} <b>{{mozoTrailExpiryDays}}</b> {{messages.mozoLicenseRemaining}}</span>
+      </span>
+      <span class="pull-right">
+        <a href="#nogo" class="btn btn-green">
+          UPGRADE SUBSCRIBTION
+        </a>
+        <span (click)="closeTrailExpiry()" class="btn">
+          NOT NOW
+        </span>
+        <span (click)="closeTrailExpiry()" class="close"></span>
+      </span>
+    </div>
+    <!--- Alert -->
+    <!-- This div is for pending list --> 
+    <div *ngIf="toggle==true">
+        <div class="manage-lead-table">
+          <table class="table table-odd-even tdsWidth" *ngIf="noRecs===false" >
+            <thead>
+              <tr class="hdr">
+                <th class="cptr" (click)="sortDatasource('name')" >{{messages.name}}
+                  <a>
+                    <span class="icon-unsorted sort-icon"></span>
+                  </a>
+                </th>
+                <th class="cptr" (click)="sortDatasource('awanarole')" >{{messages.awanaRole}}
+                  <a>
+                    <span class="icon-unsorted sort-icon"></span>
+                  </a>
+                </th>
+                <th class="cptr" (click)="sortDatasource('accowner')">{{messages.accountOwner}}
+                  <a>
+                    <span class="icon-unsorted sort-icon"></span>
+                  </a>
+                </th>
+                <th class="cptr" (click)="sortDatasource('mozolicense')">{{messages.mozoLicense}}
+                  <a>
+                    <span class="icon-unsorted sort-icon"></span>
+                  </a>
+                </th>
+                <th  class="text-right">
+                  <a routerLink="add" class="btn btn-green">
+                    {{messages.addUser}}
+                  </a>
+                </th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let pendingLeader of dataSource?.records | paginate: { itemsPerPage:pageSize, currentPage: profile.currentPage, totalItems:totalItems }">
+              <tr>
+                <td class="ellipsis" title="{{pendingLeader?.Contact_Name__c.replace(' - ',' ')}}">{{pendingLeader?.Contact_Name__c.replace(' - ',' ')}}</td>
+                <td class="ellipsis" title="{{pendingLeader.Awana_Role__c}}">{{formatAwanaRole(pendingLeader.Awana_Role__c)}}</td>
+                <td>{{(pendingLeader?.Organization_Owner__c) === true ? 'YES' : 'NO'}}</td>
+                <td>{{pendingLeader?.Mozo_User_Level__c}}</td>
+                <td class="text-right">
+                  <a class="btn btn-curve-line">
+                    {{messages.invitationSent}}
+                  </a>
+                  <span (click)="toggleOptionsPending(pendingLeader)" class="icon close-icon" [ngClass]="pendingLeader.plusExpandFlagPending ? 'icon-icon_minus_square' : 'icon-icon_plus_square'">
+                  </span>
+                </td>
+              </tr>
+              <tr *ngIf="pendingLeader.plusExpandFlagPending">
+                <td colspan="5" class="padding-muted">
+                  <div class="approve-user-details">
+                    <table width="100%" class="view-detail-table">
+                      <tr>
+                        <td colspan="3"></td>
+                      </tr>
+                      <tr>
+                        <td class="text-center" width="12%">
+                          <span class="icon-icon_user_new user-icon"></span>
+                        </td>
+                        <td width="35%">
+                          <div class="form-group margin-muted">
+                            <label class="text-muted">
+                              {{messages.emailID}}
+                            </label>
+                            <span class="text-bold"> {{pendingLeader?.npe5__Contact__r?.Email}}
+                            </span>
+                          </div>
+                        </td>
+                        <td width="28%">
+                          <div class="form-group margin-muted">
+                            <label class="text-muted">
+                              {{messages.invitedOn}}
+                            </label>
+                            <span class="text-bold">
+                              <span class="margin-r10">{{pendingLeader.invitedOn | date:'short'}}</span>
+                            </span>
+                          </div>
+                        </td>
+                        <td width="25%">
+                          <div class="form-group margin-muted">
+                            <label class="text-muted">
+                              {{messages.invitedBy}}
+                            </label>
+                            <span class="text-bold">
+                              {{pendingLeader.invitedBy}}
+                            </span>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="3"></td>
+                      </tr>
+                    </table>
+                    <div class="btn-row text-right">
+                      <a (click)="updatePendingLeader(pendingLeader)" class="btn btn-green margin-r10 cptr">
+                        {{messages.edit}}
+                        <span class="icon icon-icon_maps-and-flags"></span>
+                      </a>
+                      <a (click)="confirmPendingLeaderDeletion(pendingLeader)" class="btn btn-red-bor cptr">
+                        {{messages.remove}}
+                        <span class="icon icon-trash-o"></span>
+                      </a>
+                      <!-- Displays deletion confirmation alert -->
+                      <div class="modal text-left" style="display: block;" *ngIf="displayConfirmationPopUp==true">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                          <div class="modal-scroll">
+                            <div class="content-pad">
+                              <span class="close icon-icon_close" (click)="closeConfirmationPopUp();"></span>
+                              <h2 class="heading">{{messages.removeLeader}}</h2>
+                              <div class="modal-alert">
+                                <div class="db-alert-message">
+                                  <span>
+                                    <span class="icon icon-icon_danger"></span>
+                                    <span class="para-txt">{{messages.doYouReallyWantToRemove}} {{leaderName}}'s {{messages.account}}?</span>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="modal-footer text-right">
+                              <span>
+                                <button class="btn btn-med btn-green margin-r10 cptr" [disabled]="loading" (click)="removePendingLeader()">
+                                  {{messages.remove}}
+                                </button>
+                                <a class="btn btn-med btn-grey cptr" (click)="closeConfirmationPopUp();">
+                                  {{messages.cancel}}
+                                </a>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="clearfix text-right" *ngIf="!loading">
+          <div class="paginator" *ngIf="noRecs===false">
+            <span (click)="goFirstPage()" [class.disabled]="profile.currentPage==1" class="fist-btn" href="">First</span>
+            <pagination-controls class="awana-pagination" (pageChange)="pageChange($event)" maxSize="9" previousLabel="" nextLabel=""></pagination-controls>
+            <span (click)="goLastPage()" [class.disabled]="(this.profile.currentPage==lastPage) || (pageSize > totalItems)" class="last-btn" href="">Last</span>
+          </div>
+        </div>
+      </div>
+  
+   <!-- This div is for main leader list -->
+  <div *ngIf="toggle==false">
+    <!--- Alert Added for Approve functionality-->
+    <div class="db-alert-message db-alert-msg-success" *ngIf="approvalDisplayMessage">
+      <span>
+        <span class="icon icon-icon_like"></span>
+        <span title="{{approvalDisplayMessage}}" class="para-txt elle">{{approvalDisplayMessage}}</span>
+      </span>
+      <a style="cursor: pointer;" class="close">
+        <span class="icon icon-icon_close" (click)="approvalDisplayMessage=null;"></span>
+      </a>
+    </div>
+    <div *ngIf="loading" class="loadinggif">
+      <img id="mySpinner" src="assets/img/Awana_Spinner.gif" />
+    </div>
+    <div *ngIf="serviceError" style="text-align:center">
+        <p class="para-txt"> {{serviceMessage}} </p>
+    </div>
+    <!--- Table Content -->
+    <div class="manage-lead-table" *ngIf="!loading">
+      <table class="table table-odd-even tdsWidth" *ngIf="noRecs===false">
+        <thead>
+          <tr class="hdr">
+            <th class="cptr" (click)="sortDatasource('name')">{{messages.name}}
+              <a>
+                <span class="icon-unsorted sort-icon"></span>
+              </a>
+            </th>
+            <th class="cptr" (click)="sortDatasource('awanarole')">{{messages.awanaRole}}
+              <a>
+                <span class="icon-unsorted sort-icon"></span>
+              </a>
+            </th>
+            <th class="cptr" (click)="sortDatasource('accowner')">{{messages.accountOwner}}
+              <a>
+                <span class="icon-unsorted sort-icon"></span>
+              </a>
+            </th>
+            <th class="cptr" (click)="sortDatasource('mozolicense')">{{messages.mozoLicense}}
+              <a>
+                <span class="icon-unsorted sort-icon"></span>
+              </a>
+            </th>
+            <th *ngIf="userAuthorization && userAuthorization.editManageLeaders" class="text-right">
+              <a routerLink="add" class="btn btn-green">
+                {{messages.addUser}}
+              </a>
+            </th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let leader of dataSource?.records | paginate: { itemsPerPage:pageSize, currentPage: profile.currentPage, totalItems:totalItems }">
+
+          <tr [ngClass]="leader.plusExpandFlag ? 'open-details' : ''">
+              <td class="ellipsis" title="{{leader?.Contact_Name__c}}">{{leader?.Contact_Name__c}}</td>
+            <td class="ellipsis" title="{{leader?.Awana_Role__c}}">{{formatAwanaRole(leader.Awana_Role__c)}}</td>
+            <td>{{(leader?.Organization_Owner__c) === true ? 'YES' : 'NO'}}</td>
+            <td>{{leader?.Mozo_User_Level__c}}</td>
+            <td class="text-right" *ngIf="leader.npe5__Status__c!=='Current'">
+              <a *ngIf="userAuthorization && userAuthorization.editManageLeaders" class="btn btn-green margin-r10 cptr capitalize" (click)="updateLeader(leader, 'Approve')">{{messages.approve}}</a>
+              <a *ngIf="userAuthorization && userAuthorization.editManageLeaders" class="btn btn-red-bor cptr capitalize" (click)="rejectLeader(leader)">{{messages.reject}}</a>
+            </td>
+            <td class="text-right" *ngIf="leader.npe5__Status__c=='Current'">
+              <span (click)="toggleOptions(leader)" class="icon close-icon" [ngClass]="leader.plusExpandFlag ? 'icon-icon_minus_square' : 'icon-icon_plus_square'">
+              </span>
+            </td>
+          </tr>
+          <tr *ngIf="leader.plusExpandFlag">
+            <td colspan="5" class="padding-muted">
+              <div class="approve-user-details">
+                  <img *ngIf="innerLoading" id="mySpinner" class="innerSpin" src="assets/img/Awana_Spinner.gif" />
+                <table width="100%" class="view-detail-table">
+                  <tr>
+                    <td colspan="3"></td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">
+                      <img *ngIf="leader.imageUrl" class="bor-radius-profile pro-img" src="{{leader.imageUrl}}">
+                      <span *ngIf="!leader.imageUrl" class="icon-icon_user_new user-icon">
+                      </span>
+                    </td>
+                    <td width="48%">
+                      <div class="form-group" *ngIf="leader.Awana_Role__c">
+                        <label class="text-muted">
+                          {{messages.awanaRole}}:
+                        </label>
+                        <span class="text-bold">{{leader?.Awana_Role__c.split(';').join(', ')}}</span>
+                      </div>
+
+                      <div class="form-group" *ngIf="leader?.Church_Role__c">
+                        <label class="text-muted">
+                          {{messages.churchRole}}:
+                        </label>
+                        <span class="text-bold">{{leader?.Church_Role__c.split(';').join(', ')}}</span>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="text-muted">
+                          {{messages.authorizedPurchaser}}:
+                        </label>
+                        <span class="text-bold" *ngIf="leader?.Authorized_Purchaser__c==!''">{{leader?.Authorized_Purchaser__c== true ? 'YES' : 'NO'}} </span>
+                        <span class="text-bold" *ngIf="leader?.Authorized_Purchaser__c==''">No</span>
+                      </div>
+                    </td>
+                    <td width="40%">
+                        <div class="form-group">
+                            <label class="text-muted">
+                              {{messages.shippingAddress}}
+                            </label>
+                            <div class="text-bold" *ngIf="leader.Address1">{{leader?.Address1}}</div>
+                            <div *ngIf="leader.Address2"><span class="text-bold" >{{leader?.Address2}}</span></div>
+                              <div *ngIf="leader.Address3"><span class="text-bold" >{{leader?.Address3}}</span></div>
+                            <div>
+                            <span class="text-bold">
+                              <span *ngIf="leader?.City"> {{leader?.City}},</span>
+                              <span *ngIf="leader?.ShippingState">{{leader?.ShippingState}} </span>
+                              <span *ngIf="leader?.Postalcode">{{leader?.Postalcode}} </span>
+                            </span>
+                          </div>
+                          </div>
+                      <div class="form-group" *ngIf="leader.Phone">
+                        <label class="text-muted">
+                          {{messages.mobile}}:
+                        </label>
+                        <span class="text-bold">{{leader?.Phone}}</span>
+                      </div>
+                      <div class="form-group" *ngIf="leader.emailId">
+                        <label class="text-muted">
+                          {{messages.email}}:
+                        </label>
+                        <span class="text-bold"><a href="mailto:{{leader?.emailId}}">{{leader?.emailId}}</a></span>
+                      </div>
+
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3"></td>
+                  </tr>
+                </table>
+                <div class="btn-row text-right" *ngIf="userAuthorization && userAuthorization.editManageLeaders">
+                  <a (click)="updateLeader(leader, 'Update')" class="btn btn-green margin-r10 cptr">
+                    {{messages.edit}}
+                    <span class="icon icon-icon_maps-and-flags"></span>
+                  </a>
+                  <a (click)="removeItem(leader)" class="btn btn-red-bor cptr">
+                    <!-- //changes required for 1028 btn btn-red-bor cptr capitalize -->
+                    {{messages.remove}}
+                    <span class="icon icon-trash-o"></span>
+                  </a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="clearfix text-right" *ngIf="!loading">
+      <div class="paginator" *ngIf="noRecs===false">
+        <span (click)="goFirstPage()" [class.disabled]="profile.currentPage==1" class="fist-btn" href="">First</span>
+        <pagination-controls class="awana-pagination" (pageChange)="pageChange($event)" maxSize="9" previousLabel="" nextLabel=""></pagination-controls>
+        <span (click)="goLastPage()" [class.disabled]="(this.profile.currentPage==lastPage) || (pageSize > totalItems)" class="last-btn" href="">Last</span>
+      </div>
+    </div>   
+  </div>
+  <div class="clsmessg" *ngIf="noRecs===true && !loading">{{messages.noRecordsFound}}</div>
+</div>
+
+
+  <!-- Reject Leader Modal -->
+  <div class="modal text-left" style="display: block;" *ngIf="rejectLeaderFlag">
+    <!-- Modal content -->
+    <div class="modal-content animated fadeInDown">
+      <div class="modal-scroll">
+        <div class="content-pad">
+          <span class="close icon-icon_close" (click)="closeRejectLeaderModal()"></span>
+          <h2 class="heading">{{messages.rejectLeader}}</h2>
+          <div class="modal-alert">
+            <div class="db-alert-message">
+              <span>
+                <span class="icon icon-icon_danger"></span>
+                <span class="para-txt">{{messages.doYouReallyWantToReject}} {{leaderName}}'s {{messages.account}}?</span>
+              </span>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer text-right">
+          <span>
+            <button [disabled]="loading" class="btn btn-med btn-green margin-r10 cptr" (click)="rejectLeaderProfile()">
+              {{messages.reject}}
+            </button>
+            <a class="btn btn-med btn-grey cptr" (click)="closeRejectLeaderModal()">
+              {{messages.cancel}}
+            </a>
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Remove Leader Modal -->
+  <div class="modal text-left" style="display: block;" *ngIf="removePopUp==true">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-scroll">
+        <div class="content-pad">
+          <span class="close icon-icon_close" (click)="closeRemoveLeaderModal();"></span>
+          <h2 class="heading">{{messages.removeLeader}}</h2>
+          <div class="modal-alert">
+            <div class="toast-msg toast-warning" *ngIf="!selfRemovePop">
+                <div class="toast-content">
+                    <span class="icon icon-icon_danger"></span>
+                    <p class="para-txt">
+                        {{messages.doYouReallyWantToRemove}} {{leaderName}}'s {{messages.account}}?
+                    </p>
+                  </div>
+            </div>
+            <div class="toast-msg toast-warning" *ngIf="selfRemovePop">
+              <div class="toast-content">
+                <span class="icon icon-icon_warning"></span>
+                <p class="para-txt">{{messages.selfDelete1}} <br><b>{{messages.selfDelete2}}</b> {{messages.selfDelete3}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer text-right">
+          <span>
+            <button class="btn btn-med btn-green margin-r10 cptr" [disabled]="loading" (click)="removeLeader()">
+              {{messages.remove}}
+            </button>
+            <a class="btn btn-med btn-grey cptr" (click)="closeRemoveLeaderModal();">
+              {{messages.cancel}}
+            </a>
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- Mobile Code Starts-->
+<section class="page-content" *layout="'mobile'">
+  <h1 class="section-header" [ngClass]="{'search-header' : searchAnimate === true}">
+    <div *ngIf="showSubHead">
+      <span class="icon-icon_church icon"></span>
+      {{messages.manageLeaders}}
+      <span class="pull-right">
+        <span class="icon-search2 icon" (click)="showSearchBar()"></span>
+        <span class="sorting-icon-arrow">
+          <span class="icon-icon_sort_mobile icon" (click)="showSortingBar()"></span>
+        </span>
+      </span>
+    </div>
+    <!--- Search Header -->
+    <div *ngIf="!showSubHead">
+      <span class="search-box col-11 padding-muted animated fadeInRight">
+        <span class="close icon-icon_close" (click)="removeSearch()"></span>
+        <input type="text" [(ngModel)]="searchItem" name="" placeholder="{{messages.searchByNameEmailRole}}" class="text-field" (keyup)="searchLeader$.next($event.target.value)">
+      </span>
+      <span class="sorting-icon-arrow">
+        <span class="icon-icon_sort_mobile icon custom-sort-icon-mobile" (click)="showSortingBar()"></span>
+      </span>
+    </div>
+  </h1>
+
+  <!--- Sorting -->
+  <div class="modal mobile-sorting" style="display:block" *ngIf="showSortBar">
+    <ul class="modal-content list">
+      <li class="capitalize">
+        <strong>{{messages.sortBy}}:</strong>
+      </li>
+      <li *ngFor="let sortOption of sortOptions">
+        {{sortOption.label}}
+        <div class="clearfix">
+          <input id="{{sortOption.id}}" type="radio" name="field" value="option" (click)="sortDatasource(sortOption.sourceName)">
+          <label for="{{sortOption.id}}">
+            <span>
+              <span></span>
+            </span>
+          </label>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Pending Invitations -->
+  <div class="order-row mob-pending-invite">
+    <span>
+        {{messages.pendingInvitation}} :
+    </span>
+    <label class="switch">
+        <input type="checkbox" [(ngModel)]="toggle" (change) = "getleaders()">
+        <span class="input-slider round"></span>
+    </label>
+  </div>
+		    	<!--- MOZO Level Alert -->
+  <div class="order-row clearfix" *ngIf="mozoTrailExpiryDays && showTrailExpiry == '1' && showTrailDisable!='true' && userAuthorization.authorizationLevel">
+    <div class="db-alert-message db-alert-msg-info db-alert-msg-small clearfix">
+      <span *ngIf="mozoFreeTrail">
+        <span class="para-txt"><b>{{mozoTrailExpiryDays}} {{messages.days}}</b> {{messages.leftForYour}} <b>{{messages.mozo}}</b> {{messages.liscenseTrialVersionToExpire}}</span>
+      </span>
+      <span *ngIf="mozoRemainingLicense">
+        <span class="para-txt" >{{messages.only}} <b>{{mozoTrailExpiryDays}}</b> {{messages.mozoLicenseRemaining}}</span>
+      </span>
+      <span class="pull-right">
+        <a href="#nogo" class="btn btn-green">
+          {{messages.upgradeSubscription}}
+        </a>
+        <span (click)="closeTrailExpiry()" class="btn">
+          {{messages.notNow}}
+        </span>
+      </span>
+    </div>
+  </div>
+  
+
+  <div class="db-alert-message" *ngIf="removalOfLeaderFlag">
+    <span>
+      <span class=""></span>
+      <span class="para-txt">{{messages.leaderRemovalValidationMessage}}</span>
+    </span>
+    <a class="close cptr">
+      <span class="icon icon-icon_close" (click)="removalOfLeaderFlag=false;"></span>
+    </a>
+  </div>
+
+  <!--- Manage leaders - pending list-->
+  <div *ngIf="toggle==true" infiniteScroll infiniteScrollDistance="0.2" infiniteScrollThrottle="50"
+  (scrolled)="onScroll()">
+    <div *ngIf="noRecs===false && !mobileLoading">
+      <div *ngFor="let leader of dataSource?.records | slice:0:common.mobileRecordsLimit">
+        <div class="order-row mob-mange-lead-row">
+          <ul class="row list">
+            <li class="col-12">
+              <label class="lead-head label-head-pending-list" *ngIf="leader?.Contact_Name__c">{{leader?.Contact_Name__c}}</label>
+              <a class="btn btn-curve-line invitation-btn-pending-list">
+                  {{messages.invitationSent}}
+                </a>
+            </li>
+          </ul>
+          <ul class="row list">
+            <li class="col-6">
+              <span>
+                <span class="text-muted">{{messages.awanaRole}}:</span> 
+                <span *ngIf="leader?.Awana_Role__c">{{leader?.Awana_Role__c.split(';').join(', ')}}</span>
+              </span>
+            </li>
+            <li class="col-6">
+              <span>
+                <span class="text-muted">{{messages.mozoLicense}}:</span> 
+                <span *ngIf="leader?.Mozo_User_Level__c">{{leader?.Mozo_User_Level__c}}</span>
+              </span>
+            </li>
+          </ul>
+          <ul class="row list">
+            <li class="col-6">
+              <span>
+                <span class="text-muted">{{messages.accountOwner}}:</span>
+                <span *ngIf="leader?.Organization_Owner__c">{{(leader?.Organization_Owner__c) === true ? 'YES' : 'NO'}}</span>
+              </span>
+            </li>
+          </ul>
+          <div class="clearfix btn-row active-links">
+            <ul class="row">
+              <li class="col-4">
+                <a (click)="viewLeader(leader)">
+                  <span class="icon-icon_visibility icon"></span>
+                  {{messages.details}}
+                </a>
+              </li>
+              <li class="col-4" *ngIf="userAuthorization && userAuthorization.editManageLeaders">
+                <a (click)="updateLeader(leader, 'Update')">
+                  <span class="icon-icon_maps-and-flags icon"></span>
+                  {{messages.update}}
+                </a>
+              </li>
+              <li class="col-4" *ngIf="userAuthorization && userAuthorization.editManageLeaders">
+                <a (click)="confirmPendingLeaderDeletion(leader)">
+                  <span class="icon-trash-o icon"></span>
+                  {{messages.remove}}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--- Manage leaders - main leader list-->
+  <div *ngIf="toggle==false" infiniteScroll infiniteScrollDistance="0.2" infiniteScrollThrottle="50"
+  (scrolled)="onScroll()">
+    <div *ngIf="noRecs===false && !mobileLoading">
+      <div *ngFor="let leader of dataSource?.records | slice:0:common.mobileRecordsLimit">
+        <div class="order-row green-border mob-mange-lead-row" *ngIf="leader.npe5__Status__c!=='Current'">
+          <ul class="row list">
+            <li class="col-12">
+              <label class="lead-head" *ngIf="leader?.Contact_Name__c">{{leader?.Contact_Name__c}}</label>
+            </li>
+          </ul>
+          <ul class="row list">
+            <li class="col-6">
+              <span>
+                <span class="text-muted">{{messages.awanaRole}}:</span> 
+                <span *ngIf="leader?.Awana_Role__c">{{leader?.Awana_Role__c.split(';').join(', ')}}</span>
+              </span>
+            </li>
+            <li class="col-6">
+              <span>
+                <span class="text-muted">{{messages.mozoLicense}}:</span> 
+                <span *ngIf="leader?.Mozo_User_Level__c">{{leader?.Mozo_User_Level__c}}</span>
+              </span>
+            </li>
+          </ul>
+          <ul class="row list">
+            <li class="col-6">
+              <span>
+                <span class="text-muted">{{messages.accountOwner}}:</span> 
+                <span *ngIf="leader?.Organization_Owner__c">{{(leader?.Organization_Owner__c) === true ? 'YES' : 'NO'}}</span>
+              </span>
+            </li>
+            <li class="col-6">
+
+            </li>
+          </ul>
+          <div class="clearfix btn-row" *ngIf="userAuthorization && userAuthorization.editManageLeaders">
+            <a class="btn btn-green margin-r10" (click)="updateLeader(leader, 'Approve')">
+              {{messages.approve}}
+            </a>
+            <a class="btn btn-red-bor" (click)="rejectLeader(leader)">
+              {{messages.reject}}
+            </a>
+          </div>
+        </div>
+        <div class="order-row mob-mange-lead-row" *ngIf="leader.npe5__Status__c=='Current'">
+          <ul class="row list">
+            <li class="col-12">
+              <label class="lead-head" *ngIf="leader?.Contact_Name__c">{{leader?.Contact_Name__c}}</label>
+            </li>
+          </ul>
+          <ul class="row list">
+            <li class="col-6">
+              <span>
+                <span class="text-muted">{{messages.awanaRole}}:</span> 
+                <span *ngIf="leader?.Awana_Role__c">{{leader?.Awana_Role__c.split(';').join(', ')}}</span>
+              </span>
+            </li>
+            <li class="col-6">
+              <span>
+                <span class="text-muted">{{messages.mozoLicense}}:</span> 
+                <span *ngIf="leader?.Mozo_User_Level__c">{{leader?.Mozo_User_Level__c}}</span>
+              </span>
+            </li>
+          </ul>
+          <ul class="row list">
+            <li class="col-6">
+              <span>
+                <span class="text-muted">{{messages.accountOwner}}:</span> 
+                <span *ngIf="leader?.Organization_Owner__c">{{(leader?.Organization_Owner__c) === true ? 'YES' : 'NO'}}</span>
+              </span>
+            </li>
+            <li class="col-6">
+
+            </li>
+          </ul>
+          <div class="clearfix btn-row active-links">
+            <ul class="row">
+              <li class="col-4">
+                <a (click)="viewLeader(leader)">
+                  <span class="icon-icon_visibility icon"></span>
+                  {{messages.details}}
+                </a>
+              </li>
+              <li class="col-4" *ngIf="userAuthorization && userAuthorization.editManageLeaders">
+                <a (click)="updateLeader(leader, 'Update')">
+                  <span class="icon-icon_maps-and-flags icon"></span>
+                  {{messages.update}}
+                </a>
+              </li>
+              <li class="col-4" *ngIf="userAuthorization && userAuthorization.editManageLeaders">
+                <a (click)="removeItem(leader)">
+                  <span class="icon-trash-o icon"></span>
+                  {{messages.remove}}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clsmessg" *ngIf="noRecs===true && !loading">{{messages.noRecordsFound}}</div>
+
+  <div class="footer-btn" *ngIf="userAuthorization && userAuthorization.editManageLeaders">
+    <a routerLink="add" class="btn btn-green btn-block btn-block-small">
+      {{messages.addNewUser}}
+    </a>
+  </div>
+
+  <!-- Reject Leader Modal -->
+  <div class="modal text-left block" *ngIf="rejectLeaderFlag">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-scroll">
+        <div class="content-pad">
+          <span class="close icon-icon_close mobile_close" (click)="closeRejectLeaderModal()"></span>
+          <h2 class="heading">{{messages.rejectLeader}}</h2>
+          <div class="mobile-modal-alert">
+            <div class="db-alert-message">
+              <span>
+                <span class="icon icon-icon_danger"></span>
+                <span class="para-txt">{{messages.doYouReallyWantToReject}} {{leaderName}}'s {{messages.account}}?</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer text-right footer-alignments">
+          <span>
+            <button [disabled]="loading" class="btn btn-med btn-green margin-r10 cptr" (click)="rejectLeaderProfile()">
+              {{messages.reject}}
+            </button>
+            <a class="btn btn-med btn-grey cptr" (click)="closeRejectLeaderModal()">
+              {{messages.cancel}}
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Remove Leader Modal -->
+  <div class="modal text-left block" *ngIf="removePopUp==true">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-scroll">
+        <div class="content-pad">
+          <span class="close icon-icon_close mobile_close" (click)="closeRemoveLeaderModal()"></span>
+          <h2 class="heading">{{messages.removeLeader}}</h2>         
+          <div class="modal-alert">
+              <div class="toast-msg toast-warning" *ngIf="!selfRemovePop">
+                  <div class="toast-content">
+                      <span class="icon icon-icon_danger"></span>
+                      <p class="para-txt">
+                          {{messages.doYouReallyWantToRemove}} {{leaderName}}'s {{messages.account}}?
+                      </p>
+                    </div>
+              </div>
+              <div class="toast-msg toast-warning" *ngIf="selfRemovePop">
+                <div class="toast-content">
+                  <span class="icon icon-icon_warning"></span>
+                  <p class="para-txt">{{messages.selfDelete1}} <br><b>{{messages.selfDelete2}}</b> {{messages.selfDelete3}}</p>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer text-right footer-alignments">
+          <span>
+            <button class="btn btn-med btn-green margin-r10 cptr" [disabled]="loading" (click)="removeLeader()">
+              {{messages.remove}}
+            </button>
+            <a class="btn btn-med btn-grey cptr" (click)="closeRemoveLeaderModal()">
+              {{messages.cancel}}
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Displays deletion confirmation alert -->
+  <div class="modal text-left block" *ngIf="displayConfirmationPopUp==true">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-scroll">
+        <div class="content-pad">
+          <span class="close icon-icon_close" (click)="closeConfirmationPopUp();"></span>
+          <h2 class="heading">{{messages.removeLeader}}</h2>
+          <div class="modal-alert">
+            <div class="db-alert-message">
+              <span>
+                <span class="icon icon-icon_danger"></span>
+                <span class="para-txt">{{messages.doYouReallyWantToRemove}} {{leaderName}}'s {{messages.account}}?</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer text-right">
+          <span>
+            <button class="btn btn-med btn-green margin-r10 cptr" [disabled]="loading" (click)="removePendingLeader()">
+              {{messages.remove}}
+            </button>
+            <a class="btn btn-med btn-grey cptr" (click)="closeConfirmationPopUp();">
+              {{messages.cancel}}
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

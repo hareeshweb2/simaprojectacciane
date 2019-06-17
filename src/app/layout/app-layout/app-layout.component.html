@@ -1,0 +1,44 @@
+<div class="flex-body desktop" *layout="'desktop'">
+    <alert></alert>
+    <!-- Header Directive Starts -->
+    <app-app-layout-header></app-app-layout-header>
+    <!-- Header Directive Ends -->
+    <!-- Router Outlet Starts -->
+    <div class="container">
+            <section class="page-content" *layout="'desktop'">
+                    <div class="row">
+                        <div class="col-3">
+                            <app-navigation></app-navigation>
+                        </div>
+                        <div class="col-9 animated fadeInRight">
+                            <div class="padding-muted db-margin-l20">
+                                <router-outlet></router-outlet>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+    </div>
+    <div *layout="'desktop'">
+        <app-layout-footer></app-layout-footer>
+    </div>
+
+    <!-- <section *layout="'mobile'">
+        <div class="container-flex-home container mobile body-bg">
+            <router-outlet></router-outlet>
+        </div>
+    </section>
+    <div class="flex-footer mobile">
+        <app-layout-footer></app-layout-footer>
+    </div> 
+</div>-->
+
+</div>
+<div class="mobile" *layout="'mobile'" [ngClass]="{'mob-db-menu-open':common.showSidebar == 'visible'}">
+    <alert></alert>
+    <div class="container">
+        <app-app-layout-header></app-app-layout-header>
+        <app-navigation></app-navigation>
+        <router-outlet></router-outlet>
+        <app-layout-footer></app-layout-footer>
+    </div>
+</div>

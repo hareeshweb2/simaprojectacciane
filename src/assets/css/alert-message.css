@@ -1,0 +1,191 @@
+/*** -----------------------------------------
+
+            ALERT MESSAGE
+
+----------------------------------------- ***/
+
+
+.db-alert-message {
+	background: #f7efef;
+    border: 1px dashed #dab2b1;
+    padding: 16px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 0 1.6em 0;
+    position: relative;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+    align-items: center;
+}
+
+.db-alert-msg-success {
+    background: #f3f9f0;
+    border: 1px dashed #b6e6dc;
+}
+
+.db-alert-msg-info {
+    background: #fcf9ea;
+    border-color: #e8e6d4;
+}
+
+.db-alert-message .icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.db-alert-message .icon-icon_danger {
+    color: #D0021B;
+}
+
+.db-alert-message .close {
+    /*position: absolute;
+    right: 20px;
+    cursor: pointer;*/
+}
+
+.db-alert-message .close .icon {
+    /*margin-right: 0px;
+    position: relative;
+    top: 4px;*/
+}
+
+
+
+/*** -----------------------------------------
+
+                CLOSE
+
+----------------------------------------- ***/
+
+.db-alert-message .close .icon {
+    color: #acacac;
+    float: right;
+    font-size: 0px;
+    transition: all 0.3s ease-out;
+    width: 32px;
+    height: 32px;
+    position: relative;
+    margin: 0px;
+}
+
+.db-alert-message .close .icon:hover,
+.db-alert-message .close .icon:focus {
+    color: #666666;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.db-alert-message .close .icon:hover {
+    transform: rotate(180deg);
+}
+
+.db-alert-message .close:before {
+    content: "";
+    position: absolute;
+    display: block;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 32px;
+    height: 0;
+    border-top: 1px solid rgba(0,0,0,0.5);
+    transform: rotate(45deg);
+    transform-origin: center;
+}
+
+.db-alert-message .close:after {
+    content: "";
+    position: absolute;
+    display: block;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 32px;
+    height: 0;
+    border-top: 1px solid rgba(0,0,0,0.5);
+    transform: rotate(-45deg);
+    transform-origin: center;
+}
+
+
+.db-alert-message .icon-icon_like {
+    font-size: 32px;
+    vertical-align: middle;
+}
+
+
+/*** -----------------------------------------
+
+        DASHBOARD ALERT MESSAGE SMALL
+
+----------------------------------------- ***/
+
+.db-alert-msg-small {
+    font-size: 14px;
+    padding: 12px 12px 12px 14px;
+}
+
+.db-alert-msg-small .btn {
+    padding: 6px 10px;
+    font-size: 11px;
+    margin-right: 10px;
+}
+
+.db-alert-msg-small .close {
+    width: 16px;
+    height: 16px;
+    margin: 7px 2px 7px 10px;
+}
+
+.db-alert-msg-small .close:before {
+    width: 16px;
+}
+
+.db-alert-msg-small .close:after {
+    width: 16px;
+}
+
+
+
+
+/*** -----------------------------------------
+
+            ALERT MESSAGE SMALL
+
+----------------------------------------- ***/
+
+
+.alert-msg-small {
+    border-top: 2px solid #ededed;;
+}
+
+.alert-msg-small .msg-div {
+    background: #f0f5ee;
+    border: 1px dashed #b5e4da;
+    text-align: center;
+    align-items: center;
+    margin: 20px 15px;
+    font-size: 14px;
+    position: relative;
+}
+
+.alert-msg-small .msg-div .btn {
+    font-size: 12px;
+}
+
+.alert-msg-small .msg-div .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 10px;
+    margin: 7px;
+}
+

@@ -1,0 +1,23 @@
+//remove red color in mozilla browser in input box(which was coming by default)
+:invalid {
+  box-shadow: none;
+}
+:-moz-submit-invalid {
+  box-shadow: none;
+}
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+.autocomplete-active{
+  background-color: #fcfcfc !important; 
+}
+.selected-list .c-btn{
+  width: 100%;
+  box-shadow: 0px 1px 5px #959595;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  position: relative;
+}
